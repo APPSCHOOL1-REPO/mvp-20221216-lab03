@@ -13,11 +13,14 @@ import SwiftUI
 
 struct RegisterView: View {
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject var registerModel = RegisterModel()
     
     @State private var nickName: String = ""
     @State private var userEmail: String = ""
     @State private var password: String = ""
     @State private var passwordCheck: String = ""
+    
+    @State private var errorString = ""
     
     var body: some View {
         VStack {
@@ -37,13 +40,29 @@ struct RegisterView: View {
             }.padding()
 
             Button {
-                //예외처리추가하기
-                //
-                //
-                dismiss()
+                Task {
+                    await registerModel.registerUser(userID: userEmail, userPW: password)
+                    if !registerModel.isError {
+                        dismiss()
+                    }
+                }
+
             } label: {
                 Text("생성")
             }
+            .alert("오류", isPresented: $registerModel.isError, actions: {
+                
+                Button("취소",role: .cancel,action: {
+                })
+                Button("추가", action: {
+                })
+            }, message: {
+                Text("추가 할 이름을 적어주세요")
+            })
+            .onDisappear {
+                registerModel.isError = false
+            }
+            
 
         }
     }

@@ -11,6 +11,7 @@
 		161510C029502F8000BA7FFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 161510BF29502F8000BA7FFE /* GoogleService-Info.plist */; };
 		161510C32950305A00BA7FFE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 161510C22950305A00BA7FFE /* FirebaseAuth */; };
 		161510C52950305A00BA7FFE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 161510C42950305A00BA7FFE /* FirebaseFirestore */; };
+		161510C7295036B300BA7FFE /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161510C6295036B300BA7FFE /* RegisterModel.swift */; };
 		1642F0FA29388BC6005A54EF /* NotoSerifKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1642F0F329388BC4005A54EF /* NotoSerifKR-Regular.otf */; };
 		1642F0FB29388BC6005A54EF /* NotoSerifKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1642F0F429388BC5005A54EF /* NotoSerifKR-Light.otf */; };
 		1642F0FC29388BC6005A54EF /* NotoSerifKR-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1642F0F529388BC5005A54EF /* NotoSerifKR-SemiBold.otf */; };
@@ -78,6 +79,7 @@
 /* Begin PBXFileReference section */
 		161510BD29502BE600BA7FFE /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		161510BF29502F8000BA7FFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		161510C6295036B300BA7FFE /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		1642F0F329388BC4005A54EF /* NotoSerifKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifKR-Regular.otf"; sourceTree = "<group>"; };
 		1642F0F429388BC5005A54EF /* NotoSerifKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifKR-Light.otf"; sourceTree = "<group>"; };
 		1642F0F529388BC5005A54EF /* NotoSerifKR-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifKR-SemiBold.otf"; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				161510BD29502BE600BA7FFE /* RegisterView.swift */,
+				161510C6295036B300BA7FFE /* RegisterModel.swift */,
 			);
 			path = NewGilgaon;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				16F69DB629387E030045CD91 /* OnboardingTabView.swift in Sources */,
 				164974EA2936F10E00BDA2B9 /* WritingView.swift in Sources */,
 				16D46FA42935EC7F00BB9440 /* SearchNetwork.swift in Sources */,
+				161510C7295036B300BA7FFE /* RegisterModel.swift in Sources */,
 				635AE3972935E9E2008A8452 /* HomeView.swift in Sources */,
 				635AE3992935E9E7008A8452 /* TabBarView.swift in Sources */,
 				16D46F9F2935EC7F00BB9440 /* TestAPIView.swift in Sources */,
