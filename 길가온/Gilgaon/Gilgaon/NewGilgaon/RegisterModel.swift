@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseAuth
+import Combine
 
 class RegisterModel: ObservableObject {
     @Published var currentUser: Firebase.User?
@@ -17,33 +18,38 @@ class RegisterModel: ObservableObject {
     init() {
 //        currentUser = Auth.auth().currentUser
     }
-    
-    func registerUser(userID: String, userPW: String) async{
-        Auth.auth().createUser(withEmail: userID, password: userPW) { result, error in
-            if let error {
-                self.DetailError = error.localizedDescription
-                let code = (error as NSError).code
-                self.isError = true
-                print(code)
-                switch code {
-                case 17007:
-                    print("이미 있는 아이디")
-                case 17008:
-                    print("올바름 이메일 형식이 아님")
-                case 17026:
-                    print("비밀번호가 6자리 미만")
-                default:
-                    return
-                }
-//                print("Error: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let user = result?.user else { return }
+
+    @MainActor
+    func registerUser1(userID: String, userPW: String) async{
+        
+        do {
+            let result = try await Auth.auth().createUser(withEmail: userID, password: userPW)
+            let user = result.user
             self.isError = false
             print(user.uid)
         }
+        
+        catch {
+            self.isError = true
+            
+            let code = (error as NSError).code
+            switch code {
+            case 17007:
+                self.DetailError = "이미 있는 아이디"
+            case 17008:
+                print("올바름 이메일 형식이 아님")
+            case 17026:
+                print("비밀번호가 6자리 미만")
+            default:
+                return
+            }
+            self.DetailError = error.localizedDescription
+        }
     }
+    
+    
+    
+    
     
     func login(email: String, password: String) {
             Auth.auth().signIn(withEmail: email, password: password) {result, error in

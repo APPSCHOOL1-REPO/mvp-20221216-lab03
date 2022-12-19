@@ -41,12 +41,11 @@ struct RegisterView: View {
 
             Button {
                 Task {
-                    await registerModel.registerUser(userID: userEmail, userPW: password)
+                    try! await registerModel.registerUser1(userID: userEmail, userPW: password)
                     if !registerModel.isError {
                         dismiss()
                     }
                 }
-
             } label: {
                 Text("생성")
             }
