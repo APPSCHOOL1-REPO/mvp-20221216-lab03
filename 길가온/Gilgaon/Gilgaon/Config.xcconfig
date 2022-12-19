@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  HanselandGretel
+//
+//  Created by 서광현 on 2022/11/29.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+KAKAO_NATIVE_APP_KEY = c4444e95f22c564e413450f394a47246

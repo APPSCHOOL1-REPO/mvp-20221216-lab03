@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakao${KAKAO_NATIVE_APP_KEY}</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.602278480661-9q4706cdsi92ucvaqtjs3leqi8h63ead</string>
+			</array>
+		</dict>
+	</array>
+	<key>GOOGLE_NATIVE_APP_KEY</key>
+	<string>${GOOGLE_NATIVE_APP_KEY}</string>
+	<key>KAKAO_NATIVE_APP_KEY</key>
+	<string>${KAKAO_NATIVE_APP_KEY}</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>kakaolink</string>
+		<string>kakaokompassauth</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>NotoSerifKR-Black.otf</string>
+		<string>NotoSerifKR-Bold.otf</string>
+		<string>NotoSerifKR-ExtraLight.otf</string>
+		<string>NotoSerifKR-Light.otf</string>
+		<string>NotoSerifKR-Medium.otf</string>
+		<string>NotoSerifKR-Regular.otf</string>
+		<string>NotoSerifKR-SemiBold.otf</string>
+	</array>
+</dict>
+</plist>
