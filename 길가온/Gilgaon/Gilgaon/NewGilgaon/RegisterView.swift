@@ -13,7 +13,7 @@ import SwiftUI
 
 struct RegisterView: View {
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject var registerModel = RegisterModel()
+    @EnvironmentObject private var registerModel: RegisterModel
     
     @State private var nickName: String = ""
     @State private var userEmail: String = ""
@@ -41,12 +41,11 @@ struct RegisterView: View {
 
             Button {
                 Task {
-                    await registerModel.registerUser(userID: userEmail, userPW: password)
+                    try! await registerModel.registerUser(userID: userEmail, userPW: password)
                     if !registerModel.isError {
                         dismiss()
                     }
                 }
-
             } label: {
                 Text("생성")
             }
@@ -57,7 +56,7 @@ struct RegisterView: View {
                 Button("추가", action: {
                 })
             }, message: {
-                Text("추가 할 이름을 적어주세요")
+                Text("\(registerModel.DetailError)")
             })
             .onDisappear {
                 registerModel.isError = false
@@ -70,6 +69,6 @@ struct RegisterView: View {
 
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView()
+        RegisterView().environmentObject(RegisterModel())
     }
 }

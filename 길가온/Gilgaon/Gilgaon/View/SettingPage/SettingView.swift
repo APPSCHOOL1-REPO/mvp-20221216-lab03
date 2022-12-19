@@ -21,6 +21,7 @@
 import SwiftUI
 
 struct SettingView: View {
+    @EnvironmentObject private var registerModel: RegisterModel
     var body: some View {
         
         
@@ -135,17 +136,23 @@ struct SettingView: View {
                         }
   
                         
-                        NavigationLink(destination: LoginView()) {
+                       
                             ZStack{
                                 Image("line2")
                                     .resizable()
                                     .frame(width: 110, height: 100)
-                                Text("로그아웃")
-                                    .font(.custom("NotoSerifKR-Light",size:17))
-                                    .foregroundColor(Color("Pink"))
-                                    .offset(y: -3)
+                                
+                                Button {
+                                    registerModel.logout()
+                                } label: {
+                                    Text("로그아웃")
+                                        .font(.custom("NotoSerifKR-Light",size:17))
+                                        .foregroundColor(Color("Pink"))
+                                        .offset(y: -3)
+                                }
+                                
                             }
-                        }
+                        
                     }
                     .padding(.vertical)
                 }
@@ -156,6 +163,6 @@ struct SettingView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView()
+        SettingView().environmentObject(RegisterModel())
     }
 }

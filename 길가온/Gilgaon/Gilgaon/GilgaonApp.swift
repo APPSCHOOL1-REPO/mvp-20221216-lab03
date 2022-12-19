@@ -28,6 +28,7 @@ struct GilgaonApp: App {
     var body: some Scene {
         WindowGroup {
             SplashView()
+                .environmentObject(RegisterModel())
                 .environmentObject(LocationsViewModel())
                 .environmentObject(SearchViewModel())
                 .environmentObject(CalendarViewModel())

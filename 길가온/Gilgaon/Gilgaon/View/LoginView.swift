@@ -30,7 +30,7 @@ struct AppleUser: Codable {
 
 struct LoginView: View {
     @StateObject var kakaoLoginViewModel: KakaoAuthViewModel = KakaoAuthViewModel()
-    @ObservedObject var registerModel = RegisterModel()
+    @EnvironmentObject private var registerModel: RegisterModel
     
     @State var email = ""
     @State var password = ""
@@ -78,9 +78,8 @@ struct LoginView: View {
                         .offset(x: 800, y: 13)
                         
                         
-                        NavigationLink {
-//                            registerModel.login(email: email, password: password)
-                            HomeView()
+                        Button {
+                            registerModel.login(email: email, password: password)
                         } label: {
                             
                             Text("로그인")

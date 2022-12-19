@@ -29,7 +29,7 @@ struct SplashView: View {
         
         if isActive {
             
-            LoginView()
+            PleaseLoginView()
             
         } else {
             

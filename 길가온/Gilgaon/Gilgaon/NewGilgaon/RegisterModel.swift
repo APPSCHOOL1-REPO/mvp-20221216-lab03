@@ -8,8 +8,9 @@
 import Foundation
 import Firebase
 import FirebaseAuth
+import Combine
 
-class RegisterModel: ObservableObject {
+final class RegisterModel: ObservableObject {
     @Published var currentUser: Firebase.User?
     @Published var isError: Bool = false
     @Published var DetailError: String = ""
@@ -17,34 +18,57 @@ class RegisterModel: ObservableObject {
     init() {
 //        currentUser = Auth.auth().currentUser
     }
+
     
-    func registerUser(userID: String, userPW: String) async{
-        Auth.auth().createUser(withEmail: userID, password: userPW) { result, error in
-            if let error {
-                self.DetailError = error.localizedDescription
-                let code = (error as NSError).code
-                self.isError = true
-                print(code)
-                switch code {
-                case 17007:
-                    print("이미 있는 아이디")
-                case 17008:
-                    print("올바름 이메일 형식이 아님")
-                case 17026:
-                    print("비밀번호가 6자리 미만")
-                default:
-                    return
-                }
-//                print("Error: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let user = result?.user else { return }
-            self.isError = false
-            print(user.uid)
+    var user: User? {
+        didSet {
+            objectWillChange.send()
         }
     }
     
+    func listenToAuthState() {
+        Auth.auth().addStateDidChangeListener { [weak self] _, user in
+            guard let self = self else {
+                return
+            }
+            self.user = user
+        }
+        
+    }
+    
+    @MainActor
+    // 회원가입
+    func registerUser(userID: String, userPW: String) async{
+        
+        do {
+            let result = try await Auth.auth().createUser(withEmail: userID, password: userPW)
+            let user = result.user
+            self.isError = false
+            print(user.uid)
+        }
+        
+        catch {
+            self.isError = true
+            
+            let code = (error as NSError).code
+            switch code {
+            case 17007:
+                self.DetailError = "이미 있는 아이디"
+            case 17008:
+                self.DetailError = "올바름 이메일 형식이 아님"
+            case 17026:
+                self.DetailError = "비밀번호가 6자리 미만"
+            default:
+                return
+            }
+            
+        }
+    }
+    
+    
+    
+    
+    // 로그인
     func login(email: String, password: String) {
             Auth.auth().signIn(withEmail: email, password: password) {result, error in
             if let error {
@@ -54,6 +78,8 @@ class RegisterModel: ObservableObject {
             self.currentUser = result?.user
         }
     }
+    
+    // 로그아웃
     func logout() {
         currentUser = nil
         try? Auth.auth().signOut()
