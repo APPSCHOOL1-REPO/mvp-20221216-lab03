@@ -16,7 +16,7 @@ struct HomeView: View {
         VStack {
             switch selectedTabBar {
             case .first:
-                RecordView()
+                DrawerView()
             case .second:
                 CalendarView()
             case .third:
@@ -27,7 +27,7 @@ struct HomeView: View {
             TabBarView(selectedTabBar: $selectedTabBar)
                 .frame(height: 40)
         }
-        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
         .accentColor(Color("Red"))
         .fullScreenCover(isPresented: $isFirstLaunching) {
             OnboardingTabView(isFirstLaunching: $isFirstLaunching)
