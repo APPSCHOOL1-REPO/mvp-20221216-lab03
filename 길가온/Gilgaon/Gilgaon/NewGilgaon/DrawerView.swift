@@ -23,11 +23,11 @@ struct DrawerView: View {
     
     
     var body: some View {
-        
-        ZStack {
-            Color("White")
-                .ignoresSafeArea()
-            
+        NavigationStack {
+            ZStack {
+                Color("White")
+                    .ignoresSafeArea()
+                
                 VStack {
                     Text("닉네임")
                     HStack(spacing: 100) {
@@ -35,8 +35,8 @@ struct DrawerView: View {
                             .resizable()
                             .frame(width: 100, height: 100)
                             .clipShape(Circle())
-                        Button {
-                            
+                        NavigationLink {
+                            AddFriendView()
                         } label: {
                             Text("친구추가")
                         }
@@ -77,27 +77,27 @@ struct DrawerView: View {
                         DrawerListView()
                     }
                 }
-            GeometryReader { _ in
-                HStack {
-                    Spacer()
-                    DrawerSettingView()
-                        .offset(x: showMenu ? 0 : UIScreen.main.bounds.width)
-                        .animation(.easeInOut(duration: 0.3), value: showMenu)
+                GeometryReader { _ in
+                    HStack {
+                        Spacer()
+                        DrawerSettingView()
+                            .offset(x: showMenu ? 0 : UIScreen.main.bounds.width)
+                            .animation(.easeInOut(duration: 0.3), value: showMenu)
+                    }
+                    
                 }
+                .background(Color("DarkGray").opacity(showMenu ? 0.5 : 0))
                 
             }
-            .background(Color("DarkGray").opacity(showMenu ? 0.5 : 0))
             
-        }
-        
-        .toolbar {
-            Button {
-                self.showMenu.toggle()
-            } label: {
-                Image(systemName: "line.3.horizontal")
+            .toolbar {
+                Button {
+                    self.showMenu.toggle()
+                } label: {
+                    Image(systemName: "line.3.horizontal")
+                }
             }
         }
-        
     }
 }
 

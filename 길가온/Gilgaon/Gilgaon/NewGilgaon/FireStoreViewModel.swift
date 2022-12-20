@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 import FirebaseFirestore
 import FirebaseAuth
 
@@ -16,12 +17,13 @@ class FireStoreViewModel: ObservableObject {
     
     let database = Firestore.firestore()
     var currentUserId:String?{ Auth.auth().currentUser?.uid }
+
     
     //친구목록을 조회하는 함수
-    func fetchFriend(user: FireStoreModel) {
+    func fetchFriend() {
         database
             .collection("User")
-            .document(user.id)
+            .document(self.currentUserId!)
             .collection("Friend")
             .getDocuments { (snapshot, error) in
                 self.myFriendArray.removeAll()
