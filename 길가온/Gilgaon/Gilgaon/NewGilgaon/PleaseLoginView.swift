@@ -10,15 +10,18 @@ import SwiftUI
 struct PleaseLoginView: View {
     @EnvironmentObject private var registerModel: RegisterModel
     var body: some View {
-        Group {
-            if registerModel.currentUser != nil {
-                HomeView()
-            } else {
-                LoginView()
+        
+        NavigationStack {
+            Group {
+                if registerModel.currentUser != nil {
+                    HomeView()
+                } else {
+                    LoginView()
+                }
             }
-        }
-        .onAppear {
-           registerModel.listenToAuthState()
+            .onAppear {
+                registerModel.listenToAuthState()
+            }
         }
     }
 }
