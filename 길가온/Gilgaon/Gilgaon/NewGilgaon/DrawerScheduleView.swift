@@ -9,6 +9,7 @@ import SwiftUI
 
 
 struct DrawerScheduleView: View {
+    @StateObject private var fireStoreViewModel = FireStoreViewModel()
     @State var isRecording: Bool = false
     var body: some View {
         ZStack {
@@ -17,14 +18,16 @@ struct DrawerScheduleView: View {
             VStack{
                 Button {
                     isRecording.toggle()
+                    if isRecording == true{
+                        //  -> [스케쥴을 추가하는 View] //
+                    }
                 } label: {
                     Text(isRecording ? "기록멈추기": "기록하기")
                 }
                 
                 flowerWritingView
             }
-            // offset
-      
+
         }
     }
 }

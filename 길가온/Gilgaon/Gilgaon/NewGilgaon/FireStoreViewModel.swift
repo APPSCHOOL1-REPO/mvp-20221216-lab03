@@ -11,12 +11,15 @@ import FirebaseFirestore
 import FirebaseAuth
 
 class FireStoreViewModel: ObservableObject {
-    @Published var myFriendArray: [FriendModel] = []
-    @Published var userList: [FriendModel] = []
-    @Published var calendars: [CalendarStoreModel] = []
+    
     @Published var users: [FireStoreModel] = []
+    @Published var userList: [FriendModel] = []
+    @Published var markerList: [MarkerModel] = []
+    @Published var myFriendArray: [FriendModel] = []
+    @Published var calendarList:[DayCalendarModel] = []
     
     let database = Firestore.firestore()
+    var nowCalendarId: String = ""
     var currentUserId:String?{ Auth.auth().currentUser?.uid }
 
     
@@ -46,7 +49,7 @@ class FireStoreViewModel: ObservableObject {
     }
     
     //일정 추가
-    func addSchedule(_ scheduleData: CalendarStoreModel){
+    func addSchedule(_ scheduleData: MarkerModel){
         database
             .collection("User")
             .document(self.currentUserId!)
@@ -62,6 +65,7 @@ class FireStoreViewModel: ObservableObject {
                 "lat": scheduleData.lat,
                 "lon": scheduleData.lon
             ])
+        self.nowCalendarId = scheduleData.id
     }
     
 
@@ -111,14 +115,76 @@ class FireStoreViewModel: ObservableObject {
                     }
                 }
         }
-
-  
-    func fetchCalendars() {
-        database.collection("User")
+    
+    
+    // [서랍 doc생성]
+    func addCalendar(_ calendar: DayCalendarModel){
+        database
+            .collection("User")
+            .document(self.currentUserId!)
+            .collection("Calendar")
+            .document(calendar.id)
+            .setData([
+                "id": calendar.id,
+                "createdAt": calendar.createdAt,
+                "title": calendar.title,
+                "shareFriend": calendar.shareFriend
+            ])
+    }
+    
+    
+    //[서랍 data불러오기]
+    func fetchDayCalendar(){
+        database
+            .collection("User")
             .document(self.currentUserId!)
             .collection("Calendar")
             .getDocuments { (snapshot, error) in
-                self.calendars.removeAll()
+                self.calendarList.removeAll()
+                if let snapshot{
+                    for document in snapshot.documents{
+                        let id = document.documentID
+                        let docData = document.data()
+                        let createdAt = docData["createdAt"] as? Double ?? 0
+                        let title = docData["title"] as? String ?? ""
+                        let shareFriend = docData["shareFriend"] as? [String] ?? []
+                        let calendarData = DayCalendarModel(id: id, createdAt: createdAt, title: title, shareFriend: shareFriend)
+                    }
+                }
+            }
+    }
+  
+    // [마커 생성하기]
+    func addMarker(_ marker: MarkerModel){
+        database
+            .collection("User")
+            .document(self.currentUserId!)
+            .collection("Calendar")
+            .document(self.nowCalendarId)
+            .collection("Marker")
+            .document(marker.id)
+            .setData([
+                "id": marker.id,
+                "title": marker.title,
+                "photo": marker.photo,
+                "createdAt": marker.createdAt,
+                "contents": marker.contents,
+                "locationName": marker.locationName,
+                "lat": marker.lat,
+                "lon": marker.lon
+            ])
+    }
+    
+    
+    // [마커 가져오기]
+    func fetchMarkers(_ userId: String) {
+        database.collection("User")
+            .document(self.currentUserId!)
+            .collection("Calendar")
+            .document(userId)
+            .collection("Marker")
+            .getDocuments { (snapshot, error) in
+                self.markerList.removeAll()
                 if let snapshot {
                     for document in snapshot.documents {
                         let id: String = document.documentID
@@ -134,9 +200,9 @@ class FireStoreViewModel: ObservableObject {
                         let lon: String = docData["lon"] as? String ?? ""
                         
                         
-                        let calendars: CalendarStoreModel = CalendarStoreModel(id: id, title: title, photo: photo, createdAt: createdAt, contents: contents, locationName: locationName, lat: lat, lon: lon)
+                        let marker: MarkerModel = MarkerModel(id: id, title: title, photo: photo, createdAt: createdAt, contents: contents, locationName: locationName, lat: lat, lon: lon)
                         
-                        self.calendars.append(calendars)
+                        self.markerList.append(marker)
                     }
                 }
             }
