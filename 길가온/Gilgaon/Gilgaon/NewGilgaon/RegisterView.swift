@@ -14,6 +14,7 @@ import SwiftUI
 struct RegisterView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var registerModel: RegisterModel
+    @EnvironmentObject var fireStoreViewModel: FireStoreViewModel
     
     @State private var nickName: String = ""
     @State private var userEmail: String = ""
@@ -42,6 +43,7 @@ struct RegisterView: View {
             Button {
                 Task {
                     try! await registerModel.registerUser(userID: userEmail, userPW: password)
+                    try! await fireStoreViewModel.addUser(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: "", userEmail: userEmail))
                     if !registerModel.isError {
                         dismiss()
                     }
