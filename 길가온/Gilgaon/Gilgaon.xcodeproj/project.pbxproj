@@ -19,7 +19,6 @@
 		1642F0FE29388BC6005A54EF /* NotoSerifKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1642F0F729388BC5005A54EF /* NotoSerifKR-Black.otf */; };
 		1642F0FF29388BC6005A54EF /* NotoSerifKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1642F0F829388BC6005A54EF /* NotoSerifKR-Bold.otf */; };
 		1642F10029388BC6005A54EF /* NotoSerifKR-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1642F0F929388BC6005A54EF /* NotoSerifKR-ExtraLight.otf */; };
-		164974EA2936F10E00BDA2B9 /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164974E92936F10E00BDA2B9 /* WritingView.swift */; };
 		16CA72952939BDE200D451F0 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 16CA72942939BDE200D451F0 /* AppIcon.appiconset */; };
 		16CFFE0629363BEA00DC0B55 /* CalendarSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CFFE0529363BE900DC0B55 /* CalendarSelectView.swift */; };
 		16CFFE0829363CEF00DC0B55 /* InviteFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CFFE0729363CEF00DC0B55 /* InviteFriendView.swift */; };
@@ -49,6 +48,7 @@
 		3663C67D293881C1006880C9 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C67C293881C1006880C9 /* SheetView.swift */; };
 		3691CB3229364AC400F41FDB /* Polyline in Frameworks */ = {isa = PBXBuildFile; productRef = 3691CB3129364AC400F41FDB /* Polyline */; };
 		369CB73E293726E700C2E4BF /* JogakData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369CB73D293726E700C2E4BF /* JogakData.swift */; };
+		36BB028B29518BD300CF2816 /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BB028A29518BD300CF2816 /* WritingView.swift */; };
 		634BC63E2950369D0044B38B /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC63D2950369D0044B38B /* DrawerView.swift */; };
 		634BC6402950398C0044B38B /* DrawerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC63F2950398C0044B38B /* DrawerListView.swift */; };
 		634BC642295039D10044B38B /* DrawerScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC641295039D10044B38B /* DrawerScheduleView.swift */; };
@@ -94,7 +94,6 @@
 		1642F0F729388BC5005A54EF /* NotoSerifKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifKR-Black.otf"; sourceTree = "<group>"; };
 		1642F0F829388BC6005A54EF /* NotoSerifKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifKR-Bold.otf"; sourceTree = "<group>"; };
 		1642F0F929388BC6005A54EF /* NotoSerifKR-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifKR-ExtraLight.otf"; sourceTree = "<group>"; };
-		164974E92936F10E00BDA2B9 /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
 		16CA72942939BDE200D451F0 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
 		16CFFE0529363BE900DC0B55 /* CalendarSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSelectView.swift; sourceTree = "<group>"; };
 		16CFFE0729363CEF00DC0B55 /* InviteFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendView.swift; sourceTree = "<group>"; };
@@ -121,6 +120,7 @@
 		3663C67A293863D4006880C9 /* LocationDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataService.swift; sourceTree = "<group>"; };
 		3663C67C293881C1006880C9 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
 		369CB73D293726E700C2E4BF /* JogakData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JogakData.swift; sourceTree = "<group>"; };
+		36BB028A29518BD300CF2816 /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
 		634BC63D2950369D0044B38B /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
 		634BC63F2950398C0044B38B /* DrawerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerListView.swift; sourceTree = "<group>"; };
 		634BC641295039D10044B38B /* DrawerScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerScheduleView.swift; sourceTree = "<group>"; };
@@ -188,6 +188,7 @@
 				16EE2F612951501700414279 /* AddFriendView.swift */,
 				16EE2F632951504600414279 /* FireStoreModel.swift */,
 				16EE2F652951508D00414279 /* FireStoreViewModel.swift */,
+				36BB028A29518BD300CF2816 /* WritingView.swift */,
 			);
 			path = NewGilgaon;
 			sourceTree = "<group>";
@@ -325,7 +326,6 @@
 				635AE39C2935E9F6008A8452 /* CalendarView.swift */,
 				16CFFE0529363BE900DC0B55 /* CalendarSelectView.swift */,
 				635AE3A229360793008A8452 /* CustomDataPicker.swift */,
-				164974E92936F10E00BDA2B9 /* WritingView.swift */,
 				63D2C1292938388A0011BC89 /* DayView.swift */,
 				C0B7045A29388F1200245ED7 /* Sakura.json */,
 				16FA82C7293906A6006129D3 /* PopupTest.swift */,
@@ -476,6 +476,7 @@
 				16CFFE0629363BEA00DC0B55 /* CalendarSelectView.swift in Sources */,
 				635AE3952935E9DC008A8452 /* LoginView.swift in Sources */,
 				16F69DA7293845E80045CD91 /* LottieView.swift in Sources */,
+				36BB028B29518BD300CF2816 /* WritingView.swift in Sources */,
 				3663C67129386372006880C9 /* LocationListView.swift in Sources */,
 				6FF334BC2935F17D007438B1 /* AuthAppDelegate.swift in Sources */,
 				635AE39B2935E9F0008A8452 /* RecordView.swift in Sources */,
@@ -483,7 +484,6 @@
 				63660F4E2937216F00B70272 /* ImagePicker.swift in Sources */,
 				63D2C123293836CD0011BC89 /* DayTask.swift in Sources */,
 				16F69DB629387E030045CD91 /* OnboardingTabView.swift in Sources */,
-				164974EA2936F10E00BDA2B9 /* WritingView.swift in Sources */,
 				634BC646295043110044B38B /* FriendsView.swift in Sources */,
 				16D46FA42935EC7F00BB9440 /* SearchNetwork.swift in Sources */,
 				161510C7295036B300BA7FFE /* RegisterModel.swift in Sources */,

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct DrawerScheduleView: View {
     @State var isRecording: Bool = false
     var body: some View {
@@ -46,9 +47,10 @@ extension DrawerScheduleView {
                 .padding()
                 HStack(spacing: 30) {
                     NavigationLink {
-                        //                    WritingView(currentDate:$currentDate, calID:$calID)
+                        WritingView()
                     } label: {
                         Text("새 글작성")
+                        
                             .font(.custom("NotoSerifKR-SemiBold", size: 15))
                             .foregroundColor(Color("Pink"))
                     }
@@ -69,6 +71,9 @@ extension DrawerScheduleView {
         }
         
     }
+    
+    
+    
     
 }
 struct DrawerScheduleView_Previews: PreviewProvider {

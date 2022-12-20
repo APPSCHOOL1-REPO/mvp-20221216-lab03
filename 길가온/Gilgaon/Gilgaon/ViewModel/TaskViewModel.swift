@@ -13,17 +13,7 @@ import SwiftUI
 class TaskViewModel: ObservableObject {
     
     @Published var storedTasks: [DayTask] = [
-//    
-//        DayTask(taskTitle: "예쁜 카페발견!", taskDescription: "돌아다니기 개꿀잼", taskDate: .init(timeIntervalSince1970: 1669766400)),
-//        DayTask(taskTitle: "여기 진짜 맛집임 ㅜㅜ", taskDescription: "돌아다니기 개꿀잼", taskDate: .init(timeIntervalSince1970: 1669767400)),
-//        DayTask(taskTitle: "너무 즐거운하루", taskDescription: "돌아다니기 개꿀잼", taskDate: .init(timeIntervalSince1970: 1669852800)),
-//        DayTask(taskTitle: "소소하지만 즐거웠음", taskDescription: "돌아다니기 개꿀잼", taskDate: .init(timeIntervalSince1970: 1669892400)),
-//        DayTask(taskTitle: "하루가 행복하당ㅎㅎ", taskDescription: "돌아다니기 개꿀잼", taskDate: .init(timeIntervalSince1970: 1669914000)),
-//        DayTask(taskTitle: "여기 천국인가 ... ?", taskDescription: "돌아다니기 개꿀잼", taskDate: .init(timeIntervalSince1970: 1669802400)),
-//        DayTask(taskTitle: "함께라서 더 좋아", taskDescription: "돌아다니기 개꿀잼", taskDate: .init(timeIntervalSince1970: 1669716000)),
-//        DayTask(taskTitle: "힘들었지만 재밌었어 ^_^", taskDescription: "돌아다니기 개꿀잼", taskDate: .init(timeIntervalSince1970: 1669629600)),
-//        DayTask(taskTitle: "예쁜 카페발견!", taskDescription: "돌아다니기 개꿀잼", taskDate: .init(timeIntervalSince1970: 1669644000))
-    
+
     ]
     
     @Published var currentWeek: [Date] = []
