@@ -101,9 +101,9 @@ class FireStoreViewModel: ObservableObject {
                                nickName.contains(userName)
                             {
                                 let docData = document.data()
-                                var nickName: String = docData["nickName"] as? String ?? ""
-                                var userPhoto: String = docData["userPhoto"] as? String ?? ""
-                                var userEmail:String = docData["userEmail"] as? String ?? ""
+                                let nickName: String = docData["nickName"] as? String ?? ""
+                                let userPhoto: String = docData["userPhoto"] as? String ?? ""
+                                let userEmail:String = docData["userEmail"] as? String ?? ""
                                 let friend = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
                                 self.userList.append(friend)
                             }
