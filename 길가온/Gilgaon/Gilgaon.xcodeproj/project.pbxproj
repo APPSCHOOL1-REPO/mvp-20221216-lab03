@@ -46,6 +46,11 @@
 		3663C67D293881C1006880C9 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C67C293881C1006880C9 /* SheetView.swift */; };
 		3691CB3229364AC400F41FDB /* Polyline in Frameworks */ = {isa = PBXBuildFile; productRef = 3691CB3129364AC400F41FDB /* Polyline */; };
 		369CB73E293726E700C2E4BF /* JogakData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369CB73D293726E700C2E4BF /* JogakData.swift */; };
+		634BC63E2950369D0044B38B /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC63D2950369D0044B38B /* DrawerView.swift */; };
+		634BC6402950398C0044B38B /* DrawerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC63F2950398C0044B38B /* DrawerListView.swift */; };
+		634BC642295039D10044B38B /* DrawerScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC641295039D10044B38B /* DrawerScheduleView.swift */; };
+		634BC64429503C000044B38B /* DrawerSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC64329503C000044B38B /* DrawerSettingView.swift */; };
+		634BC646295043110044B38B /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC645295043110044B38B /* FriendsView.swift */; };
 		635AE3852935E932008A8452 /* GilgaonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635AE3842935E932008A8452 /* GilgaonApp.swift */; };
 		635AE3892935E934008A8452 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635AE3882935E934008A8452 /* Assets.xcassets */; };
 		635AE38C2935E934008A8452 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 635AE38B2935E934008A8452 /* Preview Assets.xcassets */; };
@@ -110,6 +115,11 @@
 		3663C67A293863D4006880C9 /* LocationDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataService.swift; sourceTree = "<group>"; };
 		3663C67C293881C1006880C9 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
 		369CB73D293726E700C2E4BF /* JogakData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JogakData.swift; sourceTree = "<group>"; };
+		634BC63D2950369D0044B38B /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
+		634BC63F2950398C0044B38B /* DrawerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerListView.swift; sourceTree = "<group>"; };
+		634BC641295039D10044B38B /* DrawerScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerScheduleView.swift; sourceTree = "<group>"; };
+		634BC64329503C000044B38B /* DrawerSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerSettingView.swift; sourceTree = "<group>"; };
+		634BC645295043110044B38B /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		635AE3812935E932008A8452 /* Gilgaon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gilgaon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		635AE3842935E932008A8452 /* GilgaonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GilgaonApp.swift; sourceTree = "<group>"; };
 		635AE3882935E934008A8452 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -162,6 +172,11 @@
 			isa = PBXGroup;
 			children = (
 				161510BD29502BE600BA7FFE /* RegisterView.swift */,
+				634BC63D2950369D0044B38B /* DrawerView.swift */,
+				634BC64329503C000044B38B /* DrawerSettingView.swift */,
+				634BC641295039D10044B38B /* DrawerScheduleView.swift */,
+				634BC63F2950398C0044B38B /* DrawerListView.swift */,
+				634BC645295043110044B38B /* FriendsView.swift */,
 			);
 			path = NewGilgaon;
 			sourceTree = "<group>";
@@ -431,6 +446,7 @@
 			files = (
 				3663C66F29386338006880C9 /* MapAnnotationView.swift in Sources */,
 				6FF334BE2935F17D007438B1 /* KakaoAuthViewModel.swift in Sources */,
+				634BC63E2950369D0044B38B /* DrawerView.swift in Sources */,
 				362DC67429389FD100507017 /* LocationFetcher.swift in Sources */,
 				161510BE29502BE600BA7FFE /* RegisterView.swift in Sources */,
 				3663C67D293881C1006880C9 /* SheetView.swift in Sources */,
@@ -442,6 +458,7 @@
 				3663C67529386397006880C9 /* FlowerMapView.swift in Sources */,
 				635AE3A12935EA04008A8452 /* SettingView.swift in Sources */,
 				635AE3852935E932008A8452 /* GilgaonApp.swift in Sources */,
+				634BC642295039D10044B38B /* DrawerScheduleView.swift in Sources */,
 				635AE39D2935E9F6008A8452 /* CalendarView.swift in Sources */,
 				16F69DB729387E030045CD91 /* GilgaonRequestPermissonView.swift in Sources */,
 				16CFFE0629363BEA00DC0B55 /* CalendarSelectView.swift in Sources */,
@@ -455,6 +472,7 @@
 				63D2C123293836CD0011BC89 /* DayTask.swift in Sources */,
 				16F69DB629387E030045CD91 /* OnboardingTabView.swift in Sources */,
 				164974EA2936F10E00BDA2B9 /* WritingView.swift in Sources */,
+				634BC646295043110044B38B /* FriendsView.swift in Sources */,
 				16D46FA42935EC7F00BB9440 /* SearchNetwork.swift in Sources */,
 				635AE3972935E9E2008A8452 /* HomeView.swift in Sources */,
 				635AE3992935E9E7008A8452 /* TabBarView.swift in Sources */,
@@ -469,8 +487,10 @@
 				16D46FA12935EC7F00BB9440 /* SearchViewModel.swift in Sources */,
 				635AE39F2935E9FE008A8452 /* MarkView.swift in Sources */,
 				16FA82C8293906A6006129D3 /* PopupTest.swift in Sources */,
+				634BC64429503C000044B38B /* DrawerSettingView.swift in Sources */,
 				635AE3AD29361A6D008A8452 /* DateTask.swift in Sources */,
 				63D2C12A2938388A0011BC89 /* DayView.swift in Sources */,
+				634BC6402950398C0044B38B /* DrawerListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

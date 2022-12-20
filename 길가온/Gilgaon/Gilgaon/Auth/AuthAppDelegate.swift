@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-/// KAKAO
+// KAKAO
 import KakaoSDKCommon
 import KakaoSDKAuth
 
 
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AuthAppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         // MARK: - KAKAO
