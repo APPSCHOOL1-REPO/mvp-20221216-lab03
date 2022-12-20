@@ -7,9 +7,8 @@
 
 import Foundation
 
-
 // Collection User
-struct FireStoreModel: Identifiable {
+struct FireStoreModel: Codable,Identifiable,Hashable {
     var id: String //currentUser UID (Document ID)
     
     // field 값들
@@ -19,7 +18,7 @@ struct FireStoreModel: Identifiable {
     //
 }
 
-struct CalendarModelModel: Identifiable {
+struct CalendarStoreModel: Codable,Identifiable,Hashable {
     
     var id: String
     var title: String
@@ -31,7 +30,7 @@ struct CalendarModelModel: Identifiable {
     var lon: String
 }
 
-struct FriendModel: Identifiable {
+struct FriendModel: Codable,Identifiable,Hashable {
     var id: String //currentUser UID (Document ID)
     // field 값들
     var nickName: String

@@ -1,10 +1,3 @@
-//
-//  LoginView.swift
-//  HanselAndGretel
-//
-//  Created by zooey on 2022/11/29.
-//
-
 import SwiftUI
 import AuthenticationServices
 
@@ -37,7 +30,7 @@ struct LoginView: View {
     
     var body: some View {
         
-        NavigationStack {
+      //  NavigationStack {
             ZStack {
                 
                 Color("White")
@@ -51,7 +44,7 @@ struct LoginView: View {
            
                     MyPath2()
                         .stroke(Color("Pink"))
-                        .offset(x: 800, y: 280)
+                        .offset(x: 800, y: 250)
       
                 VStack {
                     
@@ -70,7 +63,7 @@ struct LoginView: View {
                         HStack {
                             Image(systemName: "lock")
                                 .foregroundColor(Color("DarkGray"))
-                            TextField("비밀번호", text: $password)
+                            SecureField("비밀번호", text: $password)
                         }
                         .font(.custom("NotoSerifKR-Regular",size:16))
                         .padding()
@@ -143,8 +136,8 @@ struct LoginView: View {
                     
                 }
                
-            }
-            .navigationBarHidden(true)
+//            }
+//            .navigationBarHidden(true)
         }
         .accentColor(Color("Red"))
     }
