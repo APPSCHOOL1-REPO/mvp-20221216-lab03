@@ -1,26 +1,21 @@
 //
-//  RecordSheetView.swift
-//  HanselAndGretel
+//  WritingView.swift
+//  Gilgaon
 //
-//  Created by zooey on 2022/11/16.
+//  Created by sehooon on 2022/12/20.
 //
 
 import SwiftUI
 import PhotosUI
 
 struct WritingView: View {
+    @StateObject private var firestoreViewModel = FireStoreViewModel()
+    
     @ObservedObject var jogakData: JogakData = JogakData()
     @EnvironmentObject var viewModel: SearchViewModel
-    @EnvironmentObject private var cvm: CalendarViewModel
-    @Binding var currentDate: Date
-    @Binding var calID: [String]
     
     @State private var openPhoto = false
-    @State private var openPhoto2 = false
-    @State private var openPhoto3 = false
     @State private var image = UIImage()
-    @State private var image2 = UIImage()
-    @State private var image3 = UIImage()
     @State private var travelName2: String = ""
     @State private var travel: String = ""
     @Environment(\.dismiss) private var dismiss
@@ -37,7 +32,6 @@ struct WritingView: View {
         ZStack {
             Color("White")
                 .ignoresSafeArea()
-            
             VStack{
                 ZStack {
                     Image("line")
@@ -48,7 +42,6 @@ struct WritingView: View {
                         .foregroundColor(Color("DarkGray"))
                         .offset(y: -4)
                 }
-                
                 Spacer()
                 
                 HStack {
@@ -86,9 +79,7 @@ struct WritingView: View {
                     }
                 }
                 
-                
                 HStack {
-                    
                     Button {
                         self.openPhoto = true
                     } label: {
@@ -112,51 +103,6 @@ struct WritingView: View {
                         
                     }
                     
-                    Button {
-                        self.openPhoto2 = true
-                    } label: {
-                        ZStack {
-                            Image(systemName: "plus.app")
-                                .resizable()
-                                .frame(width: 80, height: 80)
-                                .fontWeight(.light)
-                                .foregroundColor(Color("DarkGray"))
-                            
-                            Image(uiImage: self.image2)
-                                .resizable()
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(15)
-                        }
-                    }
-                    .sheet(isPresented: $openPhoto2) {
-                        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image2)
-                            .onDisappear{
-                                jogakData.images.append(image2)
-                            }
-                    }
-                    
-                    Button {
-                        self.openPhoto3 = true
-                    } label: {
-                        ZStack {
-                            Image(systemName: "plus.app")
-                                .resizable()
-                                .frame(width: 80, height: 80)
-                                .fontWeight(.light)
-                                .foregroundColor(Color("DarkGray"))
-                            Image(uiImage: self.image3)
-                                .resizable()
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(15)
-                            
-                        }
-                    }
-                    .sheet(isPresented: $openPhoto3) {
-                        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image3)
-                            .onDisappear{
-                                jogakData.images.append(image3)
-                            }
-                    }
                 }
                 
                 TextField("제목", text: $travelName2)
@@ -175,15 +121,12 @@ struct WritingView: View {
                     .cornerRadius(5)
                     .padding()
                 
-//                TaskMetaData(dateTask: [
-//                    DateTask(title: "강남 데이투"),
-//                    DateTask(title: "놀러가쟈ㅎ_ㅎ"),
-//                ], taskDate: getSampleDate(offset: -4)),
                 
                 Button {
-//                    cvm.tasks.append(TaskMetaData(dateTask: [DateTask(title: travelName2)], taskDate: currentDate))
-                    cvm.tasks.append(DateTask(title: travelName2,taskDate: currentDate,realDate: calID))
-                    print(cvm.tasks)
+                    let id = UUID().uuidString
+                    let createdAt = Date().timeIntervalSince1970
+                    let schedule = CalendarStoreModel(id: id, title: travelName2, photo: "", createdAt: createdAt, contents: travel, locationName: "", lat: "", lon: "")
+                    firestoreViewModel.addSchedule(schedule)
                     dismiss()
                 } label: {
                     Text("추가")
@@ -203,6 +146,6 @@ struct WritingView: View {
 
 struct WritingView_Previews: PreviewProvider {
     static var previews: some View {
-        WritingView(currentDate: .constant(Date()),calID: .constant([]))
+        WritingView()
     }
 }

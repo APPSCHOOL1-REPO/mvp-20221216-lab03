@@ -216,7 +216,7 @@ struct CustomDataPicker: View {
                                 .padding()
                                 HStack(spacing: 30) {
                                     NavigationLink {
-                                        WritingView(currentDate:$currentDate, calID:$calID)
+                                        WritingView()
                                     } label: {
                                         Text("새 글작성")
                                             .font(.custom("NotoSerifKR-SemiBold", size: 15))
