@@ -5,6 +5,7 @@
 //  Created by sehooon on 2022/11/30.
 //
 
+//MARK: - 꽃갈피 -> 상단바에 보여지는 리스트들
 import SwiftUI
 
 struct LocationsListView: View {

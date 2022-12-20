@@ -37,7 +37,6 @@
 		16FA82C8293906A6006129D3 /* PopupTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FA82C7293906A6006129D3 /* PopupTest.swift */; };
 		16FA82CB293906BA006129D3 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 16FA82CA293906BA006129D3 /* PopupView */; };
 		362DC67429389FD100507017 /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362DC67329389FD100507017 /* LocationFetcher.swift */; };
-		3663C66F29386338006880C9 /* MapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C66E29386338006880C9 /* MapAnnotationView.swift */; };
 		3663C67129386372006880C9 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C67029386372006880C9 /* LocationListView.swift */; };
 		3663C67329386383006880C9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C67229386383006880C9 /* Location.swift */; };
 		3663C67529386397006880C9 /* FlowerMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C67429386397006880C9 /* FlowerMapView.swift */; };
@@ -109,7 +108,6 @@
 		16FA82C5293903BC006129D3 /* InviteFriendLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InviteFriendLottie.json; sourceTree = "<group>"; };
 		16FA82C7293906A6006129D3 /* PopupTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupTest.swift; sourceTree = "<group>"; };
 		362DC67329389FD100507017 /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
-		3663C66E29386338006880C9 /* MapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationView.swift; sourceTree = "<group>"; };
 		3663C67029386372006880C9 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		3663C67229386383006880C9 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		3663C67429386397006880C9 /* FlowerMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowerMapView.swift; sourceTree = "<group>"; };
@@ -234,9 +232,7 @@
 		3663C66D2938631E006880C9 /* MapVIew */ = {
 			isa = PBXGroup;
 			children = (
-				3663C66E29386338006880C9 /* MapAnnotationView.swift */,
 				3663C67029386372006880C9 /* LocationListView.swift */,
-				3663C67229386383006880C9 /* Location.swift */,
 				3663C67429386397006880C9 /* FlowerMapView.swift */,
 				3663C676293863B1006880C9 /* FlowerMapPreviewView.swift */,
 				3663C678293863C4006880C9 /* LocationsViewModel.swift */,
@@ -295,6 +291,7 @@
 		635AE3A629361959008A8452 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3663C67229386383006880C9 /* Location.swift */,
 				362DC67329389FD100507017 /* LocationFetcher.swift */,
 				16D46F9C2935EC7F00BB9440 /* SearchModel.swift */,
 				16D46F9D2935EC7F00BB9440 /* SearchNetwork.swift */,
@@ -450,7 +447,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3663C66F29386338006880C9 /* MapAnnotationView.swift in Sources */,
 				6FF334BE2935F17D007438B1 /* KakaoAuthViewModel.swift in Sources */,
 				634BC63E2950369D0044B38B /* DrawerView.swift in Sources */,
 				362DC67429389FD100507017 /* LocationFetcher.swift in Sources */,

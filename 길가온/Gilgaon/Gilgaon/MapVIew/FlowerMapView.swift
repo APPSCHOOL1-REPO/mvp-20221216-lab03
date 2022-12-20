@@ -8,8 +8,6 @@
 import SwiftUI
 import MapKit
 
-
-
 struct Place: Identifiable{
     var id = UUID()
     var name: String = ""
@@ -32,7 +30,7 @@ struct FlowerMapView: View {
                 annotationItems: vm.locations,
                 annotationContent: { location in
                 MapAnnotation(coordinate: location.coordinate) {
-                    MapAnnotationView()
+                    mapMarker()
                         .scaleEffect(vm.mapLocation == location ? 1.2: 0.9)
                         .shadow(radius: 10)
                         .onTapGesture {
@@ -64,6 +62,13 @@ struct FlowerMapView: View {
             
             
         }
+    }
+    
+    func mapMarker() -> some View {
+        Image("flowerPink")
+            .resizable()
+            .frame(width: 40, height: 40)
+            .scaledToFit()
     }
 }
 
