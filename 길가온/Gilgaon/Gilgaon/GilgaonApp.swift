@@ -23,7 +23,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct GilgaonApp: App {
     // register app delegate for Firebase setup
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @UIApplicationDelegateAdaptor var appDelegate: AppDelegate
+//    @UIApplicationDelegateAdaptor var appDelegate: AppDelegate
     
     var body: some Scene {
         WindowGroup {
