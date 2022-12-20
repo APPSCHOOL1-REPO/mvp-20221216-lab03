@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 class FireStoreViewModel: ObservableObject {
     @Published var myFriendArray: [FriendModel] = []
@@ -14,18 +16,14 @@ class FireStoreViewModel: ObservableObject {
     @Published var calendars: [CalendarStoreModel] = []
     
     let database = Firestore.firestore()
-    
-    init() {
-        
-        calendars = []
-    }
-    
+    var currentUserId:String?{ Auth.auth().currentUser?.uid }
+
     
     //친구목록을 조회하는 함수
-    func fetchFriend(user: FireStoreModel) {
+    func fetchFriend() {
         database
             .collection("User")
-            .document(user.id)
+            .document(self.currentUserId!)
             .collection("Friend")
             .getDocuments { (snapshot, error) in
                 self.myFriendArray.removeAll()
@@ -46,6 +44,26 @@ class FireStoreViewModel: ObservableObject {
             }
     }
     
+    //일정 추가
+    func addSchedule(_ scheduleData: CalendarStoreModel){
+        database
+            .collection("User")
+            .document(self.currentUserId!)
+            .collection("Calendar")
+            .document(scheduleData.id)
+            .setData([
+                "id": scheduleData.id,
+                "title": scheduleData.title,
+                "photo": scheduleData.photo,
+                "createdAt": scheduleData.createdAt,
+                "contents": scheduleData.contents,
+                "locationName": scheduleData.locationName,
+                "lat": scheduleData.lat,
+                "lon": scheduleData.lon
+            ])
+    }
+    
+
     //친구를 추가하는 함수
     func addFriend(user: FireStoreModel, friend: FriendModel) {
         database
@@ -94,13 +112,12 @@ class FireStoreViewModel: ObservableObject {
         }
 
   
-    func fetchCalendars(user: FireStoreModel) {
+    func fetchCalendars() {
         database.collection("User")
-            .document(user.id)
+            .document(self.currentUserId!)
             .collection("Calendar")
             .getDocuments { (snapshot, error) in
                 self.calendars.removeAll()
-                
                 if let snapshot {
                     for document in snapshot.documents {
                         let id: String = document.documentID
