@@ -14,10 +14,13 @@ enum MiddleView: String {
 
 struct DrawerView: View {
     
+    @State private var showMenu: Bool = false
     @State private var middleView: MiddleView = .schedule
+   
+    
     private var middleViewArray: [MiddleView] = [.schedule, .list]
     
-    @State private var showMenu: Bool = false
+    
     
     var body: some View {
         

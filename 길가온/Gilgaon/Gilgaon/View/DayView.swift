@@ -85,17 +85,13 @@ struct DayView: View {
     }
     
     func tasksView() -> some View {
-        
         LazyVStack(spacing: 18) {
             if let tasks = cvm.tasks {
-                
                 if tasks.isEmpty {
-                    
                     Text("남겨진 꽃갈피가 없습니다.")
                         .font(.custom("NotoSerifKR-Light", size: 15))
                         .foregroundColor(Color("DarkGray"))
                         .offset(y: 100)
-                    
                 } else {
                     ForEach(cvm.tasks.filter {$0.realDate.contains(calID)}) { task in
                         NavigationLink(destination: FlowerMapView()) {
@@ -104,9 +100,7 @@ struct DayView: View {
                         }
                     }
                 }
-                
             } else {
-                
                 ProgressView()
                     .offset(y: 100)
             }
