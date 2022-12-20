@@ -8,8 +8,45 @@
 import SwiftUI
 
 struct AddFriendView: View {
+    @StateObject private var fireStoreViewModel: FireStoreViewModel = FireStoreViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  
+            ZStack {
+                List {
+                    ForEach(fireStoreViewModel.myFriendArray, id: \.self) { myFriend in
+                        
+                        VStack(alignment: .leading) {
+                            Text(myFriend.nickName)
+                                .font(.title2)
+                                .fontWeight(.medium)
+                                .padding(.vertical, 10)
+                        }
+                        .padding(10)
+                        
+                    }
+                    .listRowBackground(
+                        RoundedRectangle(cornerRadius: 20)
+                            .background(.clear)
+                            .foregroundColor(.white)
+                            .padding(
+                                EdgeInsets(
+                                    top: 10,
+                                    leading: 10,
+                                    bottom: 10,
+                                    trailing: 10
+                                )
+                            )
+                    )
+                    .listRowSeparator(.hidden)
+                    
+                }
+   
+   
+        }
+            .onAppear {
+                fireStoreViewModel.fetchFriend()
+            }
     }
 }
 
