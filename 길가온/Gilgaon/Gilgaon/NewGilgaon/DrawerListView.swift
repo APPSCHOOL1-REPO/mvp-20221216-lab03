@@ -1,7 +1,6 @@
 //
 //  DrawerListView.swift
 //  Gilgaon
-//
 //  Created by zooey on 2022/12/19.
 //
 
@@ -16,15 +15,14 @@ struct DrawerListView: View {
                 .ignoresSafeArea()
             ScrollView {
                 LazyVStack {
-                    ForEach(firestoreViewModel.calendars){ schedule in
-                        Text(schedule.locationName)
-                        Text(schedule.contents)
+                    ForEach(firestoreViewModel.calendarList){ schedule in
+                        Text(schedule.title)
                     }
                 }
             }
         }
         .onAppear{
-            firestoreViewModel.fetchCalendars()
+            firestoreViewModel.fetchDayCalendar()
         }
         
         

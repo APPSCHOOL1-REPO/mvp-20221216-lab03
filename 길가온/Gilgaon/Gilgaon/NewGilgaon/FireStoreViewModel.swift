@@ -130,6 +130,9 @@ class FireStoreViewModel: ObservableObject {
                 "title": calendar.title,
                 "shareFriend": calendar.shareFriend
             ])
+        
+            self.nowCalendarId = calendar.id
+            print("nowCalendarId: \(self.nowCalendarId)")
     }
     
     
@@ -149,6 +152,8 @@ class FireStoreViewModel: ObservableObject {
                         let title = docData["title"] as? String ?? ""
                         let shareFriend = docData["shareFriend"] as? [String] ?? []
                         let calendarData = DayCalendarModel(id: id, createdAt: createdAt, title: title, shareFriend: shareFriend)
+                        
+                        self.calendarList.append(calendarData)
                     }
                 }
             }
@@ -160,7 +165,7 @@ class FireStoreViewModel: ObservableObject {
             .collection("User")
             .document(self.currentUserId!)
             .collection("Calendar")
-            .document(self.nowCalendarId)
+            .document(self.nowCalendarId) //출력됨
             .collection("Marker")
             .document(marker.id)
             .setData([

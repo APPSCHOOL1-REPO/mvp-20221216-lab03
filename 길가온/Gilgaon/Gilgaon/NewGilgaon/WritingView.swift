@@ -9,7 +9,7 @@ import SwiftUI
 import PhotosUI
 
 struct WritingView: View {
-    @StateObject private var firestoreViewModel = FireStoreViewModel()
+    @ObservedObject var firestoreViewModel:FireStoreViewModel
     
     @ObservedObject var jogakData: JogakData = JogakData()
     @EnvironmentObject var viewModel: SearchViewModel
@@ -126,7 +126,7 @@ struct WritingView: View {
                     let id = UUID().uuidString
                     let createdAt = Date().timeIntervalSince1970
                     let marker = MarkerModel(id: id, title: travelName2, photo: "", createdAt: createdAt, contents: travel, locationName: "", lat: "", lon: "")
-                    firestoreViewModel.addSchedule(marker)
+                    firestoreViewModel.addMarker(marker)
                     dismiss()
                 } label: {
                     Text("추가")
@@ -144,8 +144,8 @@ struct WritingView: View {
     }
 }
 
-struct WritingView_Previews: PreviewProvider {
-    static var previews: some View {
-        WritingView()
-    }
-}
+//struct WritingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WritingView()
+//    }
+//}
