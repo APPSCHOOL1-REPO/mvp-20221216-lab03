@@ -18,7 +18,18 @@ struct FireStoreModel: Codable,Identifiable,Hashable {
     //
 }
 
-struct CalendarStoreModel: Identifiable {
+// [기록시작 -> 생성]
+struct DayCalendarModel: Identifiable{
+    var id: String
+    var createdAt: Double
+    // 제목 : [서울여행]
+    var title: String
+    // 추후
+    var shareFriend:[String]
+}
+
+// [마커 Data]
+struct MarkerModel: Identifiable {
     var id: String
     var title: String
     var photo: String
@@ -39,6 +50,8 @@ struct CalendarStoreModel: Identifiable {
         return dateFormatter.string(from: dateCreatedAt)
     }
 }
+
+
 
 struct FriendModel: Codable,Identifiable,Hashable {
     var id: String //currentUser UID (Document ID)

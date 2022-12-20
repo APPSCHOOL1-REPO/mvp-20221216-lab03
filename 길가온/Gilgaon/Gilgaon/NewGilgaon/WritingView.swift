@@ -125,8 +125,8 @@ struct WritingView: View {
                 Button {
                     let id = UUID().uuidString
                     let createdAt = Date().timeIntervalSince1970
-                    let schedule = CalendarStoreModel(id: id, title: travelName2, photo: "", createdAt: createdAt, contents: travel, locationName: "", lat: "", lon: "")
-                    firestoreViewModel.addSchedule(schedule)
+                    let marker = MarkerModel(id: id, title: travelName2, photo: "", createdAt: createdAt, contents: travel, locationName: "", lat: "", lon: "")
+                    firestoreViewModel.addSchedule(marker)
                     dismiss()
                 } label: {
                     Text("추가")
