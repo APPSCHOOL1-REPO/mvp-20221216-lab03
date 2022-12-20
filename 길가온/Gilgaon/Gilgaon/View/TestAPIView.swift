@@ -14,6 +14,7 @@ struct TestAPIView: View {
     @EnvironmentObject var viewModel: SearchViewModel
     @ObservedObject var jogakData: JogakData = JogakData()
     @EnvironmentObject private var vm: LocationsViewModel
+//    @EnvironmentObject private var firestore: FireStoreViewModel
     
     @State private var searchText: String = ""
 //    @State private var testFilter: [Poi] = []
@@ -27,6 +28,15 @@ struct TestAPIView: View {
 //            {$0.name.localizedStandardContains(searchText)}
 //        }
 //    }
+    
+//    var getUser: [FireStoreModel] {
+//        Task {
+//            try! await firestore.searchUser(searchText)
+//        }
+//        return firestore.users.filter {$0.nickName.localizedStandardContains(searchText)}
+//    }
+
+    
     
     var filterData: [Poi] {
         Task {

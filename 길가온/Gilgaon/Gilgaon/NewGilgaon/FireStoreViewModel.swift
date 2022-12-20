@@ -14,6 +14,7 @@ class FireStoreViewModel: ObservableObject {
     @Published var myFriendArray: [FriendModel] = []
     @Published var userList: [FriendModel] = []
     @Published var calendars: [CalendarStoreModel] = []
+    @Published var users: [FireStoreModel] = []
     
     let database = Firestore.firestore()
     var currentUserId:String?{ Auth.auth().currentUser?.uid }
@@ -75,7 +76,7 @@ class FireStoreViewModel: ObservableObject {
                       "userEmail": friend.userEmail])
     }
     
-    //유저를 추가하는 함수
+    //사용자의 로그인 정보를 추가하는 함수
     func addUser(user: FireStoreModel){
             database
                 .collection("User") //
@@ -97,12 +98,12 @@ class FireStoreViewModel: ObservableObject {
                             let id: String = document.documentID
                             let docData = document.data()
                             if let nickName = docData["nickName"] as? String,
-                               nickName == userName
+                               nickName.contains(userName)
                             {
                                 let docData = document.data()
-                                var nickName: String = docData["nickName"] as? String ?? ""
-                                var userPhoto: String = docData["userPhoto"] as? String ?? ""
-                                var userEmail:String = docData["userEmail"] as? String ?? ""
+                                let nickName: String = docData["nickName"] as? String ?? ""
+                                let userPhoto: String = docData["userPhoto"] as? String ?? ""
+                                let userEmail:String = docData["userEmail"] as? String ?? ""
                                 let friend = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
                                 self.userList.append(friend)
                             }
