@@ -32,6 +32,7 @@ struct GilgaonApp: App {
                 .environmentObject(LocationsViewModel())
                 .environmentObject(SearchViewModel())
                 .environmentObject(CalendarViewModel())
+                .environmentObject(FireStoreViewModel())
         }
     }
 }

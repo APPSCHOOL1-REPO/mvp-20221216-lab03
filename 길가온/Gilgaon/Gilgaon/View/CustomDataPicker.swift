@@ -203,9 +203,7 @@ struct CustomDataPicker: View {
                     } else {
                         //MARK: 토글 스위치값에 따라 보여주는 뷰 다르게 설정하기 위함
                         if toggleValue {
-                            
                             VStack {
-                                
                                 HStack {
                                     Text("꽃갈피 남기는 중...")
                                         .font(.custom("NotoSerifKR-Bold", size: 18))
@@ -216,17 +214,14 @@ struct CustomDataPicker: View {
                                         .foregroundColor(Color("Pink"))
                                 }
                                 .padding()
-                                
                                 HStack(spacing: 30) {
                                     NavigationLink {
                                         WritingView(currentDate:$currentDate, calID:$calID)
-                                        
                                     } label: {
                                         Text("새 글작성")
                                             .font(.custom("NotoSerifKR-SemiBold", size: 15))
                                             .foregroundColor(Color("Pink"))
                                     }
-                                    
                                     NavigationLink {
                                         FlowerMapView()
                                     } label: {
@@ -235,11 +230,7 @@ struct CustomDataPicker: View {
                                             .foregroundColor(Color("Pink"))
                                     }
                                 }
-                                
                             }
-                            
-                            
-                            
                         }
                         else {
                             Text("만들어진 꽃갈피가 없습니다.")

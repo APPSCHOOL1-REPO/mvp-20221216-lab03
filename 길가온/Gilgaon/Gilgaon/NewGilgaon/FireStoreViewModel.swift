@@ -8,6 +8,7 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
+import FirebaseAuth
 
 class FireStoreViewModel: ObservableObject {
     @Published var myFriendArray: [FriendModel] = []
@@ -16,12 +17,7 @@ class FireStoreViewModel: ObservableObject {
     
     let database = Firestore.firestore()
     var currentUserId:String?{ Auth.auth().currentUser?.uid }
-    
-    init() {
-        
-        calendars = []
-    }
-    
+
     
     //친구목록을 조회하는 함수
     func fetchFriend() {
@@ -48,15 +44,44 @@ class FireStoreViewModel: ObservableObject {
             }
     }
     
+    //일정 추가
+    func addSchedule(_ scheduleData: CalendarStoreModel){
+        database
+            .collection("User")
+            .document(self.currentUserId!)
+            .collection("Calendar")
+            .document(scheduleData.id)
+            .setData([
+                "id": scheduleData.id,
+                "title": scheduleData.title,
+                "photo": scheduleData.photo,
+                "createdAt": scheduleData.createdAt,
+                "contents": scheduleData.contents,
+                "locationName": scheduleData.locationName,
+                "lat": scheduleData.lat,
+                "lon": scheduleData.lon
+            ])
+    }
+    
+
     //친구를 추가하는 함수
     func addFriend(user: FireStoreModel, friend: FriendModel) {
         database
-            .collection("rollingpaper") //
+            .collection("User") //
             .document(user.id)
             .collection("Friend")
             .document(friend.id)
             .setData(["id": friend.id, "nickName": friend.nickName, "userPhoto": friend.userPhoto,
                       "userEmail": friend.userEmail])
+    }
+    
+    //유저를 추가하는 함수
+    func addUser(user: FireStoreModel){
+            database
+                .collection("User") //
+                .document(user.id)
+                .setData(["id": user.id, "nickName": user.nickName, "userPhoto": user.userPhoto,
+                          "userEmail": user.userEmail])
     }
     
     
@@ -87,13 +112,12 @@ class FireStoreViewModel: ObservableObject {
         }
 
   
-    func fetchCalendars(user: FireStoreModel) {
+    func fetchCalendars() {
         database.collection("User")
-            .document(user.id)
+            .document(self.currentUserId!)
             .collection("Calendar")
             .getDocuments { (snapshot, error) in
                 self.calendars.removeAll()
-                
                 if let snapshot {
                     for document in snapshot.documents {
                         let id: String = document.documentID

@@ -18,8 +18,7 @@ struct FireStoreModel: Codable,Identifiable,Hashable {
     //
 }
 
-struct CalendarStoreModel: Codable,Identifiable,Hashable {
-    
+struct CalendarStoreModel: Identifiable {
     var id: String
     var title: String
     var photo: String
@@ -28,6 +27,17 @@ struct CalendarStoreModel: Codable,Identifiable,Hashable {
     var locationName: String
     var lat: String
     var lon: String
+    
+    var createdDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_Kr")
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let dateCreatedAt = Date(timeIntervalSince1970: createdAt)
+        
+        return dateFormatter.string(from: dateCreatedAt)
+    }
 }
 
 struct FriendModel: Codable,Identifiable,Hashable {

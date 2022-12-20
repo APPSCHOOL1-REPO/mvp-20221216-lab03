@@ -9,11 +9,13 @@ import Foundation
 import Firebase
 import FirebaseAuth
 import Combine
+import SwiftUI
 
 final class RegisterModel: ObservableObject {
     @Published var currentUser: Firebase.User?
     @Published var isError: Bool = false
     @Published var DetailError: String = ""
+    @Published var userUID: String = ""
     
     init() {
 //        currentUser = Auth.auth().currentUser
@@ -45,6 +47,7 @@ final class RegisterModel: ObservableObject {
             let user = result.user
             self.isError = false
             print(user.uid)
+            userUID = user.uid
         }
         
         catch {
@@ -76,6 +79,10 @@ final class RegisterModel: ObservableObject {
                 return
             }
             self.currentUser = result?.user
+                
+                //나중에 document 접근할 때 사용할 유저 uid
+                print(self.currentUser!.uid)
+
         }
     }
     
@@ -85,3 +92,7 @@ final class RegisterModel: ObservableObject {
         try? Auth.auth().signOut()
     }
 }
+
+
+//let fireStoreAddUser = FireStoreModel(id: user.uid, nickName: nickName, userPhoto: "", userEmail: userID)
+//self.fireStoreViewModel.addUser(user: fireStoreAddUser)
