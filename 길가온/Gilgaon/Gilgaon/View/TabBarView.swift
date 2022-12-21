@@ -39,7 +39,7 @@ struct TabBarView: View {
                                 .frame(width: 60, height: 60)
                         }
                         
-                        Text("서랍")
+                        Text("서랍장")
                             .font(.custom("NotoSerifKR-Regular", size: 18))
                             .foregroundColor(selectedTabBar == .first ? Color("Pink") : Color("DarkGray"))
                             .offset(y: -3)
