@@ -94,7 +94,7 @@ struct DayView: View {
                         .offset(y: 100)
                 } else {
                     ForEach(cvm.tasks.filter {$0.realDate.contains(calID)}) { task in
-                        NavigationLink(destination: FlowerMapView()) {
+                        NavigationLink(destination: EmptyView()) {
                             taskCardView(task: task)
                                 .font(.custom("NotoSerifKR-SemiBold", size: 15))
                         }

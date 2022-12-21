@@ -20,7 +20,8 @@ struct HomeView: View {
             case .second:
                 CalendarView()
             case .third:
-                FlowerMapView()
+                EmptyView()
+//                FlowerMapView()
             case .fourth:
                 SettingView()
             }

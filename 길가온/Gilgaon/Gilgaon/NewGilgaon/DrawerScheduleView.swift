@@ -74,7 +74,7 @@ extension DrawerScheduleView {
                             .foregroundColor(Color("Pink"))
                     }
                     NavigationLink {
-                        FlowerMapView()
+                        FlowerMapView(fireStoreViewModel: fireStoreViewModel)
                     } label: {
                         Text("지도 보기")
                             .font(.custom("NotoSerifKR-SemiBold", size: 15))

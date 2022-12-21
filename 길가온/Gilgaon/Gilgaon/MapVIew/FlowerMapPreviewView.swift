@@ -10,7 +10,7 @@ import SwiftUI
 struct FlowerMapPreview: View {
     @State var isTapped: Bool = false
     @EnvironmentObject private var vm: LocationsViewModel
-    let location: Location
+    let location: MarkerModel
     
     var body: some View {
         HStack(alignment: .bottom){
@@ -43,8 +43,14 @@ struct FlowerMapPreview: View {
 extension FlowerMapPreview{
     private var imageSection: some View{
         ZStack{
-            if let imageName = location.imageNames.first{
+            if let imageName = location.photo{
                 Image(imageName)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 90, height: 90)
+                    .cornerRadius(10)
+            }else{
+                Image(systemName: "plus")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 90, height: 90)
@@ -58,11 +64,11 @@ extension FlowerMapPreview{
     
     private var titleSection: some View{
         VStack(alignment: .leading,spacing: 4){
-            Text(location.name)
+            Text(location.locationName)
                 .font(.custom("NotoSerifKR-SemiBold", size: 22))
                 .fontWeight(.bold)
                 .foregroundColor(Color("DarkGray"))
-            Text(location.cityName)
+            Text(location.createdDate)
                 .font(.custom("NotoSerifKR-SemiBold", size: 15))
                 .foregroundColor(Color("DarkGray"))
         }

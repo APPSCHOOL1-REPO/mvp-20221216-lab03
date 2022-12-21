@@ -29,6 +29,10 @@ struct DrawerListView: View {
     }
 }
 
+extension DrawerListView{
+    
+}
+
 struct DrawerListView_Previews: PreviewProvider {
     static var previews: some View {
         DrawerListView()

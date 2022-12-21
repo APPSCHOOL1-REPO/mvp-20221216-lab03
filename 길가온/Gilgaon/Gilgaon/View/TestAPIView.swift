@@ -14,9 +14,13 @@ struct TestAPIView: View {
     @EnvironmentObject var viewModel: SearchViewModel
     @ObservedObject var jogakData: JogakData = JogakData()
     @EnvironmentObject private var vm: LocationsViewModel
-//    @EnvironmentObject private var firestore: FireStoreViewModel
-    
     @State private var searchText: String = ""
+    @Binding var lonString: String
+    @Binding var lanString: String
+    @Binding var locationName: String
+    //    @EnvironmentObject private var firestore: FireStoreViewModel
+    
+    
 //    @State private var testFilter: [Poi] = []
     
     
@@ -55,17 +59,21 @@ struct TestAPIView: View {
                     List(filterData,id:\.self) { datum in
 //                        Text("\(datum.name)")
                         Button {
-                            LocationsDataService.locations.append(
-                                Location(
-                                    name: datum.name,
-                                    cityName: "경기 안산시 단원구 원곡동 906",
-                                    coordinate: CLLocationCoordinate2D(latitude: Double(datum.frontLat)!, longitude: Double(datum.frontLon)!),
-                                    description: "...",
-                                    imageNames: ["b00"],
-                                    link: "dfsdfsdf"))
+                            locationName = datum.name
+                            lonString = datum.frontLon
+                            lanString = datum.frontLat
+                            
+                            
+//                            LocationsDataService.locations.append(
+//                                Location(
+//                                    name: datum.name,
+//                                    cityName: "경기 안산시 단원구 원곡동 906",
+//                                    coordinate: CLLocationCoordinate2D(latitude: Double(datum.frontLat)!, longitude: Double(datum.frontLon)!),
+//                                    description: "...",
+//                                    imageNames: ["b00"],
+//                                    link: "dfsdfsdf"))
 //                            jogakData.datum.append(datum)
                             dismiss()
-                            print(LocationsDataService.locations)
                             vm.doSomeThing()
                         } label: {
                             Text("\(datum.name)")
@@ -92,8 +100,8 @@ struct TestAPIView: View {
 
 }
 
-struct TestAPIView_Previews: PreviewProvider {
-    static var previews: some View {
-        TestAPIView()
-    }
-}
+//struct TestAPIView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TestAPIView()
+//    }
+//}
