@@ -37,7 +37,25 @@
 
 - 달력
 
+
 - 맵
 
-- 친구
+- 친구 - [친구 추가]
 
+<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
+<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/14.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
+<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/15.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
+
+1. “서랍 뷰”에서 친구 추가를 클릭합니다.
+
+2. 추가할 친구를 검색합니다.
+
+3. 추가할 친구를 클릭하여 추가합니다.
+
+- 친구 - [친구 목록]
+<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
+<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/16.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
+
+1. “서랍 뷰”에서 친구 목록을 클릭합니다.
+
+2. 친구 목록을 확인합니다.
