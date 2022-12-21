@@ -14,8 +14,6 @@ struct AddFriendView: View {
   
             ZStack {
                 List {
-                    
-           
                         ForEach(fireStoreViewModel.myFriendArray, id: \.self) { myFriend in
                             
                             VStack(alignment: .leading) {

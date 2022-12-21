@@ -4,10 +4,11 @@
 //
 //  Created by kimminho on 2022/12/20.
 
-import Foundation
+import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseStorage
 
 class FireStoreViewModel: ObservableObject {
     
@@ -16,11 +17,52 @@ class FireStoreViewModel: ObservableObject {
     @Published var markerList: [MarkerModel] = []
     @Published var myFriendArray: [FriendModel] = []
     @Published var calendarList:[DayCalendarModel] = []
+    @Published var isRecording: Bool = false
+    
+    
+    // ** [회원가입] UIimage -> |profileUrlString | -> if nil -> (sys, Image)
+    @Published var profileUrlString: String?
     
     let database = Firestore.firestore()
     var nowCalendarId: String = ""
     var currentUserId:String?{ Auth.auth().currentUser?.uid }
-
+    
+    // [Image to Storage]
+    func uploadImageToStorage(userImage: UIImage, photoId: String) {
+        let ref = Storage.storage().reference(withPath: photoId)
+        guard let imageData = userImage.jpegData(compressionQuality: 0.5) else { return }
+        ref.putData(imageData, metadata: nil) { metadata, err in
+            if let err = err { return }
+        }
+        ref.downloadURL { url, err in
+            if let err = err { return }
+            print(url?.absoluteString)
+        }
+    }
+    
+    // [fetch Profile Image]
+    func fetchImageUrl() {
+        let storage = Storage.storage()
+        guard let uid = Auth.auth().currentUser?.uid else{return}
+        let pathReference = storage.reference(withPath: uid)
+        pathReference.downloadURL { url, error in
+            if let error = error {
+                print(error)
+            } else {
+                guard let urlString = url?.absoluteString else {
+                    return
+                }
+                self.profileUrlString = urlString
+            }
+        }
+    }
+    
+    //
+    func addLocationImage(){
+        
+    }
+    
+    
     //친구목록을 조회하는 함수
     func fetchFriend() {
         database
@@ -66,7 +108,7 @@ class FireStoreViewModel: ObservableObject {
         self.nowCalendarId = scheduleData.id
     }
     
-
+    
     //친구를 추가하는 함수
     func addFriend(friend: FriendModel) {
         database
@@ -89,42 +131,42 @@ class FireStoreViewModel: ObservableObject {
         fetchFriend()
     }
     
-
+    
     
     //사용자의 로그인 정보를 추가하는 함수
     func addUser(user: FireStoreModel){
-            database
-                .collection("User") //
-                .document(user.id)
-                .setData(["id": user.id, "nickName": user.nickName, "userPhoto": user.userPhoto,
-                          "userEmail": user.userEmail])
+        database
+            .collection("User") //
+            .document(user.id)
+            .setData(["id": user.id, "nickName": user.nickName, "userPhoto": user.userPhoto,
+                      "userEmail": user.userEmail])
     }
     
     
     //사용자로부터 닉네임을 입력받아 일치하는 유저를 조회하는 함수
     func searchUser(_ userName: String){
-            database
-                .collection("User")
-                .getDocuments { (snapshot, error) in
-                    self.userList.removeAll()
-                    if let snapshot{
-                        for document in snapshot.documents{
-                            let id: String = document.documentID
+        database
+            .collection("User")
+            .getDocuments { (snapshot, error) in
+                self.userList.removeAll()
+                if let snapshot{
+                    for document in snapshot.documents{
+                        let id: String = document.documentID
+                        let docData = document.data()
+                        if let nickName = docData["nickName"] as? String,
+                           nickName.contains(userName)
+                        {
                             let docData = document.data()
-                            if let nickName = docData["nickName"] as? String,
-                               nickName.contains(userName)
-                            {
-                                let docData = document.data()
-                                let nickName: String = docData["nickName"] as? String ?? ""
-                                let userPhoto: String = docData["userPhoto"] as? String ?? ""
-                                let userEmail:String = docData["userEmail"] as? String ?? ""
-                                let friend = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
-                                self.userList.append(friend)
-                            }
+                            let nickName: String = docData["nickName"] as? String ?? ""
+                            let userPhoto: String = docData["userPhoto"] as? String ?? ""
+                            let userEmail:String = docData["userEmail"] as? String ?? ""
+                            let friend = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
+                            self.userList.append(friend)
                         }
                     }
                 }
-        }
+            }
+    }
     
     
     // [서랍 doc생성]
@@ -141,9 +183,9 @@ class FireStoreViewModel: ObservableObject {
                 "shareFriend": calendar.shareFriend
             ])
         
-            self.nowCalendarId = calendar.id
-            print("nowCalendarId: \(self.nowCalendarId)")
-            calendarList.append(calendar)
+        self.nowCalendarId = calendar.id
+        print("nowCalendarId: \(self.nowCalendarId)")
+        calendarList.append(calendar)
     }
     
     
@@ -170,7 +212,7 @@ class FireStoreViewModel: ObservableObject {
                 }
             }
     }
-  
+    
     // [마커 생성하기]
     func addMarker(_ marker: MarkerModel){
         database

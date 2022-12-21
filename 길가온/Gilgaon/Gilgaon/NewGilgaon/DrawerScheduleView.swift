@@ -10,9 +10,8 @@ import SwiftUI
 
 struct DrawerScheduleView: View {
     @StateObject private var fireStoreViewModel = FireStoreViewModel()
-    @State var isRecording: Bool = false
     @State var isStart: Bool = false
-    
+    @State var isRecording: Bool = RecordingValue.isRecording
 //    @Binding var currentDate: Date
 //    @Binding var calID: [String]
     
@@ -23,7 +22,8 @@ struct DrawerScheduleView: View {
                 .ignoresSafeArea()
             VStack{
                 Button {
-                    isRecording.toggle()
+                        isRecording.toggle()
+                        RecordingValue.isRecording = isRecording
                     if isRecording == true{
                         //  -> [스케쥴을 추가하는 View] //
                         isStart = true
@@ -34,6 +34,8 @@ struct DrawerScheduleView: View {
                 .alert("여행 제목을 입력하세연~", isPresented: $isStart, actions: {
                     TextField("여행 제목입력", text: $title)
                     Button("취소",role: .cancel,action: {
+                        isRecording = false
+                        RecordingValue.isRecording = isRecording
                     })
                     Button("추가", action: {
                         let calendar = DayCalendarModel(id: UUID().uuidString,taskDate: Date(),createdAt: DateType2String(), title: title, shareFriend: [])

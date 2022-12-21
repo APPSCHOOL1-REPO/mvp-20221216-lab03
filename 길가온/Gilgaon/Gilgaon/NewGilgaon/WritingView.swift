@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import PhotosUI
+
 
 struct WritingView: View {
     @ObservedObject var firestoreViewModel:FireStoreViewModel
@@ -14,10 +14,6 @@ struct WritingView: View {
     @ObservedObject var jogakData: JogakData = JogakData()
     @EnvironmentObject var viewModel: SearchViewModel
     
-    
-    
-    @State private var openPhoto = false
-    @State private var image = UIImage()
     @State private var travelName2: String = ""
     @State private var travel: String = ""
     @Environment(\.dismiss) private var dismiss
@@ -27,8 +23,12 @@ struct WritingView: View {
     @State private var lonString = ""
     @State private var locationName = ""
     //사진을 보관할 상태 변수
-    @State private var selectedItem: PhotosPickerItem?
     @State private var selectedImageData: Data? = nil
+    
+    @State private var shouldShowImagePicker = false
+    @State private var image: UIImage?
+    
+    
     
     
     var body: some View {
@@ -86,7 +86,7 @@ struct WritingView: View {
                 
                 HStack {
                     Button {
-                        self.openPhoto = true
+                        shouldShowImagePicker.toggle()
                     } label: {
                         ZStack {
                             Image(systemName: "plus.app")
@@ -94,20 +94,15 @@ struct WritingView: View {
                                 .frame(width: 80, height: 80)
                                 .fontWeight(.light)
                                 .foregroundColor(Color("DarkGray"))
-                            Image(uiImage: self.image)
-                                .resizable()
-                                .frame(width: 100, height: 100)
-                                .cornerRadius(15)
+                            if let image = image{
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .frame(width: 100, height: 100)
+                                    .cornerRadius(15)
+                            }
+                            
                         }
                     }
-//                    .sheet(isPresented: $openPhoto) {
-//                        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
-//                            .onDisappear{
-//                                jogakData.images.append(image)
-//                            }
-//                        
-//                    }
-                    
                 }
                 
                 TextField("제목", text: $travelName2)
@@ -130,7 +125,12 @@ struct WritingView: View {
                 Button {
                     let id = UUID().uuidString
                     let createdAt = Date().timeIntervalSince1970
-                    let marker = MarkerModel(id: id, title: travelName2, photo: "", createdAt: createdAt, contents: travel, locationName: locationName, lat: lanString, lon: lonString)
+                    var photoId = ""
+                    if let image = image{
+                        photoId = UUID().uuidString
+                        firestoreViewModel.uploadImageToStorage(userImage: image, photoId: photoId)
+                    }
+                    let marker = MarkerModel(id: id, title: travelName2, photo: photoId, createdAt: createdAt, contents: travel, locationName: locationName, lat: lanString, lon: lonString)
                     firestoreViewModel.addMarker(marker)
                     dismiss()
                 } label: {
@@ -145,6 +145,9 @@ struct WritingView: View {
                 Spacer()
                 
             }
+        }
+        .fullScreenCover(isPresented: $shouldShowImagePicker) {
+            ImagePicker(image: $image)
         }
     }
 }
