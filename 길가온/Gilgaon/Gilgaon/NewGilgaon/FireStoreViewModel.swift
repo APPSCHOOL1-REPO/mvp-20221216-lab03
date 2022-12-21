@@ -68,15 +68,28 @@ class FireStoreViewModel: ObservableObject {
     
 
     //친구를 추가하는 함수
-    func addFriend(user: FireStoreModel, friend: FriendModel) {
+    func addFriend(friend: FriendModel) {
         database
             .collection("User") //
-            .document(user.id)
+            .document(self.currentUserId!)
             .collection("Friend")
             .document(friend.id)
             .setData(["id": friend.id, "nickName": friend.nickName, "userPhoto": friend.userPhoto,
                       "userEmail": friend.userEmail])
     }
+    
+    // 친구를 삭제하는 함수
+    func deleteFriend(friend: FriendModel) {
+        database
+            .collection("User")
+            .document(self.currentUserId!)
+            .collection("Friend")
+            .document(friend.id)
+            .delete()
+        fetchFriend()
+    }
+    
+
     
     //사용자의 로그인 정보를 추가하는 함수
     func addUser(user: FireStoreModel){
