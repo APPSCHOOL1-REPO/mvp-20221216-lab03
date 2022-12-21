@@ -181,6 +181,9 @@
 		161510BC29502BD100BA7FFE /* NewGilgaon */ = {
 			isa = PBXGroup;
 			children = (
+				16F69DB129387D320045CD91 /* OnBoard */,
+				1642F10129388FD0005A54EF /* SplashView */,
+				635AE3942935E9DC008A8452 /* LoginView.swift */,
 				161510BD29502BE600BA7FFE /* RegisterView.swift */,
 				161510C6295036B300BA7FFE /* RegisterModel.swift */,
 				C0C44ACA2950AAA8006FE8A4 /* PleaseLoginView.swift */,
@@ -195,6 +198,8 @@
 				36BB028A29518BD300CF2816 /* WritingView.swift */,
 				16EE2F672951885A00414279 /* SearchUserView.swift */,
 				63660F4D2937216F00B70272 /* ImagePicker.swift */,
+				635AE3962935E9E2008A8452 /* HomeView.swift */,
+				635AE3982935E9E7008A8452 /* TabBarView.swift */,
 			);
 			path = NewGilgaon;
 			sourceTree = "<group>";
@@ -322,12 +327,7 @@
 		635AE3A729361971008A8452 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1642F10129388FD0005A54EF /* SplashView */,
-				16F69DB129387D320045CD91 /* OnBoard */,
-				635AE3942935E9DC008A8452 /* LoginView.swift */,
 				16D46F982935EC7E00BB9440 /* TestAPIView.swift */,
-				635AE3982935E9E7008A8452 /* TabBarView.swift */,
-				635AE3962935E9E2008A8452 /* HomeView.swift */,
 				635AE39A2935E9F0008A8452 /* RecordView.swift */,
 				635AE39C2935E9F6008A8452 /* CalendarView.swift */,
 				16CFFE0529363BE900DC0B55 /* CalendarSelectView.swift */,

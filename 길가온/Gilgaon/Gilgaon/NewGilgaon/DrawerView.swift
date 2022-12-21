@@ -30,16 +30,18 @@ struct DrawerView: View {
                 
                 VStack {
                     Text("닉네임")
-                    HStack(spacing: 100) {
+                    HStack(spacing: 40) {
                         Image("p1")
                             .resizable()
-                            .frame(width: 100, height: 100)
-                            .clipShape(Circle())
+                            .scaledToFill()
+                            .frame(width: 128, height: 128)
+                            .cornerRadius(64)
                         
                         NavigationLink {
                             SearchUserView()
                         } label: {
                             Text("친구추가")
+                                .font(.custom("NotoSerifKR-Regular",size:16))
                         }
                         
                         
@@ -47,6 +49,7 @@ struct DrawerView: View {
                             AddFriendView()
                         } label: {
                             Text("친구목록")
+                                .font(.custom("NotoSerifKR-Regular",size:16))
                         }
                         
                         
@@ -61,6 +64,7 @@ struct DrawerView: View {
                                 } label: {
                                     Text(select.rawValue)
                                         .foregroundColor(middleView == select ? Color("Pink") : Color("DarkGray"))
+                                        .font(.custom("NotoSerifKR-Regular",size:16))
                                 }
                                 if middleView == select {
                                     Capsule()
