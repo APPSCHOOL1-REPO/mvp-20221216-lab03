@@ -10,8 +10,6 @@ import SwiftUI
 enum SelectedTab {
     case first
     case second
-    case third
-    case fourth
 }
 
 struct TabBarView: View {
@@ -24,7 +22,7 @@ struct TabBarView: View {
             Color("White")
                 .ignoresSafeArea()
             
-            HStack(spacing: 30) {
+            HStack(spacing: 100) {
                 
                 Button {
                     selectedTabBar = .first
@@ -65,48 +63,6 @@ struct TabBarView: View {
                         Text("달력")
                             .font(.custom("NotoSerifKR-Regular", size: 18))
                             .foregroundColor(selectedTabBar == .second ? Color("Pink") : Color("DarkGray"))
-                            .offset(y: -3)
-                    }
-                }
-                
-                Button {
-                    selectedTabBar = .third
-                } label: {
-                    ZStack {
-                        if selectedTabBar == .third {
-                            Image("line2")
-                                .resizable()
-                                .frame(width: 60, height: 60)
-                        } else {
-                            Image("line")
-                                .resizable()
-                                .frame(width: 60, height: 60)
-                        }
-                        
-                        Text("꽃갈피")
-                            .font(.custom("NotoSerifKR-Regular", size: 18))
-                            .foregroundColor(selectedTabBar == .third ? Color("Pink") : Color("DarkGray"))
-                            .offset(y: -3)
-                    }
-                }
-                
-                Button {
-                    selectedTabBar = .fourth
-                } label: {
-                    ZStack {
-                        if selectedTabBar == .fourth {
-                            Image("line2")
-                                .resizable()
-                                .frame(width: 60, height: 60)
-                        } else {
-                            Image("line")
-                                .resizable()
-                                .frame(width: 60, height: 60)
-                        }
-                        
-                        Text("설정")
-                            .font(.custom("NotoSerifKR-Regular", size: 18))
-                            .foregroundColor(selectedTabBar == .fourth ? Color("Pink") : Color("DarkGray"))
                             .offset(y: -3)
                     }
                 }

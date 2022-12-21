@@ -23,6 +23,7 @@ struct PleaseLoginView: View {
                 registerModel.listenToAuthState()
             }
         }
+        .accentColor(Color("Red"))
     }
 }
 

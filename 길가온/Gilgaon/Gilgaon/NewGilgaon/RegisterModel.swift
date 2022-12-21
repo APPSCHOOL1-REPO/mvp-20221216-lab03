@@ -10,6 +10,7 @@ import Firebase
 import FirebaseAuth
 import Combine
 import SwiftUI
+import FirebaseStorage
 
 final class RegisterModel: ObservableObject {
     @Published var currentUser: Firebase.User?
@@ -40,7 +41,7 @@ final class RegisterModel: ObservableObject {
     
     @MainActor
     // 회원가입
-    func registerUser(userID: String, userPW: String) async{
+    func registerUser(userID: String, userPW: String, userImage: UIImage?) async{
         
         do {
             let result = try await Auth.auth().createUser(withEmail: userID, password: userPW)
@@ -48,6 +49,9 @@ final class RegisterModel: ObservableObject {
             self.isError = false
             print(user.uid)
             userUID = user.uid
+            if let userImage = userImage {
+                persisImageToStorage(userImage: userImage)
+            }
         }
         
         catch {
@@ -66,6 +70,27 @@ final class RegisterModel: ObservableObject {
             }
             
         }
+    }
+    
+    func persisImageToStorage(userImage: UIImage) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let ref = Storage.storage().reference(withPath: uid)
+        guard let imageData = userImage.jpegData(compressionQuality: 0.5) else { return }
+        ref.putData(imageData, metadata: nil) { metadata, err in
+            if let err = err {
+                self.DetailError = "Failed to push image to Storage: \(err)"
+                return
+            }
+        }
+        ref.downloadURL { url, err in
+            if let err = err {
+                self.DetailError = "Failed to retrieve downloadURL: \(err)"
+                return
+            }
+            self.DetailError = "Successfully stored image wioth url: \(url?.absoluteString ?? "")"
+            print(url?.absoluteString)
+        }
+        
     }
     
     

@@ -70,6 +70,7 @@
 		635AE3AD29361A6D008A8452 /* DateTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635AE3AC29361A6D008A8452 /* DateTask.swift */; };
 		63660F4E2937216F00B70272 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63660F4D2937216F00B70272 /* ImagePicker.swift */; };
 		63660F522937573500B70272 /* Customtoggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63660F512937573500B70272 /* Customtoggle.swift */; };
+		6380E7802952C3EE007772C3 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6380E77F2952C3EE007772C3 /* FirebaseStorage */; };
 		63D2C123293836CD0011BC89 /* DayTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2C122293836CD0011BC89 /* DayTask.swift */; };
 		63D2C1282938379C0011BC89 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2C1272938379C0011BC89 /* TaskViewModel.swift */; };
 		63D2C12A2938388A0011BC89 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2C1292938388A0011BC89 /* DayView.swift */; };
@@ -164,6 +165,7 @@
 				6FF334C72935F1B3007438B1 /* KakaoSDKUser in Frameworks */,
 				16FA82CB293906BA006129D3 /* PopupView in Frameworks */,
 				6FF334C12935F1B3007438B1 /* KakaoSDK in Frameworks */,
+				6380E7802952C3EE007772C3 /* FirebaseStorage in Frameworks */,
 				6FF334C52935F1B3007438B1 /* KakaoSDKCommon in Frameworks */,
 				6FF334C32935F1B3007438B1 /* KakaoSDKAuth in Frameworks */,
 				161510C52950305A00BA7FFE /* FirebaseFirestore in Frameworks */,
@@ -258,6 +260,7 @@
 			children = (
 				635AE3832935E932008A8452 /* Gilgaon */,
 				635AE3822935E932008A8452 /* Products */,
+				6380E77E2952C3EE007772C3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -323,8 +326,8 @@
 				16F69DB129387D320045CD91 /* OnBoard */,
 				635AE3942935E9DC008A8452 /* LoginView.swift */,
 				16D46F982935EC7E00BB9440 /* TestAPIView.swift */,
-				635AE3982935E9E7008A8452 /* TabBarView.swift */,
 				635AE3962935E9E2008A8452 /* HomeView.swift */,
+				635AE3982935E9E7008A8452 /* TabBarView.swift */,
 				635AE39A2935E9F0008A8452 /* RecordView.swift */,
 				635AE39C2935E9F6008A8452 /* CalendarView.swift */,
 				16CFFE0529363BE900DC0B55 /* CalendarSelectView.swift */,
@@ -335,6 +338,13 @@
 				16FA82CC29391936006129D3 /* SettingPage */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		6380E77E2952C3EE007772C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		63D2C1242938371C0011BC89 /* ViewModel */ = {
@@ -381,6 +391,7 @@
 				16FA82CA293906BA006129D3 /* PopupView */,
 				161510C22950305A00BA7FFE /* FirebaseAuth */,
 				161510C42950305A00BA7FFE /* FirebaseFirestore */,
+				6380E77F2952C3EE007772C3 /* FirebaseStorage */,
 			);
 			productName = Gilgaon;
 			productReference = 635AE3812935E932008A8452 /* Gilgaon.app */;
@@ -784,6 +795,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3691CB3029364AC400F41FDB /* XCRemoteSwiftPackageReference "Polyline" */;
 			productName = Polyline;
+		};
+		6380E77F2952C3EE007772C3 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 161510C12950305A00BA7FFE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 		6FF334C02935F1B3007438B1 /* KakaoSDK */ = {
 			isa = XCSwiftPackageProductDependency;

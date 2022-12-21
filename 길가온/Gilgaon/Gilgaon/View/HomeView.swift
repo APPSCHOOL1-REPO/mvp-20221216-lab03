@@ -19,11 +19,7 @@ struct HomeView: View {
                 DrawerView()
             case .second:
                 CalendarView()
-            case .third:
-                EmptyView()
-//                FlowerMapView()
-            case .fourth:
-                SettingView()
+
             }
             TabBarView(selectedTabBar: $selectedTabBar)
                 .frame(height: 40)

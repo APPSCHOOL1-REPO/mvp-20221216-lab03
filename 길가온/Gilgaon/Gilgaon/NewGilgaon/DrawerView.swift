@@ -30,10 +30,10 @@ struct DrawerView: View {
                 
                 VStack {
                     Text("닉네임")
-                    HStack(spacing: 100) {
+                    HStack(spacing: 40) {
                         Image("p1")
                             .resizable()
-                            .frame(width: 100, height: 100)
+                            .frame(width: 128, height: 128)
                             .clipShape(Circle())
                         
                         NavigationLink {
