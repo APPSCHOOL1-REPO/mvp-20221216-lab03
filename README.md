@@ -53,6 +53,7 @@
 3. 추가할 친구를 클릭하여 추가합니다.
 
 - 친구 - [친구 목록]
+
 <img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
 <img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/16.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
 
