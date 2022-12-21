@@ -45,12 +45,13 @@
 
 
 ### [맵]
-
+<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/keroro6.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
 <img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/keroro8.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
 <img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/mapViewList.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
 <img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/mapViewimage.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
 
-1. "맵뷰"를 통해, 기록한 지역들을 살펴볼 수 있습니다.
+
+1. 지도보기를 클릭한 후, "맵뷰"를 통해 기록한 지역들을 살펴볼 수 있습니다.
 
 2. 상단의 맵 리스트 뷰를 통해, 모든 기록된 지역들을 확인해볼 수 있습니다.
 
