@@ -180,8 +180,7 @@ struct DayView: View {
         }
         .hLeading()
     }
-    
-    
+ 
     func headerView() -> some View {
         
         HStack(spacing: 10) {
