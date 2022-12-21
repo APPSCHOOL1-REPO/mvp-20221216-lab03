@@ -177,13 +177,12 @@ class FireStoreViewModel: ObservableObject {
                 "lat": marker.lat,
                 "lon": marker.lon
             ])
+        fetchMarkers()
     }
     
     
     // [마커 가져오기]
     func fetchMarkers() {
-        
-        
         database.collection("User")
             .document(self.currentUserId!)
             .collection("Calendar")
@@ -208,8 +207,7 @@ class FireStoreViewModel: ObservableObject {
                         let marker: MarkerModel = MarkerModel(id: id, title: title, photo: photo, createdAt: createdAt, contents: contents, locationName: locationName, lat: lat, lon: lon)
                         
                         self.markerList.append(marker)
-                        LocationsDataService.locations.append(marker)
-
+                        LocationsDataService.locations = self.markerList
                     }
                 }
             }

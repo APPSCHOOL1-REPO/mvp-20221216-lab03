@@ -21,9 +21,7 @@ struct FlowerMapView: View {
     @State var userTracking = MapUserTrackingMode.follow
     
     var body: some View {
-        
         ZStack{
-            
                 Map(coordinateRegion: $mapRegion,
                     interactionModes: .all,
                     showsUserLocation: true,
@@ -40,10 +38,6 @@ struct FlowerMapView: View {
                         }
                     }
                 )
-//            .onReceive(vm.$mapRegion){ mapRegion in
-//                       self.mapRegion = mapRegion
-//            }
-           
             VStack{
                 header
                     .padding()
@@ -60,7 +54,7 @@ struct FlowerMapView: View {
             }
         }
         .onAppear{
-            fireStoreViewModel.fetchMarkers()
+            vm.locations = fireStoreViewModel.markerList
         }
     }
     
