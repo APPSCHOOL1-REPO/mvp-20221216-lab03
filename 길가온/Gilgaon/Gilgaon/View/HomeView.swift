@@ -22,7 +22,7 @@ struct HomeView: View {
 
             }
             TabBarView(selectedTabBar: $selectedTabBar)
-                .frame(height: 40)
+                .frame(height: 30)
         }
         .navigationBarBackButtonHidden(true)
         .accentColor(Color("Red"))
