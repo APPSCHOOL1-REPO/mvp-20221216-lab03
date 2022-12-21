@@ -14,7 +14,7 @@
 ## 화면설명
 
 
-- 서랍장 - 꽃갈피
+### [서랍장 - 꽃갈피]
 
 <img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/8.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img><img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/9.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img><img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/10.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
 
@@ -28,24 +28,35 @@
     
 5. 기록멈추기를 눌러 기록을 종료합니다.
     
-- 서랍장 - 서랍
+### [서랍장 - 서랍]
 
 <img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
 1. 서랍을 열어 기록된 꽃갈피를 확인한다.
     
 2. 기록된 꽃갈피를 눌러 해당 위치 지도를 본다.
 
-- 달력
+### [달력]
 
 <img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/Calendar.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
 
 1. 일정을 기록했을 경우, “달력 뷰” 에서 오늘 날짜에 해당하는 칸에 “체크” 마크 표시가 자동으로 이루어진다.
+
 2. “달력 뷰” 를 월마다 넘겨보며, 전체 마크된 날짜를 확인하며 월별 기록횟수 및 기록 날짜를 파악할 수 있다.
 
 
-- 맵
+### [맵]
 
-- 친구 - [친구 추가]
+<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/keroro8.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
+<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/mapViewList.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
+<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/mapViewimage.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
+
+1. "맵뷰"를 통해, 기록한 지역들을 살펴볼 수 있습니다.
+
+2. 상단의 맵 리스트 뷰를 통해, 모든 기록된 지역들을 확인해볼 수 있습니다.
+
+3. 기록한 내용들을 꽃갈피 확인을 통해 살펴볼 수 있습니다.
+
+### [친구 - 친구 추가]
 
 <img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
 <img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/14.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
@@ -57,7 +68,7 @@
 
 3. 추가할 친구를 클릭하여 추가합니다.
 
-- 친구 - [친구 목록]
+### [친구 - 친구 목록]
 
 <img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
 <img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/16.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
