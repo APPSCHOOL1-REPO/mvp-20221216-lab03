@@ -18,7 +18,7 @@ struct SheetView: View {
             //[Title - PlaceName]
             VStack {
                 HStack{
-                    Text("\(location.mapLocation.name) ")
+                    Text("\(location.mapLocation.locationName) ")
                         .font(.custom("NotoSerifKR-SemiBold", size: 22))
                         .fontWeight(.heavy)
                         .foregroundColor(Color("DarkGray"))
@@ -85,7 +85,7 @@ struct SheetView: View {
                             HStack{
                                 VStack{
                                     ZStack{
-                                        Image(city.imageNames.first!)
+                                        Image(city.photo)
                                             .resizable()
                                             .scaledToFit()
                                             .opacity(0.7)
@@ -96,7 +96,7 @@ struct SheetView: View {
                                     .padding(4)
                                     .background(Color("Pink"))
                                     .cornerRadius(10)
-                                    Text(city.name)
+                                    Text(city.locationName)
                                 }
                             }
                             

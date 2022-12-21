@@ -16,31 +16,34 @@ struct Place: Identifiable{
 
 struct FlowerMapView: View {
     @EnvironmentObject private var vm: LocationsViewModel
-    
+    @ObservedObject var fireStoreViewModel: FireStoreViewModel
+    @State private var mapRegion = MKCoordinateRegion()
     @State var userTracking = MapUserTrackingMode.follow
     
     var body: some View {
         
         ZStack{
             
-            Map(coordinateRegion: $vm.mapRegion,
-                interactionModes: .all,
-                showsUserLocation: true,
-                userTrackingMode: $userTracking,
-                annotationItems: vm.locations,
-                annotationContent: { location in
-                MapAnnotation(coordinate: location.coordinate) {
-                    mapMarker()
-                        .scaleEffect(vm.mapLocation == location ? 1.2: 0.9)
-                        .shadow(radius: 10)
-                        .onTapGesture {
-                            vm.showNextLocation(location: location)
+                Map(coordinateRegion: $mapRegion,
+                    interactionModes: .all,
+                    showsUserLocation: true,
+                    userTrackingMode: $userTracking,
+                    annotationItems: vm.locations,
+                    annotationContent: { location in
+                    MapAnnotation(coordinate: location.coordinate) {
+                        mapMarker()
+                            .scaleEffect(vm.mapLocation == location ? 1.2: 0.9)
+                            .shadow(radius: 10)
+                            .onTapGesture {
+                                vm.showNextLocation(location: location)
+                            }
                         }
                     }
-                }
-            )
-            .ignoresSafeArea()
-            
+                )
+//            .onReceive(vm.$mapRegion){ mapRegion in
+//                       self.mapRegion = mapRegion
+//            }
+           
             VStack{
                 header
                     .padding()
@@ -52,15 +55,12 @@ struct FlowerMapView: View {
                                 .shadow(color: Color("DarkGray").opacity(0.3), radius: 20)
                                 .padding()
                         }
-                        
                     }
-                                   
                 }
-
-                
             }
-            
-            
+        }
+        .onAppear{
+            fireStoreViewModel.fetchMarkers()
         }
     }
     
@@ -76,7 +76,7 @@ extension FlowerMapView {
     var header: some View{
         Button(action: vm.toggleLocationsList){
             VStack{
-                Text(vm.mapLocation.name)
+                Text(vm.mapLocation.locationName)
                     .font(.custom("NotoSerifKR-SemiBold", size: 22))
                     .fontWeight(.black)
                     .foregroundColor(Color("Pink"))
@@ -104,10 +104,10 @@ extension FlowerMapView {
 
 
 
-struct FlowerMapView_Previews: PreviewProvider {
-    static var previews: some View {
-        FlowerMapView()
-            .environmentObject(LocationsViewModel())
-    }
-}
+//struct FlowerMapView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FlowerMapView()
+//            .environmentObject(LocationsViewModel())
+//    }
+//}
 

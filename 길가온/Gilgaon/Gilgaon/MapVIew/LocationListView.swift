@@ -11,6 +11,7 @@ import SwiftUI
 struct LocationsListView: View {
     
     @EnvironmentObject private var vm: LocationsViewModel
+    //l7xx8749f7a7b24c491682f94ec946029847
     
     var body: some View {
         List{
@@ -31,20 +32,26 @@ struct LocationsListView: View {
 
 
 extension LocationsListView{
-    private func listRowView(location: Location) -> some View{
+    private func listRowView(location: MarkerModel) -> some View{
         HStack{
-            if let imageName = location.imageNames.first{
+            if let imageName = location.photo{
                 Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 45, height: 45)
+                    .cornerRadius(10)
+            } else{
+                Image(systemName: "plus")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 45, height: 45)
                     .cornerRadius(10)
             }
             VStack(alignment: .leading){
-                Text(location.name)
+                Text(location.locationName)
                     .font(.custom("NotoSerifKR-SemiBold", size: 17))
                     .foregroundColor(Color("DarkGray"))
-                Text(location.cityName)
+                Text(location.createdDate)
                     .font(.custom("NotoSerifKR-SemiBold", size: 15))
                     .foregroundColor(Color("DarkGray"))
             }

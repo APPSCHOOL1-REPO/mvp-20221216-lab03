@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import MapKit
 // Collection User
 struct FireStoreModel: Codable,Identifiable,Hashable {
     var id: String //currentUser UID (Document ID)
@@ -29,7 +29,7 @@ struct DayCalendarModel: Identifiable{
 }
 
 // [마커 Data]
-struct MarkerModel: Identifiable {
+struct MarkerModel: Identifiable, Equatable {
     var id: String
     var title: String
     var photo: String
@@ -38,6 +38,10 @@ struct MarkerModel: Identifiable {
     var locationName: String
     var lat: String
     var lon: String
+    
+    var coordinate:CLLocationCoordinate2D{
+        CLLocationCoordinate2D(latitude: Double(self.lat)!, longitude: Double(self.lon)!)
+    }
     
     var createdDate: String {
         let dateFormatter = DateFormatter()
@@ -48,6 +52,10 @@ struct MarkerModel: Identifiable {
         let dateCreatedAt = Date(timeIntervalSince1970: createdAt)
         
         return dateFormatter.string(from: dateCreatedAt)
+    }
+    
+    static func == (lhs: MarkerModel, rhs: MarkerModel) -> Bool {
+        lhs.id == rhs.id
     }
 }
 
