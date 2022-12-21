@@ -13,15 +13,12 @@ enum MiddleView: String {
 }
 
 struct DrawerView: View {
-    
     @State private var showMenu: Bool = false
     @State private var middleView: MiddleView = .schedule
     @EnvironmentObject var fireStoreViewModel: FireStoreViewModel
-   
+
     
     private var middleViewArray: [MiddleView] = [.schedule, .list]
-    
-    
     
     var body: some View {
         NavigationStack {
@@ -32,11 +29,30 @@ struct DrawerView: View {
                 VStack {
                     Text(fireStoreViewModel.userNickName)
                     HStack(spacing: 40) {
-                        Image("p1")
-                            .resizable()
-                            .frame(width: 128, height: 128)
-                            .clipShape(Circle())
+                        // profile Image
+                        if let url = fireStoreViewModel.profileUrlString,
+                           let imageUrl = URL(string: url) {
+                            AsyncImage(url: imageUrl) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 128, height: 128)
+                                    .cornerRadius(64)
+                                    .overlay(RoundedRectangle(cornerRadius: 64)
+                                                        .stroke(Color("Pink"), lineWidth: 3))
+                            } placeholder: {
+                                
+                            }
+                        } else{
+                            Image(systemName: "person.fill")
+                                .foregroundColor(Color("Pink"))
+                                .font(.system(size: 64))
+                                .padding()
+                                .overlay(RoundedRectangle(cornerRadius: 64)
+                                                    .stroke(Color("Pink"), lineWidth: 3))
+                        }
                         
+                       
                         NavigationLink {
                             SearchUserView()
                         } label: {
@@ -103,6 +119,9 @@ struct DrawerView: View {
                     Image(systemName: "line.3.horizontal")
                 }
             }
+        }
+        .onAppear{
+            fireStoreViewModel.fetchImageUrl()
         }
     }
 }
