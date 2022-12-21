@@ -17,8 +17,9 @@
 - 서랍장 - 꽃갈피
 1. 기록하기를 눌러 기록을 시작합니다.
     
-    ![Simulator Screen Shot - iPhone 14 Pro - 2022-12-21 at 17.39.57.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a53fc470-6354-483d-9fc4-f7e7a36d714c/Simulator_Screen_Shot_-_iPhone_14_Pro_-_2022-12-21_at_17.39.57.png)
-    
+
+![Uploading simulator_screenshot_5F7E6845-CBB5-4A31-8AF6-AF5C8EEA0E10.png…]()
+
 2. 여행 제목을 입력하고 추가 버튼을 눌러주세요.
     
     ![Simulator Screen Shot - iPhone 14 Pro - 2022-12-21 at 17.40.23.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/494caebf-bf56-481c-a3a1-da63b0bd81ed/Simulator_Screen_Shot_-_iPhone_14_Pro_-_2022-12-21_at_17.40.23.png)
