@@ -16,37 +16,19 @@
 - 서랍
 - 서랍장 - 꽃갈피
 1. 기록하기를 눌러 기록을 시작합니다.
-    
-
-![Uploading simulator_screenshot_5F7E6845-CBB5-4A31-8AF6-AF5C8EEA0E10.png…]()
 
 2. 여행 제목을 입력하고 추가 버튼을 눌러주세요.
     
-    ![Simulator Screen Shot - iPhone 14 Pro - 2022-12-21 at 17.40.23.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/494caebf-bf56-481c-a3a1-da63b0bd81ed/Simulator_Screen_Shot_-_iPhone_14_Pro_-_2022-12-21_at_17.40.23.png)
-    
 3. 새 글작성을 눌러 제목, 글, 사진을 작성할 수 있습니다.(함께한 친구와 위치를 지정합니다.)
-    
-    ![Simulator Screen Shot - iPhone 14 Pro - 2022-12-21 at 17.40.58.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9b8b74e9-5516-4cf6-9650-b97d6879dca4/Simulator_Screen_Shot_-_iPhone_14_Pro_-_2022-12-21_at_17.40.58.png)
-    
-    ![Simulator Screen Shot - iPhone 14 Pro - 2022-12-21 at 17.41.03.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f21d9b6d-bf99-4e38-a6bb-5aca572b0cac/Simulator_Screen_Shot_-_iPhone_14_Pro_-_2022-12-21_at_17.41.03.png)
     
 4. 지도보기로 지정한 위치를 확인합니다. 
     
-    ![Simulator Screen Shot - iPhone 14 Pro - 2022-12-21 at 17.49.52.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ee9b4051-35ef-48c3-8f93-605b9bc7bac7/Simulator_Screen_Shot_-_iPhone_14_Pro_-_2022-12-21_at_17.49.52.png)
-    
 5. 기록멈추기를 눌러 기록을 종료합니다.
     
-    ![Simulator Screen Shot - iPhone 14 Pro - 2022-12-21 at 17.43.04.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4592d51e-2cc4-4f15-8af3-49c127020771/Simulator_Screen_Shot_-_iPhone_14_Pro_-_2022-12-21_at_17.43.04.png)
-    
-
 - 서랍장 - 서랍
 1. 서랍을 열어 기록된 꽃갈피를 확인한다.
     
-    ![Simulator Screen Shot - iPhone 14 Pro - 2022-12-21 at 17.46.58.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/31667802-6e2c-4b66-a81e-12658d73adf4/Simulator_Screen_Shot_-_iPhone_14_Pro_-_2022-12-21_at_17.46.58.png)
-    
 2. 기록된 꽃갈피를 눌러 해당 위치 지도를 본다.
-    
-    ![Simulator Screen Shot - iPhone 14 Pro - 2022-12-21 at 17.50.15.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6f830041-1747-44eb-9dd0-59e45c72087b/Simulator_Screen_Shot_-_iPhone_14_Pro_-_2022-12-21_at_17.50.15.png)
 
 - 달력
 
