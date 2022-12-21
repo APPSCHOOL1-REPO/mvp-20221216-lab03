@@ -16,7 +16,7 @@
 - 서랍
 - 서랍장 - 꽃갈피
 1. 기록하기를 눌러 기록을 시작합니다.
-
+<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/10.png" width="40%" height="30%" title="px(픽셀) 크기 설정" alt="RubberDuck"></img>
 2. 여행 제목을 입력하고 추가 버튼을 눌러주세요.
     
 3. 새 글작성을 눌러 제목, 글, 사진을 작성할 수 있습니다.(함께한 친구와 위치를 지정합니다.)
