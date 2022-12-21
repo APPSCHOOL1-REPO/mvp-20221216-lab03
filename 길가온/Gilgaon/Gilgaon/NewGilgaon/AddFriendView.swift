@@ -13,14 +13,22 @@ struct AddFriendView: View {
     var body: some View {
   
             ZStack {
+                
+                
                 List {
+           
                         ForEach(fireStoreViewModel.myFriendArray, id: \.self) { myFriend in
                             
-                            VStack(alignment: .leading) {
-                                Text(myFriend.nickName)
-                                    .font(.title2)
-                                    .fontWeight(.medium)
-                                    .padding(.vertical, 10)
+                            HStack(alignment: .center) {
+                                Circle()
+                                    .frame(width: 100, height: 100)
+                                
+                                VStack {
+                                    Text(myFriend.nickName)
+                                        .font(.title2)
+                                        .fontWeight(.medium)
+                                        .padding(.vertical, 10)
+                                }
                             }
                             .padding(10)
                             
@@ -28,7 +36,7 @@ struct AddFriendView: View {
                         .listRowBackground(
                             RoundedRectangle(cornerRadius: 20)
                                 .background(.clear)
-                                .foregroundColor(.white)
+                                .foregroundColor(Color("White"))
                                 .padding(
                                     EdgeInsets(
                                         top: 10,
@@ -39,7 +47,9 @@ struct AddFriendView: View {
                                 )
                         )
                         .listRowSeparator(.hidden)
-                    }
+                }
+                .scrollContentBackground(.hidden)
+                .background(.green)
 
                 
         }
