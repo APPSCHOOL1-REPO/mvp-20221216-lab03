@@ -23,6 +23,7 @@ class FireStoreViewModel: ObservableObject {
     // ** [회원가입] UIimage -> |profileUrlString | -> if nil -> (sys, Image)
     @Published var profileUrlString: String?
     
+    @Published var userNickName: String = ""
     let database = Firestore.firestore()
     var nowCalendarId: String = ""
     var currentUserId:String?{ Auth.auth().currentUser?.uid }
@@ -61,8 +62,7 @@ class FireStoreViewModel: ObservableObject {
     func addLocationImage(){
         
     }
-    
-    
+
     //친구목록을 조회하는 함수
     func fetchFriend() {
         database
@@ -141,6 +141,29 @@ class FireStoreViewModel: ObservableObject {
             .setData(["id": user.id, "nickName": user.nickName, "userPhoto": user.userPhoto,
                       "userEmail": user.userEmail])
     }
+    
+    //사용자로부터 닉네임을 입력받아 일치하는 유저를 조회하는 함수
+    func myInfo(_ userID: String){
+            database
+                .collection("User")
+                .getDocuments { (snapshot, error) in
+                    self.userList.removeAll()
+                    if let snapshot{
+                        for document in snapshot.documents{
+                            let id: String = document.documentID
+                            let docData = document.data()
+                            if id == userID {
+                                let docData = document.data()
+                                let nickName: String = docData["nickName"] as? String ?? ""
+                                let userPhoto: String = docData["userPhoto"] as? String ?? ""
+                                let userEmail:String = docData["userEmail"] as? String ?? ""
+                                let friend = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
+                                self.userNickName = friend.nickName
+                            }
+                        }
+                    }
+                }
+        }
     
     
     //사용자로부터 닉네임을 입력받아 일치하는 유저를 조회하는 함수

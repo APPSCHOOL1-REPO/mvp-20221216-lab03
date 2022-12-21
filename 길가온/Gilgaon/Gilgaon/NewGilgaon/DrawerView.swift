@@ -13,9 +13,10 @@ enum MiddleView: String {
 }
 
 struct DrawerView: View {
-    @StateObject var fireStoreViewModel = FireStoreViewModel()
     @State private var showMenu: Bool = false
     @State private var middleView: MiddleView = .schedule
+    @EnvironmentObject var fireStoreViewModel: FireStoreViewModel
+
     
     private var middleViewArray: [MiddleView] = [.schedule, .list]
     
@@ -26,7 +27,7 @@ struct DrawerView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    Text("닉네임")
+                    Text(fireStoreViewModel.userNickName)
                     HStack(spacing: 40) {
                         // profile Image
                         if let url = fireStoreViewModel.profileUrlString,
@@ -108,7 +109,8 @@ struct DrawerView: View {
                 
             }
             .onAppear {
-                print(DateType2String())
+//                myInfo(fireStoreViewModel.currentUserId!)
+                fireStoreViewModel.myInfo(fireStoreViewModel.currentUserId!)
             }
             .toolbar {
                 Button {
