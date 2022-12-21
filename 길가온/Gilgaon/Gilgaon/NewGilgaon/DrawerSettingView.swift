@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct DrawerSettingView: View {
+    @EnvironmentObject var registerModel: RegisterModel
+    
     
     var body: some View {
         
@@ -24,7 +26,7 @@ struct DrawerSettingView: View {
                 .padding(.horizontal, 16)
             
             Button {
-                
+                registerModel.logout()
             } label: {
                 Text("로그아웃")
                     .foregroundColor(Color("DarkGray"))

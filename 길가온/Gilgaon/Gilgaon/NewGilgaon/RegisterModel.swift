@@ -18,7 +18,7 @@ final class RegisterModel: ObservableObject {
     @Published var userUID: String = ""
     
     init() {
-//        currentUser = Auth.auth().currentUser
+        currentUser = Auth.auth().currentUser
     }
 
     
