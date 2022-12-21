@@ -231,7 +231,8 @@ struct CustomDataPicker: View {
                                             .foregroundColor(Color("Pink"))
                                     }
                                     NavigationLink {
-                                        FlowerMapView()
+                                        EmptyView()
+//                                        FlowerMapView()
                                     } label: {
                                         Text("지도 보기")
                                             .font(.custom("NotoSerifKR-SemiBold", size: 15))

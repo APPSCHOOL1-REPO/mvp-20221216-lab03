@@ -3,7 +3,6 @@
 //  Gilgaon
 //
 //  Created by kimminho on 2022/12/20.
-//
 
 import Foundation
 import Firebase
@@ -22,7 +21,6 @@ class FireStoreViewModel: ObservableObject {
     var nowCalendarId: String = ""
     var currentUserId:String?{ Auth.auth().currentUser?.uid }
 
-    
     //친구목록을 조회하는 함수
     func fetchFriend() {
         database
@@ -90,7 +88,6 @@ class FireStoreViewModel: ObservableObject {
     }
     
     
-
     //사용자로부터 닉네임을 입력받아 일치하는 유저를 조회하는 함수
     func searchUser(_ userName: String){
             database
@@ -184,18 +181,20 @@ class FireStoreViewModel: ObservableObject {
     
     
     // [마커 가져오기]
-    func fetchMarkers(_ userId: String) {
+    func fetchMarkers() {
+        
+        
         database.collection("User")
             .document(self.currentUserId!)
             .collection("Calendar")
-            .document(userId)
+            .document(self.nowCalendarId)
             .collection("Marker")
             .getDocuments { (snapshot, error) in
                 self.markerList.removeAll()
+                LocationsDataService.locations.removeAll()
                 if let snapshot {
                     for document in snapshot.documents {
                         let id: String = document.documentID
-                        
                         let docData = document.data()
                         
                         let title: String = docData["title"] as? String ?? ""
@@ -206,10 +205,11 @@ class FireStoreViewModel: ObservableObject {
                         let lat: String = docData["lat"] as? String ?? ""
                         let lon: String = docData["lon"] as? String ?? ""
                         
-                        
                         let marker: MarkerModel = MarkerModel(id: id, title: title, photo: photo, createdAt: createdAt, contents: contents, locationName: locationName, lat: lat, lon: lon)
                         
                         self.markerList.append(marker)
+                        LocationsDataService.locations.append(marker)
+
                     }
                 }
             }

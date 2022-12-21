@@ -22,8 +22,9 @@ class SearchNetwork {
         
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         //사용시에 키값 ❤️지우기
-        //l7xx8749f7a7b24c491682f94ec946029847
-        request.addValue("❤️", forHTTPHeaderField: "appKey")
+
+        request.addValue("l7xx8749f7a7b24c491682f94ec946029847", forHTTPHeaderField: "appKey")
+
         request.httpMethod = "GET"
         let (data, _) = try await URLSession.shared.data(for: request)
         let result = try JSONDecoder().decode(T.self, from: data)

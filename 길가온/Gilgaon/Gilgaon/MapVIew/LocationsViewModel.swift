@@ -11,9 +11,9 @@ import SwiftUI
 
 
 class LocationsViewModel: ObservableObject{
-    @Published var locations: [Location]
+    @Published var locations: [MarkerModel]
     
-    @Published var mapLocation: Location{
+    @Published var mapLocation: MarkerModel{
         didSet{
             updateMapRegion(location: mapLocation)
         }
@@ -41,7 +41,7 @@ class LocationsViewModel: ObservableObject{
     }
     
     
-    private func updateMapRegion(location: Location){
+    private func updateMapRegion(location: MarkerModel){
         withAnimation(.easeInOut){
             mapRegion = MKCoordinateRegion(center: location.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta:0.02))
         }
@@ -54,7 +54,7 @@ class LocationsViewModel: ObservableObject{
         }
     }
     
-    func showNextLocation(location: Location){
+    func showNextLocation(location: MarkerModel){
         withAnimation(.easeInOut) {
             mapLocation = location
             showLocationsList = false

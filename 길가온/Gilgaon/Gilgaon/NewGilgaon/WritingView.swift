@@ -23,7 +23,9 @@ struct WritingView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var location: [String] = []
     @State private var showModal2 = false
-    
+    @State private var lanString = ""
+    @State private var lonString = ""
+    @State private var locationName = ""
     //사진을 보관할 상태 변수
     @State private var selectedItem: PhotosPickerItem?
     @State private var selectedImageData: Data? = nil
@@ -75,7 +77,8 @@ struct WritingView: View {
                             .padding(.leading, 100)
                         }
                         .sheet(isPresented: $showModal2) {
-                            TestAPIView(jogakData: jogakData)
+                            TestAPIView(lonString: $lonString, lanString: $lanString, locationName: $locationName)
+                            
                                 .presentationDetents([.medium])
                         }
                     }
@@ -127,7 +130,7 @@ struct WritingView: View {
                 Button {
                     let id = UUID().uuidString
                     let createdAt = Date().timeIntervalSince1970
-                    let marker = MarkerModel(id: id, title: travelName2, photo: "", createdAt: createdAt, contents: travel, locationName: "", lat: "", lon: "")
+                    let marker = MarkerModel(id: id, title: travelName2, photo: "", createdAt: createdAt, contents: travel, locationName: locationName, lat: lanString, lon: lonString)
                     firestoreViewModel.addMarker(marker)
                     dismiss()
                 } label: {
