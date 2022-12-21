@@ -91,7 +91,9 @@ struct DrawerView: View {
                 .background(Color("DarkGray").opacity(showMenu ? 0.5 : 0))
                 
             }
-            
+            .onAppear {
+                print(DateType2String())
+            }
             .toolbar {
                 Button {
                     self.showMenu.toggle()

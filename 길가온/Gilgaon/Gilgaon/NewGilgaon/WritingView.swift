@@ -14,6 +14,8 @@ struct WritingView: View {
     @ObservedObject var jogakData: JogakData = JogakData()
     @EnvironmentObject var viewModel: SearchViewModel
     
+    
+    
     @State private var openPhoto = false
     @State private var image = UIImage()
     @State private var travelName2: String = ""

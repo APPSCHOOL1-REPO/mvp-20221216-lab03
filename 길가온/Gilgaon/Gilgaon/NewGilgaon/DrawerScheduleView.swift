@@ -13,6 +13,9 @@ struct DrawerScheduleView: View {
     @State var isRecording: Bool = false
     @State var isStart: Bool = false
     
+//    @Binding var currentDate: Date
+//    @Binding var calID: [String]
+    
     @State private var title: String = ""
     var body: some View {
         ZStack {
@@ -33,7 +36,7 @@ struct DrawerScheduleView: View {
                     Button("취소",role: .cancel,action: {
                     })
                     Button("추가", action: {
-                        let calendar = DayCalendarModel(id: UUID().uuidString, createdAt: 0, title: title, shareFriend: [])
+                        let calendar = DayCalendarModel(id: UUID().uuidString,taskDate: Date(),createdAt: DateType2String(), title: title, shareFriend: [])
                         fireStoreViewModel.addCalendar(calendar)
                         
                     })

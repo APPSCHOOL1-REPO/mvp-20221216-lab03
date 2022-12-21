@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-//MARK: - 달력의 요일을 클릭했을 때 보여줄 뷰 입니다.
+//MARK: - 안쓰는뷰
 struct CalendarSelectView: View {
     @State private var friendArray: [String] = []
     @State private var emoji: [String] = ["😆","😏","🥹"]
