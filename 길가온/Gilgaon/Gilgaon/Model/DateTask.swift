@@ -23,7 +23,6 @@ struct DateTask: Identifiable {
 
 class CalendarViewModel: ObservableObject,Identifiable {
     @Published var tasks: [DateTask]
-    
     init() {
         let tasks = CalendarModel.selectDayInfo
         self.tasks = tasks

@@ -22,22 +22,22 @@ struct FlowerMapView: View {
     
     var body: some View {
         ZStack{
-                Map(coordinateRegion: $mapRegion,
-                    interactionModes: .all,
-                    showsUserLocation: true,
-                    userTrackingMode: $userTracking,
-                    annotationItems: vm.locations,
-                    annotationContent: { location in
-                    MapAnnotation(coordinate: location.coordinate) {
-                        mapMarker()
-                            .scaleEffect(vm.mapLocation == location ? 1.2: 0.9)
-                            .shadow(radius: 10)
-                            .onTapGesture {
-                                vm.showNextLocation(location: location)
-                            }
+            Map(coordinateRegion: $vm.mapRegion,
+                interactionModes: .all,
+                showsUserLocation: true,
+                userTrackingMode: $userTracking,
+                annotationItems: vm.locations,
+                annotationContent: { location in
+                MapAnnotation(coordinate: location.coordinate) {
+                    mapMarker()
+                        .scaleEffect(vm.mapLocation == location ? 1.2: 0.9)
+                        .shadow(radius: 10)
+                        .onTapGesture {
+                            vm.showNextLocation(location: location)
                         }
-                    }
-                )
+                }
+            }
+            )
             VStack{
                 header
                     .padding()
@@ -55,6 +55,9 @@ struct FlowerMapView: View {
         }
         .onAppear{
             vm.locations = fireStoreViewModel.markerList
+            if !vm.locations.isEmpty{
+                vm.mapLocation = vm.locations.first!
+            }
         }
     }
     
@@ -87,7 +90,7 @@ extension FlowerMapView {
                 if vm.showLocationsList{
                     LocationsListView()
                 }
-//
+                //
             }
             .background(.thickMaterial)
             .cornerRadius(10)
