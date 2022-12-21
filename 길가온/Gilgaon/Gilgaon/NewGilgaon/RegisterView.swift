@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseStorage
 
 //1. Auth
 //2. Storage
@@ -23,50 +25,110 @@ struct RegisterView: View {
     
     @State private var errorString = ""
     
+    @State private var shouldShowImagePicker = false
+    @State private var image: UIImage?
+    
     var body: some View {
-        VStack {
-            Circle()
-                .frame(width: 100, height: 100)
-            VStack(alignment: .leading) {
-                Text("닉네임")
-                TextField("닉네임 입력", text: $nickName)
-                Text("아이디")
-                TextField("아이디 입력", text: $userEmail)
+        
+        ZStack {
+            
+            Color("White")
+                .ignoresSafeArea()
+            
+            VStack(spacing: 16) {
                 
-                //안보이는 비밀번호로 수정
-                Text("비밀번호")
-                SecureField("비밀번호 입력", text: $password)
-                Text("비밀번호 확인")
-                SecureField("비밀번호 입력", text: $passwordCheck)
-            }.padding()
-
-            Button {
-                Task {
-                    try! await registerModel.registerUser(userID: userEmail, userPW: password)
-                    try! await fireStoreViewModel.addUser(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: "", userEmail: userEmail))
-                    if !registerModel.isError {
-                        dismiss()
+                Text("회원 가입")
+                    .font(.custom("NotoSerifKR-Bold", size: 30))
+                    .foregroundColor(Color("DarkGray"))
+                
+                Button {
+                    shouldShowImagePicker.toggle()
+                } label: {
+                    VStack {
+                        if let image = self.image {
+                            Image(uiImage: image)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 128, height: 128)
+                                .cornerRadius(64)
+                        } else {
+                            Image(systemName: "person.fill")
+                                .font(.system(size: 64))
+                                .foregroundColor(Color("Pink"))
+                                .padding()
+                        }
                     }
                 }
-            } label: {
-                Text("생성")
-            }
-            .alert("오류", isPresented: $registerModel.isError, actions: {
+                .overlay(RoundedRectangle(cornerRadius: 64)
+                    .stroke(Color("Pink"), lineWidth: 3))
                 
-                Button("취소",role: .cancel,action: {
+                
+                
+                VStack(alignment: .leading) {
+                    Text("닉네임")
+                        .font(.custom("NotoSerifKR-Regular",size:16))
+                        .foregroundColor(Color("DarkGray"))
+                    TextField("닉네임을 입력해주세요", text: $nickName)
+                        .font(.custom("NotoSerifKR-Regular",size:16))
+                        .foregroundColor(Color("DarkGray"))
+                    Text("이메일")
+                        .font(.custom("NotoSerifKR-Regular",size:16))
+                        .foregroundColor(Color("DarkGray"))
+                    TextField("이메일을 입력력해주세요", text: $userEmail)
+                        .font(.custom("NotoSerifKR-Regular",size:16))
+                        .foregroundColor(Color("DarkGray"))
+                    
+                    //안보이는 비밀번호로 수정
+                    Text("비밀번호")
+                        .font(.custom("NotoSerifKR-Regular",size:16))
+                        .foregroundColor(Color("DarkGray"))
+                    SecureField("비밀번호를 입력해주세요", text: $password)
+                        .font(.custom("NotoSerifKR-Regular",size:16))
+                        .foregroundColor(Color("DarkGray"))
+                    Text("비밀번호 확인")
+                        .font(.custom("NotoSerifKR-Regular",size:16))
+                        .foregroundColor(Color("DarkGray"))
+                    SecureField("비밀번호를 입력해주세요", text: $passwordCheck)
+                        .font(.custom("NotoSerifKR-Regular",size:16))
+                        .foregroundColor(Color("DarkGray"))
+                }
+                .padding()
+                
+                Button {
+                    Task {
+                        try! await registerModel.registerUser(userID: userEmail, userPW: password, userImage: image)
+                        try! await fireStoreViewModel.addUser(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: "", userEmail: userEmail))
+                        if !registerModel.isError {
+                            dismiss()
+                        }
+                    }
+                   
+                } label: {
+                    Text("가입하기")
+                        .font(.custom("NotoSerifKR-Regular",size:16))
+                        .foregroundColor(Color("DarkGray"))
+                }
+                .alert("오류", isPresented: $registerModel.isError, actions: {
+                    
+                    Button("취소",role: .cancel,action: {
+                    })
+                    Button("추가", action: {
+                    })
+                }, message: {
+                    Text("\(registerModel.DetailError)")
+                        .font(.custom("NotoSerifKR-Regular",size:16))
                 })
-                Button("추가", action: {
-                })
-            }, message: {
-                Text("\(registerModel.DetailError)")
-            })
-            .onDisappear {
-                registerModel.isError = false
+                .onDisappear {
+                    registerModel.isError = false
+                }
+                
             }
-            
-
+        }
+        .fullScreenCover(isPresented: $shouldShowImagePicker) {
+            ImagePicker(image: $image)
         }
     }
+    
 }
 
 struct RegisterView_Previews: PreviewProvider {
