@@ -133,6 +133,7 @@ class FireStoreViewModel: ObservableObject {
         
             self.nowCalendarId = calendar.id
             print("nowCalendarId: \(self.nowCalendarId)")
+            calendarList.append(calendar)
     }
     
     
@@ -148,10 +149,11 @@ class FireStoreViewModel: ObservableObject {
                     for document in snapshot.documents{
                         let id = document.documentID
                         let docData = document.data()
-                        let createdAt = docData["createdAt"] as? Double ?? 0
+                        let createdAt = docData["createdAt"] as? [String] ?? []
                         let title = docData["title"] as? String ?? ""
                         let shareFriend = docData["shareFriend"] as? [String] ?? []
-                        let calendarData = DayCalendarModel(id: id, createdAt: createdAt, title: title, shareFriend: shareFriend)
+                        let taskDate = docData["taskDate"] as? Date ?? Date()
+                        let calendarData = DayCalendarModel(id: id, taskDate: Date(), createdAt: createdAt, title: title, shareFriend: shareFriend)
                         
                         self.calendarList.append(calendarData)
                     }

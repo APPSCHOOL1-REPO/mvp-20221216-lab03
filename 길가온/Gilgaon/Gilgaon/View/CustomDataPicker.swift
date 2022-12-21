@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct CustomDataPicker: View {
+    @EnvironmentObject var fireStoreModel: FireStoreViewModel
     
-    @Binding var currentDate: Date
+    
+    
+    @State var currentDate = Date()
     @Binding var calID: [String]
     @State var currentMonth: Int = 0
     //+버튼을 눌렀을 때 화면아래로 이동하게 설정해주는 변수
@@ -124,7 +127,9 @@ struct CustomDataPicker: View {
 //                                        print("currentDate:",currentDate)
 //                                        print(value.date,currentDate)
                                         calID = extraDate()
-                                        print(calID)
+//                                        print("calID:",calID)
+//                                        print(fireStoreModel.calendarList)
+//                                        print(fireStoreModel.)
 
 //                                        print("value.id:",value.id)
 //                                        calID = value.id
@@ -132,6 +137,9 @@ struct CustomDataPicker: View {
                                     }
                                 
                             }
+                        }
+                        .onAppear {
+                            fireStoreModel.fetchDayCalendar()
                         }
                     }
                     .offset(y: 20)
@@ -168,7 +176,7 @@ struct CustomDataPicker: View {
                         
                     }
                     
-                    
+//                    fireStoreModel.
                     if let dateTask = cvm.tasks.first(where: { task in
                         return isSameDay(date1: task.taskDate, date2: currentDate)
                     }) {
@@ -263,11 +271,10 @@ struct CustomDataPicker: View {
 //                if cvm.tasks.count > 0 {
 //
 //                }
-                if let dateTask = cvm.tasks.first(where: { task1 in
-                    
+                if let dateTask = fireStoreModel.calendarList.first(where: { task1 in
                     return isSameDay(date1: task1.taskDate, date2: value.date)
-                    
-                }) {
+                })
+                {
                     
                     Text("\(value.day)")
                         .font(.custom("NotoSerifKR-SemiBold", size: 20))

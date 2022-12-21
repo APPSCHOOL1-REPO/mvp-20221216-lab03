@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalendarView: View {
     
-    @State var currentDate: Date = Date()
+    @State var currentDate = Date()
     @State var calID: [String] = []
     @State var isTapped: Bool = true
 
@@ -23,7 +23,7 @@ struct CalendarView: View {
 //            ScrollView(.vertical, showsIndicators: false) {
 
                 VStack(spacing: 20) {
-                    CustomDataPicker(currentDate: $currentDate, calID: $calID)
+                    CustomDataPicker(currentDate: currentDate, calID: $calID)
 
                 }
                 .padding(.vertical)

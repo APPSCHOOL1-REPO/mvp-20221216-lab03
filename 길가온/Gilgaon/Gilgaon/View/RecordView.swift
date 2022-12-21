@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//MARK: - 안쓰는 뷰
 struct TripItem: Identifiable {
     var id = UUID()
     var imageName: String
