@@ -105,7 +105,7 @@ struct RegisterView: View {
                    
                 } label: {
                     Text("가입하기")
-                        .font(.custom("NotoSerifKR-Regular",size:16))
+                        .font(.custom("NotoSerifKR-Bold",size:16))
                         .foregroundColor(Color("DarkGray"))
                 }
                 .alert("오류", isPresented: $registerModel.isError, actions: {
