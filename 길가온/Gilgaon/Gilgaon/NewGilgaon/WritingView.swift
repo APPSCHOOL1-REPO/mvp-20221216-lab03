@@ -100,13 +100,13 @@ struct WritingView: View {
                                 .cornerRadius(15)
                         }
                     }
-                    .sheet(isPresented: $openPhoto) {
-                        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
-                            .onDisappear{
-                                jogakData.images.append(image)
-                            }
-                        
-                    }
+//                    .sheet(isPresented: $openPhoto) {
+//                        ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
+//                            .onDisappear{
+//                                jogakData.images.append(image)
+//                            }
+//                        
+//                    }
                     
                 }
                 
