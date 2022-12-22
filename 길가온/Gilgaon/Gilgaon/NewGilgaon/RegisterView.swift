@@ -97,7 +97,9 @@ struct RegisterView: View {
                 Button {
                     Task {
                         try! await registerModel.registerUser(userID: userEmail, userPW: password, userImage: image)
-                        try! await fireStoreViewModel.addUser(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: "", userEmail: userEmail))
+                        if registerModel.userUID != "" {
+                            try! await fireStoreViewModel.addUser(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: "", userEmail: userEmail))
+                        }
                         if !registerModel.isError {
                             dismiss()
                         }
