@@ -50,6 +50,7 @@
 		3691CB3229364AC400F41FDB /* Polyline in Frameworks */ = {isa = PBXBuildFile; productRef = 3691CB3129364AC400F41FDB /* Polyline */; };
 		369484C22952E1960030890A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369484C12952E1960030890A /* Util.swift */; };
 		369CB73E293726E700C2E4BF /* JogakData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369CB73D293726E700C2E4BF /* JogakData.swift */; };
+		36A0C2802954423700DFDD45 /* OnboardingMapDescribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0C27F2954423700DFDD45 /* OnboardingMapDescribeView.swift */; };
 		36BB028B29518BD300CF2816 /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BB028A29518BD300CF2816 /* WritingView.swift */; };
 		634BC63E2950369D0044B38B /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC63D2950369D0044B38B /* DrawerView.swift */; };
 		634BC6402950398C0044B38B /* DrawerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC63F2950398C0044B38B /* DrawerListView.swift */; };
@@ -125,6 +126,7 @@
 		3663C67C293881C1006880C9 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
 		369484C12952E1960030890A /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		369CB73D293726E700C2E4BF /* JogakData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JogakData.swift; sourceTree = "<group>"; };
+		36A0C27F2954423700DFDD45 /* OnboardingMapDescribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMapDescribeView.swift; sourceTree = "<group>"; };
 		36BB028A29518BD300CF2816 /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
 		634BC63D2950369D0044B38B /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
 		634BC63F2950398C0044B38B /* DrawerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerListView.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				16F69DB429387E030045CD91 /* GilgaonRequestPermissonView.swift */,
 				16F69DB229387E020045CD91 /* OnboardingDescribeView.swift */,
 				16F69DB329387E020045CD91 /* OnboardingTabView.swift */,
+				36A0C27F2954423700DFDD45 /* OnboardingMapDescribeView.swift */,
 			);
 			path = OnBoard;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				634BC63E2950369D0044B38B /* DrawerView.swift in Sources */,
 				362DC67429389FD100507017 /* LocationFetcher.swift in Sources */,
 				161510BE29502BE600BA7FFE /* RegisterView.swift in Sources */,
+				36A0C2802954423700DFDD45 /* OnboardingMapDescribeView.swift in Sources */,
 				16EE2F622951501700414279 /* AddFriendView.swift in Sources */,
 				3663C67D293881C1006880C9 /* SheetView.swift in Sources */,
 				16D46FA32935EC7F00BB9440 /* SearchModel.swift in Sources */,
