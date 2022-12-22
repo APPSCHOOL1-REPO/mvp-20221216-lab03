@@ -28,6 +28,12 @@ struct RegisterView: View {
     @State private var shouldShowImagePicker = false
     @State private var image: UIImage?
     
+    func SectionLabel(labelName: String) -> some View {
+        Text(labelName)
+            .font(.custom("NotoSerifKR-Regular",size:14))
+            .foregroundColor(Color("DarkGray"))
+    }
+    
     var body: some View {
         
         ZStack {
@@ -61,53 +67,56 @@ struct RegisterView: View {
                 }
                 .overlay(RoundedRectangle(cornerRadius: 64)
                     .stroke(Color("Pink"), lineWidth: 3))
+                Text("프로필 사진을 추가해보세요")
+                    .font(.custom("NotoSerifKR-Regular",size:14))
+                    .foregroundColor(Color("DarkGray"))
                 
+
                 
-                
-                VStack(alignment: .leading) {
-                    Text("닉네임")
-                        .font(.custom("NotoSerifKR-Regular",size:16))
-                        .foregroundColor(Color("DarkGray"))
-                    TextField("닉네임을 입력해주세요", text: $nickName)
-                        .font(.custom("NotoSerifKR-Regular",size:16))
-                        .foregroundColor(Color("DarkGray"))
-                    Text("이메일")
-                        .font(.custom("NotoSerifKR-Regular",size:16))
-                        .foregroundColor(Color("DarkGray"))
-                    TextField("이메일을 입력력해주세요", text: $userEmail)
-                        .font(.custom("NotoSerifKR-Regular",size:16))
-                        .foregroundColor(Color("DarkGray"))
+                Form {
+                    Section {
+                        TextField("닉네임을 입력해주세요.", text: $nickName)
+                    } header: {
+                        SectionLabel(labelName: "닉네임")
+                    }
                     
-                    //안보이는 비밀번호로 수정
-                    Text("비밀번호")
-                        .font(.custom("NotoSerifKR-Regular",size:16))
-                        .foregroundColor(Color("DarkGray"))
-                    SecureField("비밀번호를 입력해주세요", text: $password)
-                        .font(.custom("NotoSerifKR-Regular",size:16))
-                        .foregroundColor(Color("DarkGray"))
-                    Text("비밀번호 확인")
-                        .font(.custom("NotoSerifKR-Regular",size:16))
-                        .foregroundColor(Color("DarkGray"))
-                    SecureField("비밀번호를 입력해주세요", text: $passwordCheck)
-                        .font(.custom("NotoSerifKR-Regular",size:16))
-                        .foregroundColor(Color("DarkGray"))
+                    Section {
+                        TextField("이메일을 입력해주세요.", text: $userEmail)
+                    } header: {
+                        SectionLabel(labelName: "이메일")
+                    }
+                    
+                    Section {
+                        SecureField("비밀번호 입력", text: $password)
+                        SecureField("비밀번호를 재입력", text: $passwordCheck)
+                    } header: {
+                        SectionLabel(labelName: "비밀번호")
+                    }
+
                 }
-                .padding()
+                .scrollContentBackground(.hidden)
+                .font(.custom("NotoSerifKR-Regular",size:13))
+                .foregroundColor(Color("DarkGray"))
+
                 
                 Button {
-                    Task {
-                        try! await registerModel.registerUser(userID: userEmail, userPW: password, userImage: image)
-                        if registerModel.userUID != "" {
-                            try! await fireStoreViewModel.addUser(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: "", userEmail: userEmail))
+                    if (nickName != "") && (userEmail != "") && (password != "" && password.count >= 6) && (passwordCheck != "" && passwordCheck.count >= 6) {
+                        Task {
+                            try! await registerModel.registerUser(userID: userEmail, userPW: password, userImage: image)
+                            if registerModel.userUID != "" {
+                                try! await fireStoreViewModel.addUser(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: "", userEmail: userEmail))
+                            }
+                            if !registerModel.isError {
+                                dismiss()
+                            }
                         }
-                        if !registerModel.isError {
-                            dismiss()
-                        }
+                    }else {
+                        print("문제있음")
                     }
                    
                 } label: {
                     Text("가입하기")
-                        .font(.custom("NotoSerifKR-Bold",size:16))
+                        .font(.custom("NotoSerifKR-Bold",size:18))
                         .foregroundColor(Color("DarkGray"))
                 }
                 .alert("오류", isPresented: $registerModel.isError, actions: {
@@ -123,6 +132,7 @@ struct RegisterView: View {
                 .onDisappear {
                     registerModel.isError = false
                 }
+                Spacer()
                 
             }
         }
