@@ -124,7 +124,7 @@ struct LoginView: View {
                                 Button {
                                     kakaoLoginViewModel.handleKakaoLogin()
                                 } label: {
-                                    Text("카카오 로그인")
+                                    Text("")
                                 }
                                 .blendMode(.overlay)
                                 
