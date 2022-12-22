@@ -166,6 +166,7 @@ class FireStoreViewModel: ObservableObject {
         }
     
     
+    
     //사용자로부터 닉네임을 입력받아 일치하는 유저를 조회하는 함수
     func searchUser(_ userName: String){
         database

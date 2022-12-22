@@ -14,7 +14,12 @@ struct OnboardingTabView: View {
         TabView {
             // 페이지 1: 앱 소개
             OnboardingDescribeView()
-            // 페이지 2: 카메라,위치추적 활성화
+            
+            // 페이지 2: 꽃갈피 소개
+            OnboardingMapDescribeView()
+            
+            
+            // 페이지 3: 카메라,위치추적 활성화
             GilgaonRequestPermissonView(isFirstLaunching: $isFirstLaunching)
             
             
