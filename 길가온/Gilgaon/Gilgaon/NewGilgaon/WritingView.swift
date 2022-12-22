@@ -11,7 +11,7 @@ import SwiftUI
 struct WritingView: View {
     @ObservedObject var firestoreViewModel:FireStoreViewModel
     
-    @ObservedObject var jogakData: JogakData = JogakData()
+//    @ObservedObject var jogakData: JogakData = JogakData()
     @EnvironmentObject var viewModel: SearchViewModel
     
     @State private var travelName2: String = ""
@@ -19,6 +19,7 @@ struct WritingView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var location: [String] = []
     @State private var showModal2 = false
+    @State private var showModal3 = false
     @State private var lanString = ""
     @State private var lonString = ""
     @State private var locationName = ""
@@ -36,37 +37,47 @@ struct WritingView: View {
         ZStack {
             Color("White")
                 .ignoresSafeArea()
-            VStack{
-                ZStack {
-                    Image("line")
-                        .resizable()
-                        .frame(width: 100, height: 70)
-                    Text("꽃갈피")
-                        .font(.custom("NotoSerifKR-Black", size: 20))
-                        .foregroundColor(Color("DarkGray"))
-                        .offset(y: -4)
+            
+        VStack {
+              
+            ZStack(alignment: .leading) {
+                MyPath3()
+                    .stroke(Color("Pink"))
+                Text("꽃   갈   피")
+                    .font(.custom("NotoSerifKR-Bold", size: 30))
+                    .foregroundColor(Color("DarkGray"))
+                    .padding(.leading, 50)
+            }
+            .frame(height: 50)
+            .offset(y: -50)
+            
+            VStack {
+                HStack {
+                    Button {
+                        showModal3.toggle()
+                    } label: {
+                        
+                        Label("함께", systemImage: "plus")
+                            .foregroundColor(Color("DarkGray"))
+                            .font(.custom("NotoSerifKR-SemiBold", size: 15))
+                    }
+                    .sheet(isPresented: $showModal3) {
+                        AddFriendView()
+                            .presentationDetents([.medium])
+                    }
+                    Spacer()
                 }
-                Spacer()
                 
                 HStack {
-                    NavigationLink {
-                        //                        FriendList()
-                    } label: {
-                        Label("함께", systemImage: "plus")
-                    }
-                    .foregroundColor(Color("DarkGray"))
-                    .font(.custom("NotoSerifKR-SemiBold", size: 15))
-                    
-                    
                     if location != [] {
-                        Text("\(location[0])")
+                        
+                        Text("\(locationName)")
                             .fontWeight(.semibold)
                             .foregroundColor(Color("DarkGray"))
-                            .padding(.leading, 100)
                     } else {
                         Button {
                             showModal2.toggle()
-                            print(viewModel.center?.searchPoiInfo.pois.poi.count)
+                            //                            print(viewModel.center?.searchPoiInfo.pois.poi.count)
                         } label: {
                             HStack() {
                                 Image(systemName: "pin.fill")
@@ -74,53 +85,66 @@ struct WritingView: View {
                             }
                             .foregroundColor(Color("DarkGray"))
                             .font(.custom("NotoSerifKR-SemiBold", size: 15))
-                            .padding(.leading, 100)
                         }
                         .sheet(isPresented: $showModal2) {
                             TestAPIView(lonString: $lonString, lanString: $lanString, locationName: $locationName)
-                            
                                 .presentationDetents([.medium])
                         }
                     }
+                    Spacer()
+                }
+            }
+            .padding()
+
+            VStack {
+                TextField("제목", text: $travelName2)
+                    .foregroundColor(Color("DarkGray"))
+                    .frame(width: 380)
+                    .font(.custom("NotoSerifKR-SemiBold", size: 15))
+                
+                Divider()
+                
+                TextField("내용", text: $travel)
+                    .foregroundColor(Color("DarkGray"))
+                    .frame(width: 380)
+                    .font(.custom("NotoSerifKR-SemiBold", size: 15))
+            }
+            .padding(.bottom, 200)
+            
+            VStack {
+                HStack {
+                    Text("사진을 추가해보세요.")
+                        .foregroundColor(Color("DarkGray"))
+                        .font(.custom("NotoSerifKR-SemiBold", size: 15))
+                    Spacer()
                 }
                 
                 HStack {
+                    
+                    
                     Button {
                         shouldShowImagePicker.toggle()
                     } label: {
-                        ZStack {
-                            Image(systemName: "plus.app")
-                                .resizable()
-                                .frame(width: 80, height: 80)
-                                .fontWeight(.light)
-                                .foregroundColor(Color("DarkGray"))
+                        VStack {
                             if let image = image{
                                 Image(uiImage: image)
                                     .resizable()
                                     .frame(width: 100, height: 100)
                                     .cornerRadius(15)
+                            } else {
+                                Image(systemName: "plus.app")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                                    .fontWeight(.light)
+                                    .foregroundColor(Color("DarkGray"))
                             }
-                            
                         }
                     }
+                    
+                    Spacer()
                 }
-                
-                TextField("제목", text: $travelName2)
-                    .foregroundColor(Color("DarkGray"))
-                    .frame(width: 300)
-                    .font(.custom("NotoSerifKR-SemiBold", size: 15))
-                    .background(.white)
-                    .cornerRadius(5)
-                    .padding()
-                
-                TextEditor(text: $travel)
-                    .frame(width: 300, height: 300)
-                    .font(.custom("NotoSerifKR-SemiBold", size: 15))
-                    .foregroundColor(Color("DarkGray"))
-                    .background(.white)
-                    .cornerRadius(5)
-                    .padding()
-                
+            }
+            .padding()
                 
                 Button {
                     let id = UUID().uuidString
@@ -141,9 +165,6 @@ struct WritingView: View {
                         .foregroundColor(Color("White"))
                         .cornerRadius(8)
                 }
-                
-                Spacer()
-                
             }
         }
         .fullScreenCover(isPresented: $shouldShowImagePicker) {
@@ -152,8 +173,43 @@ struct WritingView: View {
     }
 }
 
-//struct WritingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WritingView()
-//    }
-//}
+struct MyPath3: Shape {
+    
+    func path(in rect: CGRect) -> Path {
+        
+        var path = Path()
+        
+        path.move(to: CGPoint(x: 20, y: 0))
+        path.addLine(to: CGPoint(x: 210, y: 0))
+        
+        path.move(to: CGPoint(x: 20, y: 3))
+        path.addLine(to: CGPoint(x: 210, y: 3))
+        
+        path.move(to: CGPoint(x: 20, y: 50))
+        path.addLine(to: CGPoint(x: 210, y: 50))
+        
+        path.move(to: CGPoint(x: 20, y: 53))
+        path.addLine(to: CGPoint(x: 210, y: 53))
+        
+        path.move(to: CGPoint(x: 40, y: 3))
+        path.addLine(to: CGPoint(x: 40, y: 50))
+        
+        path.move(to: CGPoint(x: 90, y: 3))
+        path.addLine(to: CGPoint(x: 90, y: 50))
+        
+        path.move(to: CGPoint(x: 140, y: 3))
+        path.addLine(to: CGPoint(x: 140, y: 50))
+        
+        path.move(to: CGPoint(x: 190, y: 3))
+        path.addLine(to: CGPoint(x: 190, y: 50))
+        
+        return path
+    }
+}
+
+
+struct WritingView_Previews: PreviewProvider {
+    static var previews: some View {
+        WritingView(firestoreViewModel: FireStoreViewModel())
+    }
+}
