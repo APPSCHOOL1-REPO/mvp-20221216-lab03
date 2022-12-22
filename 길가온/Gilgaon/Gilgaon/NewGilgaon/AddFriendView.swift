@@ -10,54 +10,93 @@ import SwiftUI
 struct AddFriendView: View {
     @StateObject private var fireStoreViewModel: FireStoreViewModel = FireStoreViewModel()
     
+    
+    
     var body: some View {
-  
-            ZStack {
+        NavigationStack {
+            VStack {
                 
                 
                 List {
-           
-                        ForEach(fireStoreViewModel.myFriendArray, id: \.self) { myFriend in
+                    
+                    ForEach(fireStoreViewModel.myFriendArray, id: \.self) { myFriend in
+                        
+                        HStack(alignment: .center) {
                             
-                            HStack(alignment: .center) {
-                                Circle()
-                                    .frame(width: 100, height: 100)
-                                
-                                VStack {
-                                    Text(myFriend.nickName)
-                                        .font(.title2)
-                                        .fontWeight(.medium)
-                                        .padding(.vertical, 10)
+                            // profile Image
+                            if let url = fireStoreViewModel.profileUrlString,
+                               let imageUrl = URL(string: url) {
+                                AsyncImage(url: imageUrl) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 110, height: 110)
+                                        .cornerRadius(30)
+                                        .overlay(RoundedRectangle(cornerRadius: 30)
+                                            .stroke(Color("Pink"), lineWidth: 3))
+                                } placeholder: {
+                                    
                                 }
+                            } else{
+                                Image(systemName: "person.fill")
+                                    .foregroundColor(Color("Pink"))
+                                    .font(.system(size: 30))
+                                    .padding()
+                                    .overlay(RoundedRectangle(cornerRadius: 30)
+                                        .stroke(Color("Pink"), lineWidth: 3))
                             }
-                            .padding(10)
+                            
+                            
+                            
+                            Text(myFriend.nickName)
+                                .font(.custom("NotoSerifKR-Regular",size:16))
+                                .bold()
+                                .padding(.leading, 20.0)
                             
                         }
-                        .listRowBackground(
-                            RoundedRectangle(cornerRadius: 20)
-                                .background(.clear)
-                                .foregroundColor(Color("White"))
-                                .padding(
-                                    EdgeInsets(
-                                        top: 10,
-                                        leading: 10,
-                                        bottom: 10,
-                                        trailing: 10
-                                    )
+                        
+                        
+                    }
+                    .listRowBackground(
+                        RoundedRectangle(cornerRadius: 20)
+                            .background(.clear)
+                            .foregroundColor(Color("White"))
+                            .padding(
+                                EdgeInsets(
+                                    top: 10,
+                                    leading: 10,
+                                    bottom: 10,
+                                    trailing: 10
                                 )
-                        )
-                        .listRowSeparator(.hidden)
+                            )
+                    )
+                    .listRowSeparator(.hidden)
                 }
                 .scrollContentBackground(.hidden)
-                .background(.green)
-
+                .background(Color("White"))
                 
-        }
+                
+            }
             .onAppear {
                 fireStoreViewModel.fetchFriend()
             }
+        }
+        .toolbar {
+     
+                NavigationLink {
+                    SearchUserView()
+                } label: {
+                    Text("+")
+                        .font(.custom("NotoSerifKR-Regular",size:26))
+                        .bold()
+                }
+            }
+
+        }
     }
-}
+
+
+    
 
 //struct AddFriendView_Previews: PreviewProvider {
 //    static var previews: some View {

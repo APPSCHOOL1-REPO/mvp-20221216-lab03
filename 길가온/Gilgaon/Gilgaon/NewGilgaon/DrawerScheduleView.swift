@@ -30,9 +30,10 @@ struct DrawerScheduleView: View {
                     }
                 } label: {
                     Text(isRecording ? "기록멈추기": "기록하기")
+                        .font(.custom("NotoSerifKR-Regular",size:16))
                 }
-                .alert("여행 제목을 입력하세연~", isPresented: $isStart, actions: {
-                    TextField("여행 제목입력", text: $title)
+                .alert("기록을 시작합니다.", isPresented: $isStart, actions: {
+                    TextField("꽃갈피 제목", text: $title)
                     Button("취소",role: .cancel,action: {
                         isRecording = false
                         RecordingValue.isRecording = isRecording
@@ -42,9 +43,11 @@ struct DrawerScheduleView: View {
                         fireStoreViewModel.addCalendar(calendar)
                         
                     })
-                }, message: {
-                    Text("여행 제목 입력해주세요")
-                })
+                }//, message: {
+                 //   Text("여행 제목 입력해주세요")
+                //}
+                )
+                .font(.custom("NotoSerifKR-Regular",size:16))
                 
                 flowerWritingView
             }

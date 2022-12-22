@@ -47,6 +47,8 @@ struct SearchUserView: View {
                 self.shouldBottomToastMessage = true
             } label: {
                 Text(value.nickName)
+                    .font(.custom("NotoSerifKR-Regular",size:16))
+                    .bold()
             }
             
         }
@@ -57,7 +59,7 @@ struct SearchUserView: View {
         .searchable(
             text: $searchText,
             placement: .navigationBarDrawer,
-            prompt: "인간 검색"
+            prompt: "친구 검색"
         )
     }
 }
