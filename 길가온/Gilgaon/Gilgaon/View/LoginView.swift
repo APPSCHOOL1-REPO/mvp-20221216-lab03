@@ -91,13 +91,11 @@ struct LoginView: View {
                                 .bold()
                         }
                         
-                        
-                        
-                        Text("OR")
+                       Text("OR")
                             .foregroundColor(Color("DarkGray"))
                             .font(.custom("NotoSerifKR-Medium",size:16))
-                        
                     }
+                    .textInputAutocapitalization(.never)
                     
                     
                     HStack(spacing: 20) {
@@ -124,7 +122,7 @@ struct LoginView: View {
                                 Button {
                                     kakaoLoginViewModel.handleKakaoLogin()
                                 } label: {
-                                    Text("카카오 로그인")
+                                    Text("")
                                 }
                                 .blendMode(.overlay)
                                 
