@@ -94,6 +94,7 @@ struct RegisterView: View {
                     }
 
                 }
+                .textInputAutocapitalization(.never)
                 .scrollContentBackground(.hidden)
                 .font(.custom("NotoSerifKR-Regular",size:13))
                 .foregroundColor(Color("DarkGray"))
