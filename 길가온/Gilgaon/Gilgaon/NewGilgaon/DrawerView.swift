@@ -27,7 +27,7 @@ struct DrawerView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    Text(fireStoreViewModel.userNickName)
+                    
                     HStack(spacing: 40) {
                         // profile Image
                         if let url = fireStoreViewModel.profileUrlString,
@@ -36,7 +36,7 @@ struct DrawerView: View {
                                 image
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 128, height: 128)
+                                    .frame(width: 110, height: 110)
                                     .cornerRadius(64)
                                     .overlay(RoundedRectangle(cornerRadius: 64)
                                                         .stroke(Color("Pink"), lineWidth: 3))
@@ -51,24 +51,35 @@ struct DrawerView: View {
                                 .overlay(RoundedRectangle(cornerRadius: 64)
                                                     .stroke(Color("Pink"), lineWidth: 3))
                         }
-                        
-                       
-                        NavigationLink {
-                            SearchUserView()
-                        } label: {
-                            Text("친구추가")
-                        }
+                            
                         
                         
-                        NavigationLink {
-                            AddFriendView()
-                        } label: {
-                            Text("친구목록")
+                        VStack(alignment: .leading) {
+                            Text(fireStoreViewModel.userNickName)
+                                .font(.custom("NotoSerifKR-Regular",size:30))
+                                .bold()
+                            //                        NavigationLink {
+                            //                            SearchUserView()
+                            //                        } label: {
+                            //                            Text("친구추가")
+                            //                                .font(.custom("NotoSerifKR-Regular",size:16))
+                            //                        }
+                            
+                            
+                            NavigationLink {
+                                AddFriendView()
+                            } label: {
+                         
+                                Text("\(fireStoreViewModel.myFriendArray.count)명의 친구")
+                                        .font(.custom("NotoSerifKR-Regular",size:16))
+         
+                            }
                         }
                         
                         
                     }
                     .padding()
+                    .padding(.leading, -30.0)
                     
                     HStack {
                         ForEach(middleViewArray, id: \.self) { select in
@@ -78,6 +89,7 @@ struct DrawerView: View {
                                 } label: {
                                     Text(select.rawValue)
                                         .foregroundColor(middleView == select ? Color("Pink") : Color("DarkGray"))
+                                        .font(.custom("NotoSerifKR-Regular",size:16))
                                 }
                                 if middleView == select {
                                     Capsule()
@@ -126,8 +138,8 @@ struct DrawerView: View {
     }
 }
 
-struct DrawerView_Previews: PreviewProvider {
-    static var previews: some View {
-        DrawerView()
-    }
-}
+//struct DrawerView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DrawerView()
+//    }
+//}
