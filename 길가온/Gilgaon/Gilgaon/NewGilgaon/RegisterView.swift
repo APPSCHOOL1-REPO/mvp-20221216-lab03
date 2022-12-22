@@ -14,6 +14,14 @@ import FirebaseStorage
 //3. FireStore
 
 struct RegisterView: View {
+    
+    enum Field {
+        case nickName
+        case email
+        case password
+        case passwordCheck
+    }
+    @FocusState private var focusField: Field?
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject private var registerModel: RegisterModel
     @EnvironmentObject var fireStoreViewModel: FireStoreViewModel
@@ -23,15 +31,28 @@ struct RegisterView: View {
     @State private var password: String = ""
     @State private var passwordCheck: String = ""
     
+    @State private var checkEmail: Bool = true
+    @State private var checkPassword: Bool = true
+//    @State private var checkEmail: Bool = true
     @State private var errorString = ""
     
     @State private var shouldShowImagePicker = false
     @State private var image: UIImage?
-    
     func SectionLabel(labelName: String) -> some View {
         Text(labelName)
             .font(.custom("NotoSerifKR-Regular",size:14))
             .foregroundColor(Color("DarkGray"))
+    }
+    
+    func isValidEmail(inputYourEmail: String) -> Bool {
+          let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.com"
+          let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+          return emailTest.evaluate(with: inputYourEmail)
+    }
+    func checkPasswordLogic(password: String, checkPassword: String) -> Bool {
+        return ((password.count >= 6) && (checkPassword.count >= 6)) && (password == checkPassword)
+            
+        
     }
     
     var body: some View {
@@ -75,20 +96,54 @@ struct RegisterView: View {
                 
                 Form {
                     Section {
-                        TextField("닉네임을 입력해주세요.", text: $nickName)
+                        HStack {
+                            TextField("닉네임을 입력해주세요", text: $nickName)
+                                .focused($focusField, equals: .nickName)
+                            Circle()
+                                .frame(width:10,height:10)
+                                .foregroundColor((nickName.count >= 2) && nickName.count <= 15 ? .green : .red)
+                        }
+
                     } header: {
                         SectionLabel(labelName: "닉네임")
+                    }.onSubmit {
+                        focusField = .email
                     }
                     
                     Section {
-                        TextField("이메일을 입력해주세요.", text: $userEmail)
+                        HStack {
+                            TextField("이메일을 입력해주세요.", text: $userEmail)
+                                .focused($focusField, equals: .email)
+                            Circle()
+                                .frame(width:10,height:10)
+                                .foregroundColor(isValidEmail(inputYourEmail: userEmail) ? .green : .red)
+                        }
+                        
                     } header: {
                         SectionLabel(labelName: "이메일")
                     }
+                    .onSubmit {
+                        focusField = .password
+                    }
                     
                     Section {
-                        SecureField("비밀번호 입력", text: $password)
-                        SecureField("비밀번호를 재입력", text: $passwordCheck)
+                        HStack {
+                            SecureField("비밀번호 입력", text: $password)
+                                .focused($focusField, equals: .password)
+                            Circle()
+                                .frame(width:10,height:10)
+                                .foregroundColor(password.count >= 6 ? .green : .red)
+                        }
+                        .onSubmit {
+                                focusField = .passwordCheck
+                        }
+                        HStack {
+                            SecureField("비밀번호를 재입력", text: $passwordCheck)
+                                .focused($focusField, equals: .passwordCheck)
+                            Circle()
+                                .frame(width:10,height:10)
+                                .foregroundColor(checkPasswordLogic(password: password, checkPassword: passwordCheck) ? .green : .red)
+                        }
                     } header: {
                         SectionLabel(labelName: "비밀번호")
                     }
