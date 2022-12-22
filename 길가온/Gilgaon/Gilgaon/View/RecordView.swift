@@ -93,33 +93,3 @@ struct RecordView_Previews: PreviewProvider {
     }
 }
 
-struct MyPath3: Shape {
-    
-    func path(in rect: CGRect) -> Path {
-        
-        var path = Path()
-        
-        path.move(to: CGPoint(x: 20, y: 0))
-        path.addLine(to: CGPoint(x: 160, y: 0))
-        
-        path.move(to: CGPoint(x: 20, y: 3))
-        path.addLine(to: CGPoint(x: 160, y: 3))
-        
-        path.move(to: CGPoint(x: 20, y: 50))
-        path.addLine(to: CGPoint(x: 160, y: 50))
-        
-        path.move(to: CGPoint(x: 20, y: 53))
-        path.addLine(to: CGPoint(x: 160, y: 53))
-        
-        path.move(to: CGPoint(x: 40, y: 3))
-        path.addLine(to: CGPoint(x: 40, y: 50))
-        
-        path.move(to: CGPoint(x: 90, y: 3))
-        path.addLine(to: CGPoint(x: 90, y: 50))
-        
-        path.move(to: CGPoint(x: 140, y: 3))
-        path.addLine(to: CGPoint(x: 140, y: 50))
-        
-        return path
-    }
-}

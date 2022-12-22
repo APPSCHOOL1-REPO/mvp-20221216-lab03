@@ -20,14 +20,11 @@ struct CalendarView: View {
             Color("White")
                 .ignoresSafeArea()
 
-//            ScrollView(.vertical, showsIndicators: false) {
-
                 VStack(spacing: 20) {
                     CustomDataPicker(currentDate: currentDate, calID: $calID)
 
                 }
                 .padding(.vertical)
-//            }
         }
     }
 }

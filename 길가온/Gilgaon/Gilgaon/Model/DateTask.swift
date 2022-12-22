@@ -15,12 +15,6 @@ struct DateTask: Identifiable {
     var time: Date = Date()
 }
 
-//struct TaskMetaData: Identifiable {
-//    var id = UUID().uuidString
-//    var dateTask: DateTask
-//    var taskDate: Date
-//}
-
 class CalendarViewModel: ObservableObject,Identifiable {
     @Published var tasks: [DateTask]
     init() {
@@ -33,14 +27,10 @@ class CalendarModel {
     static var selectDayInfo: [DateTask] = []
 }
 
-
-
 func getSampleDate(offset: Int) -> Date {
     
     let calender = Calendar.current
-    
     let date = calender.date(byAdding: .day, value: offset, to: Date())
-    
     return date ?? Date()
     
 }
@@ -56,8 +46,6 @@ func DateType2String() -> [String]{
     formatter.timeZone = TimeZone(abbreviation: "KST")
     //형태 변환
     formatter.dateFormat = "yyyy MM dd"
-//    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-    
     
     let date = formatter.string(from: current)
 //    return date
