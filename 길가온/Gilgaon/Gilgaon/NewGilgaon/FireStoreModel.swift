@@ -20,12 +20,15 @@ struct FireStoreModel: Codable,Identifiable,Hashable {
 // [기록시작 -> 생성]
 struct DayCalendarModel: Identifiable{
     var id: String
+    var createdAt: [String]
     var taskDate: Date
     var createdAt: Double
     // 제목 : [서울여행]
     var title: String
     // 추후
     var shareFriend:[String]
+    var taskDate: Date
+    var realDate: Double
     var createdDate: String {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_kr")

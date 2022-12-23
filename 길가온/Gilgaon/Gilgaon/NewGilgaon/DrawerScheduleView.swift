@@ -12,6 +12,7 @@ struct DrawerScheduleView: View {
     @StateObject private var fireStoreViewModel = FireStoreViewModel()
     @State var isStart: Bool = false
     @State var isRecording: Bool = RecordingValue.isRecording
+    @State var currentDate = Date()
 //    @Binding var currentDate: Date
 //    @Binding var calID: [String]
     
@@ -41,7 +42,14 @@ struct DrawerScheduleView: View {
                         title = ""
                     })
                     Button("추가", action: {
+
+                        let createdAt = Date().timeIntervalSince1970
+                        //민호
+                        let calendar = DayCalendarModel(id: UUID().uuidString, createdAt: DateType2String(), title: title, shareFriend: [], taskDate: currentDate, realDate: createdAt)
+
+                        //세훈
                         let calendar = DayCalendarModel(id: UUID().uuidString, taskDate: Date(),createdAt: Date().timeIntervalSince1970, title: title, shareFriend: [])
+
                         fireStoreViewModel.addCalendar(calendar)
                         title = ""
                         
