@@ -49,6 +49,8 @@ struct MarkerModel: Identifiable, Equatable {
     var locationName: String
     var lat: String
     var lon: String
+    //
+    var shareFriend:[String]
     
     var coordinate:CLLocationCoordinate2D{
         CLLocationCoordinate2D(latitude: Double(self.lat)!, longitude: Double(self.lon)!)

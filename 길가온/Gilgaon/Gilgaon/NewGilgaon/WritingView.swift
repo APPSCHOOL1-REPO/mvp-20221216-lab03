@@ -11,7 +11,7 @@ import SwiftUI
 struct WritingView: View {
     @ObservedObject var firestoreViewModel:FireStoreViewModel
     
-//    @ObservedObject var jogakData: JogakData = JogakData()
+    //    @ObservedObject var jogakData: JogakData = JogakData()
     @EnvironmentObject var viewModel: SearchViewModel
     
     @State private var travelName2: String = ""
@@ -30,124 +30,120 @@ struct WritingView: View {
     @State private var image: UIImage?
     
     
-    
-    
     var body: some View {
         
         ZStack {
             Color("White")
                 .ignoresSafeArea()
-
-        VStack {
-              
-            ZStack(alignment: .leading) {
-                MyPath3()
-                    .stroke(Color("Pink"))
-                Text("꽃   갈   피")
-                    .font(.custom("NotoSerifKR-Bold", size: 30))
-                    .foregroundColor(Color("DarkGray"))
-                    .padding(.leading, 50)
-            }
-            .frame(height: 50)
-            .offset(y: -50)
             
-            VStack(spacing: 20) {
-                HStack {
-                    Button {
-                        showModal3.toggle()
-                    } label: {
-                        Label("함께", systemImage: "plus")
-                            .foregroundColor(Color("DarkGray"))
-                            .font(.custom("NotoSerifKR-SemiBold", size: 15))
-                    }
-                    .sheet(isPresented: $showModal3) {
-                        AddFriendView(fireStoreViewModel: firestoreViewModel)
-                            .presentationDetents([.medium])
-                    }
-                    Spacer()
-                    
-                    
-                }
+            VStack {
                 
-                HStack {
-                    if location != [] {
-                        
-                        Text("\(locationName)")
-                            .fontWeight(.semibold)
-                            .foregroundColor(Color("DarkGray"))
-                    } else {
+                ZStack(alignment: .leading) {
+                    MyPath3()
+                        .stroke(Color("Pink"))
+                    Text("꽃   갈   피")
+                        .font(.custom("NotoSerifKR-Bold", size: 30))
+                        .foregroundColor(Color("DarkGray"))
+                        .padding(.leading, 50)
+                }
+                .frame(height: 50)
+                .offset(y: -50)
+                
+                VStack(spacing: 20) {
+                    HStack {
                         Button {
-                            showModal2.toggle()
-                            //                            print(viewModel.center?.searchPoiInfo.pois.poi.count)
+                            showModal3.toggle()
                         } label: {
-                            HStack() {
-                                Image(systemName: "pin.fill")
-                                Text("위치")
-                                Text(locationName)
-                                    .foregroundColor(Color("Red"))
-                            }
-                            .foregroundColor(Color("DarkGray"))
-                            .font(.custom("NotoSerifKR-SemiBold", size: 15))
+                            Label("함께", systemImage: "plus")
+                                .foregroundColor(Color("DarkGray"))
+                                .font(.custom("NotoSerifKR-SemiBold", size: 15))
                         }
-                        .sheet(isPresented: $showModal2) {
-                            TestAPIView(lonString: $lonString, lanString: $lanString, locationName: $locationName)
+                        .sheet(isPresented: $showModal3) {
+                            AddMarkerFriendView(fireStoreViewModel: firestoreViewModel)
                                 .presentationDetents([.medium])
                         }
+                        Spacer()
+                        
+                        
                     }
-                    Spacer()
-                }
-            }
-            .padding()
-
-            VStack {
-                TextField("제목", text: $travelName2)
-                    .foregroundColor(Color("DarkGray"))
-                    .frame(width: 380)
-                    .font(.custom("NotoSerifKR-SemiBold", size: 15))
-                
-                Divider()
-                
-                TextField("내용", text: $travel)
-                    .foregroundColor(Color("DarkGray"))
-                    .frame(width: 380)
-                    .font(.custom("NotoSerifKR-SemiBold", size: 15))
-            }
-            .padding(.bottom, 200)
-            
-            VStack {
-                HStack {
-                    Text("사진을 추가해보세요.")
-                        .foregroundColor(Color("DarkGray"))
-                        .font(.custom("NotoSerifKR-SemiBold", size: 15))
-                    Spacer()
-                }
-                
-                HStack {
                     
-                    
-                    Button {
-                        shouldShowImagePicker.toggle()
-                    } label: {
-                        VStack {
-                            if let image = image{
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .frame(width: 100, height: 100)
-                                    .cornerRadius(15)
-                            } else {
-                                Image(systemName: "plus.app")
-                                    .resizable()
-                                    .frame(width: 40, height: 40)
-                                    .fontWeight(.light)
-                                    .foregroundColor(Color("DarkGray"))
+                    HStack {
+                        if location != [] {
+                            
+                            Text("\(locationName)")
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color("DarkGray"))
+                        } else {
+                            Button {
+                                showModal2.toggle()
+                                //                            print(viewModel.center?.searchPoiInfo.pois.poi.count)
+                            } label: {
+                                HStack() {
+                                    Image(systemName: "pin.fill")
+                                    Text("위치")
+                                    Text(locationName)
+                                        .foregroundColor(Color("Red"))
+                                }
+                                .foregroundColor(Color("DarkGray"))
+                                .font(.custom("NotoSerifKR-SemiBold", size: 15))
+                            }
+                            .sheet(isPresented: $showModal2) {
+                                TestAPIView(lonString: $lonString, lanString: $lanString, locationName: $locationName)
+                                    .presentationDetents([.medium])
                             }
                         }
+                        Spacer()
+                    }
+                }
+                .padding()
+                
+                VStack {
+                    TextField("제목", text: $travelName2)
+                        .foregroundColor(Color("DarkGray"))
+                        .frame(width: 380)
+                        .font(.custom("NotoSerifKR-SemiBold", size: 15))
+                    
+                    Divider()
+                    
+                    TextField("내용", text: $travel)
+                        .foregroundColor(Color("DarkGray"))
+                        .frame(width: 380)
+                        .font(.custom("NotoSerifKR-SemiBold", size: 15))
+                }
+                .padding(.bottom, 200)
+                
+                VStack {
+                    HStack {
+                        Text("사진을 추가해보세요.")
+                            .foregroundColor(Color("DarkGray"))
+                            .font(.custom("NotoSerifKR-SemiBold", size: 15))
+                        Spacer()
                     }
                     
-                    Spacer()
+                    HStack {
+                        Button {
+                            shouldShowImagePicker.toggle()
+                        } label: {
+                            VStack {
+                                if let image = image{
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .frame(width: 100, height: 100)
+                                        .cornerRadius(15)
+                                } else {
+                                    Image(systemName: "plus.app")
+                                        .resizable()
+                                        .frame(width: 40, height: 40)
+                                        .fontWeight(.light)
+                                        .foregroundColor(Color("DarkGray"))
+                                }
+                            }
+                        }
+                        
+                        Spacer()
+                    }
                 }
-            }
-            .padding()
+                .padding()
                 
                 Button {
                     let id = UUID().uuidString
@@ -157,7 +153,8 @@ struct WritingView: View {
                         photoId = UUID().uuidString
                         firestoreViewModel.uploadImageToStorage(userImage: image, photoId: photoId)
                     }
-                    let marker = MarkerModel(id: id, title: travelName2, photo: photoId, createdAt: createdAt, contents: travel, locationName: locationName, lat: lanString, lon: lonString)
+                    let marker = MarkerModel(id: id, title: travelName2, photo: photoId, createdAt: createdAt, contents: travel, locationName: locationName, lat: lanString, lon: lonString, shareFriend: [])
+                    
                     firestoreViewModel.addMarker(marker)
                     dismiss()
                 } label: {
