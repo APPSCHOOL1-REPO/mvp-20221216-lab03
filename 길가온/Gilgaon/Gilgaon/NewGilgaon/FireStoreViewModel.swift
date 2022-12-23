@@ -276,7 +276,7 @@ class FireStoreViewModel: ObservableObject {
     }
     
     // [마커 생성하기]
-    func addMarker(_ marker: MarkerModel){
+    @MainActor func addMarker(_ marker: MarkerModel){
         database
             .collection("User")
             .document(self.currentUserId!)
@@ -300,8 +300,10 @@ class FireStoreViewModel: ObservableObject {
     
     
     // [마커 가져오기]
-    func fetchMarkers(inputID: String) {
+    @MainActor
+    func fetchMarkers(inputID: String){
         print(#function)
+        print(inputID)
         database.collection("User")
             .document(self.currentUserId!)
             .collection("Calendar")
