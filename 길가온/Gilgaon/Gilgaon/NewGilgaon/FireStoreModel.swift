@@ -10,7 +10,6 @@ import MapKit
 // Collection User
 struct FireStoreModel: Codable,Identifiable,Hashable {
     var id: String //currentUser UID (Document ID)
-    
     // field 값들
     var nickName: String
     var userPhoto: String

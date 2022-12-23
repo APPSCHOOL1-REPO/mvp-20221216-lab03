@@ -33,6 +33,7 @@ struct OnboardingDescribeView: View {
                 .offset(x:200,y:-270)
                 .frame(width: 2000,height: 1300)
                 .opacity(0.6)
+                
        
             VStack(alignment: .center, spacing: 5) {
                 Spacer()

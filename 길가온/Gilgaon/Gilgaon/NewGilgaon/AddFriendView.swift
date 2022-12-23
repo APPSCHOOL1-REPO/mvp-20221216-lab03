@@ -10,15 +10,10 @@ import SwiftUI
 struct AddFriendView: View {
     @StateObject private var fireStoreViewModel: FireStoreViewModel = FireStoreViewModel()
     
-    
-    
     var body: some View {
         NavigationStack {
             VStack {
-                
-                
                 List {
-                    
                     ForEach(fireStoreViewModel.myFriendArray, id: \.self) { myFriend in
                         
                         HStack(alignment: .center) {
@@ -45,17 +40,14 @@ struct AddFriendView: View {
                                     .overlay(RoundedRectangle(cornerRadius: 30)
                                         .stroke(Color("Pink"), lineWidth: 3))
                             }
-                            
-                            
-                            
+                               
                             Text(myFriend.nickName)
                                 .font(.custom("NotoSerifKR-Regular",size:16))
                                 .bold()
                                 .padding(.leading, 20.0)
                             
                         }
-                        
-                        
+                    
                     }
                     .listRowBackground(
                         RoundedRectangle(cornerRadius: 20)
@@ -75,14 +67,12 @@ struct AddFriendView: View {
                 .scrollContentBackground(.hidden)
                 .background(Color("White"))
                 
-                
             }
             .onAppear {
                 fireStoreViewModel.fetchFriend()
             }
         }
         .toolbar {
-     
                 NavigationLink {
                     SearchUserView()
                 } label: {

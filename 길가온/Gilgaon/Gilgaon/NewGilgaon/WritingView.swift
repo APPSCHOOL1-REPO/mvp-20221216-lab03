@@ -37,7 +37,7 @@ struct WritingView: View {
         ZStack {
             Color("White")
                 .ignoresSafeArea()
-            
+
         VStack {
               
             ZStack(alignment: .leading) {
@@ -51,12 +51,11 @@ struct WritingView: View {
             .frame(height: 50)
             .offset(y: -50)
             
-            VStack {
+            VStack(spacing: 20) {
                 HStack {
                     Button {
                         showModal3.toggle()
                     } label: {
-                        
                         Label("함께", systemImage: "plus")
                             .foregroundColor(Color("DarkGray"))
                             .font(.custom("NotoSerifKR-SemiBold", size: 15))
@@ -82,6 +81,8 @@ struct WritingView: View {
                             HStack() {
                                 Image(systemName: "pin.fill")
                                 Text("위치")
+                                Text(locationName)
+                                    .foregroundColor(Color("Red"))
                             }
                             .foregroundColor(Color("DarkGray"))
                             .font(.custom("NotoSerifKR-SemiBold", size: 15))

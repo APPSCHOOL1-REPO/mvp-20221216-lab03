@@ -19,7 +19,7 @@ struct FlowerMapView: View {
     @ObservedObject var fireStoreViewModel: FireStoreViewModel
     @State private var mapRegion = MKCoordinateRegion()
     @State var userTracking = MapUserTrackingMode.follow
-    
+    @State var value = 0
     var body: some View {
         ZStack{
             Map(coordinateRegion: $vm.mapRegion,
@@ -36,8 +36,8 @@ struct FlowerMapView: View {
                             vm.showNextLocation(location: location)
                         }
                 }
-            }
-            )
+            })
+     
             VStack{
                 header
                     .padding()
@@ -67,6 +67,20 @@ struct FlowerMapView: View {
             .frame(width: 40, height: 40)
             .scaledToFit()
     }
+}
+
+extension MKCoordinateRegion: Equatable{
+    public static func == (lhs: MKCoordinateRegion, rhs: MKCoordinateRegion) -> Bool {
+        return lhs.center == rhs.center
+    }
+}
+
+extension CLLocationCoordinate2D:Equatable{
+    public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        return (lhs.latitude == rhs.latitude) && (lhs.latitude == lhs.longitude)
+    }
+    
+    
 }
 
 extension FlowerMapView {
