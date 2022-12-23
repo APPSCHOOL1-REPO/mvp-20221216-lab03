@@ -34,18 +34,19 @@ struct DrawerScheduleView: View {
                 }
                 .alert("기록을 시작합니다.", isPresented: $isStart, actions: {
                     TextField("꽃갈피 제목", text: $title)
+                        .font(.custom("NotoSerifKR-Regular",size:16))
                     Button("취소",role: .cancel,action: {
                         isRecording = false
                         RecordingValue.isRecording = isRecording
+                        title = ""
                     })
                     Button("추가", action: {
                         let calendar = DayCalendarModel(id: UUID().uuidString, taskDate: Date(),createdAt: Date().timeIntervalSince1970, title: title, shareFriend: [])
                         fireStoreViewModel.addCalendar(calendar)
+                        title = ""
                         
                     })
-                }//, message: {
-                 //   Text("여행 제목 입력해주세요")
-                //}
+                }
                 )
                 .font(.custom("NotoSerifKR-Regular",size:16))
                 

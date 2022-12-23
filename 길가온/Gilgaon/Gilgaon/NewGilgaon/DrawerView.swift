@@ -28,62 +28,57 @@ struct DrawerView: View {
                 
                 VStack {
                     
-                    HStack(spacing: 40) {
+                    
+                    HStack {
                         // profile Image
-                        if let url = fireStoreViewModel.profileUrlString,
-                           let imageUrl = URL(string: url) {
-                            AsyncImage(url: imageUrl) { image in
-                                image
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 110, height: 110)
-                                    .cornerRadius(64)
+                        VStack {
+                            if let url = fireStoreViewModel.profileUrlString,
+                               let imageUrl = URL(string: url) {
+                                AsyncImage(url: imageUrl) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 110, height: 110)
+                                        .cornerRadius(64)
+                                        .overlay(RoundedRectangle(cornerRadius: 64)
+                                            .stroke(Color("Pink"), lineWidth: 3))
+                                    
+                                } placeholder: {
+                                    
+                                }
+                            } else{
+                                Image(systemName: "person.fill")
+                                    .foregroundColor(Color("Pink"))
+                                    .font(.system(size: 64))
+                                    .padding()
                                     .overlay(RoundedRectangle(cornerRadius: 64)
-                                                        .stroke(Color("Pink"), lineWidth: 3))
-                            } placeholder: {
-                                
+                                        .stroke(Color("Pink"), lineWidth: 3))
                             }
-                        } else{
-                            Image(systemName: "person.fill")
-                                .foregroundColor(Color("Pink"))
-                                .font(.system(size: 64))
-                                .padding()
-                                .overlay(RoundedRectangle(cornerRadius: 64)
-                                                    .stroke(Color("Pink"), lineWidth: 3))
-                        }
                             
-                        
+                        }
+                        .offset(x: -65)
                         
                         VStack(alignment: .leading) {
                             Text(fireStoreViewModel.userNickName)
-                                .font(.custom("NotoSerifKR-Regular",size:30))
+                                .font(.custom("NotoSerifKR-Regular",size:25))
                                 .bold()
-                            //                        NavigationLink {
-                            //                            SearchUserView()
-                            //                        } label: {
-                            //                            Text("친구추가")
-                            //                                .font(.custom("NotoSerifKR-Regular",size:16))
-                            //                        }
-                            
-                            
+                                .padding(.bottom, 10)
+                        
                             NavigationLink {
                                 AddFriendView()
                             } label: {
                          
                                 Text("\(fireStoreViewModel.myFriendArray.count)명의 친구")
                                         .font(.custom("NotoSerifKR-Regular",size:16))
-         
                             }
                         }
-                        
-                        
+                        .offset(x: -30)
                     }
-                    .padding()
-                    .padding(.leading, -30.0)
+                   
                     
                     HStack {
                         ForEach(middleViewArray, id: \.self) { select in
-                            VStack {
+                            ZStack {
                                 Button {
                                     middleView = select
                                 } label: {
@@ -91,11 +86,15 @@ struct DrawerView: View {
                                         .foregroundColor(middleView == select ? Color("Pink") : Color("DarkGray"))
                                         .font(.custom("NotoSerifKR-Regular",size:16))
                                 }
+                                
+                                
                                 if middleView == select {
                                     Capsule()
                                         .foregroundColor(Color("Red"))
                                         .frame(height: 3)
+                                        .offset(y: 17)
                                 }
+                                  
                             }
                             .frame(width: 160)
                         }
@@ -108,6 +107,7 @@ struct DrawerView: View {
                         DrawerListView()
                     }
                 }
+                
                 GeometryReader { _ in
                     HStack {
                         Spacer()
