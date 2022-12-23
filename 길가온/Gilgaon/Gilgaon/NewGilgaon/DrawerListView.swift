@@ -18,7 +18,7 @@ struct DrawerListView: View {
             ScrollView {
                 VStack {
                     ForEach(firestoreViewModel.calendarList){ value in
-                        NavigationLink(destination: FlowerMapView(fireStoreViewModel: firestoreViewModel)) {
+                        NavigationLink(destination: FlowerMapView(fireStoreViewModel: firestoreViewModel,getStringValue: value.id)) {
                             taskCardView(task: value)
                         }
                     }
@@ -35,12 +35,10 @@ struct DrawerListView: View {
         
         HStack(alignment: .top, spacing: 30) {
             VStack {
-                
                 HStack(alignment: .top, spacing: 10) {
                     VStack(alignment: .leading, spacing: 12) {
                         Text(task.title)
                             .font(.custom("NotoSerifKR-Bold", size: 19))
-                        
                     }
                     .hLeading()
                     

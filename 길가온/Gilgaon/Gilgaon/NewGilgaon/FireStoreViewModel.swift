@@ -295,16 +295,17 @@ class FireStoreViewModel: ObservableObject {
                 "lon": marker.lon,
                 "sharedFriend": marker.shareFriend
             ])
-        fetchMarkers()
+        fetchMarkers(inputID: self.nowCalendarId)
     }
     
     
     // [마커 가져오기]
-    func fetchMarkers() {
+    func fetchMarkers(inputID: String) {
+        print(#function)
         database.collection("User")
             .document(self.currentUserId!)
             .collection("Calendar")
-            .document(self.nowCalendarId)
+            .document(inputID)
             .collection("Marker")
             .getDocuments { (snapshot, error) in
                 self.markerList.removeAll()
@@ -330,5 +331,6 @@ class FireStoreViewModel: ObservableObject {
                     }
                 }
             }
+        print("markerList:",self.markerList)
     }
 }

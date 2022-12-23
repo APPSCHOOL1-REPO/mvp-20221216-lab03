@@ -16,7 +16,8 @@ struct Place: Identifiable{
 
 struct FlowerMapView: View {
     @EnvironmentObject private var vm: LocationsViewModel
-    @ObservedObject var fireStoreViewModel: FireStoreViewModel
+    @ObservedObject var fireStoreViewModel : FireStoreViewModel
+    @State var getStringValue: String
     @State private var mapRegion = MKCoordinateRegion()
     @State var userTracking = MapUserTrackingMode.follow
     @State var value = 0
@@ -54,6 +55,9 @@ struct FlowerMapView: View {
             }
         }
         .onAppear{
+            Task {
+                fireStoreViewModel.fetchMarkers(inputID:getStringValue)
+            }
             vm.locations = fireStoreViewModel.markerList
             if !vm.locations.isEmpty{
                 vm.mapLocation = vm.locations.first!
