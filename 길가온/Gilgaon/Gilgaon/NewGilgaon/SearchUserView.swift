@@ -38,30 +38,86 @@ struct SearchUserView: View {
     
     var body: some View {
         
-        
-        List(getUser,id:\.self) {value in
-            
-            
-            Button {
-                firestore.addFriend(friend: value)
-                self.shouldBottomToastMessage = true
-            } label: {
-                Text(value.nickName)
-                    .font(.custom("NotoSerifKR-Regular",size:16))
-                    .bold()
+        ZStack {
+            if searchText.count < 0 {
+                ZStack {
+                    Color("White")
+                        .ignoresSafeArea()
+                }
+            } else { List {
+                ForEach(getUser,id:\.self) {value in
+                    
+                    HStack(alignment: .center) {
+                        
+                        if let url = firestore.profileUrlString,
+                           let imageUrl = URL(string: url) {
+                            AsyncImage(url: imageUrl) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 110, height: 110)
+                                    .cornerRadius(20)
+                                    .overlay(RoundedRectangle(cornerRadius: 30)
+                                        .stroke(Color("Pink"), lineWidth: 3))
+                            } placeholder: {
+                                
+                            }
+                        } else{
+                            Image(systemName: "person.fill")
+                                .foregroundColor(Color("Pink"))
+                                .font(.system(size: 20))
+                                .padding()
+                                .overlay(RoundedRectangle(cornerRadius: 30)
+                                    .stroke(Color("Pink"), lineWidth: 3))
+                        }
+                        
+                        Button {
+                            firestore.addFriend(friend: value)
+                            self.shouldBottomToastMessage = true
+                        } label: {
+                            Text(value.nickName)
+                                .foregroundColor(Color("DarkGray"))
+                                .font(.custom("NotoSerifKR-Regular",size:16))
+                                .bold()
+                        }
+                    }
+                }
+                .listRowBackground(
+                    RoundedRectangle(cornerRadius: 20)
+                        .background(.clear)
+                        .foregroundColor(Color("White"))
+                        .padding(
+                            EdgeInsets(
+                                top: 10,
+                                leading: 10,
+                                bottom: 10,
+                                trailing: 10
+                            )
+                        )
+                )
+                .listRowSeparator(.hidden)
+                
             }
-            
+            .scrollContentBackground(.hidden)
+            .background(Color("White"))
+            .popup(isPresented: $shouldBottomToastMessage , type: .floater(verticalPadding: 20), position: .bottom, animation: .spring(), autohideIn: 2, dragToDismiss: true, closeOnTap: true, closeOnTapOutside: true, view: {
+                self.createBottomToastMessage()
+            })
+                
+                
+                
+                
+            }
         }
-        .popup(isPresented: $shouldBottomToastMessage , type: .floater(verticalPadding: 20), position: .bottom, animation: .spring(), autohideIn: 2, dragToDismiss: true, closeOnTap: true, closeOnTapOutside: true, view: {
-            self.createBottomToastMessage()
-        })
-        
-        .searchable(
-            text: $searchText,
-            placement: .navigationBarDrawer,
-            prompt: "친구 검색"
-        )
+            .searchable(
+                text: $searchText,
+                placement: .navigationBarDrawer,
+                prompt: Text("친구 검색")
+            )
+            .font(.custom("NotoSerifKR-Regular",size:16))
+            .bold()
     }
+    
 }
 
 
