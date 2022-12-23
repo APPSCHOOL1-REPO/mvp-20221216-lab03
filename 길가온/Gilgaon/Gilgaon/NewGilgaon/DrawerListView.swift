@@ -8,34 +8,31 @@ import SwiftUI
 
 struct DrawerListView: View {
     @StateObject private var firestoreViewModel = FireStoreViewModel()
-   
+    
     var body: some View {
         
-        NavigationStack {
-            ZStack {
-                Color("White")
-                    .ignoresSafeArea()
-                ScrollView {
-                    VStack {
-                        ForEach(firestoreViewModel.calendarList){ value in
-                            
-//                            NavigationLink {
-//                                FlowerMapView(fireStoreViewModel: firestoreViewModel)
-//                            } label: {
-//                                taskCardView(task: value)
-//                            }
-                            NavigationLink(destination: FlowerMapView(fireStoreViewModel: firestoreViewModel)) {
-                                taskCardView(task: value)
-                            }
+        
+        ZStack {
+            Color("White")
+                .ignoresSafeArea()
+            ScrollView {
+                VStack {
+                    ForEach(firestoreViewModel.calendarList){ value in
+                        NavigationLink(destination: FlowerMapView(fireStoreViewModel: firestoreViewModel)) {
+                            taskCardView(task: value)
                         }
                     }
                 }
+                .padding()
+            }
+            .refreshable {
+                firestoreViewModel.fetchDayCalendar()
             }
         }
         .onAppear{
             firestoreViewModel.fetchDayCalendar()
         }
- }
+    }
     
     func taskCardView(task: DayCalendarModel) -> some View {
         
@@ -50,7 +47,7 @@ struct DrawerListView: View {
                     }
                     .hLeading()
                     
-//                    Text(task.taskDate.formatted(date: .omitted, time: .shortened))
+                    //                    Text(task.taskDate.formatted(date: .omitted, time: .shortened))
                     ForEach(task.createdAt,id:\.self) {value in
                         Text(value)
                     }
@@ -68,8 +65,8 @@ struct DrawerListView: View {
                                 .frame(width: 45, height: 45)
                                 .clipShape(Circle())
                                 .background(
-                                Circle()
-                                    .stroke(Color("DarkGray"), lineWidth: 2)
+                                    Circle()
+                                        .stroke(Color("DarkGray"), lineWidth: 2)
                                 )
                             
                         }
@@ -83,9 +80,9 @@ struct DrawerListView: View {
             .padding()
             .hLeading()
             .background(
-            Color("Pink")
-                .cornerRadius(25)
-                .opacity(0.4)
+                Color("Pink")
+                    .cornerRadius(25)
+                    .opacity(0.4)
             )
         }
         .hLeading()

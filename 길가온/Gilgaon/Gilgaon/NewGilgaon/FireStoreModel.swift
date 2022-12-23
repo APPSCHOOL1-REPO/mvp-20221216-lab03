@@ -21,7 +21,7 @@ struct FireStoreModel: Codable,Identifiable,Hashable {
 struct DayCalendarModel: Identifiable{
     var id: String
     var taskDate: Date
-    var createdAt: [String]
+    var createdAt: String
     // 제목 : [서울여행]
     var title: String
     // 추후

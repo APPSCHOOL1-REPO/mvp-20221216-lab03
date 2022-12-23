@@ -214,6 +214,7 @@ class FireStoreViewModel: ObservableObject {
             .collection("User")
             .document(self.currentUserId!)
             .collection("Calendar")
+            .order(by: "createdAt", descending: true)
             .getDocuments { (snapshot, error) in
                 self.calendarList.removeAll()
                 if let snapshot{
