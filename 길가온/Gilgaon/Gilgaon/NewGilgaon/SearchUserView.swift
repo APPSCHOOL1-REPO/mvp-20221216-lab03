@@ -10,7 +10,7 @@ import PopupView
 
 struct SearchUserView: View {
     @State private var user: [String] = ["김민호","전준수","정세훈","한주희"]
-    @EnvironmentObject private var firestore: FireStoreViewModel
+    @StateObject private var firestore: FireStoreViewModel = FireStoreViewModel()
     @State private var searchText: String = ""
     @State var shouldBottomToastMessage : Bool = false
     @State var shouldPopupMessage : Bool = false
@@ -51,8 +51,8 @@ struct SearchUserView: View {
                                 image
                                     .resizable()
                                     .scaledToFill()
-                                    .frame(width: 110, height: 110)
-                                    .cornerRadius(20)
+                                    .frame(width: 55, height: 55)
+                                    .cornerRadius(28)
                                     .overlay(RoundedRectangle(cornerRadius: 30)
                                         .stroke(Color("Pink"), lineWidth: 3))
                             } placeholder: {
@@ -77,6 +77,10 @@ struct SearchUserView: View {
                                 .bold()
                         }
                     }
+                    .onAppear{
+                        firestore.fetchImageUrl()
+                    }
+
                 }
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 20)

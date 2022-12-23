@@ -25,8 +25,8 @@ struct AddFriendView: View {
                                         image
                                             .resizable()
                                             .scaledToFill()
-                                            .frame(width: 110, height: 110)
-                                            .cornerRadius(55)
+                                            .frame(width: 55, height: 55)
+                                            .cornerRadius(28)
                                             .overlay(RoundedRectangle(cornerRadius: 55)
                                                 .stroke(Color("Pink"), lineWidth: 3))
                                     } placeholder: {
