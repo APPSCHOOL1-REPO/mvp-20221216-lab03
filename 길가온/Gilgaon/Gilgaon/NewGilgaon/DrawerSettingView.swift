@@ -17,8 +17,8 @@ struct DrawerSettingView: View {
         VStack {
             
             Text("설정")
-                .font(.title)
                 .foregroundColor(Color("DarkGray"))
+                .font(.custom("NotoSerifKR-Bold", size: 30))
             
             Divider()
                 .frame(width: 140, height: 2)
@@ -30,7 +30,11 @@ struct DrawerSettingView: View {
             } label: {
                 Text("로그아웃")
                     .foregroundColor(Color("DarkGray"))
+                    .font(.custom("NotoSerifKR-Regular",size:16))
+                    
             }
+            .padding()
+            
             Spacer()
         }
         .padding(32)

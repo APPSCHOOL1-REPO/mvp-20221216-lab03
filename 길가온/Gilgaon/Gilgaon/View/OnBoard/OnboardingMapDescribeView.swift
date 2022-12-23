@@ -41,10 +41,10 @@ struct OnboardingMapDescribeView: View {
                             .offset(y:50)
                     }
                     .padding(.bottom,50)
-                    Text("“꽃갈피”")
+                    Text("“꽃갈피”란?")
                       .kerning(-0.5)
                       .font(.custom("NotoSerifKR-SemiBold",size:25))
-                      .foregroundColor(Color("Pink")) + Text("로 지나온 동선에 ")
+                      .foregroundColor(Color("Pink")) + Text(" 지나온 동선에 ")
                       .kerning(-0.5)
                       .foregroundColor(Color("DarkGray"))
                       .font(.custom("NotoSerifKR-Light",size:25))
@@ -52,7 +52,7 @@ struct OnboardingMapDescribeView: View {
                       
     
                     
-                    Text("특별한 기록을 남기세요.")
+                    Text("특별한 기록을 남겨주는 말입니다.")
                         .padding(.top,5)
                         .kerning(-0.5)
                         

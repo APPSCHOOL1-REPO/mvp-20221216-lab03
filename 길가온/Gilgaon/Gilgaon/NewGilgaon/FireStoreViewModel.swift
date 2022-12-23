@@ -10,6 +10,7 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
 
+
 class FireStoreViewModel: ObservableObject {
     
     @Published var users: [FireStoreModel] = []
@@ -17,6 +18,8 @@ class FireStoreViewModel: ObservableObject {
     @Published var markerList: [MarkerModel] = []
     @Published var myFriendArray: [FriendModel] = []
     @Published var calendarList:[DayCalendarModel] = []
+    //[마커ㅎ
+    @Published var sharedFriendList:[FriendModel] = []
     @Published var isRecording: Bool = false
     @Published var profileUrlString: String?
     
@@ -35,6 +38,20 @@ class FireStoreViewModel: ObservableObject {
         ref.downloadURL { url, err in
             if let err = err { return }
             print(url?.absoluteString)
+        }
+    }
+    
+    
+    func fetchFriendImageUrl(){
+        let storage = Storage.storage()
+        guard !myFriendArray.isEmpty else {return}
+        self.myFriendArray.forEach { friend in
+            let pathReference = storage.reference(withPath: friend.id)
+            pathReference.downloadURL { url, error in
+                if let error = error {
+                    print(error)
+                }
+            }
         }
     }
     
@@ -113,7 +130,9 @@ class FireStoreViewModel: ObservableObject {
             .document(self.currentUserId!)
             .collection("Friend")
             .document(friend.id)
-            .setData(["id": friend.id, "nickName": friend.nickName, "userPhoto": friend.userPhoto,
+            .setData(["id": friend.id,
+                      "nickName": friend.nickName,
+                      "userPhoto": friend.userPhoto,
                       "userEmail": friend.userEmail])
     }
     
@@ -131,11 +150,11 @@ class FireStoreViewModel: ObservableObject {
     
     
     //사용자의 로그인 정보를 추가하는 함수
-    func addUser(user: FireStoreModel){
+    func addUser(user: FireStoreModel, photoId: String){
         database
             .collection("User") //
             .document(user.id)
-            .setData(["id": user.id, "nickName": user.nickName, "userPhoto": user.userPhoto,
+            .setData(["id": user.id, "nickName": user.nickName, "userPhoto": photoId,
                       "userEmail": user.userEmail])
     }
     
@@ -187,7 +206,28 @@ class FireStoreViewModel: ObservableObject {
             }
     }
     
-    
+    func persisImageToStorage(user:FireStoreModel, userImage: UIImage) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        print("uid성공!")
+        let ref = Storage.storage().reference(withPath: uid)
+        guard let imageData = userImage.jpegData(compressionQuality: 0.5) else { return }
+        ref.putData(imageData, metadata: nil) { metadata, err in
+            if let err = err {
+                print("풋실패\(err)")
+                return
+            }
+            ref.downloadURL { url, err in
+                if let err = err {
+                    print("다운실패\(err)")
+                    return }
+                if let url = url    {
+                    self.addUser(user: user,photoId: url.absoluteString)
+                    PhotoId.photoUrl = url.absoluteString
+                    print(url.absoluteString)
+                }
+            }
+        }
+    }
     // [서랍 doc생성]
     func addCalendar(_ calendar: DayCalendarModel){
         database
@@ -215,13 +255,14 @@ class FireStoreViewModel: ObservableObject {
             .collection("User")
             .document(self.currentUserId!)
             .collection("Calendar")
+            .order(by: "createdAt", descending: true)
             .getDocuments { (snapshot, error) in
                 self.calendarList.removeAll()
                 if let snapshot{
                     for document in snapshot.documents{
                         let id = document.documentID
                         let docData = document.data()
-                        let createdAt = docData["createdAt"] as? [String] ?? []
+                        let createdAt = docData["createdAt"] as? Double ?? 0
                         let title = docData["title"] as? String ?? ""
                         let shareFriend = docData["shareFriend"] as? [String] ?? []
                         let taskDate = docData["taskDate"] as? Date ?? Date()
@@ -252,7 +293,8 @@ class FireStoreViewModel: ObservableObject {
                 "contents": marker.contents,
                 "locationName": marker.locationName,
                 "lat": marker.lat,
-                "lon": marker.lon
+                "lon": marker.lon,
+                "sharedFriend": marker.shareFriend
             ])
         fetchMarkers()
     }
@@ -280,8 +322,9 @@ class FireStoreViewModel: ObservableObject {
                         let locationName: String = docData["locationName"] as? String ?? ""
                         let lat: String = docData["lat"] as? String ?? ""
                         let lon: String = docData["lon"] as? String ?? ""
+                        let sharedFriend:[String] = docData["sharedFriend"] as? [String] ?? []
                         
-                        let marker: MarkerModel = MarkerModel(id: id, title: title, photo: photo, createdAt: createdAt, contents: contents, locationName: locationName, lat: lat, lon: lon)
+                        let marker: MarkerModel = MarkerModel(id: id, title: title, photo: photo, createdAt: createdAt, contents: contents, locationName: locationName, lat: lat, lon: lon, shareFriend: sharedFriend)
                         
                         self.markerList.append(marker)
                         LocationsDataService.locations = self.markerList

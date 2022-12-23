@@ -49,9 +49,9 @@ final class RegisterModel: ObservableObject {
             self.isError = false
             print(user.uid)
             userUID = user.uid
-            if let userImage = userImage {
-                persisImageToStorage(userImage: userImage)
-            }
+//            if let userImage = userImage {
+//                persisImageToStorage(userImage: userImage)
+//            }
         }
         
         catch {
@@ -82,13 +82,17 @@ final class RegisterModel: ObservableObject {
                 return
             }
         }
+        
         ref.downloadURL { url, err in
             if let err = err {
                 self.DetailError = "Failed to retrieve downloadURL: \(err)"
                 return
             }
-            self.DetailError = "Successfully stored image wioth url: \(url?.absoluteString ?? "")"
-            print(url?.absoluteString)
+            if let url = url{
+                self.DetailError = "Successfully stored image wioth url: \(url.absoluteString ?? "")"
+                print(url.absoluteString)
+            }
+            
         }
         
     }
@@ -114,7 +118,9 @@ final class RegisterModel: ObservableObject {
     // 로그아웃
     func logout() {
         currentUser = nil
+        PhotoId.photoUrl = ""
         try? Auth.auth().signOut()
+        
     }
 }
 

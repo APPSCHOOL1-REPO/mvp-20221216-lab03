@@ -32,3 +32,12 @@ struct PleaseLoginView_Previews: PreviewProvider {
         PleaseLoginView().environmentObject(RegisterModel())
     }
 }
+
+extension UINavigationController {
+
+  open override func viewWillLayoutSubviews() {
+    super.viewWillLayoutSubviews()
+    navigationBar.topItem?.backButtonDisplayMode = .minimal
+  }
+
+}
