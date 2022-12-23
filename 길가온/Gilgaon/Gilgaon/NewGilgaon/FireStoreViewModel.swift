@@ -221,7 +221,7 @@ class FireStoreViewModel: ObservableObject {
                     for document in snapshot.documents{
                         let id = document.documentID
                         let docData = document.data()
-                        let createdAt = docData["createdAt"] as? [String] ?? []
+                        let createdAt = docData["createdAt"] as? Double ?? 0
                         let title = docData["title"] as? String ?? ""
                         let shareFriend = docData["shareFriend"] as? [String] ?? []
                         let taskDate = docData["taskDate"] as? Date ?? Date()

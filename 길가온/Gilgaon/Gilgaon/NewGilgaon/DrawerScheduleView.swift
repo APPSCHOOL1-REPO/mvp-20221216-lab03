@@ -39,7 +39,7 @@ struct DrawerScheduleView: View {
                         RecordingValue.isRecording = isRecording
                     })
                     Button("추가", action: {
-                        let calendar = DayCalendarModel(id: UUID().uuidString,taskDate: Date(),createdAt: DateType2String(), title: title, shareFriend: [])
+                        let calendar = DayCalendarModel(id: UUID().uuidString, taskDate: Date(),createdAt: Date().timeIntervalSince1970, title: title, shareFriend: [])
                         fireStoreViewModel.addCalendar(calendar)
                         
                     })

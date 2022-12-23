@@ -25,9 +25,6 @@ struct DrawerListView: View {
                 }
                 .padding()
             }
-            .refreshable {
-                firestoreViewModel.fetchDayCalendar()
-            }
         }
         .onAppear{
             firestoreViewModel.fetchDayCalendar()
@@ -48,9 +45,10 @@ struct DrawerListView: View {
                     .hLeading()
                     
                     //                    Text(task.taskDate.formatted(date: .omitted, time: .shortened))
-                    ForEach(task.createdAt,id:\.self) {value in
-                        Text(value)
-                    }
+//                    ForEach(task.createdAt,id:\.self) {value in
+//                        Text(value)
+//                    }
+                    
                 }
                 
                 HStack(spacing: 0) {

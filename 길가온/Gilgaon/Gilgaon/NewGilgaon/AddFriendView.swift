@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddFriendView: View {
-    @StateObject private var fireStoreViewModel: FireStoreViewModel = FireStoreViewModel()
+    @StateObject  var fireStoreViewModel: FireStoreViewModel = FireStoreViewModel()
     
     var body: some View {
         NavigationStack {

@@ -61,10 +61,12 @@ struct WritingView: View {
                             .font(.custom("NotoSerifKR-SemiBold", size: 15))
                     }
                     .sheet(isPresented: $showModal3) {
-                        AddFriendView()
+                        AddFriendView(fireStoreViewModel: firestoreViewModel)
                             .presentationDetents([.medium])
                     }
                     Spacer()
+                    
+                    
                 }
                 
                 HStack {

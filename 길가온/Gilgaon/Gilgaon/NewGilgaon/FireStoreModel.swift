@@ -21,11 +21,22 @@ struct FireStoreModel: Codable,Identifiable,Hashable {
 struct DayCalendarModel: Identifiable{
     var id: String
     var taskDate: Date
-    var createdAt: String
+    var createdAt: Double
     // 제목 : [서울여행]
     var title: String
     // 추후
     var shareFriend:[String]
+    var createdDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_kr")
+        dateFormatter.timeZone = TimeZone(abbreviation: "KST")
+        dateFormatter.dateFormat = "yyyy-MM-dd" // "yyyy-MM-dd HH:mm:ss"
+        
+        let dateCreatedAt = Date(timeIntervalSince1970: createdAt)
+        print(dateCreatedAt)
+        print(Date().timeIntervalSince1970)
+        return dateFormatter.string(from: dateCreatedAt)
+    }
 }
 
 // [마커 Data]
