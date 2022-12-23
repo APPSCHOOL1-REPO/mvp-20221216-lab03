@@ -18,7 +18,7 @@ struct FireStoreModel: Codable,Identifiable,Hashable {
 }
 
 // [기록시작 -> 생성]
-struct DayCalendarModel: Identifiable{
+struct DayCalendarModel: Identifiable,Hashable{
     var id: String
     var taskDate: Date
     // 제목 : [서울여행]

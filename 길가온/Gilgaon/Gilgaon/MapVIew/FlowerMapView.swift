@@ -4,6 +4,15 @@
 //
 //  Created by sehooon on 2022/11/30.
 //
+/*
+12_23(금) 김민호
+발견된 문제점: [서랍]에 쌓인 기록들을 클릭하면 배열이 한박자 늦게 받아짐
+1.사용자가 클릭시
+2.배열을 받을때까지 기다리고
+3.맵뷰를 보여주는 순서를 해결하면 될 듯
+ async await 공부하러가야딩...
+ */
+
 
 import SwiftUI
 import MapKit
@@ -16,7 +25,8 @@ struct Place: Identifiable{
 
 struct FlowerMapView: View {
     @EnvironmentObject private var vm: LocationsViewModel
-    @ObservedObject var fireStoreViewModel: FireStoreViewModel
+    @ObservedObject var fireStoreViewModel : FireStoreViewModel
+    @State var getStringValue: String
     @State private var mapRegion = MKCoordinateRegion()
     @State var userTracking = MapUserTrackingMode.follow
     @State var value = 0
@@ -54,10 +64,14 @@ struct FlowerMapView: View {
             }
         }
         .onAppear{
-            vm.locations = fireStoreViewModel.markerList
-            if !vm.locations.isEmpty{
-                vm.mapLocation = vm.locations.first!
+            Task {
+            try! await fireStoreViewModel.fetchMarkers(inputID:getStringValue)
+                vm.locations = fireStoreViewModel.markerList
+                if !vm.locations.isEmpty{
+                    vm.mapLocation = vm.locations.first!
+                }
             }
+
         }
     }
     
