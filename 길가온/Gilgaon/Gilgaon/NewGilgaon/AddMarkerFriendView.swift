@@ -10,30 +10,46 @@ import SwiftUI
 struct AddMarkerFriendView: View {
     @ObservedObject var fireStoreViewModel: FireStoreViewModel = FireStoreViewModel()
     var body: some View {
-        VStack{
-            ForEach(fireStoreViewModel.myFriendArray) {  friend in
-                HStack{
-                    if let urlString = friend.userPhoto,
-                       let imageUrl = URL(string: urlString){
-                        AsyncImage(url: imageUrl) { image in
-                            image
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 110, height: 110)
-                                .cornerRadius(55)
-                                .overlay(RoundedRectangle(cornerRadius: 55)
-                                    .stroke(Color("Pink"), lineWidth: 3))
-                        } placeholder: { }
-                    }else{
-                        Image(systemName: "person.fill")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 110, height: 110)
-                            .cornerRadius(55)
-                            .overlay(RoundedRectangle(cornerRadius: 55)
-                                .stroke(Color("Pink"), lineWidth: 3))
+        
+        ZStack {
+            
+            Color("White")
+            
+            LazyVStack {
+                ForEach(fireStoreViewModel.myFriendArray) {  friend in
+                    
+                    Button {
+                        
+                    } label: {
+                        HStack {
+                            Spacer()
+                            if let urlString = friend.userPhoto,
+                               let imageUrl = URL(string: urlString){
+                                AsyncImage(url: imageUrl) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 55, height: 55)
+                                        .cornerRadius(55)
+                                        .overlay(RoundedRectangle(cornerRadius: 55)
+                                            .stroke(Color("Pink"), lineWidth: 3))
+                                } placeholder: { }
+                            }else{
+                                Image(systemName: "person.fill")
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 55, height: 55)
+                                    .cornerRadius(55)
+                                    .overlay(RoundedRectangle(cornerRadius: 55)
+                                        .stroke(Color("Pink"), lineWidth: 3))
+                            }
+                            Spacer()
+                            Text(friend.nickName)
+                                .foregroundColor(Color("DarkGray"))
+                                .font(.custom("NotoSerifKR-Regular",size: 16))
+                            Spacer()
+                        }
                     }
-                    Text(friend.nickName)
                 }
             }
         }
