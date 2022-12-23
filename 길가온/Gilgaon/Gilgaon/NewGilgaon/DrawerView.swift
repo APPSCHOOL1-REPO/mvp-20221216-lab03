@@ -134,6 +134,7 @@ struct DrawerView: View {
         }
         .onAppear{
             fireStoreViewModel.fetchImageUrl()
+                    fireStoreViewModel.fetchFriend()
         }
     }
 }
