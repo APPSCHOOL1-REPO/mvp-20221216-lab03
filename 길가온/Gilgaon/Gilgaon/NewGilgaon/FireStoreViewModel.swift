@@ -199,7 +199,8 @@ class FireStoreViewModel: ObservableObject {
                 "id": calendar.id,
                 "createdAt": calendar.createdAt,
                 "title": calendar.title,
-                "shareFriend": calendar.shareFriend
+                "shareFriend": calendar.shareFriend,
+                "realDate": calendar.realDate
             ])
         
         self.nowCalendarId = calendar.id
@@ -224,8 +225,10 @@ class FireStoreViewModel: ObservableObject {
                         let title = docData["title"] as? String ?? ""
                         let shareFriend = docData["shareFriend"] as? [String] ?? []
                         let taskDate = docData["taskDate"] as? Date ?? Date()
-                        let calendarData = DayCalendarModel(id: id, taskDate: Date(), createdAt: createdAt, title: title, shareFriend: shareFriend)
-                        
+                        let realDate = docData["realDate"] as? Double ?? 0.0
+                        print("realDate: \(realDate)")
+                        let calendarData = DayCalendarModel(id: id, createdAt: createdAt, title: title, shareFriend: shareFriend, taskDate: taskDate, realDate: realDate)
+                        print(calendarData)
                         self.calendarList.append(calendarData)
                     }
                 }

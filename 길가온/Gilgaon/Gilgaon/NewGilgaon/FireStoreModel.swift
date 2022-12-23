@@ -20,12 +20,13 @@ struct FireStoreModel: Codable,Identifiable,Hashable {
 // [기록시작 -> 생성]
 struct DayCalendarModel: Identifiable{
     var id: String
-    var taskDate: Date
     var createdAt: [String]
     // 제목 : [서울여행]
     var title: String
     // 추후
     var shareFriend:[String]
+    var taskDate: Date
+    var realDate: Double
 }
 
 // [마커 Data]

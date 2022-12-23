@@ -95,12 +95,15 @@ struct CustomDataPicker: View {
                                         )
                                         .onTapGesture {
                                             currentDate = value.date
-                                            calID = extraDate()
+//                                            print(value.date)
+                                            let createdAt = value.date.timeIntervalSince1970
                                         }
                                 }
                             }
                             .onAppear {
-                                fireStoreModel.fetchDayCalendar()
+                                Task {
+                                    try! await fireStoreModel.fetchDayCalendar()
+                                }
                             }
                         }
                         .offset(y: 20)
@@ -120,22 +123,22 @@ struct CustomDataPicker: View {
     
     @ViewBuilder
     func CardView(value: DateVaule) -> some View {
-        
         VStack {
             if value.day != -1 {
                 if let dateTask = fireStoreModel.calendarList.first(where: { task1 in
-                    return isSameDay(date1: task1.taskDate, date2: value.date)
+                    return isSameDay(date1: Date(timeIntervalSince1970: task1.realDate), date2: Date(timeIntervalSince1970: value.date.timeIntervalSince1970))
+                    
                 })
                 {
                     Text("\(value.day)")
                         .font(.custom("NotoSerifKR-SemiBold", size: 20))
-                        .foregroundColor(isSameDay(date1: dateTask.taskDate, date2: currentDate) ? Color("White") : Color("DarkGray"))
+                        .foregroundColor(isSameDay(date1: Date(timeIntervalSince1970: dateTask.realDate), date2: currentDate) ? Color("White") : Color("DarkGray"))
                         .frame(maxWidth: .infinity)
                     
                     Spacer()
                     
                     Circle()
-                        .fill(isSameDay(date1: dateTask.taskDate, date2: currentDate) ? Color("White") : Color("Pink"))
+                        .fill(isSameDay(date1: Date(timeIntervalSince1970: dateTask.realDate), date2: currentDate) ? Color("White") : Color("Pink"))
                         .frame(width: 8, height: 8)
                 }
                 else {
