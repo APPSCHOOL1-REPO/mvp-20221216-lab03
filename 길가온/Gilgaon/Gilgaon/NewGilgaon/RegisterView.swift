@@ -160,7 +160,11 @@ struct RegisterView: View {
                         Task {
                             try! await registerModel.registerUser(userID: userEmail, userPW: password, userImage: image)
                             if registerModel.userUID != "" {
-                                try! await fireStoreViewModel.addUser(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: "", userEmail: userEmail))
+                                if image != nil{
+                                    fireStoreViewModel.persisImageToStorage(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: PhotoId.photoUrl, userEmail: userEmail),userImage: image! )
+                                } else{
+                                    fireStoreViewModel.addUser(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: PhotoId.photoUrl, userEmail: userEmail),photoId: "")
+                                }   
                             }
                             if !registerModel.isError {
                                 dismiss()

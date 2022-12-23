@@ -11,3 +11,7 @@ class RecordingValue{
     static var isRecording: Bool = false
     
 }
+
+class PhotoId{
+    static var photoUrl: String = ""
+}

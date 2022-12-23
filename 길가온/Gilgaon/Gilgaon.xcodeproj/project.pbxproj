@@ -39,6 +39,7 @@
 		16FA82C6293903BC006129D3 /* InviteFriendLottie.json in Resources */ = {isa = PBXBuildFile; fileRef = 16FA82C5293903BC006129D3 /* InviteFriendLottie.json */; };
 		16FA82C8293906A6006129D3 /* PopupTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16FA82C7293906A6006129D3 /* PopupTest.swift */; };
 		16FA82CB293906BA006129D3 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 16FA82CA293906BA006129D3 /* PopupView */; };
+		362A085129557CC500C582B4 /* AddMarkerFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362A085029557CC500C582B4 /* AddMarkerFriendView.swift */; };
 		362DC67429389FD100507017 /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 362DC67329389FD100507017 /* LocationFetcher.swift */; };
 		3663C67129386372006880C9 /* LocationListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C67029386372006880C9 /* LocationListView.swift */; };
 		3663C67329386383006880C9 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C67229386383006880C9 /* Location.swift */; };
@@ -116,6 +117,7 @@
 		16F69DB429387E030045CD91 /* GilgaonRequestPermissonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GilgaonRequestPermissonView.swift; sourceTree = "<group>"; };
 		16FA82C5293903BC006129D3 /* InviteFriendLottie.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = InviteFriendLottie.json; sourceTree = "<group>"; };
 		16FA82C7293906A6006129D3 /* PopupTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupTest.swift; sourceTree = "<group>"; };
+		362A085029557CC500C582B4 /* AddMarkerFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMarkerFriendView.swift; sourceTree = "<group>"; };
 		362DC67329389FD100507017 /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
 		3663C67029386372006880C9 /* LocationListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListView.swift; sourceTree = "<group>"; };
 		3663C67229386383006880C9 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				36BB028A29518BD300CF2816 /* WritingView.swift */,
 				16EE2F672951885A00414279 /* SearchUserView.swift */,
 				369484C12952E1960030890A /* Util.swift */,
+				362A085029557CC500C582B4 /* AddMarkerFriendView.swift */,
 			);
 			path = NewGilgaon;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				16F69DB529387E030045CD91 /* OnboardingDescribeView.swift in Sources */,
 				3663C67B293863D4006880C9 /* LocationDataService.swift in Sources */,
 				3663C67329386383006880C9 /* Location.swift in Sources */,
+				362A085129557CC500C582B4 /* AddMarkerFriendView.swift in Sources */,
 				63660F522937573500B70272 /* Customtoggle.swift in Sources */,
 				3663C677293863B1006880C9 /* FlowerMapPreviewView.swift in Sources */,
 				635AE3A329360793008A8452 /* CustomDataPicker.swift in Sources */,

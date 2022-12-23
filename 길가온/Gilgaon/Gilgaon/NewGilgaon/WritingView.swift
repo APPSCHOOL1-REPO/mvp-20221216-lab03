@@ -29,8 +29,6 @@ struct WritingView: View {
     @State private var image: UIImage?
     
     
-    
-    
     var body: some View {
         
         ZStack {
@@ -60,7 +58,7 @@ struct WritingView: View {
                                 .font(.custom("NotoSerifKR-SemiBold", size: 15))
                         }
                         .sheet(isPresented: $showModal3) {
-                            AddFriendView(fireStoreViewModel: firestoreViewModel)
+                            AddMarkerFriendView(fireStoreViewModel: firestoreViewModel)
                                 .presentationDetents([.medium])
                         }
                         Spacer()
@@ -148,7 +146,8 @@ struct WritingView: View {
                         photoId = UUID().uuidString
                         firestoreViewModel.uploadImageToStorage(userImage: image, photoId: photoId)
                     }
-                    let marker = MarkerModel(id: id, title: travelName2, photo: photoId, createdAt: createdAt, contents: travel, locationName: locationName, lat: lanString, lon: lonString)
+                    let marker = MarkerModel(id: id, title: travelName2, photo: photoId, createdAt: createdAt, contents: travel, locationName: locationName, lat: lanString, lon: lonString, shareFriend: [])
+                    
                     firestoreViewModel.addMarker(marker)
                     dismiss()
                 } label: {
