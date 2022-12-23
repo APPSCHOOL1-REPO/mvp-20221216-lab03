@@ -45,10 +45,10 @@ struct DrawerScheduleView: View {
 
                         let createdAt = Date().timeIntervalSince1970
                         //민호
-                        let calendar = DayCalendarModel(id: UUID().uuidString, createdAt: DateType2String(), title: title, shareFriend: [], taskDate: currentDate, realDate: createdAt)
+                        let calendar = DayCalendarModel(id: UUID().uuidString, taskDate: currentDate, title: title, shareFriend: [], realDate: createdAt)
 
                         //세훈
-                        let calendar = DayCalendarModel(id: UUID().uuidString, taskDate: Date(),createdAt: Date().timeIntervalSince1970, title: title, shareFriend: [])
+//                        let calendar = DayCalendarModel(id: UUID().uuidString, taskDate: Date(),createdAt: Date().timeIntervalSince1970, title: title, shareFriend: [])
 
                         fireStoreViewModel.addCalendar(calendar)
                         title = ""

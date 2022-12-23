@@ -20,14 +20,11 @@ struct FireStoreModel: Codable,Identifiable,Hashable {
 // [기록시작 -> 생성]
 struct DayCalendarModel: Identifiable{
     var id: String
-    var createdAt: [String]
     var taskDate: Date
-    var createdAt: Double
     // 제목 : [서울여행]
     var title: String
     // 추후
     var shareFriend:[String]
-    var taskDate: Date
     var realDate: Double
     var createdDate: String {
         let dateFormatter = DateFormatter()
@@ -35,7 +32,7 @@ struct DayCalendarModel: Identifiable{
         dateFormatter.timeZone = TimeZone(abbreviation: "KST")
         dateFormatter.dateFormat = "yyyy-MM-dd" // "yyyy-MM-dd HH:mm:ss"
         
-        let dateCreatedAt = Date(timeIntervalSince1970: createdAt)
+        let dateCreatedAt = Date(timeIntervalSince1970: realDate)
         print(dateCreatedAt)
         print(Date().timeIntervalSince1970)
         return dateFormatter.string(from: dateCreatedAt)

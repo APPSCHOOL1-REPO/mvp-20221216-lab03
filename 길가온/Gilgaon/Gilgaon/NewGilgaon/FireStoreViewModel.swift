@@ -237,7 +237,6 @@ class FireStoreViewModel: ObservableObject {
             .document(calendar.id)
             .setData([
                 "id": calendar.id,
-                "createdAt": calendar.createdAt,
                 "title": calendar.title,
                 "shareFriend": calendar.shareFriend,
                 "realDate": calendar.realDate
@@ -255,7 +254,7 @@ class FireStoreViewModel: ObservableObject {
             .collection("User")
             .document(self.currentUserId!)
             .collection("Calendar")
-            .order(by: "createdAt", descending: true)
+            .order(by: "realDate", descending: true)
             .getDocuments { (snapshot, error) in
                 self.calendarList.removeAll()
                 if let snapshot{
@@ -267,8 +266,8 @@ class FireStoreViewModel: ObservableObject {
                         let shareFriend = docData["shareFriend"] as? [String] ?? []
                         let taskDate = docData["taskDate"] as? Date ?? Date()
                         let realDate = docData["realDate"] as? Double ?? 0.0
-                        print("realDate: \(realDate)")
-                        let calendarData = DayCalendarModel(id: id, createdAt: createdAt, title: title, shareFriend: shareFriend, taskDate: taskDate, realDate: realDate)
+//                        print("realDate: \(realDate)")
+                        let calendarData = DayCalendarModel(id: id, taskDate: taskDate, title: title, shareFriend: shareFriend, realDate: realDate)
                         print(calendarData)
                         self.calendarList.append(calendarData)
                     }
