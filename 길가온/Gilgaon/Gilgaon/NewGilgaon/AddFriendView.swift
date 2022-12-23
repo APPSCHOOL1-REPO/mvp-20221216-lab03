@@ -19,15 +19,15 @@ struct AddFriendView: View {
                             
                             HStack(alignment: .center) {
                                 // profile Image
-                                if let url = fireStoreViewModel.profileUrlString,
+                                if let url = myFriend.userPhoto,
                                    let imageUrl = URL(string: url) {
                                     AsyncImage(url: imageUrl) { image in
                                         image
                                             .resizable()
                                             .scaledToFill()
                                             .frame(width: 110, height: 110)
-                                            .cornerRadius(20)
-                                            .overlay(RoundedRectangle(cornerRadius: 30)
+                                            .cornerRadius(55)
+                                            .overlay(RoundedRectangle(cornerRadius: 55)
                                                 .stroke(Color("Pink"), lineWidth: 3))
                                     } placeholder: {
                                         

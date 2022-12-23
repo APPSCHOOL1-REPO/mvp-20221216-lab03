@@ -18,14 +18,20 @@ struct AddMarkerFriendView: View {
                         AsyncImage(url: imageUrl) { image in
                             image
                                 .resizable()
-                                .scaledToFit()
-                                .frame(width:150)
+                                .scaledToFill()
+                                .frame(width: 110, height: 110)
+                                .cornerRadius(55)
+                                .overlay(RoundedRectangle(cornerRadius: 55)
+                                    .stroke(Color("Pink"), lineWidth: 3))
                         } placeholder: { }
                     }else{
                         Image(systemName: "person.fill")
                             .resizable()
-                            .scaledToFit()
-                            .frame(width:150)
+                            .scaledToFill()
+                            .frame(width: 110, height: 110)
+                            .cornerRadius(55)
+                            .overlay(RoundedRectangle(cornerRadius: 55)
+                                .stroke(Color("Pink"), lineWidth: 3))
                     }
                     Text(friend.nickName)
                 }

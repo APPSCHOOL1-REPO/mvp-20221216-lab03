@@ -39,17 +39,13 @@ struct SearchUserView: View {
     var body: some View {
         
         ZStack {
-            if searchText.count < 0 {
-                ZStack {
-                    Color("White")
-                        .ignoresSafeArea()
-                }
-            } else { List {
+            Color("White")
+                .ignoresSafeArea()
+            List {
                 ForEach(getUser,id:\.self) {value in
                     
                     HStack(alignment: .center) {
-                        
-                        if let url = firestore.profileUrlString,
+                        if let url = value.userPhoto,
                            let imageUrl = URL(string: url) {
                             AsyncImage(url: imageUrl) { image in
                                 image
@@ -103,19 +99,16 @@ struct SearchUserView: View {
             .popup(isPresented: $shouldBottomToastMessage , type: .floater(verticalPadding: 20), position: .bottom, animation: .spring(), autohideIn: 2, dragToDismiss: true, closeOnTap: true, closeOnTapOutside: true, view: {
                 self.createBottomToastMessage()
             })
-                
-                
-                
-                
-            }
+            
+            
         }
-            .searchable(
-                text: $searchText,
-                placement: .navigationBarDrawer,
-                prompt: Text("친구 검색")
-            )
-            .font(.custom("NotoSerifKR-Regular",size:16))
-            .bold()
+        .searchable(
+            text: $searchText,
+            placement: .navigationBarDrawer,
+            prompt: Text("친구 검색")
+        )
+        .font(.custom("NotoSerifKR-Regular",size:16))
+        .bold()
     }
     
 }

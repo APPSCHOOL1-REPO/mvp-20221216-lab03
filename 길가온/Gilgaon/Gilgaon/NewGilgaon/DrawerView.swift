@@ -16,7 +16,7 @@ struct DrawerView: View {
     @State private var showMenu: Bool = false
     @State private var middleView: MiddleView = .schedule
     @EnvironmentObject var fireStoreViewModel: FireStoreViewModel
-
+    
     
     private var middleViewArray: [MiddleView] = [.schedule, .list]
     
@@ -27,10 +27,10 @@ struct DrawerView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                    
-                    
+                
                     HStack {
                         // profile Image
+                        Spacer()
                         VStack {
                             if let url = fireStoreViewModel.profileUrlString,
                                let imageUrl = URL(string: url) {
@@ -56,25 +56,28 @@ struct DrawerView: View {
                             }
                             
                         }
-                        .offset(x: -65)
-                        
+//                        .offset(x: -65)
+                        Spacer()
                         VStack(alignment: .leading) {
                             Text(fireStoreViewModel.userNickName)
                                 .font(.custom("NotoSerifKR-Regular",size:25))
+                                .foregroundColor(Color("DarkGray"))
                                 .bold()
                                 .padding(.bottom, 10)
-                        
+                            
                             NavigationLink {
                                 AddFriendView()
                             } label: {
-                         
+                                
                                 Text("\(fireStoreViewModel.myFriendArray.count)명의 친구")
-                                        .font(.custom("NotoSerifKR-Regular",size:16))
+                                    .font(.custom("NotoSerifKR-Regular",size:16))
+                                    
                             }
                         }
-                        .offset(x: -30)
+//                        .offset(x: -30)
+                        Spacer()
                     }
-                   
+                    
                     
                     HStack {
                         ForEach(middleViewArray, id: \.self) { select in
@@ -94,7 +97,7 @@ struct DrawerView: View {
                                         .frame(height: 3)
                                         .offset(y: 17)
                                 }
-                                  
+                                
                             }
                             .frame(width: 160)
                         }
@@ -121,7 +124,7 @@ struct DrawerView: View {
                 
             }
             .onAppear {
-//                myInfo(fireStoreViewModel.currentUserId!)
+                //                myInfo(fireStoreViewModel.currentUserId!)
                 fireStoreViewModel.myInfo(fireStoreViewModel.currentUserId!)
             }
             .toolbar {
@@ -134,7 +137,7 @@ struct DrawerView: View {
         }
         .onAppear{
             fireStoreViewModel.fetchImageUrl()
-                    fireStoreViewModel.fetchFriend()
+            fireStoreViewModel.fetchFriend()
         }
     }
 }
