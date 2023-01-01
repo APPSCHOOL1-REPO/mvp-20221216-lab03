@@ -295,13 +295,13 @@ class FireStoreViewModel: ObservableObject {
                 "lon": marker.lon,
                 "sharedFriend": marker.shareFriend
             ])
-        fetchMarkers(inputID: self.nowCalendarId)
+//        fetchMarkers(inputID: self.nowCalendarId)
     }
     
     
     // [마커 가져오기]
     @MainActor
-    func fetchMarkers(inputID: String){
+    func fetchMarkers(inputID: String) async {
         print(#function)
         print(inputID)
         database.collection("User")
@@ -316,7 +316,6 @@ class FireStoreViewModel: ObservableObject {
                     for document in snapshot.documents {
                         let id: String = document.documentID
                         let docData = document.data()
-                        
                         let title: String = docData["title"] as? String ?? ""
                         let photo: String = docData["photo"] as? String ?? ""
                         let createdAt: Double = docData["createdAt"] as? Double ?? 0

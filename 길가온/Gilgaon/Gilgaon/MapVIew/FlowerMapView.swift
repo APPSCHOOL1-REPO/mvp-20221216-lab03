@@ -47,6 +47,11 @@ struct FlowerMapView: View {
                         }
                 }
             })
+            .onChange(of: fireStoreViewModel.markerList) { newValue in
+                vm.locations =  fireStoreViewModel.markerList
+                vm.mapLocation = vm.locations.first!
+
+            }
      
             VStack{
                 header
@@ -64,14 +69,9 @@ struct FlowerMapView: View {
             }
         }
         .onAppear{
-            Task {
-            try! await fireStoreViewModel.fetchMarkers(inputID:getStringValue)
-                vm.locations = fireStoreViewModel.markerList
-                if !vm.locations.isEmpty{
-                    vm.mapLocation = vm.locations.first!
-                }
+            Task{
+                await fireStoreViewModel.fetchMarkers(inputID:getStringValue)
             }
-
         }
     }
     
