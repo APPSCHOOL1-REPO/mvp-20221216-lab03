@@ -1,79 +1,73 @@
 # 길가온
+<img src="https://user-images.githubusercontent.com/66459715/212446413-9aa9e540-5d80-42b4-b32e-9501727ea4eb.png" width="800"></img>
 
-## 사용방법
-- 가이드
-    1. 로그인화면에서 회원가입을 진행해 주세요.
-    2. 회원정보와 프로필 사진을 추가해주세요  프로필사진은 추가하지 않아도 무방합니다.
-    3. 로그인을 하시게 되면 온보딩뷰가 나타납니다. 길가온이 어떤 앱인지 간단한 설명이 들어가 있습니다. 이후 지도를 사용하기 위해 사용자로부터 현재위치를 입력받습니다.
-    4. [서랍장]탭바의 [기록하기]를 눌러 기록을 남길 수 있습니다. 남기고 싶은 일정의 이름을 입력해주시고 추가를 눌러주세요. 이제 [기록멈추기]를 누르기 전까지 새 글작성을 하실 수 있습니다.
-    5. 새 글작성에 들어가 마커를 남길 [위치]를 눌러 검색하여 추가할 수 있습니다. 또한 일정간 사진, 제목 ,내용을 추가해주세요.
-    6. 기록멈추기를 누르게되면 기록이 [서랍]에 쌓이게 됩니다. 이렇게 남게된 서랍의 기록을 클릭해 지도의 마커를 다시 볼 수 있습니다.
-    7. 친구추가를 눌러 친구를 추가할 수 있습니다.
-    8. 추가된 친구는 친구목록에 남게되며 5의 새 글작성에 [함께] 버튼에 추가할 수 있습니다 (미구현)
+> 되새김은 여행을 계획하고, 여행을 떠나서 일정과 지출을 관리하고 다이러리도 작성해 실용성과 추억관리 두마리 토끼를 모두 잡은 애플리케이션 입니다.
 
-## 화면설명
+![Swift](https://img.shields.io/badge/swift-v5.7-orange?logo=swift) 
+![Xcode](https://img.shields.io/badge/xcode-v14.0-blue?logo=xcode)
+![SnapKit](https://img.shields.io/badge/SnapKit-v5.6.0-green)
+
+#### 프로젝트기간 
+- 12.19 ~ 12.23
 
 
-### [서랍장 - 꽃갈피]
+## 주요 기능
 
-<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/8.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img><img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/9.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img><img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/10.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
+### ✈️ 친구추가
+- 내용작성
 
-1. 기록하기를 눌러 기록을 시작합니다.
+### 💰 일정추가 
+- 내용작성 
 
-2. 여행 제목을 입력하고 추가 버튼을 눌러주세요.
-    
-3. 새 글작성을 눌러 제목, 글, 사진을 작성할 수 있습니다.(함께한 친구와 위치를 지정합니다.)
-    
-4. 지도보기로 지정한 위치를 확인합니다. 
-    
-5. 기록멈추기를 눌러 기록을 종료합니다.
-    
-### [서랍장 - 서랍]
+### 일정 작성
+- 제목 내용 사진 친구 위치 입력받는 내용
 
-<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
-1. 서랍을 열어 기록된 꽃갈피를 확인한다.
-    
-2. 기록된 꽃갈피를 눌러 해당 위치 지도를 본다.
+### 달력
+- 언제 일정 추가해쓴ㄴ지 알수 잇따
 
-### [달력]
+## 동작화면
 
-<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/Calendar.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
+|<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png"></img>|<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png"></img>|<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png"></img>|<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png"></img>|
+|:-:|:-:|:-:|:-:|
+|`스플래시뷰`|`온보딩뷰`|`로그인 및 회원가입`|`친구추가`|
+|<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png"></img>|<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png"></img>|<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png"></img>|<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png"></img>|
+|`글 작성`|`달력 확인`|`서랍함 확인`|`로그아웃`|
 
-1. 일정을 기록했을 경우, “달력 뷰” 에서 오늘 날짜에 해당하는 칸에 “체크” 마크 표시가 자동으로 이루어진다.
+## Test
+|<img src="https://user-images.githubusercontent.com/66459715/212446413-9aa9e540-5d80-42b4-b32e-9501727ea4eb.png" width="800"></img>|<img src="https://user-images.githubusercontent.com/66459715/212446416-b0edc9c0-3b0c-41bb-829e-9ad17aa863b0.png" width="800"></img>|
+|:-:|:-:|
+|`프로토타입`|`UI Flow`|
 
-2. “달력 뷰” 를 월마다 넘겨보며, 전체 마크된 날짜를 확인하며 월별 기록횟수 및 기록 날짜를 파악할 수 있다.
+## 프로젝트 구조
 
+> 길가온에서 사용하고있는 프로젝트 구조입니다.
 
-### [맵]
-<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/keroro6.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
-<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/keroro8.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
-<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/mapViewList.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
-<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/mapViewimage.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
+<!-- <img src="https://user-images.githubusercontent.com/76734067/207780104-3a489812-6340-46bd-8087-56a2bd7cb229.png"> -->
 
+- 애플리케이션의 구조가 크기 않아 코디네이터 패턴이나 클린아키텍쳐의 필요성을 느끼지 못했습니다.
+- `MVVM`만으로도 저희 애플리케이션을 충분히 유지보수할 수 있다고 생각하여 `MVVM` 디자인 패턴을 선택하였습니다.
 
-1. 지도보기를 클릭한 후, "맵뷰"를 통해 기록한 지역들을 살펴볼 수 있습니다.
+## 기술 스택
 
-2. 상단의 맵 리스트 뷰를 통해, 모든 기록된 지역들을 확인해볼 수 있습니다.
+### 💿 Firebase
+- Auth: 회원가입 및 로그인
+- FireStore: 유저 정보 및 게시글 데이터 저장
+- FireStorage: 프로필 및 다이어리 사진 저장 
 
-3. 기록한 내용들을 꽃갈피 확인을 통해 살펴볼 수 있습니다.
+### 🧭 Lottie
+- 온보딩 뷰와 로그인 뷰의 벚꽃 애니메이션
+- 스플래시 뷰의 벚꽃나무 애니메이션
 
-### [친구 - 친구 추가]
+### 🙈 CoreLocation, MapKit
+- 위치 권한 설정과 사용자의 현재위치 받아오기
+- TMapAPI로부터 받은 정보로 Map Annotation을 사용하여 지도에 표시
 
-<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
-<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/14.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
-<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/15.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
+### TMapAPI
+- 사용자가 검색해 나온 위치정보를 받아옴
 
-1. “서랍 뷰”에서 친구 추가를 클릭합니다.
+## 팀 소개
 
-2. 추가할 친구를 검색합니다.
-
-3. 추가할 친구를 클릭하여 추가합니다.
-
-### [친구 - 친구 목록]
-
-<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/13.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
-<img src="https://github.com/APPSCHOOL1-REPO/mvp-20221216-lab03/blob/main/screenshot/16.png" width="20%" height="15%" title="px(픽셀) 크기 설정" alt="RubberDuck" style="float:left;"></img>
-
-1. “서랍 뷰”에서 친구 목록을 클릭합니다.
-
-2. 친구 목록을 확인합니다.
+|김민호|정세훈|전준수|한주희|
+|:-:|:-:|:-:|:-:|
+|<img src="https://avatars.githubusercontent.com/u/66459715?v=4" width=100>|<img src="https://avatars.githubusercontent.com/u/108966759?v=4" width=100>|<img src="https://avatars.githubusercontent.com/u/114235515?v=4" width=100>|<img src="https://avatars.githubusercontent.com/u/107897929?v=4" width=100>|
+|[@stealmh](https://github.com/stealmh)|[@NewHooon](https://github.com/NewHooon)|[@JIN-JJS](https://github.com/JIN-JJS)|[@Zooey-Han](https://github.com/Zooey-Han)|
