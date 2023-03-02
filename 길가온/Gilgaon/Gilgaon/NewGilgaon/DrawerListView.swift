@@ -15,16 +15,46 @@ struct DrawerListView: View {
         ZStack {
             Color("White")
                 .ignoresSafeArea()
-            ScrollView {
-                VStack {
-                    ForEach(firestoreViewModel.calendarList){ value in
-                        NavigationLink(destination: FlowerMapView(fireStoreViewModel: firestoreViewModel,getStringValue: value.id)) {
-                            taskCardView(task: value)
+            
+            List {
+                ForEach(firestoreViewModel.calendarList){ value in
+                    taskCardView(task: value)
+                        .background {
+                            NavigationLink(destination: FlowerMapView(fireStoreViewModel: firestoreViewModel,getStringValue: value.id)) { EmptyView() }
+                                .opacity(0)
+                                .buttonStyle(PlainButtonStyle())
                         }
-                    }
                 }
-                .padding()
+                .listRowBackground(Color("White"))
+                .listRowSeparator(.hidden)
+                .swipeActions(edge: .leading) {
+                            Button {
+                                print("수정")
+                            } label: {
+                                Label("수정", systemImage: "eraser")
+                            }
+                            .tint(.yellow)
+                        }
+                .swipeActions(edge: .trailing) {
+                    Button {
+                        print("삭제")
+                    } label: {
+                        Label("삭제", systemImage: "trash")
+                    }
+                    .tint(.red)
+                }
             }
+            .listStyle(.plain)
+//            ScrollView {
+//                VStack {
+//                    ForEach(firestoreViewModel.calendarList){ value in
+//                        NavigationLink(destination: FlowerMapView(fireStoreViewModel: firestoreViewModel,getStringValue: value.id)) {
+//                            taskCardView(task: value)
+//                        }
+//                    }
+//                }
+//                .padding()
+//            }
         }
         .onAppear{
             firestoreViewModel.fetchDayCalendar()
