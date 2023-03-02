@@ -66,32 +66,68 @@ class FriendViewModel: ObservableObject {
     func addFriendBoth() {
         
     }
+    func deleteWaitingFriend(userId: String) async {
+        print(#function)
+        guard let myId = Auth.auth().currentUser?.uid else { return }
+        guard var waitingFriend = await fetchWaitingFriend(myId) else { return }
+        guard let index = waitingFriend.firstIndex(of: userId) else { return }
+        waitingFriend.remove(at: index)
+        do{
+            try await database.collection("Waiting").document(myId).updateData([ "sendToFriend" : waitingFriend ])
+        }catch{
+                print("Error")
+        }
+    }
     
     //친구추가
-    func addFriend() {
-        guard let myInfo, let friendInfo else {return}
-        database
+    func addFriendMe() async throws{
+        try await database
             .collection("User") //
-            .document(myInfo.id)
+            .document(myInfo!.id)
             .collection("Friend")
-            .document(friendInfo.id)
-            .setData(["id": friendInfo.id,
-                      "nickName": friendInfo.nickName,
-                      "userPhoto": friendInfo.userPhoto,
-                      "userEmail": friendInfo.userEmail])
-        database
+            .document(friendInfo!.id)
+            .setData(["id": friendInfo!.id,
+                      "nickName": friendInfo!.nickName,
+                      "userPhoto": friendInfo!.userPhoto,
+                      "userEmail": friendInfo!.userEmail])
+    }
+    
+    func addFriend() async throws{
+        try await database
             .collection("User") //
-            .document(friendInfo.id)
+            .document(friendInfo!.id)
             .collection("Friend")
-            .document(myInfo.id)
-            .setData(["id": myInfo.id,
-                      "nickName": myInfo.nickName,
-                      "userPhoto": myInfo.userPhoto,
-                      "userEmail": myInfo.userEmail])
+            .document(myInfo!.id)
+            .setData(["id": myInfo!.id,
+                      "nickName": myInfo!.nickName,
+                      "userPhoto": myInfo!.userPhoto,
+                      "userEmail": myInfo!.userEmail])
     }
     
     //사용자로부터 닉네임을 입력받아 일치하는 유저를 조회하는 함수
-    func findUserUId(userUid: String, myUid: String) async{
+    func findUserUIdMe(userUid: String) async{
+        database
+            .collection("User")
+            .getDocuments { (snapshot, error) in
+//                self.userList.removeAll()
+                if let snapshot{
+                    for document in snapshot.documents{
+                        let id: String = document.documentID
+                        if id == userUid {
+                            let docData = document.data()
+                            let nickName: String = docData["nickName"] as? String ?? ""
+                            let userPhoto: String = docData["userPhoto"] as? String ?? ""
+                            let userEmail:String = docData["userEmail"] as? String ?? ""
+                            let friend = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
+                            self.myInfo = friend
+                            print(self.myInfo)
+                        }
+                    }
+                }
+            }
+    }
+    
+    func findUserFriend(userUid: String) async{
         database
             .collection("User")
             .getDocuments { (snapshot, error) in
@@ -106,18 +142,7 @@ class FriendViewModel: ObservableObject {
                             let userEmail:String = docData["userEmail"] as? String ?? ""
                             let friend = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
                             self.friendInfo = friend
-                            print("userUid일때:",friend.nickName)
                         }
-                        else if id == myUid {
-                            let docData = document.data()
-                            let nickName: String = docData["nickName"] as? String ?? ""
-                            let userPhoto: String = docData["userPhoto"] as? String ?? ""
-                            let userEmail:String = docData["userEmail"] as? String ?? ""
-                            let friend = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
-                            self.myInfo = friend
-                            print("나의Uid일때:",friend.nickName)
-                        }
-                        
                     }
                 }
             }

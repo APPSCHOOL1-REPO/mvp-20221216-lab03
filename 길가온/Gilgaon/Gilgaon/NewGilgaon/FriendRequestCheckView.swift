@@ -26,12 +26,17 @@ struct FriendRequestCheckView: View {
                         Button("수락") {
                             guard let myUid = Auth.auth().currentUser?.uid else { return }
                             Task {
-                               await friendViewModel.findUserUId(userUid: data, myUid: myUid)
-                               await friendViewModel.addFriend()
+                                await friendViewModel.findUserFriend(userUid: data)
+                                await friendViewModel.findUserUIdMe(userUid: myUid)
+                                await friendViewModel.deleteWaitingFriend(userId: data)
+                                try await friendViewModel.addFriendMe()
+                                try await friendViewModel.addFriend()
                             }
                         }
                         Button("거절") {
-                            
+                            Task {
+                                await friendViewModel.deleteWaitingFriend(userId: data)
+                            }
                         }
                     }
                 }
