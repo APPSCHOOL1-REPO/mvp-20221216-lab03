@@ -25,43 +25,23 @@ struct Place: Identifiable{
 
 struct FlowerMapView: View {
     @EnvironmentObject private var vm: LocationsViewModel
-    @ObservedObject var fireStoreViewModel : FireStoreViewModel
+    @StateObject var flowerMapViewModel = FlowerMapViewModel()
+//    @StateObject var fireStoreViewModel : FireStoreViewModel
     @State var getStringValue: String
     @State private var mapRegion = MKCoordinateRegion()
     @State var userTracking = MapUserTrackingMode.follow
     @State var value = 0
     var body: some View {
-        ZStack{
-            Map(coordinateRegion: $vm.mapRegion,
-                interactionModes: .all,
-                showsUserLocation: true,
-                userTrackingMode: $userTracking,
-                annotationItems: vm.locations,
-                annotationContent: { location in
-                MapAnnotation(coordinate: location.coordinate) {
-                    mapMarker()
-                        .scaleEffect(vm.mapLocation == location ? 1.2: 0.9)
-                        .shadow(radius: 10)
-                        .onTapGesture {
-                            vm.showNextLocation(location: location)
-                        }
-                }
-            })
-            .onChange(of: fireStoreViewModel.markerList) { newValue in
-                vm.locations =  fireStoreViewModel.markerList
-                vm.mapLocation = vm.locations.first!
-
-            }
-     
+        UserMapView(flowerMapViewModel: flowerMapViewModel).overlay{
             VStack{
                 header
                     .padding()
                 Spacer()
                 ZStack{
-                    ForEach(vm.locations) { location in
-                        if vm.mapLocation == location{
-                            FlowerMapPreview(location:  location)
-                                .shadow(color: Color("DarkGray").opacity(0.3), radius: 20)
+                    ForEach(flowerMapViewModel.locations) { location in
+                        if flowerMapViewModel.mapLocation == location {
+                            FlowerMapPreview(flowerMapViewModel: flowerMapViewModel)
+                            .shadow(color: Color("DarkGray").opacity(0.3), radius: 20)
                                 .padding()
                         }
                     }
@@ -70,32 +50,16 @@ struct FlowerMapView: View {
         }
         .onAppear{
             Task{
-                await fireStoreViewModel.fetchMarkers(inputID:getStringValue)
+                print(getStringValue)
+                await flowerMapViewModel.fetchMarkers(inputID: getStringValue)
             }
         }
     }
     
-    func mapMarker() -> some View {
-        Image("flowerPink")
-            .resizable()
-            .frame(width: 40, height: 40)
-            .scaledToFit()
-    }
-}
-
-extension MKCoordinateRegion: Equatable{
-    public static func == (lhs: MKCoordinateRegion, rhs: MKCoordinateRegion) -> Bool {
-        return lhs.center == rhs.center
-    }
-}
-
-extension CLLocationCoordinate2D:Equatable{
-    public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
-        return (lhs.latitude == rhs.latitude) && (lhs.latitude == lhs.longitude)
-    }
-    
     
 }
+
+
 
 extension FlowerMapView {
     var header: some View{
