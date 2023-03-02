@@ -53,18 +53,41 @@ struct DrawerListView: View {
                     HStack(spacing: -10) {
                         
                         //친구들 프사 추가하는거(shareFriend에 친구 아이디가 추가되면 아이디를 가지고 이미지를 가져와야함)
-                        ForEach(["p2", "p3", "p4"], id: \.self) { user in
-                            
-                            Image(user)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 45, height: 45)
-                                .clipShape(Circle())
-                                .background(
-                                    Circle()
-                                        .stroke(Color("DarkGray"), lineWidth: 2)
-                                )
-                            
+                        ForEach(task.shareFriend, id: \.self) { user in
+                            if let url = user.userPhoto,
+                               let imageUrl = URL(string: url) {
+                                AsyncImage(url: imageUrl) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 45, height: 45)
+                                        .clipShape(Circle())
+                                        .background(
+                                            Circle()
+                                                .stroke(Color("DarkGray"), lineWidth: 2)
+                                            )
+                                } placeholder: {
+                                    Image(systemName: "person.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 45, height: 45)
+                                        .clipShape(Circle())
+                                        .background(
+                                            Circle()
+                                                .stroke(Color("DarkGray"), lineWidth: 2)
+                                            )
+                                }
+                            } else{
+                                Image(systemName: "person.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 45, height: 45)
+                                    .clipShape(Circle())
+                                    .background(
+                                        Circle()
+                                            .stroke(Color("DarkGray"), lineWidth: 2)
+                                        )
+                            }
                         }
                     }
                     .hLeading()

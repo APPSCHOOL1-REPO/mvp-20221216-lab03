@@ -263,7 +263,7 @@ class FireStoreViewModel: ObservableObject {
                         let docData = document.data()
                         let createdAt = docData["createdAt"] as? Double ?? 0
                         let title = docData["title"] as? String ?? ""
-                        let shareFriend = docData["shareFriend"] as? [String] ?? []
+                        let shareFriend = docData["shareFriend"] as? [FriendModel] ?? []
                         let taskDate = docData["taskDate"] as? Date ?? Date()
                         let realDate = docData["realDate"] as? Double ?? 0.0
 //                        print("realDate: \(realDate)")
