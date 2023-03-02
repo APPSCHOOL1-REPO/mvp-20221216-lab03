@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		161510BE29502BE600BA7FFE /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161510BD29502BE600BA7FFE /* RegisterView.swift */; };
-		161510C029502F8000BA7FFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 161510BF29502F8000BA7FFE /* GoogleService-Info.plist */; };
 		161510C32950305A00BA7FFE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 161510C22950305A00BA7FFE /* FirebaseAuth */; };
 		161510C52950305A00BA7FFE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 161510C42950305A00BA7FFE /* FirebaseFirestore */; };
 		161510C7295036B300BA7FFE /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161510C6295036B300BA7FFE /* RegisterModel.swift */; };
@@ -49,6 +48,7 @@
 		3663C67B293863D4006880C9 /* LocationDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C67A293863D4006880C9 /* LocationDataService.swift */; };
 		3663C67D293881C1006880C9 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C67C293881C1006880C9 /* SheetView.swift */; };
 		366600D329B045F300520F8F /* UserMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366600D229B045F300520F8F /* UserMapView.swift */; };
+		366600D529B04E7700520F8F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 366600D429B04E7600520F8F /* GoogleService-Info.plist */; };
 		3691CB3229364AC400F41FDB /* Polyline in Frameworks */ = {isa = PBXBuildFile; productRef = 3691CB3129364AC400F41FDB /* Polyline */; };
 		369484C22952E1960030890A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369484C12952E1960030890A /* Util.swift */; };
 		369CB73E293726E700C2E4BF /* JogakData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369CB73D293726E700C2E4BF /* JogakData.swift */; };
@@ -91,7 +91,6 @@
 
 /* Begin PBXFileReference section */
 		161510BD29502BE600BA7FFE /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
-		161510BF29502F8000BA7FFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		161510C6295036B300BA7FFE /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		1642F0F329388BC4005A54EF /* NotoSerifKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifKR-Regular.otf"; sourceTree = "<group>"; };
 		1642F0F429388BC5005A54EF /* NotoSerifKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifKR-Light.otf"; sourceTree = "<group>"; };
@@ -128,6 +127,7 @@
 		3663C67A293863D4006880C9 /* LocationDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataService.swift; sourceTree = "<group>"; };
 		3663C67C293881C1006880C9 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
 		366600D229B045F300520F8F /* UserMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMapView.swift; sourceTree = "<group>"; };
+		366600D429B04E7600520F8F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		369484C12952E1960030890A /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		369CB73D293726E700C2E4BF /* JogakData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JogakData.swift; sourceTree = "<group>"; };
 		36A0C27F2954423700DFDD45 /* OnboardingMapDescribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMapDescribeView.swift; sourceTree = "<group>"; };
@@ -287,12 +287,12 @@
 		635AE3832935E932008A8452 /* Gilgaon */ = {
 			isa = PBXGroup;
 			children = (
+				366600D429B04E7600520F8F /* GoogleService-Info.plist */,
 				161510BC29502BD100BA7FFE /* NewGilgaon */,
 				1642F0EC2938897E005A54EF /* Font */,
 				C0FA4348293623F4002D4473 /* Gilgaon.entitlements */,
 				6FF334CA2935F1D9007438B1 /* Info.plist */,
 				635AE3842935E932008A8452 /* GilgaonApp.swift */,
-				161510BF29502F8000BA7FFE /* GoogleService-Info.plist */,
 				3663C66D2938631E006880C9 /* MapVIew */,
 				635AE3A729361971008A8452 /* View */,
 				63D2C1242938371C0011BC89 /* ViewModel */,
@@ -456,12 +456,12 @@
 			files = (
 				635AE38C2935E934008A8452 /* Preview Assets.xcassets in Resources */,
 				1642F0FD29388BC6005A54EF /* NotoSerifKR-Medium.otf in Resources */,
+				366600D529B04E7700520F8F /* GoogleService-Info.plist in Resources */,
 				1642F0FC29388BC6005A54EF /* NotoSerifKR-SemiBold.otf in Resources */,
 				1642F0FF29388BC6005A54EF /* NotoSerifKR-Bold.otf in Resources */,
 				16CA72952939BDE200D451F0 /* AppIcon.appiconset in Resources */,
 				6FF334C92935F1CD007438B1 /* Config.xcconfig in Resources */,
 				1642F0FA29388BC6005A54EF /* NotoSerifKR-Regular.otf in Resources */,
-				161510C029502F8000BA7FFE /* GoogleService-Info.plist in Resources */,
 				C0B7045B29388F1200245ED7 /* Sakura.json in Resources */,
 				16FA82C6293903BC006129D3 /* InviteFriendLottie.json in Resources */,
 				1642F10029388BC6005A54EF /* NotoSerifKR-ExtraLight.otf in Resources */,
