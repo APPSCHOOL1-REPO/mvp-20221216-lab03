@@ -12,26 +12,39 @@ import MapKit
 
 
 struct UserMapView: UIViewRepresentable {
+    @ObservedObject var flowerMapViewModel: FlowerMapViewModel
     
     var landmarks:[LandmarkAnnotation] = LandmarkAnnotation.mockData
-    
-    
     
     //  "Description - Replace the body with a make UIView(context:) method that creates and return an empty MKMapView"
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
+        setSubscriber(mapView)
         return mapView
+    }
+
+    func setSubscriber( _ mapView: MKMapView){
+        flowerMapViewModel.buttonCancellable = flowerMapViewModel.$nextBtnPressed.sink { _ in
+                mapView.setRegion(flowerMapViewModel.mapRegions, animated: true)
+        }
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
         uiView.delegate = context.coordinator
-        uiView.addAnnotations(landmarks)
+        uiView.addAnnotations(makePins())
     }
     
     func makeCoordinator() -> UserMapViewCoordinator {
         UserMapViewCoordinator(mapViewController: self)
     }
-    
+  
+    func makePins() -> [LandmarkAnnotation]{
+        var lAT:[LandmarkAnnotation] = []
+        for location in flowerMapViewModel.locations{
+            lAT.append(LandmarkAnnotation(title: "", subtitle: "", coordinate: location.coordinate))
+        }
+        return lAT
+    }
 }
 
 // pin annotation
@@ -63,10 +76,14 @@ class UserMapViewCoordinator: NSObject, MKMapViewDelegate{
         self.mapViewController = mapViewController
     }
     
+    
+    
     // mapAnnotationSelected
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
     }
+    
+    
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
