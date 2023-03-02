@@ -9,6 +9,7 @@ import Firebase
 import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
+import Combine
 
 
 class FireStoreViewModel: ObservableObject {
@@ -22,6 +23,8 @@ class FireStoreViewModel: ObservableObject {
     @Published var sharedFriendList:[FriendModel] = []
     @Published var isRecording: Bool = false
     @Published var profileUrlString: String?
+    @Published var searchText: String = ""
+    private var cancellables = Set<AnyCancellable>()
     
     @Published var userNickName: String = ""
     let database = Firestore.firestore()
@@ -182,7 +185,7 @@ class FireStoreViewModel: ObservableObject {
     }
     
     //사용자로부터 닉네임을 입력받아 일치하는 유저를 조회하는 함수
-    func searchUser(_ userName: String){
+    func searchUser(_ userName: String) async {
         database
             .collection("User")
             .getDocuments { (snapshot, error) in
@@ -205,6 +208,21 @@ class FireStoreViewModel: ObservableObject {
                 }
             }
     }
+    
+    func searchUser() {
+        $searchText
+            .debounce(for: .milliseconds(800), scheduler: RunLoop.main)
+            .removeDuplicates()
+            .sink { _ in
+            } receiveValue: { text in
+                Task {
+                    await self.searchUser(text)
+                }
+            }
+            .store(in: &cancellables)
+            
+    }
+    
     
     func persisImageToStorage(user:FireStoreModel, userImage: UIImage) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
