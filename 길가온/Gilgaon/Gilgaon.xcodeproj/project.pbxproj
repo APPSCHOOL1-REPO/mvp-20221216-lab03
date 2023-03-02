@@ -52,6 +52,7 @@
 		3691CB3229364AC400F41FDB /* Polyline in Frameworks */ = {isa = PBXBuildFile; productRef = 3691CB3129364AC400F41FDB /* Polyline */; };
 		369484C22952E1960030890A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369484C12952E1960030890A /* Util.swift */; };
 		369CB73E293726E700C2E4BF /* JogakData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369CB73D293726E700C2E4BF /* JogakData.swift */; };
+		369CF7FE29B07768000968D6 /* FlowerMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369CF7FD29B07768000968D6 /* FlowerMapViewModel.swift */; };
 		36A0C2802954423700DFDD45 /* OnboardingMapDescribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0C27F2954423700DFDD45 /* OnboardingMapDescribeView.swift */; };
 		36BB028B29518BD300CF2816 /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BB028A29518BD300CF2816 /* WritingView.swift */; };
 		634BC63E2950369D0044B38B /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC63D2950369D0044B38B /* DrawerView.swift */; };
@@ -130,6 +131,7 @@
 		366600D429B04E7600520F8F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		369484C12952E1960030890A /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		369CB73D293726E700C2E4BF /* JogakData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JogakData.swift; sourceTree = "<group>"; };
+		369CF7FD29B07768000968D6 /* FlowerMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowerMapViewModel.swift; sourceTree = "<group>"; };
 		36A0C27F2954423700DFDD45 /* OnboardingMapDescribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMapDescribeView.swift; sourceTree = "<group>"; };
 		36BB028A29518BD300CF2816 /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
 		634BC63D2950369D0044B38B /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				3663C678293863C4006880C9 /* LocationsViewModel.swift */,
 				3663C67A293863D4006880C9 /* LocationDataService.swift */,
 				3663C67C293881C1006880C9 /* SheetView.swift */,
+				369CF7FD29B07768000968D6 /* FlowerMapViewModel.swift */,
 			);
 			path = MapVIew;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				635AE3932935E9D5008A8452 /* SplashView.swift in Sources */,
 				16F69DB529387E030045CD91 /* OnboardingDescribeView.swift in Sources */,
 				3663C67B293863D4006880C9 /* LocationDataService.swift in Sources */,
+				369CF7FE29B07768000968D6 /* FlowerMapViewModel.swift in Sources */,
 				3663C67329386383006880C9 /* Location.swift in Sources */,
 				362A085129557CC500C582B4 /* AddMarkerFriendView.swift in Sources */,
 				63660F522937573500B70272 /* Customtoggle.swift in Sources */,
