@@ -66,7 +66,7 @@ struct DrawerView: View {
                                 .padding(.bottom, 10)
                             
                             NavigationLink {
-                                AddFriendView()
+                                FriendSettingView()
                             } label: {
                                 
                                 Text("\(fireStoreViewModel.myFriendArray.count)명의 친구")
