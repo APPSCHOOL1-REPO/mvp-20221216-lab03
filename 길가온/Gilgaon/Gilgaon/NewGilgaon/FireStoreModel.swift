@@ -24,7 +24,7 @@ struct DayCalendarModel: Identifiable,Hashable{
     // 제목 : [서울여행]
     var title: String
     // 추후
-    var shareFriend:[FriendModel]
+    var shareFriend:[String]
     var realDate: Double
     var createdDate: String {
         let dateFormatter = DateFormatter()
