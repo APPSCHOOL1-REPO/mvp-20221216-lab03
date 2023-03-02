@@ -48,6 +48,7 @@
 		3663C679293863C4006880C9 /* LocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C678293863C4006880C9 /* LocationsViewModel.swift */; };
 		3663C67B293863D4006880C9 /* LocationDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C67A293863D4006880C9 /* LocationDataService.swift */; };
 		3663C67D293881C1006880C9 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C67C293881C1006880C9 /* SheetView.swift */; };
+		366600D329B045F300520F8F /* UserMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366600D229B045F300520F8F /* UserMapView.swift */; };
 		3691CB3229364AC400F41FDB /* Polyline in Frameworks */ = {isa = PBXBuildFile; productRef = 3691CB3129364AC400F41FDB /* Polyline */; };
 		369484C22952E1960030890A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369484C12952E1960030890A /* Util.swift */; };
 		369CB73E293726E700C2E4BF /* JogakData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369CB73D293726E700C2E4BF /* JogakData.swift */; };
@@ -126,6 +127,7 @@
 		3663C678293863C4006880C9 /* LocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewModel.swift; sourceTree = "<group>"; };
 		3663C67A293863D4006880C9 /* LocationDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataService.swift; sourceTree = "<group>"; };
 		3663C67C293881C1006880C9 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
+		366600D229B045F300520F8F /* UserMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMapView.swift; sourceTree = "<group>"; };
 		369484C12952E1960030890A /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		369CB73D293726E700C2E4BF /* JogakData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JogakData.swift; sourceTree = "<group>"; };
 		36A0C27F2954423700DFDD45 /* OnboardingMapDescribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMapDescribeView.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				16EE2F672951885A00414279 /* SearchUserView.swift */,
 				369484C12952E1960030890A /* Util.swift */,
 				362A085029557CC500C582B4 /* AddMarkerFriendView.swift */,
+				366600D229B045F300520F8F /* UserMapView.swift */,
 			);
 			path = NewGilgaon;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				63660F4E2937216F00B70272 /* ImagePicker.swift in Sources */,
 				63D2C123293836CD0011BC89 /* DayTask.swift in Sources */,
 				16F69DB629387E030045CD91 /* OnboardingTabView.swift in Sources */,
+				366600D329B045F300520F8F /* UserMapView.swift in Sources */,
 				634BC646295043110044B38B /* FriendsView.swift in Sources */,
 				16D46FA42935EC7F00BB9440 /* SearchNetwork.swift in Sources */,
 				16EE2F682951885A00414279 /* SearchUserView.swift in Sources */,
