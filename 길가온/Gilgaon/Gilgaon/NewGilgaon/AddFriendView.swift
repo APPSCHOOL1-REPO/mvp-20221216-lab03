@@ -82,6 +82,7 @@ struct AddFriendView: View {
                     .background(Color("White"))
                     
                 }
+                .navigationTitle("친구목록")
                 .onAppear {
                     fireStoreViewModel.fetchFriend()
                 }
