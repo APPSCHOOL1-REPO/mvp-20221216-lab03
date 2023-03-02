@@ -18,7 +18,7 @@ struct DrawerListView: View {
             ScrollView {
                 VStack {
                     ForEach(firestoreViewModel.calendarList){ value in
-                        NavigationLink(destination: UserMapView()) {
+                        NavigationLink(destination: FlowerMapView( getStringValue: value.id)) {
                             taskCardView(task: value)
                         }
                     }
