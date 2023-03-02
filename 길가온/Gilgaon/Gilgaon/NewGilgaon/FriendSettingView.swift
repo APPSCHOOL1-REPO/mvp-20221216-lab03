@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FriendSettingView: View {
 //    @Binding var selectedTabBar: SelectedTab
+    @StateObject var friendViewModel = FriendViewModel()
     @State var selection: Int = 0
     let titles: [String] = ["친구", "친구요청"]
     
@@ -29,9 +30,9 @@ struct FriendSettingView: View {
                     SegementedControllView(selection: $selection, titles: titles, selectedItemColor: Color.red, backgroundColor: Color(.clear), selectedItemFontColor: Color.blue)
                     
                     if selection == 0 {
-                        AddFriendView()
+                        AddFriendView(friendViewModel: friendViewModel)
                     } else if selection == 1 {
-                        FriendRequestCheckView()
+                        FriendRequestCheckView(friendViewModel: friendViewModel)
                     }
                 }
 //                .overlay{
@@ -63,6 +64,9 @@ struct FriendSettingView: View {
 //                    }
 //                }
             }
+        }
+        .task {
+            friendViewModel.fetchFriendRequest()
         }
     }
 }

@@ -14,6 +14,7 @@ struct SearchUserView: View {
     @State private var searchText: String = ""
     @State var shouldBottomToastMessage : Bool = false
     @State var shouldPopupMessage : Bool = false
+    @ObservedObject var friendViewModel: FriendViewModel
     
     func createBottomToastMessage() -> some View {
         
@@ -53,7 +54,19 @@ struct SearchUserView: View {
                     Spacer()
                 }
                 List(firestore.userList, id:\.self) { user in
-                    Text(user.nickName)
+                    HStack {
+                        Text(user.nickName)
+                        Spacer()
+                        Button {
+                            Task {
+                                //친구요청을 보냄
+                                await friendViewModel.sendFriendRequest(friendUid: user.id)
+                            }
+                        } label: {
+                            Text("추가하기")
+                        }
+
+                    }
                 }
 //                List {
 //                    ForEach(firestore.userList,id:\.self) {value in
@@ -131,6 +144,6 @@ struct SearchUserView: View {
 
 struct SearchUserView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchUserView()
+        SearchUserView(friendViewModel: FriendViewModel())
     }
 }

@@ -10,7 +10,7 @@ import SkeletonUI
 
 struct AddFriendView: View {
     @StateObject var fireStoreViewModel: FireStoreViewModel = FireStoreViewModel()
-    
+    @ObservedObject var friendViewModel: FriendViewModel
     var body: some View {
         
         if fireStoreViewModel.myFriendArray.count > 0 {
@@ -88,7 +88,7 @@ struct AddFriendView: View {
                 }
                 .toolbar {
                     NavigationLink {
-                        SearchUserView()
+                        SearchUserView(friendViewModel: friendViewModel)
                     } label: {
                         Text("+")
                             .font(.custom("NotoSerifKR-Regular",size:26))
@@ -105,7 +105,7 @@ struct AddFriendView: View {
             }
             .toolbar {
                 NavigationLink {
-                    SearchUserView()
+                    SearchUserView(friendViewModel: friendViewModel)
                 } label: {
                     Text("+")
                         .font(.custom("NotoSerifKR-Regular",size:26))
