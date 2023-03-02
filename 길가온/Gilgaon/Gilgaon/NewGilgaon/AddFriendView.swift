@@ -88,7 +88,7 @@ struct AddFriendView: View {
                 }
                 .toolbar {
                     NavigationLink {
-                        SearchUserView(friendViewModel: friendViewModel)
+                        SearchUserView(firestore: fireStoreViewModel, friendViewModel: friendViewModel)
                     } label: {
                         Text("+")
                             .font(.custom("NotoSerifKR-Regular",size:26))
@@ -105,7 +105,7 @@ struct AddFriendView: View {
             }
             .toolbar {
                 NavigationLink {
-                    SearchUserView(friendViewModel: friendViewModel)
+                    SearchUserView(firestore: fireStoreViewModel, friendViewModel: friendViewModel)
                 } label: {
                     Text("+")
                         .font(.custom("NotoSerifKR-Regular",size:26))

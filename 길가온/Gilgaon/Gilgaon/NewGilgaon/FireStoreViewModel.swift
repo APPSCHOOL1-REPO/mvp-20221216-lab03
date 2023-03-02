@@ -186,6 +186,7 @@ class FireStoreViewModel: ObservableObject {
     
     //사용자로부터 닉네임을 입력받아 일치하는 유저를 조회하는 함수
     func searchUser(_ userName: String) async {
+        print(#function)
         database
             .collection("User")
             .getDocuments { (snapshot, error) in
@@ -194,22 +195,25 @@ class FireStoreViewModel: ObservableObject {
                     for document in snapshot.documents{
                         let id: String = document.documentID
                         let docData = document.data()
-                        if let nickName = docData["nickName"] as? String,
-                           nickName.contains(userName)
-                        {
-                            let docData = document.data()
-                            let nickName: String = docData["nickName"] as? String ?? ""
-                            let userPhoto: String = docData["userPhoto"] as? String ?? ""
-                            let userEmail:String = docData["userEmail"] as? String ?? ""
-                            let friend = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
-                            self.userList.append(friend)
+                        let nickName: String = docData["nickName"] as? String ?? ""
+                        let userPhoto: String = docData["userPhoto"] as? String ?? ""
+                        let userEmail:String = docData["userEmail"] as? String ?? ""
+                        let friend = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
+                        for i in self.myFriendArray {
+                            if i.id != id && nickName.contains(userName) {
+                                self.userList.append(friend)
+                                print(self.userList)
+                            }
                         }
+                        self.userList = Array(Set(self.userList))
+                        
                     }
                 }
             }
     }
     
     func searchUser() {
+        print(#function)
         $searchText
             .debounce(for: .milliseconds(800), scheduler: RunLoop.main)
             .removeDuplicates()

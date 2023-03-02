@@ -10,7 +10,7 @@ import PopupView
 
 struct SearchUserView: View {
     @State private var user: [String] = ["김민호","전준수","정세훈","한주희"]
-    @StateObject private var firestore: FireStoreViewModel = FireStoreViewModel()
+    @ObservedObject var firestore: FireStoreViewModel
     @State private var searchText: String = ""
     @State var shouldBottomToastMessage : Bool = false
     @State var shouldPopupMessage : Bool = false
@@ -57,13 +57,15 @@ struct SearchUserView: View {
                     HStack {
                         Text(user.nickName)
                         Spacer()
-                        Button {
-                            Task {
-                                //친구요청을 보냄
-                                await friendViewModel.sendFriendRequest(friendUid: user.id)
+                        if !firestore.myFriendArray.contains(user) {
+                            Button {
+                                Task {
+                                    //친구요청을 보냄
+                                    await friendViewModel.sendFriendRequest(friendUid: user.id)
+                                }
+                            } label: {
+                                Text("추가하기")
                             }
-                        } label: {
-                            Text("추가하기")
                         }
 
                     }
@@ -144,6 +146,6 @@ struct SearchUserView: View {
 
 struct SearchUserView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchUserView(friendViewModel: FriendViewModel())
+        SearchUserView(firestore: FireStoreViewModel(), friendViewModel: FriendViewModel())
     }
 }
