@@ -7,10 +7,10 @@
 import SwiftUI
 
 struct DrawerListView: View {
+    
     @StateObject private var firestoreViewModel = FireStoreViewModel()
     
     var body: some View {
-        
         
         ZStack {
             Color("White")
@@ -42,17 +42,17 @@ struct DrawerListView: View {
                     }
                     .hLeading()
                     
-                    //                    Text(task.taskDate.formatted(date: .omitted, time: .shortened))
-//                    ForEach(task.createdAt,id:\.self) {value in
-//                        Text(value)
-//                    }
+                    // 생성 날짜
+                    Text(task.createdDate)
+                    
+                    // 기록 수정 삭제 기능 추가해야함(밀어서 삭제하기)
                     
                 }
                 
                 HStack(spacing: 0) {
                     HStack(spacing: -10) {
                         
-                        //친구들 프사 추가하는거
+                        //친구들 프사 추가하는거(shareFriend에 친구 아이디가 추가되면 아이디를 가지고 이미지를 가져와야함)
                         ForEach(["p2", "p3", "p4"], id: \.self) { user in
                             
                             Image(user)
@@ -83,10 +83,6 @@ struct DrawerListView: View {
         }
         .hLeading()
     }
-}
-
-extension DrawerListView{
-    
 }
 
 struct DrawerListView_Previews: PreviewProvider {
