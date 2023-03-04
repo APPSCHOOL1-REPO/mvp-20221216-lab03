@@ -22,7 +22,6 @@ struct AppleUser: Codable {
 }
 
 struct LoginView: View {
-    @StateObject var kakaoLoginViewModel: KakaoAuthViewModel = KakaoAuthViewModel()
     @EnvironmentObject private var registerModel: RegisterModel
     
     @State var email = ""
@@ -100,7 +99,19 @@ struct LoginView: View {
                     
                     HStack(spacing: 20) {
                         // 애플 버튼
-                        CustomButton()
+                        HStack{
+                            Image(systemName: "applelogo")
+                                .resizable()
+                            
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 25, height: 25)
+                                .frame(height: 45)
+                            
+                            Text("Apple Sign in")
+                                .font(.callout)
+                                .lineLimit(1)
+                        }
+                        .padding(.horizontal,15)
                             .foregroundColor(.white)
                             .background {
                                 RoundedRectangle(cornerRadius: 10, style: .continuous)
@@ -112,22 +123,6 @@ struct LoginView: View {
                             }
                             .clipped()
                         
-                        CustomButton(isKakao: true)
-                            .foregroundColor(.black)
-                            .background {
-                                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .fill(.yellow)
-                            }
-                            .overlay{
-                                Button {
-                                    kakaoLoginViewModel.handleKakaoLogin()
-                                } label: {
-                                    Text("")
-                                }
-                                .blendMode(.overlay)
-                                
-                            }
-                            .clipped()
                         
                     }
                 
@@ -175,34 +170,7 @@ struct LoginView: View {
             print(error)
         }
     }
-    
-    @ViewBuilder
-    func CustomButton(isKakao: Bool = false)->some View {
-        HStack{
-            Group{
-                if isKakao{
-                    Image("Kakao")
-                        .resizable()
 
-                }else{
-                    Image(systemName: "applelogo")
-                        .resizable()
-                    
-                }
-            }
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 25, height: 25)
-            .frame(height: 45)
-            
-            Text("\(isKakao ? "카카오 로그인" : "Apple Sign in")")
-                .font(.callout)
-                .lineLimit(1)
-        }
-        .padding(.horizontal,15)
-        
-    }
-    
-    
 }
 
 struct LoginView_Previews: PreviewProvider {
