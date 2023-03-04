@@ -59,6 +59,14 @@ struct LoginView: View {
                                 .font(.custom("NotoSerifKR-Bold",size:20))
                                 .bold()
                         }
+                        .alert("계정 확인", isPresented: $registerModel.isError, actions: {
+                            
+                            Button("확인",role: .cancel,action: {
+                            })
+                        }, message: {
+                            Text("아이디 및 비밀번호를 확인해보세요.")
+                                .font(.custom("NotoSerifKR-Regular",size:16))
+                        })
 
                         NavigationLink {
                             RegisterView()

@@ -126,6 +126,7 @@ class RegisterModel: ObservableObject {
                 Auth.auth().signIn(withEmail: email, password: password) {result, error in
                 if let error {
                     print("Error: \(error.localizedDescription)")
+                    self.isError = true
                     return
                 }
                 self.currentUser = result?.user
