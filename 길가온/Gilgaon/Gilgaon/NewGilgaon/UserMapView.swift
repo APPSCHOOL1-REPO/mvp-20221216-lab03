@@ -14,8 +14,6 @@ import MapKit
 struct UserMapView: UIViewRepresentable {
     @ObservedObject var flowerMapViewModel: FlowerMapViewModel
     
-    var landmarks:[LandmarkAnnotation] = []
-    
     // func makeUIView() == func body() -> some View {}
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
@@ -23,7 +21,6 @@ struct UserMapView: UIViewRepresentable {
         setSubscriber(mapView)
         return mapView
     }
-    
     
     // MARK: - mapView에 "다음장소"버튼 클릭 시, 맵뷰의 Region을 변경
     func setSubscriber( _ mapView: MKMapView){
@@ -107,14 +104,12 @@ class UserMapViewCoordinator: NSObject, MKMapViewDelegate{
         guard let aView = mapView.dequeueReusableAnnotationView(withIdentifier: "custom") else {
             let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "custom")
             annotationView.image = setUpImage(annotation)
-            print("un reuse")
             return annotationView
         }
         aView.image = setUpImage(annotation)
         return aView
     }
 }
-
 
 //UIImage Renderer하기
 extension UIImage {
