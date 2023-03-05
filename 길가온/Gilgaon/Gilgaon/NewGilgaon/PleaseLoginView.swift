@@ -15,9 +15,11 @@ struct PleaseLoginView: View {
             Group {
                 if registerModel.currentUser != nil {
                     if registerModel.currentUserProfile == nil {
-                        RegisterView()
+                            RegisterView()
+                            .deferredRendering(for: 0.5)
                     } else {
                         HomeView()
+                            .deferredRendering(for: 0.5)
                     }
                 } else {
                     LoginView()
@@ -49,4 +51,44 @@ extension UINavigationController {
     navigationBar.topItem?.backButtonDisplayMode = .minimal
   }
 
+}
+
+// MARK: 지연 시키는 ViewModifier
+private struct DeferredViewModifier: ViewModifier {
+    
+    // MARK: API
+    
+    let threshold: Double
+    
+    // MARK: - ViewModifier
+    
+    func body(content: Content) -> some View {
+        _content(content)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + threshold) {
+                    self.shouldRender = true
+                }
+            }
+    }
+    
+    // MARK: - Private
+    
+    @ViewBuilder
+    private func _content(_ content: Content) -> some View {
+        if shouldRender {
+            content
+        } else {
+            content
+                .hidden()
+        }
+    }
+    
+    @State
+    private var shouldRender = false
+}
+
+extension View {
+    func deferredRendering(for seconds: Double) -> some View {
+        modifier(DeferredViewModifier(threshold: seconds))
+    }
 }
