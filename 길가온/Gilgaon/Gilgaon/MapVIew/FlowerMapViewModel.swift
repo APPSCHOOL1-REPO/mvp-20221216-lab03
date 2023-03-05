@@ -18,6 +18,8 @@ final class FlowerMapViewModel: ObservableObject{
     
     @Published var nextBtnPressed: Bool = false
     @Published var detailBtnPressed:Bool = false
+    @Published var showLocationsList: Bool = false
+    
     var buttonCancellable: AnyCancellable?
     
     func showNextLocation(location: MarkerModel){
@@ -61,8 +63,12 @@ final class FlowerMapViewModel: ObservableObject{
     }
     
     func updateMapRegions(_ mapMarker: MarkerModel){
-        mapRegions = MKCoordinateRegion(center: mapMarker.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta:0.02))
+        self.mapRegions = MKCoordinateRegion(center: mapMarker.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta:0.02))
     }
     
-    
+    func toggleLocationsList(){
+        withAnimation(.easeInOut) {
+            showLocationsList.toggle()
+        }
+    }
 }

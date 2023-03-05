@@ -4,16 +4,6 @@
 //
 //  Created by sehooon on 2022/11/30.
 //
-/*
-12_23(금) 김민호
-발견된 문제점: [서랍]에 쌓인 기록들을 클릭하면 배열이 한박자 늦게 받아짐
-1.사용자가 클릭시
-2.배열을 받을때까지 기다리고
-3.맵뷰를 보여주는 순서를 해결하면 될 듯
- async await 공부하러가야딩...
- */
-
-
 import SwiftUI
 import MapKit
 
@@ -24,9 +14,8 @@ struct Place: Identifiable{
 }
 
 struct FlowerMapView: View {
-    @EnvironmentObject private var vm: LocationsViewModel
+    
     @StateObject var flowerMapViewModel = FlowerMapViewModel()
-//    @StateObject var fireStoreViewModel : FireStoreViewModel
     @State var getStringValue: String
     @State private var mapRegion = MKCoordinateRegion()
     @State var userTracking = MapUserTrackingMode.follow
@@ -59,30 +48,27 @@ struct FlowerMapView: View {
     
 }
 
-
-
 extension FlowerMapView {
     var header: some View{
-        Button(action: vm.toggleLocationsList){
+        Button(action: flowerMapViewModel.toggleLocationsList){
             VStack{
-                Text(vm.mapLocation.locationName)
+                Text(flowerMapViewModel.mapLocation.locationName)
                     .font(.custom("NotoSerifKR-SemiBold", size: 22))
                     .fontWeight(.black)
                     .foregroundColor(Color("Pink"))
                     .frame(height: 55)
                     .frame(maxWidth: .infinity)
-                    .animation(.none, value: vm.mapLocation)
+                    .animation(.none, value: flowerMapViewModel.mapLocation)
                     .overlay(alignment: .leading) {
                         Image(systemName: "chevron.up")
                             .font(.headline)
                             .foregroundColor(Color("DarkGray"))
                             .padding()
-                            .rotationEffect(Angle(degrees: vm.showLocationsList ? 180 : 0))
+                            .rotationEffect(Angle(degrees: flowerMapViewModel.showLocationsList ? 180 : 0))
                     }
-                if vm.showLocationsList{
-                    LocationsListView()
+                if flowerMapViewModel.showLocationsList{
+                    LocationsListView(flowerMapViewModel: flowerMapViewModel)
                 }
-                //
             }
             .background(.thickMaterial)
             .cornerRadius(10)
