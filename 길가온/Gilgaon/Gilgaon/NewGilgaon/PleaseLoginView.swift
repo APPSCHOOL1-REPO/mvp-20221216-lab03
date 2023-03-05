@@ -14,11 +14,11 @@ struct PleaseLoginView: View {
         NavigationStack {
             Group {
                 if registerModel.currentUser != nil {
-//                    if registerModel.currentUserProfile == nil {
-//                        RegisterView()
-//                    } else {
+                    if registerModel.currentUserProfile == nil {
+                        RegisterView()
+                    } else {
                         HomeView()
-                  //  }
+                    }
                 } else {
                     LoginView()
                 }
