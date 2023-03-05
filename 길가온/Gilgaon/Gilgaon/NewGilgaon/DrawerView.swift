@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 enum MiddleView: String {
     case schedule = "꽃갈피"
@@ -17,6 +18,12 @@ struct DrawerView: View {
     @State private var middleView: MiddleView = .schedule
     @EnvironmentObject var fireStoreViewModel: FireStoreViewModel
     
+    // 프로필 편집 모드
+    @State private var photoEditing: Bool = false
+    @State private var showPicker: Bool = false
+    @State private var profileImage: UIImage? = nil
+    @State var userProfile: FireStoreModel?
+
     
     private var middleViewArray: [MiddleView] = [.schedule, .list]
     
@@ -27,38 +34,113 @@ struct DrawerView: View {
                     .ignoresSafeArea()
                 
                 VStack {
-                
+ 
                     HStack {
                         // profile Image
                         Spacer()
+                        
                         VStack {
-                            if let url = fireStoreViewModel.profileUrlString,
-                               let imageUrl = URL(string: url) {
-                                AsyncImage(url: imageUrl) { image in
-                                    image
-                                        .resizable()
-                                        .clipShape(Circle())
-                                        .frame(width: 110, height: 110)
-                                        .overlay(RoundedRectangle(cornerRadius: 64)
-                                            .stroke(Color("Pink"), lineWidth: 3))
-                                    
-                                } placeholder: {
-                                    Image(systemName: "person.circle")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .foregroundColor(Color("Pink"))
-                                        .frame(width: 110, height: 110)
-                                        .aspectRatio(contentMode: .fit)
-                                }
-                            } else {
-                                Image(systemName: "person.circle")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .foregroundColor(Color("Pink"))
-                                    .frame(width: 110, height: 110)
-                            }
                             
+                            ZStack {
+                                Button {
+                                    photoEditing.toggle()
+                                } label: {
+                                    
+                                    if profileImage == nil {
+                                        if let url = fireStoreViewModel.profileUrlString,
+                                           let imageUrl = URL(string: url) {
+                                            AsyncImage(url: imageUrl) { image in
+                                                image
+                                                    .resizable()
+                                                    .clipShape(Circle())
+                                                    .frame(width: 110, height: 110)
+                                                    .overlay(RoundedRectangle(cornerRadius: 64)
+                                                        .stroke(Color("Pink"), lineWidth: 3))
+                                                
+                                            } placeholder: {
+                                                Image(systemName: "person.circle")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .foregroundColor(Color("Pink"))
+                                                    .frame(width: 110, height: 110)
+                                                    .aspectRatio(contentMode: .fit)
+                                            }
+                                        } else {
+                                            Image(systemName: "person.circle")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .foregroundColor(Color("Pink"))
+                                                .frame(width: 110, height: 110)
+                                        }
+                                    } else {
+                                        if profileImage != nil {
+                                            Image(uiImage: profileImage!)
+                                                .resizable()
+                                                .clipShape(Circle())
+                                                .frame(width: 110, height: 110)
+                                                .overlay(RoundedRectangle(cornerRadius: 64)
+                                                    .stroke(Color("Pink"), lineWidth: 3))
+                                        } else {
+                                            Image(systemName: "person.circle")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .foregroundColor(Color("Pink"))
+                                                .frame(width: 110, height: 110)
+                                                .aspectRatio(contentMode: .fit)
+                                        }
+                                    }
+                                    
+                                }
+                                
+                                VStack {
+                                    // MARK: 프로필 편집 모드 On
+                                    if photoEditing == true {
+                                        HStack(spacing: 10) {
+                                            // 선택된 이미지가 없는 경우
+                                            if profileImage == nil {
+                                                // 사진 선택 버튼
+                                                Button {
+                                                    showPicker.toggle()
+                                                } label: {
+                                                    Text("선택")
+                                                        .font(.custom("NotoSerifKR-Regular",size:12))
+                                                }
+                                                
+                                                // 선택된 이미지가 없는 경우
+                                            } else {
+                                                // 선택 완료 버튼
+                                                Button {
+                                                    photoEditing = false
+                                                    
+                                                    
+                                                    let userProfile = FireStoreModel(id: fireStoreViewModel.info?.id ?? "", nickName: fireStoreViewModel.userNickName, userPhoto: fireStoreViewModel.info?.userPhoto ?? "", userEmail: fireStoreViewModel.info?.userEmail ?? "")
+                                                    Task{
+                                                        await fireStoreViewModel.uploadImageToStorage(userImage: profileImage, user: userProfile)
+                                                    }
+                                                } label: {
+                                                    Text("완료")
+                                                        .font(.custom("NotoSerifKR-Regular",size:12))
+                                                }
+                                                
+                                            }
+                                            
+                                            // 선택 취소 버튼
+                                            Button(action: {
+                                                photoEditing = false
+                                                profileImage = nil
+                                            }) {
+                                                Text("취소")
+                                                    .font(.custom("NotoSerifKR-Regular",size:12))
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                                .offset(y: 70)
+                            }
+     
                         }
+                
 //                        .offset(x: -65)
                         Spacer()
                         VStack(alignment: .leading) {
@@ -80,6 +162,7 @@ struct DrawerView: View {
 //                        .offset(x: -30)
                         Spacer()
                     }
+                    .padding(.bottom, 30)
                     
                     
                     HStack {
@@ -129,6 +212,9 @@ struct DrawerView: View {
             .onAppear {
                 //                myInfo(fireStoreViewModel.currentUserId!)
                 fireStoreViewModel.myInfo(fireStoreViewModel.currentUserId!)
+            }
+            .fullScreenCover(isPresented: $showPicker) {
+                ImagePicker(image: $profileImage)
             }
             .toolbar {
                 Button {

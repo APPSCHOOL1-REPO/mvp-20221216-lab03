@@ -16,10 +16,10 @@ struct PleaseLoginView: View {
                 if registerModel.currentUser != nil {
                     if registerModel.currentUserProfile == nil {
                             RegisterView()
-                            .deferredRendering(for: 0.5)
+                            .deferredRendering(for: 1.0)
                     } else {
                         HomeView()
-                            .deferredRendering(for: 0.5)
+                            .deferredRendering(for: 1.0)
                     }
                 } else {
                     LoginView()
