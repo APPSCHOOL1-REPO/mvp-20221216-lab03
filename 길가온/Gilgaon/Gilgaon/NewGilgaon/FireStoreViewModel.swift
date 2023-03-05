@@ -3,7 +3,7 @@
 //  Gilgaon
 //
 //  Created by kimminho on 2022/12/20.
-
+// MARK: -준수 수정함
 import UIKit
 import Firebase
 import FirebaseFirestore
