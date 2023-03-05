@@ -4,7 +4,7 @@
 //
 //  Created by sehooon on 2022/12/22.
 //
-// MARK: -준수 수정함
+// MARK: -준수 수정
 import SwiftUI
 
 struct OnboardingMapDescribeView: View {

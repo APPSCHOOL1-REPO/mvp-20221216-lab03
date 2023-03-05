@@ -4,7 +4,7 @@
 //
 //  Created by kimminho on 2022/12/01.
 //
-// MARK: -준수 수정함
+// MARK: -준수 수정
 import SwiftUI
 
 struct OnboardingTabView: View {

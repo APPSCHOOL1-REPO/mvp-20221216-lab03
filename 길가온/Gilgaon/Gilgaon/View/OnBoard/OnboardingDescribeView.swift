@@ -18,7 +18,7 @@
  === NotoSerifKR-Bold
  === NotoSerifKR-Black
  */
-// MARK: -준수 수정함
+// MARK: -준수 수정
 import SwiftUI
 
 struct OnboardingDescribeView: View {
