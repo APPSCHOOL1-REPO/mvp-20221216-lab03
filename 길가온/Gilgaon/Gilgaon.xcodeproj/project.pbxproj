@@ -19,6 +19,12 @@
 		1642F0FE29388BC6005A54EF /* NotoSerifKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1642F0F729388BC5005A54EF /* NotoSerifKR-Black.otf */; };
 		1642F0FF29388BC6005A54EF /* NotoSerifKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1642F0F829388BC6005A54EF /* NotoSerifKR-Bold.otf */; };
 		1642F10029388BC6005A54EF /* NotoSerifKR-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1642F0F929388BC6005A54EF /* NotoSerifKR-ExtraLight.otf */; };
+		169C821729AF724100DE8090 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 169C821629AF724100DE8090 /* GoogleService-Info.plist */; };
+		16A60C1429B039C300116569 /* SkeletonUI in Frameworks */ = {isa = PBXBuildFile; productRef = 16A60C1329B039C300116569 /* SkeletonUI */; };
+		16A60C1629B0448600116569 /* SegmentControllView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A60C1529B0448600116569 /* SegmentControllView.swift */; };
+		16A60C1829B044DC00116569 /* FriendSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A60C1729B044DC00116569 /* FriendSettingView.swift */; };
+		16A60C1A29B0463400116569 /* FriendRequestCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A60C1929B0463400116569 /* FriendRequestCheckView.swift */; };
+		16A60C1C29B04AFF00116569 /* FriendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A60C1B29B04AFF00116569 /* FriendViewModel.swift */; };
 		16CA72952939BDE200D451F0 /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 16CA72942939BDE200D451F0 /* AppIcon.appiconset */; };
 		16CFFE0629363BEA00DC0B55 /* CalendarSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CFFE0529363BE900DC0B55 /* CalendarSelectView.swift */; };
 		16CFFE0829363CEF00DC0B55 /* InviteFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16CFFE0729363CEF00DC0B55 /* InviteFriendView.swift */; };
@@ -99,6 +105,11 @@
 		1642F0F729388BC5005A54EF /* NotoSerifKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifKR-Black.otf"; sourceTree = "<group>"; };
 		1642F0F829388BC6005A54EF /* NotoSerifKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifKR-Bold.otf"; sourceTree = "<group>"; };
 		1642F0F929388BC6005A54EF /* NotoSerifKR-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifKR-ExtraLight.otf"; sourceTree = "<group>"; };
+		169C821629AF724100DE8090 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		16A60C1529B0448600116569 /* SegmentControllView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentControllView.swift; sourceTree = "<group>"; };
+		16A60C1729B044DC00116569 /* FriendSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSettingView.swift; sourceTree = "<group>"; };
+		16A60C1929B0463400116569 /* FriendRequestCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestCheckView.swift; sourceTree = "<group>"; };
+		16A60C1B29B04AFF00116569 /* FriendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewModel.swift; sourceTree = "<group>"; };
 		16CA72942939BDE200D451F0 /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
 		16CFFE0529363BE900DC0B55 /* CalendarSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSelectView.swift; sourceTree = "<group>"; };
 		16CFFE0729363CEF00DC0B55 /* InviteFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendView.swift; sourceTree = "<group>"; };
@@ -175,6 +186,7 @@
 				6FF334C52935F1B3007438B1 /* KakaoSDKCommon in Frameworks */,
 				6FF334C32935F1B3007438B1 /* KakaoSDKAuth in Frameworks */,
 				161510C52950305A00BA7FFE /* FirebaseFirestore in Frameworks */,
+				16A60C1429B039C300116569 /* SkeletonUI in Frameworks */,
 				3691CB3229364AC400F41FDB /* Polyline in Frameworks */,
 				16F69DAA2938461F0045CD91 /* Lottie in Frameworks */,
 				161510C32950305A00BA7FFE /* FirebaseAuth in Frameworks */,
@@ -202,6 +214,10 @@
 				16EE2F672951885A00414279 /* SearchUserView.swift */,
 				369484C12952E1960030890A /* Util.swift */,
 				362A085029557CC500C582B4 /* AddMarkerFriendView.swift */,
+				16A60C1529B0448600116569 /* SegmentControllView.swift */,
+				16A60C1729B044DC00116569 /* FriendSettingView.swift */,
+				16A60C1929B0463400116569 /* FriendRequestCheckView.swift */,
+				16A60C1B29B04AFF00116569 /* FriendViewModel.swift */,
 			);
 			path = NewGilgaon;
 			sourceTree = "<group>";
@@ -290,6 +306,7 @@
 				6FF334CA2935F1D9007438B1 /* Info.plist */,
 				635AE3842935E932008A8452 /* GilgaonApp.swift */,
 				161510BF29502F8000BA7FFE /* GoogleService-Info.plist */,
+				169C821629AF724100DE8090 /* GoogleService-Info.plist */,
 				3663C66D2938631E006880C9 /* MapVIew */,
 				635AE3A729361971008A8452 /* View */,
 				63D2C1242938371C0011BC89 /* ViewModel */,
@@ -401,6 +418,7 @@
 				161510C22950305A00BA7FFE /* FirebaseAuth */,
 				161510C42950305A00BA7FFE /* FirebaseFirestore */,
 				6380E77F2952C3EE007772C3 /* FirebaseStorage */,
+				16A60C1329B039C300116569 /* SkeletonUI */,
 			);
 			productName = Gilgaon;
 			productReference = 635AE3812935E932008A8452 /* Gilgaon.app */;
@@ -436,6 +454,7 @@
 				16F69DA82938461F0045CD91 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 				16FA82C9293906BA006129D3 /* XCRemoteSwiftPackageReference "PopupView" */,
 				161510C12950305A00BA7FFE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				16A60C1229B039C300116569 /* XCRemoteSwiftPackageReference "SkeletonUI" */,
 			);
 			productRefGroup = 635AE3822935E932008A8452 /* Products */;
 			projectDirPath = "";
@@ -460,6 +479,7 @@
 				1642F0FA29388BC6005A54EF /* NotoSerifKR-Regular.otf in Resources */,
 				161510C029502F8000BA7FFE /* GoogleService-Info.plist in Resources */,
 				C0B7045B29388F1200245ED7 /* Sakura.json in Resources */,
+				169C821729AF724100DE8090 /* GoogleService-Info.plist in Resources */,
 				16FA82C6293903BC006129D3 /* InviteFriendLottie.json in Resources */,
 				1642F10029388BC6005A54EF /* NotoSerifKR-ExtraLight.otf in Resources */,
 				1642F0FB29388BC6005A54EF /* NotoSerifKR-Light.otf in Resources */,
@@ -496,8 +516,10 @@
 				635AE3A12935EA04008A8452 /* SettingView.swift in Sources */,
 				635AE3852935E932008A8452 /* GilgaonApp.swift in Sources */,
 				634BC642295039D10044B38B /* DrawerScheduleView.swift in Sources */,
+				16A60C1C29B04AFF00116569 /* FriendViewModel.swift in Sources */,
 				635AE39D2935E9F6008A8452 /* CalendarView.swift in Sources */,
 				16F69DB729387E030045CD91 /* GilgaonRequestPermissonView.swift in Sources */,
+				16A60C1629B0448600116569 /* SegmentControllView.swift in Sources */,
 				16CFFE0629363BEA00DC0B55 /* CalendarSelectView.swift in Sources */,
 				635AE3952935E9DC008A8452 /* LoginView.swift in Sources */,
 				16F69DA7293845E80045CD91 /* LottieView.swift in Sources */,
@@ -510,6 +532,7 @@
 				63D2C123293836CD0011BC89 /* DayTask.swift in Sources */,
 				16F69DB629387E030045CD91 /* OnboardingTabView.swift in Sources */,
 				634BC646295043110044B38B /* FriendsView.swift in Sources */,
+				16A60C1829B044DC00116569 /* FriendSettingView.swift in Sources */,
 				16D46FA42935EC7F00BB9440 /* SearchNetwork.swift in Sources */,
 				16EE2F682951885A00414279 /* SearchUserView.swift in Sources */,
 				161510C7295036B300BA7FFE /* RegisterModel.swift in Sources */,
@@ -517,6 +540,7 @@
 				635AE3992935E9E7008A8452 /* TabBarView.swift in Sources */,
 				16D46F9F2935EC7F00BB9440 /* TestAPIView.swift in Sources */,
 				635AE3932935E9D5008A8452 /* SplashView.swift in Sources */,
+				16A60C1A29B0463400116569 /* FriendRequestCheckView.swift in Sources */,
 				16F69DB529387E030045CD91 /* OnboardingDescribeView.swift in Sources */,
 				3663C67B293863D4006880C9 /* LocationDataService.swift in Sources */,
 				3663C67329386383006880C9 /* Location.swift in Sources */,
@@ -748,6 +772,14 @@
 				kind = branch;
 			};
 		};
+		16A60C1229B039C300116569 /* XCRemoteSwiftPackageReference "SkeletonUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CSolanaM/SkeletonUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		16F69DA82938461F0045CD91 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
@@ -792,6 +824,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 161510C12950305A00BA7FFE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		16A60C1329B039C300116569 /* SkeletonUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 16A60C1229B039C300116569 /* XCRemoteSwiftPackageReference "SkeletonUI" */;
+			productName = SkeletonUI;
 		};
 		16F69DA92938461F0045CD91 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;
