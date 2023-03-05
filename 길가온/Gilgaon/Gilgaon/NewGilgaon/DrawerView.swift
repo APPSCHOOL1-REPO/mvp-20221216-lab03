@@ -37,22 +37,25 @@ struct DrawerView: View {
                                 AsyncImage(url: imageUrl) { image in
                                     image
                                         .resizable()
-                                        .scaledToFill()
+                                        .clipShape(Circle())
                                         .frame(width: 110, height: 110)
-                                        .cornerRadius(64)
                                         .overlay(RoundedRectangle(cornerRadius: 64)
                                             .stroke(Color("Pink"), lineWidth: 3))
                                     
                                 } placeholder: {
-                                    
+                                    Image(systemName: "person.circle")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .foregroundColor(Color("Pink"))
+                                        .frame(width: 110, height: 110)
+                                        .aspectRatio(contentMode: .fit)
                                 }
-                            } else{
-                                Image(systemName: "person.fill")
+                            } else {
+                                Image(systemName: "person.circle")
+                                    .resizable()
+                                    .scaledToFit()
                                     .foregroundColor(Color("Pink"))
-                                    .font(.system(size: 64))
-                                    .padding()
-                                    .overlay(RoundedRectangle(cornerRadius: 64)
-                                        .stroke(Color("Pink"), lineWidth: 3))
+                                    .frame(width: 110, height: 110)
                             }
                             
                         }
