@@ -13,62 +13,125 @@ enum MiddleView: String {
 }
 
 struct DrawerView: View {
-    
+    @State private var showMenu: Bool = false
+    @State private var middleView: MiddleView = .schedule
     @EnvironmentObject var fireStoreViewModel: FireStoreViewModel
     
-    @State private var showMenu: Bool = false
     
+    private var middleViewArray: [MiddleView] = [.schedule, .list]
     
     var body: some View {
         NavigationStack {
-            GeometryReader { geometry in
-                ZStack {
-                    Color("White")
-                        .ignoresSafeArea()
-                    //서랍, 꽃갈피 뷰
-                    DrawerDetailView(showMenu: $showMenu)
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                    
-                    //                    GeometryReader { geometry in
+            ZStack {
+                Color("White")
+                    .ignoresSafeArea()
+                
+                VStack {
+                
                     HStack {
+                        // profile Image
                         Spacer()
-                        if showMenu {
-                            //햄버거 메뉴 눌렀을 때 보이는 뷰
-                            DrawerSettingView()
-                                .frame(width: geometry.size.width/2)
-                                .animation(.easeInOut(duration: 0.1), value: showMenu)
-                                .transition(.move(edge: .trailing)) //왼쪽에서 스윽 나옴
-                                .onTapGesture {
-                                    //햄버거 메뉴 뷰 터치하면 화면 안꺼지게
-                                    self.showMenu = true
+                        VStack {
+                            if let url = fireStoreViewModel.profileUrlString,
+                               let imageUrl = URL(string: url) {
+                                AsyncImage(url: imageUrl) { image in
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 110, height: 110)
+                                        .cornerRadius(64)
+                                        .overlay(RoundedRectangle(cornerRadius: 64)
+                                            .stroke(Color("Pink"), lineWidth: 3))
+                                    
+                                } placeholder: {
+                                    
                                 }
-                        }
-                    }
-                    .background(Color("DarkGray").opacity(showMenu ? 0.5 : 0))
-                    .onTapGesture {
-                        //햄버거 메뉴 버튼말고 터치로 닫는 코드
-                        if self.showMenu {
-                            withAnimation {
-                                self.showMenu.toggle()
+                            } else{
+                                Image(systemName: "person.fill")
+                                    .foregroundColor(Color("Pink"))
+                                    .font(.system(size: 64))
+                                    .padding()
+                                    .overlay(RoundedRectangle(cornerRadius: 64)
+                                        .stroke(Color("Pink"), lineWidth: 3))
                             }
                             
                         }
-                    }
-                    //                    }
-                }
-                .onAppear {
-                    //                myInfo(fireStoreViewModel.currentUserId!)
-                    fireStoreViewModel.myInfo(fireStoreViewModel.currentUserId!)
-                }
-                .toolbar {
-                    Button {
-                        withAnimation {
-                            showMenu.toggle()
+//                        .offset(x: -65)
+                        Spacer()
+                        VStack(alignment: .leading) {
+                            Text(fireStoreViewModel.userNickName)
+                                .font(.custom("NotoSerifKR-Regular",size:25))
+                                .foregroundColor(Color("DarkGray"))
+                                .bold()
+                                .padding(.bottom, 10)
+                            
+                            NavigationLink {
+                                AddFriendView()
+                            } label: {
+                                
+                                Text("\(fireStoreViewModel.myFriendArray.count)명의 친구")
+                                    .font(.custom("NotoSerifKR-Regular",size:16))
+                                    
+                            }
                         }
-                        
-                    } label: {
-                        Image(systemName: "line.3.horizontal")
+//                        .offset(x: -30)
+                        Spacer()
                     }
+                    
+                    
+                    HStack {
+                        ForEach(middleViewArray, id: \.self) { select in
+                            ZStack {
+                                Button {
+                                    middleView = select
+                                } label: {
+                                    Text(select.rawValue)
+                                        .foregroundColor(middleView == select ? Color("Pink") : Color("DarkGray"))
+                                        .font(.custom("NotoSerifKR-Regular",size:16))
+                                }
+                                
+                                
+                                if middleView == select {
+                                    Capsule()
+                                        .foregroundColor(Color("Red"))
+                                        .frame(height: 3)
+                                        .offset(y: 17)
+                                }
+                                
+                            }
+                            .frame(width: 160)
+                        }
+                    }
+                    
+                    switch middleView {
+                    case .schedule:
+                        DrawerScheduleView()
+                    case .list:
+                        DrawerListView()
+                    }
+                }
+                
+                GeometryReader { _ in
+                    HStack {
+                        Spacer()
+                        DrawerSettingView()
+                            .offset(x: showMenu ? 0 : UIScreen.main.bounds.width)
+                            .animation(.easeInOut(duration: 0.3), value: showMenu)
+                    }
+                    
+                }
+                .background(Color("DarkGray").opacity(showMenu ? 0.5 : 0))
+                
+            }
+            .onAppear {
+                //                myInfo(fireStoreViewModel.currentUserId!)
+                fireStoreViewModel.myInfo(fireStoreViewModel.currentUserId!)
+            }
+            .toolbar {
+                Button {
+                    self.showMenu.toggle()
+                } label: {
+                    Image(systemName: "line.3.horizontal")
                 }
             }
         }
