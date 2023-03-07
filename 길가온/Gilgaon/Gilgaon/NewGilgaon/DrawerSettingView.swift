@@ -10,6 +10,7 @@ import SwiftUI
 struct DrawerSettingView: View {
     @EnvironmentObject var registerModel: RegisterModel
     
+    @State private var deleteAlert: Bool = false
     
     var body: some View {
         
@@ -34,6 +35,25 @@ struct DrawerSettingView: View {
                     
             }
             .padding()
+           
+                Button {
+                    
+                    self.deleteAlert = true
+                    
+                } label: {
+                    Text("회원탈퇴")
+                        .foregroundColor(Color("DarkGray"))
+                        .font(.custom("NotoSerifKR-Regular",size:16))
+                    
+                }
+                .alert("회원탈퇴", isPresented: $deleteAlert) {
+                    Button("취소") {}
+                    Button("회원탈퇴") {registerModel.deleteUser()
+                        
+                    }
+                       } message: {
+                           Text("회원탈퇴를 하시겠습니까?")
+                       }
             
             Spacer()
         }

@@ -54,6 +54,8 @@
 		369CF7FE29B07768000968D6 /* FlowerMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369CF7FD29B07768000968D6 /* FlowerMapViewModel.swift */; };
 		36A0C2802954423700DFDD45 /* OnboardingMapDescribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0C27F2954423700DFDD45 /* OnboardingMapDescribeView.swift */; };
 		36BB028B29518BD300CF2816 /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BB028A29518BD300CF2816 /* WritingView.swift */; };
+		4C4FB8A629B256B700C6A7B7 /* DrawerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4FB8A529B256B700C6A7B7 /* DrawerDetailView.swift */; };
+		4C64480929B07BA100242BBC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4C64480829B07BA000242BBC /* GoogleService-Info.plist */; };
 		634BC63E2950369D0044B38B /* DrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC63D2950369D0044B38B /* DrawerView.swift */; };
 		634BC6402950398C0044B38B /* DrawerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC63F2950398C0044B38B /* DrawerListView.swift */; };
 		634BC642295039D10044B38B /* DrawerScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634BC641295039D10044B38B /* DrawerScheduleView.swift */; };
@@ -132,6 +134,8 @@
 		369CF7FD29B07768000968D6 /* FlowerMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowerMapViewModel.swift; sourceTree = "<group>"; };
 		36A0C27F2954423700DFDD45 /* OnboardingMapDescribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMapDescribeView.swift; sourceTree = "<group>"; };
 		36BB028A29518BD300CF2816 /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
+		4C4FB8A529B256B700C6A7B7 /* DrawerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerDetailView.swift; sourceTree = "<group>"; };
+		4C64480829B07BA000242BBC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		634BC63D2950369D0044B38B /* DrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerView.swift; sourceTree = "<group>"; };
 		634BC63F2950398C0044B38B /* DrawerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerListView.swift; sourceTree = "<group>"; };
 		634BC641295039D10044B38B /* DrawerScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerScheduleView.swift; sourceTree = "<group>"; };
@@ -194,6 +198,7 @@
 				C0C44ACA2950AAA8006FE8A4 /* PleaseLoginView.swift */,
 				634BC63D2950369D0044B38B /* DrawerView.swift */,
 				634BC64329503C000044B38B /* DrawerSettingView.swift */,
+				4C4FB8A529B256B700C6A7B7 /* DrawerDetailView.swift */,
 				634BC641295039D10044B38B /* DrawerScheduleView.swift */,
 				634BC63F2950398C0044B38B /* DrawerListView.swift */,
 				634BC645295043110044B38B /* FriendsView.swift */,
@@ -462,6 +467,7 @@
 				6FF334C92935F1CD007438B1 /* Config.xcconfig in Resources */,
 				1642F0FA29388BC6005A54EF /* NotoSerifKR-Regular.otf in Resources */,
 				C0B7045B29388F1200245ED7 /* Sakura.json in Resources */,
+				4C64480929B07BA100242BBC /* GoogleService-Info.plist in Resources */,
 				16FA82C6293903BC006129D3 /* InviteFriendLottie.json in Resources */,
 				1642F10029388BC6005A54EF /* NotoSerifKR-ExtraLight.otf in Resources */,
 				1642F0FB29388BC6005A54EF /* NotoSerifKR-Light.otf in Resources */,
@@ -497,6 +503,7 @@
 				3663C67529386397006880C9 /* FlowerMapView.swift in Sources */,
 				635AE3A12935EA04008A8452 /* SettingView.swift in Sources */,
 				635AE3852935E932008A8452 /* GilgaonApp.swift in Sources */,
+				4C4FB8A629B256B700C6A7B7 /* DrawerDetailView.swift in Sources */,
 				634BC642295039D10044B38B /* DrawerScheduleView.swift in Sources */,
 				635AE39D2935E9F6008A8452 /* CalendarView.swift in Sources */,
 				16F69DB729387E030045CD91 /* GilgaonRequestPermissonView.swift in Sources */,
