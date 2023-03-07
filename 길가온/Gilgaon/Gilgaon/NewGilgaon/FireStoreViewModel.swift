@@ -3,7 +3,7 @@
 //  Gilgaon
 //
 //  Created by kimminho on 2022/12/20.
-
+// MARK: -준수 수정함
 import UIKit
 import Firebase
 import FirebaseFirestore
@@ -13,6 +13,8 @@ import Combine
 
 
 class FireStoreViewModel: ObservableObject {
+    
+    @Published var info: FireStoreModel?
     
     @Published var users: [FireStoreModel] = []
     @Published var userList: [FriendModel] = []
@@ -274,6 +276,37 @@ class FireStoreViewModel: ObservableObject {
            print("imageUpload Fail!")
         }
     }
+    
+    //프로필설정을 마치고 완료버튼을 눌렀을 때 발동
+    func addUserInfo(user: FireStoreModel, downloadUrl: String) {
+        print(#function)
+        database.collection("User")
+            .document(Auth.auth().currentUser?.uid ?? "")
+            .setData(["id": Auth.auth().currentUser?.uid ?? "",
+                      "nickName": user.nickName,
+                      "userPhoto": downloadUrl,
+                      "userEmail": user.userEmail
+                     ])
+    }
+    
+    
+    // MARK: - 회원가입 메서드
+    /// 회원가입시, 유저의 프로필을 파이어스토어 User컬렉션에 등록하는 메서드.
+    func uploadImageToStorage(userImage: UIImage?, user: FireStoreModel) async -> Void {
+        let ref = Storage.storage().reference(withPath: Auth.auth().currentUser?.uid ?? "")
+        guard let userImage, let imageData = userImage.jpegData(compressionQuality: 0.5) else {
+            self.addUserInfo(user: user, downloadUrl: "")
+            return
+        }
+        do{
+            let _ = try await ref.putDataAsync(imageData)
+            let downloadUrl = try await ref.downloadURL()
+            self.addUserInfo(user: user, downloadUrl: downloadUrl.absoluteString)
+        }catch{
+           print("imageUpload Fail!")
+        }
+    }
+    
     // [서랍 doc생성]
     func addCalendar(_ calendar: DayCalendarModel){
         database

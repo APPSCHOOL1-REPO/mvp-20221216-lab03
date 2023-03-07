@@ -4,8 +4,9 @@
 //
 //  Created by zooey on 2022/12/19.
 //
-
+// MARK: -준수 수정함
 import SwiftUI
+import PhotosUI
 
 enum MiddleView: String {
     case schedule = "꽃갈피"
@@ -16,11 +17,14 @@ struct DrawerView: View {
     
     @EnvironmentObject var fireStoreViewModel: FireStoreViewModel
     
+
     @State private var showMenu: Bool = false
+
     
     
     var body: some View {
         NavigationStack {
+
             GeometryReader { geometry in
                 ZStack {
                     Color("White")
@@ -29,6 +33,7 @@ struct DrawerView: View {
                     DrawerDetailView(showMenu: $showMenu)
                         .frame(width: geometry.size.width, height: geometry.size.height)
                     HStack {
+
                         Spacer()
                         if showMenu {
                             //햄버거 메뉴 눌렀을 때 보이는 뷰
@@ -39,6 +44,7 @@ struct DrawerView: View {
                             //햄버거 메뉴 뷰 터치하면 화면 안꺼지게
                                 .onTapGesture { self.showMenu = true }
                         }
+
                     }
                     .background(Color("DarkGray").opacity(showMenu ? 0.5 : 0))
                     //햄버거 메뉴 버튼말고 터치로 닫는 코드
@@ -49,6 +55,9 @@ struct DrawerView: View {
                 fireStoreViewModel.myInfo(fireStoreViewModel.currentUserId!)
                 fireStoreViewModel.fetchImageUrl()
                 fireStoreViewModel.fetchFriend()
+            }
+            .fullScreenCover(isPresented: $showPicker) {
+                ImagePicker(image: $profileImage)
             }
             .toolbar {
                 Button(action: { showMenu.toggle() }) {
