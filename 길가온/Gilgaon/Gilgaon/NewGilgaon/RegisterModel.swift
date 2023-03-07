@@ -137,14 +137,6 @@ class RegisterModel: ObservableObject {
             }
         }
     
-        // 로그아웃
-        func logout() {
-            currentUser = nil
-            PhotoId.photoUrl = ""
-            try? Auth.auth().signOut()
-            self.userRegisterType = .Email
-        }
-    
     // MARK: - UserProfile 유무 판별함수
     /// 로그인 후, 해당 유저의 프로필이 등록되어있는지 확인하는 함수
     func fetchUserInfo(_ userId: String) async throws -> FireStoreModel? {
@@ -157,22 +149,6 @@ class RegisterModel: ObservableObject {
         let userEmail: String = docData["userEmail"] as? String ?? ""
         let userInfo = FireStoreModel(id: snapshot.documentID, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
         return userInfo
-    }
-    
-    func deleteUser() {
-        print(#function)
-        //Refresh Token
-        //        print(Auth.auth().currentUser?.getIDToken())
-        let user = Auth.auth().currentUser
-        user?.delete { error in
-            if let error = error {
-                // An error happened.
-                print("error: \(error)")
-            } else {
-                // Account deleted.
-                self.currentUser = nil
-            }
-        }
     }
     
     func signout(){
@@ -211,6 +187,37 @@ class RegisterModel: ObservableObject {
             print("appleLogin Fail..!")
         }
         
+    }
+    
+    // 로그아웃
+    func logout() {
+        currentUser = nil
+        PhotoId.photoUrl = ""
+        try? Auth.auth().signOut()
+        self.userRegisterType = .Email
+    }
+    // 회원탈퇴
+    func deleteUser() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        Firestore.firestore().collection("User").document(uid).delete() { err in
+            
+            if let err {
+                print("회원탈퇴 중 error 만남: \(err)")
+            } else {
+                let user = Auth.auth().currentUser
+                user?.delete { err in
+                    if let err {
+                        print("사용자 삭제 중 오류 - \(err)")
+                    } else {
+                        print("회원탈퇴 성공")
+                        self.currentUser = nil
+                    }
+                }
+                
+            }
+            
+        }
     }
 }
     
@@ -253,9 +260,9 @@ func randomNonceString(length: Int = 32) -> String {
             }
         }
     }
-    
     return result
 }
+
 
 
 //let fireStoreAddUser = FireStoreModel(id: user.uid, nickName: nickName, userPhoto: "", userEmail: userID)
