@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		161510BE29502BE600BA7FFE /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161510BD29502BE600BA7FFE /* RegisterView.swift */; };
-		161510C029502F8000BA7FFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 161510BF29502F8000BA7FFE /* GoogleService-Info.plist */; };
 		161510C32950305A00BA7FFE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 161510C22950305A00BA7FFE /* FirebaseAuth */; };
 		161510C52950305A00BA7FFE /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 161510C42950305A00BA7FFE /* FirebaseFirestore */; };
 		161510C7295036B300BA7FFE /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 161510C6295036B300BA7FFE /* RegisterModel.swift */; };
@@ -48,9 +47,11 @@
 		3663C679293863C4006880C9 /* LocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C678293863C4006880C9 /* LocationsViewModel.swift */; };
 		3663C67B293863D4006880C9 /* LocationDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C67A293863D4006880C9 /* LocationDataService.swift */; };
 		3663C67D293881C1006880C9 /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3663C67C293881C1006880C9 /* SheetView.swift */; };
+		366600D329B045F300520F8F /* UserMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 366600D229B045F300520F8F /* UserMapView.swift */; };
 		3691CB3229364AC400F41FDB /* Polyline in Frameworks */ = {isa = PBXBuildFile; productRef = 3691CB3129364AC400F41FDB /* Polyline */; };
 		369484C22952E1960030890A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369484C12952E1960030890A /* Util.swift */; };
 		369CB73E293726E700C2E4BF /* JogakData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369CB73D293726E700C2E4BF /* JogakData.swift */; };
+		369CF7FE29B07768000968D6 /* FlowerMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369CF7FD29B07768000968D6 /* FlowerMapViewModel.swift */; };
 		36A0C2802954423700DFDD45 /* OnboardingMapDescribeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36A0C27F2954423700DFDD45 /* OnboardingMapDescribeView.swift */; };
 		36BB028B29518BD300CF2816 /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36BB028A29518BD300CF2816 /* WritingView.swift */; };
 		4C4FB8A629B256B700C6A7B7 /* DrawerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4FB8A529B256B700C6A7B7 /* DrawerDetailView.swift */; };
@@ -92,7 +93,6 @@
 
 /* Begin PBXFileReference section */
 		161510BD29502BE600BA7FFE /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
-		161510BF29502F8000BA7FFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		161510C6295036B300BA7FFE /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		1642F0F329388BC4005A54EF /* NotoSerifKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifKR-Regular.otf"; sourceTree = "<group>"; };
 		1642F0F429388BC5005A54EF /* NotoSerifKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSerifKR-Light.otf"; sourceTree = "<group>"; };
@@ -128,8 +128,10 @@
 		3663C678293863C4006880C9 /* LocationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsViewModel.swift; sourceTree = "<group>"; };
 		3663C67A293863D4006880C9 /* LocationDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataService.swift; sourceTree = "<group>"; };
 		3663C67C293881C1006880C9 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
+		366600D229B045F300520F8F /* UserMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMapView.swift; sourceTree = "<group>"; };
 		369484C12952E1960030890A /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		369CB73D293726E700C2E4BF /* JogakData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JogakData.swift; sourceTree = "<group>"; };
+		369CF7FD29B07768000968D6 /* FlowerMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowerMapViewModel.swift; sourceTree = "<group>"; };
 		36A0C27F2954423700DFDD45 /* OnboardingMapDescribeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingMapDescribeView.swift; sourceTree = "<group>"; };
 		36BB028A29518BD300CF2816 /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
 		4C4FB8A529B256B700C6A7B7 /* DrawerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerDetailView.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				16EE2F672951885A00414279 /* SearchUserView.swift */,
 				369484C12952E1960030890A /* Util.swift */,
 				362A085029557CC500C582B4 /* AddMarkerFriendView.swift */,
+				366600D229B045F300520F8F /* UserMapView.swift */,
 			);
 			path = NewGilgaon;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				3663C678293863C4006880C9 /* LocationsViewModel.swift */,
 				3663C67A293863D4006880C9 /* LocationDataService.swift */,
 				3663C67C293881C1006880C9 /* SheetView.swift */,
+				369CF7FD29B07768000968D6 /* FlowerMapViewModel.swift */,
 			);
 			path = MapVIew;
 			sourceTree = "<group>";
@@ -294,8 +298,6 @@
 				C0FA4348293623F4002D4473 /* Gilgaon.entitlements */,
 				6FF334CA2935F1D9007438B1 /* Info.plist */,
 				635AE3842935E932008A8452 /* GilgaonApp.swift */,
-				161510BF29502F8000BA7FFE /* GoogleService-Info.plist */,
-				4C64480829B07BA000242BBC /* GoogleService-Info.plist */,
 				3663C66D2938631E006880C9 /* MapVIew */,
 				635AE3A729361971008A8452 /* View */,
 				63D2C1242938371C0011BC89 /* ViewModel */,
@@ -464,7 +466,6 @@
 				16CA72952939BDE200D451F0 /* AppIcon.appiconset in Resources */,
 				6FF334C92935F1CD007438B1 /* Config.xcconfig in Resources */,
 				1642F0FA29388BC6005A54EF /* NotoSerifKR-Regular.otf in Resources */,
-				161510C029502F8000BA7FFE /* GoogleService-Info.plist in Resources */,
 				C0B7045B29388F1200245ED7 /* Sakura.json in Resources */,
 				4C64480929B07BA100242BBC /* GoogleService-Info.plist in Resources */,
 				16FA82C6293903BC006129D3 /* InviteFriendLottie.json in Resources */,
@@ -517,6 +518,7 @@
 				63660F4E2937216F00B70272 /* ImagePicker.swift in Sources */,
 				63D2C123293836CD0011BC89 /* DayTask.swift in Sources */,
 				16F69DB629387E030045CD91 /* OnboardingTabView.swift in Sources */,
+				366600D329B045F300520F8F /* UserMapView.swift in Sources */,
 				634BC646295043110044B38B /* FriendsView.swift in Sources */,
 				16D46FA42935EC7F00BB9440 /* SearchNetwork.swift in Sources */,
 				16EE2F682951885A00414279 /* SearchUserView.swift in Sources */,
@@ -527,6 +529,7 @@
 				635AE3932935E9D5008A8452 /* SplashView.swift in Sources */,
 				16F69DB529387E030045CD91 /* OnboardingDescribeView.swift in Sources */,
 				3663C67B293863D4006880C9 /* LocationDataService.swift in Sources */,
+				369CF7FE29B07768000968D6 /* FlowerMapViewModel.swift in Sources */,
 				3663C67329386383006880C9 /* Location.swift in Sources */,
 				362A085129557CC500C582B4 /* AddMarkerFriendView.swift in Sources */,
 				63660F522937573500B70272 /* Customtoggle.swift in Sources */,
