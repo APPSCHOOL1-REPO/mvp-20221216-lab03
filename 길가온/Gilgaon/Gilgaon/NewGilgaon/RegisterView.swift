@@ -62,139 +62,220 @@ struct RegisterView: View {
             Color("White")
                 .ignoresSafeArea()
             
-            VStack(spacing: 16) {
-                
-                Text("회원 가입")
-                    .font(.custom("NotoSerifKR-Bold", size: 30))
-                    .foregroundColor(Color("DarkGray"))
-                
-                Button {
-                    shouldShowImagePicker.toggle()
-                } label: {
-                    VStack {
-                        if let image = self.image {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 128, height: 128)
-                                .cornerRadius(64)
-                        } else {
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 64))
-                                .foregroundColor(Color("Pink"))
-                                .padding()
-                        }
-                    }
-                }
-                .overlay(RoundedRectangle(cornerRadius: 64)
-                    .stroke(Color("Pink"), lineWidth: 3))
-                Text("프로필 사진을 추가해보세요")
-                    .font(.custom("NotoSerifKR-Regular",size:14))
-                    .foregroundColor(Color("DarkGray"))
-                
-
-                
-                Form {
-                    Section {
-                        HStack {
-                            TextField("닉네임을 입력해주세요", text: $nickName)
-                                .focused($focusField, equals: .nickName)
-                            Circle()
-                                .frame(width:10,height:10)
-                                .foregroundColor((nickName.count >= 2) && nickName.count <= 15 ? .green : .red)
-                        }
-
-                    } header: {
-                        SectionLabel(labelName: "닉네임")
-                    }.onSubmit {
-                        focusField = .email
-                    }
+            switch registerModel.userRegisterType {
+            case RegisterType.Email:
+                VStack(spacing: 16) {
                     
-                    Section {
-                        HStack {
-                            TextField("이메일을 입력해주세요.", text: $userEmail)
-                                .focused($focusField, equals: .email)
-                            Circle()
-                                .frame(width:10,height:10)
-                                .foregroundColor(isValidEmail(inputYourEmail: userEmail) ? .green : .red)
+                    Text("회원 가입")
+                        .font(.custom("NotoSerifKR-Bold", size: 30))
+                        .foregroundColor(Color("DarkGray"))
+                    
+                    Button {
+                        shouldShowImagePicker.toggle()
+                    } label: {
+                        VStack {
+                            if let image = self.image {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 128, height: 128)
+                                    .cornerRadius(64)
+                            } else {
+                                Image(systemName: "person.fill")
+                                    .font(.system(size: 64))
+                                    .foregroundColor(Color("Pink"))
+                                    .padding()
+                            }
+                        }
+                    }
+                    .overlay(RoundedRectangle(cornerRadius: 64)
+                        .stroke(Color("Pink"), lineWidth: 3))
+                    Text("프로필 사진을 추가해보세요")
+                        .font(.custom("NotoSerifKR-Regular",size:14))
+                        .foregroundColor(Color("DarkGray"))
+                    
+
+                    
+                    Form {
+                        Section {
+                            HStack {
+                                TextField("닉네임을 입력해주세요", text: $nickName)
+                                    .focused($focusField, equals: .nickName)
+                                Circle()
+                                    .frame(width:10,height:10)
+                                    .foregroundColor((nickName.count >= 2) && nickName.count <= 15 ? .green : .red)
+                            }
+
+                        } header: {
+                            SectionLabel(labelName: "닉네임")
+                        }.onSubmit {
+                            focusField = .email
                         }
                         
-                    } header: {
-                        SectionLabel(labelName: "이메일")
-                    }
-                    .onSubmit {
-                        focusField = .password
-                    }
-                    
-                    Section {
-                        HStack {
-                            SecureField("비밀번호 입력", text: $password)
-                                .focused($focusField, equals: .password)
-                            Circle()
-                                .frame(width:10,height:10)
-                                .foregroundColor(password.count >= 6 ? .green : .red)
+                        Section {
+                            HStack {
+                                TextField("이메일을 입력해주세요.", text: $userEmail)
+                                    .focused($focusField, equals: .email)
+                                Circle()
+                                    .frame(width:10,height:10)
+                                    .foregroundColor(isValidEmail(inputYourEmail: userEmail) ? .green : .red)
+                            }
+                            
+                        } header: {
+                            SectionLabel(labelName: "이메일")
                         }
                         .onSubmit {
-                                focusField = .passwordCheck
+                            focusField = .password
                         }
-                        HStack {
-                            SecureField("비밀번호를 재입력", text: $passwordCheck)
-                                .focused($focusField, equals: .passwordCheck)
-                            Circle()
-                                .frame(width:10,height:10)
-                                .foregroundColor(checkPasswordLogic(password: password, checkPassword: passwordCheck) ? .green : .red)
-                        }
-                    } header: {
-                        SectionLabel(labelName: "비밀번호")
-                    }
-
-                }
-                .textInputAutocapitalization(.never)
-                .scrollContentBackground(.hidden)
-                .font(.custom("NotoSerifKR-Regular",size:13))
-                .foregroundColor(Color("DarkGray"))
-
-                
-                Button {
-                    if (nickName != "") && (userEmail != "") && (password != "" && password.count >= 6) && (passwordCheck != "" && passwordCheck.count >= 6) {
-                        Task {
-                            try! await registerModel.registerUser(userID: userEmail, userPW: password, userImage: image)
-                            if registerModel.userUID != "" {
-                                if image != nil{
-                                    fireStoreViewModel.persisImageToStorage(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: PhotoId.photoUrl, userEmail: userEmail),userImage: image! )
-                                } else{
-                                    fireStoreViewModel.addUser(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: PhotoId.photoUrl, userEmail: userEmail),photoId: "")
-                                }   
+                        
+                        Section {
+                            HStack {
+                                SecureField("비밀번호 입력", text: $password)
+                                    .focused($focusField, equals: .password)
+                                Circle()
+                                    .frame(width:10,height:10)
+                                    .foregroundColor(password.count >= 6 ? .green : .red)
                             }
-                            if !registerModel.isError {
-                                dismiss()
+                            .onSubmit {
+                                    focusField = .passwordCheck
                             }
+                            HStack {
+                                SecureField("비밀번호를 재입력", text: $passwordCheck)
+                                    .focused($focusField, equals: .passwordCheck)
+                                Circle()
+                                    .frame(width:10,height:10)
+                                    .foregroundColor(checkPasswordLogic(password: password, checkPassword: passwordCheck) ? .green : .red)
+                            }
+                            
+                        } header: {
+                            SectionLabel(labelName: "비밀번호")
                         }
-                    }else {
-                        print("문제있음")
+
                     }
-                   
-                } label: {
-                    Text("가입하기")
-                        .font(.custom("NotoSerifKR-Bold",size:18))
-                        .foregroundColor(Color("DarkGray"))
-                }
-                .alert("오류", isPresented: $registerModel.isError, actions: {
+                    .textInputAutocapitalization(.never)
+                    .scrollContentBackground(.hidden)
+                    .font(.custom("NotoSerifKR-Regular",size:13))
+                    .foregroundColor(Color("DarkGray"))
+
                     
-                    Button("취소",role: .cancel,action: {
+                    Button {
+                        if (nickName != "") && (userEmail != "") && (password != "" && password.count >= 6) && (passwordCheck != "" && passwordCheck.count >= 6) {
+                            Task {
+                                try! await registerModel.registerUser(userID: userEmail, userPW: password, userImage: image)
+                                if registerModel.userUID != "" {
+                                    if image != nil{
+                                       await fireStoreViewModel.persisImageToStorage(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: PhotoId.photoUrl, userEmail: userEmail),userImage: image! )
+                                    } else{
+                                        fireStoreViewModel.addUser(user: FireStoreModel(id: registerModel.userUID, nickName: nickName, userPhoto: PhotoId.photoUrl, userEmail: userEmail),photoId: "")
+                                    }
+                                }
+                                if !registerModel.isError {
+                                    dismiss()
+                                }
+                            }
+                        }else {
+                            print("문제있음")
+                        }
+                       
+                    } label: {
+                        Text("가입하기")
+                            .font(.custom("NotoSerifKR-Bold",size:18))
+                            .foregroundColor(Color("DarkGray"))
+                    }
+                    .alert("오류", isPresented: $registerModel.isError, actions: {
+                        
+                        Button("취소",role: .cancel,action: {
+                        })
+                        Button("추가", action: {
+                        })
+                    }, message: {
+                        Text("\(registerModel.DetailError)")
+                            .font(.custom("NotoSerifKR-Regular",size:16))
                     })
-                    Button("추가", action: {
-                    })
-                }, message: {
-                    Text("\(registerModel.DetailError)")
-                        .font(.custom("NotoSerifKR-Regular",size:16))
-                })
-                .onDisappear {
-                    registerModel.isError = false
+                    .onDisappear {
+                        registerModel.isError = false
+                    }
+                    
+                    Spacer()
+                    
                 }
-                Spacer()
-                
+            case RegisterType.Apple:
+                VStack(spacing: 16) {
+                    
+                    Text("회원 가입")
+                        .font(.custom("NotoSerifKR-Bold", size: 30))
+                        .foregroundColor(Color("DarkGray"))
+                    
+                    Button {
+                        shouldShowImagePicker.toggle()
+                    } label: {
+                        VStack {
+                            if let image = self.image {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 128, height: 128)
+                                    .cornerRadius(64)
+                            } else {
+                                Image(systemName: "person.fill")
+                                    .font(.system(size: 64))
+                                    .foregroundColor(Color("Pink"))
+                                    .padding()
+                            }
+                        }
+                    }
+                    .overlay(RoundedRectangle(cornerRadius: 64)
+                        .stroke(Color("Pink"), lineWidth: 3))
+                    Text("프로필 사진을 추가해보세요")
+                        .font(.custom("NotoSerifKR-Regular",size:14))
+                        .foregroundColor(Color("DarkGray"))
+                    
+
+                    
+                    Form {
+                        Section {
+                            HStack {
+                                TextField("닉네임을 입력해주세요", text: $nickName)
+                                    .focused($focusField, equals: .nickName)
+                                Circle()
+                                    .frame(width:10,height:10)
+                                    .foregroundColor((nickName.count >= 2) && nickName.count <= 15 ? .green : .red)
+                            }
+
+                        } header: {
+                            SectionLabel(labelName: "닉네임")
+                        }.onSubmit {
+                            focusField = .email
+                        }
+                        
+                    }
+                    .textInputAutocapitalization(.never)
+                    .scrollContentBackground(.hidden)
+                    .font(.custom("NotoSerifKR-Regular",size:13))
+                    .foregroundColor(Color("DarkGray"))
+
+                    
+                    Button {
+                        if (nickName != "") {
+                            Task{
+                                let userProfile = FireStoreModel(id: Auth.auth().currentUser?.uid ?? "", nickName: nickName, userPhoto: PhotoId.photoUrl, userEmail: "")
+                                await fireStoreViewModel
+                                    .persisImageToStorage(user: userProfile, userImage: image!)
+                                registerModel.currentUserProfile = try await registerModel.fetchUserInfo(Auth.auth().currentUser?.uid ?? "")
+                             
+                            }
+                        }
+                    } label: {
+                        Text("가입하기")
+                            .font(.custom("NotoSerifKR-Bold",size:18))
+                            .foregroundColor(Color("DarkGray"))
+                    }
+                    
+                    Spacer()
+                    
+                }
             }
+            
         }
         .fullScreenCover(isPresented: $shouldShowImagePicker) {
             ImagePicker(image: $image)

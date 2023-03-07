@@ -1,28 +1,7 @@
 import SwiftUI
 import AuthenticationServices
 
-struct AppleUser: Codable {
-    let userId: String
-    let firstName: String
-    let lastName: String
-    let email: String
-    
-    init?(credentials: ASAuthorizationAppleIDCredential) {
-        guard
-            let firstName = credentials.fullName?.givenName,
-            let lastName = credentials.fullName?.familyName,
-            let email = credentials.email
-        else { return nil }
-        
-        self.userId = credentials.user
-        self.firstName = firstName
-        self.lastName = lastName
-        self.email = email
-    }
-}
-
 struct LoginView: View {
-    @StateObject var kakaoLoginViewModel: KakaoAuthViewModel = KakaoAuthViewModel()
     @EnvironmentObject private var registerModel: RegisterModel
     
     @State var email = ""
@@ -80,6 +59,14 @@ struct LoginView: View {
                                 .font(.custom("NotoSerifKR-Bold",size:20))
                                 .bold()
                         }
+                        .alert("계정 확인", isPresented: $registerModel.isError, actions: {
+                            
+                            Button("확인",role: .cancel,action: {
+                            })
+                        }, message: {
+                            Text("아이디 및 비밀번호를 확인해보세요.")
+                                .font(.custom("NotoSerifKR-Regular",size:16))
+                        })
 
                         NavigationLink {
                             RegisterView()
@@ -98,38 +85,27 @@ struct LoginView: View {
                     .textInputAutocapitalization(.never)
                     
                     
-                    HStack(spacing: 20) {
-                        // 애플 버튼
-                        CustomButton()
-                            .foregroundColor(.white)
-                            .background {
-                                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .fill(.black)
+                    SignInWithAppleButton { request in
+                        registerModel.nonce = randomNonceString()
+                        request.requestedScopes = [.fullName, .email]
+                        request.nonce = sha256(registerModel.nonce)
+                    } onCompletion: { (result) in
+                        switch result {
+                        case .success(let user):
+                            print("success")
+                            guard let credential = user.credential as?
+                                    ASAuthorizationAppleIDCredential else {
+                                print("error with firebase")
+                                return
                             }
-                            .overlay {
-                                SignInWithAppleButton(.signIn, onRequest: configure, onCompletion: handle)
-                                    .blendMode(.overlay)
-                            }
-                            .clipped()
-                        
-                        CustomButton(isKakao: true)
-                            .foregroundColor(.black)
-                            .background {
-                                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                    .fill(.yellow)
-                            }
-                            .overlay{
-                                Button {
-                                    kakaoLoginViewModel.handleKakaoLogin()
-                                } label: {
-                                    Text("")
-                                }
-                                .blendMode(.overlay)
-                                
-                            }
-                            .clipped()
-                        
+                            Task { await registerModel.appleAuthenticate(credential: credential) }
+                        case.failure(let error):
+                            print(error.localizedDescription)
+                        }
                     }
+
+                    .frame(width: 300, height: 45)
+
                 
                     
                 }
@@ -139,69 +115,6 @@ struct LoginView: View {
         }
         .accentColor(Color("Red"))
     }
-    
-    func configure(_ request: ASAuthorizationAppleIDRequest) {
-        request.requestedScopes = [.fullName, .email]
-//        request.nonce = ""
-    }
-    
-    func handle(_ authResult: Result<ASAuthorization, Error>) {
-        switch authResult {
-        case .success(let auth):
-            print(auth)
-            switch auth.credential {
-            case let appleIdCredentials as ASAuthorizationAppleIDCredential:
-                if let appleUser = AppleUser(credentials: appleIdCredentials),
-                   let appleUserData = try? JSONEncoder().encode(appleUser) {
-                    UserDefaults.standard.setValue(appleUserData, forKey: appleUser.userId)
-                    
-                    print("saved apple user", appleUser)
-                } else {
-//                    print("missing some fields", appleIdCredentials.email, appleIdCredentials.fullName, appleIdCredentials.user)
-                    
-                    guard
-                        let appleUserData = UserDefaults.standard.data(forKey: appleIdCredentials.user),
-                        let appleUser = try? JSONDecoder().decode(AppleUser.self, from: appleUserData)
-                    else { return }
-                    
-                    print(appleUser)
-                }
-                
-            default:
-                print(auth.credential)
-            }
-            
-        case .failure(let error):
-            print(error)
-        }
-    }
-    
-    @ViewBuilder
-    func CustomButton(isKakao: Bool = false)->some View {
-        HStack{
-            Group{
-                if isKakao{
-                    Image("Kakao")
-                        .resizable()
-
-                }else{
-                    Image(systemName: "applelogo")
-                        .resizable()
-                    
-                }
-            }
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 25, height: 25)
-            .frame(height: 45)
-            
-            Text("\(isKakao ? "카카오 로그인" : "Apple Sign in")")
-                .font(.callout)
-                .lineLimit(1)
-        }
-        .padding(.horizontal,15)
-        
-    }
-    
     
 }
 

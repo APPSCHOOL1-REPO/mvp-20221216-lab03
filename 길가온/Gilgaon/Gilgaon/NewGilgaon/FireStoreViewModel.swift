@@ -9,6 +9,7 @@ import Firebase
 import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
+import Combine
 
 
 class FireStoreViewModel: ObservableObject {
@@ -23,6 +24,8 @@ class FireStoreViewModel: ObservableObject {
     @Published var sharedFriendList:[FriendModel] = []
     @Published var isRecording: Bool = false
     @Published var profileUrlString: String?
+    @Published var searchText: String = ""
+    private var cancellables = Set<AnyCancellable>()
     
     @Published var userNickName: String = ""
     let database = Firestore.firestore()
@@ -183,7 +186,8 @@ class FireStoreViewModel: ObservableObject {
     }
     
     //사용자로부터 닉네임을 입력받아 일치하는 유저를 조회하는 함수
-    func searchUser(_ userName: String){
+    func searchUser(_ userName: String) async {
+        print(#function)
         database
             .collection("User")
             .getDocuments { (snapshot, error) in
@@ -192,21 +196,24 @@ class FireStoreViewModel: ObservableObject {
                     for document in snapshot.documents{
                         let id: String = document.documentID
                         let docData = document.data()
-                        if let nickName = docData["nickName"] as? String,
-                           nickName.contains(userName)
-                        {
-                            let docData = document.data()
-                            let nickName: String = docData["nickName"] as? String ?? ""
-                            let userPhoto: String = docData["userPhoto"] as? String ?? ""
-                            let userEmail:String = docData["userEmail"] as? String ?? ""
-                            let friend = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
-                            self.userList.append(friend)
+                        let nickName: String = docData["nickName"] as? String ?? ""
+                        let userPhoto: String = docData["userPhoto"] as? String ?? ""
+                        let userEmail:String = docData["userEmail"] as? String ?? ""
+                        let friend = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
+                        for i in self.myFriendArray {
+                            if i.id != id && nickName.contains(userName) {
+                                self.userList.append(friend)
+                                print(self.userList)
+                            }
                         }
+                        self.userList = Array(Set(self.userList))
+                        
                     }
                 }
             }
     }
     
+
     // id를 가지고 유저를 조회해 사진 url 가져오는 함수
     @MainActor
     func getImageURL(userId: [String]) async -> [FriendModel] {
@@ -237,27 +244,34 @@ class FireStoreViewModel: ObservableObject {
             return []
         }
     }
+    func searchUser() {
+        print(#function)
+        $searchText
+            .debounce(for: .milliseconds(800), scheduler: RunLoop.main)
+            .removeDuplicates()
+            .sink { _ in
+            } receiveValue: { text in
+                Task {
+                    await self.searchUser(text)
+                }
+            }
+            .store(in: &cancellables)
+            
+    }
     
-    func persisImageToStorage(user:FireStoreModel, userImage: UIImage) {
+    
+
+    func persisImageToStorage(user:FireStoreModel, userImage: UIImage) async -> Void {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         print("uid성공!")
         let ref = Storage.storage().reference(withPath: uid)
         guard let imageData = userImage.jpegData(compressionQuality: 0.5) else { return }
-        ref.putData(imageData, metadata: nil) { metadata, err in
-            if let err = err {
-                print("풋실패\(err)")
-                return
-            }
-            ref.downloadURL { url, err in
-                if let err = err {
-                    print("다운실패\(err)")
-                    return }
-                if let url = url    {
-                    self.addUser(user: user,photoId: url.absoluteString)
-                    PhotoId.photoUrl = url.absoluteString
-                    print(url.absoluteString)
-                }
-            }
+        do{
+            let _ = try await ref.putDataAsync(imageData)
+            let downloadUrl = try await ref.downloadURL()
+            self.addUser(user: user,photoId: downloadUrl.absoluteString)
+        }catch{
+           print("imageUpload Fail!")
         }
     }
     // [서랍 doc생성]
@@ -333,37 +347,34 @@ class FireStoreViewModel: ObservableObject {
     
     // [마커 가져오기]
     @MainActor
-    func fetchMarkers(inputID: String) async {
+    func fetchMarkers(inputID: String) async -> [MarkerModel] {
         print(#function)
-        print(inputID)
-        database.collection("User")
-            .document(self.currentUserId!)
-            .collection("Calendar")
-            .document(inputID)
-            .collection("Marker")
-            .getDocuments { (snapshot, error) in
-                self.markerList.removeAll()
-                LocationsDataService.locations.removeAll()
-                if let snapshot {
-                    for document in snapshot.documents {
-                        let id: String = document.documentID
-                        let docData = document.data()
-                        let title: String = docData["title"] as? String ?? ""
-                        let photo: String = docData["photo"] as? String ?? ""
-                        let createdAt: Double = docData["createdAt"] as? Double ?? 0
-                        let contents: String = docData["contents"] as? String ?? ""
-                        let locationName: String = docData["locationName"] as? String ?? ""
-                        let lat: String = docData["lat"] as? String ?? ""
-                        let lon: String = docData["lon"] as? String ?? ""
-                        let sharedFriend:[String] = docData["sharedFriend"] as? [String] ?? []
-                        
-                        let marker: MarkerModel = MarkerModel(id: id, title: title, photo: photo, createdAt: createdAt, contents: contents, locationName: locationName, lat: lat, lon: lon, shareFriend: sharedFriend)
-                        
-                        self.markerList.append(marker)
-                        LocationsDataService.locations = self.markerList
-                    }
-                }
+        var markerArr: [MarkerModel] = []
+        let ref = database.collection("User").document(self.currentUserId!).collection("Calendar").document(inputID).collection("Marker")
+        do{
+            let querySnapshots = try await ref.getDocuments()
+            for document in querySnapshots.documents{
+                let id: String = document.documentID
+                let docData = document.data()
+                let title: String = docData["title"] as? String ?? ""
+                let photo: String = docData["photo"] as? String ?? ""
+                let createdAt: Double = docData["createdAt"] as? Double ?? 0
+                let contents: String = docData["contents"] as? String ?? ""
+                let locationName: String = docData["locationName"] as? String ?? ""
+                let lat: String = docData["lat"] as? String ?? ""
+                let lon: String = docData["lon"] as? String ?? ""
+                let sharedFriend:[String] = docData["sharedFriend"] as? [String] ?? []
+                
+                let marker: MarkerModel = MarkerModel(id: id, title: title, photo: photo, createdAt: createdAt, contents: contents, locationName: locationName, lat: lat, lon: lon, shareFriend: sharedFriend)
+                
+                markerArr.append(marker)
+                LocationsDataService.locations = self.markerList
             }
-        print("markerList:",self.markerList)
+            return markerArr
+        }catch{
+            return []
+        }
+        
+        
     }
 }

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct FlowerMapPreview: View {
     @State var isTapped: Bool = false
-    @EnvironmentObject private var vm: LocationsViewModel
-    let location: MarkerModel
+    @ObservedObject var flowerMapViewModel: FlowerMapViewModel
+   
     
     var body: some View {
         HStack(alignment: .bottom){
@@ -43,7 +43,7 @@ struct FlowerMapPreview: View {
 extension FlowerMapPreview{
     private var imageSection: some View{
         ZStack{
-            if let imageName = location.photo{
+            if let imageName = flowerMapViewModel.mapLocation.photo{
                 Image(imageName)
                     .resizable()
                     .scaledToFill()
@@ -64,11 +64,11 @@ extension FlowerMapPreview{
     
     private var titleSection: some View{
         VStack(alignment: .leading,spacing: 4){
-            Text(location.locationName)
+            Text(flowerMapViewModel.mapLocation.locationName)
                 .font(.custom("NotoSerifKR-SemiBold", size: 22))
                 .fontWeight(.bold)
                 .foregroundColor(Color("DarkGray"))
-            Text(location.createdDate)
+            Text(flowerMapViewModel.mapLocation.createdDate)
                 .font(.custom("NotoSerifKR-SemiBold", size: 15))
                 .foregroundColor(Color("DarkGray"))
         }
@@ -77,7 +77,10 @@ extension FlowerMapPreview{
     
     private var nextButton: some View{
         Button {
-            vm.nextButtonPressed()
+            flowerMapViewModel.nextBtnPressed.toggle()
+            flowerMapViewModel.clickNextButton()
+            
+//            vm.nextButtonPressed()
         } label: {
             Text("다음 장소")
                 .font(.custom("NotoSerifKR-SemiBold", size: 17))
@@ -104,9 +107,12 @@ extension FlowerMapPreview{
 }
 
 
-struct FlowerMapPreview_Previews: PreviewProvider {
-    static var previews: some View {
-        FlowerMapPreview(location: LocationsDataService.locations.first!)
-            .environmentObject(LocationsViewModel())
-    }
-}
+//struct FlowerMapPreview_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FlowerMapPreview(location: LocationsDataService.locations.first!)
+//            .environmentObject(LocationsViewModel())
+//    }
+//}
+//
+//
+

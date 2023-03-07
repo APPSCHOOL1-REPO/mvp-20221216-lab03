@@ -10,14 +10,14 @@ import SwiftUI
 
 struct LocationsListView: View {
     
-    @EnvironmentObject private var vm: LocationsViewModel
+    @ObservedObject var flowerMapViewModel: FlowerMapViewModel
     //l7xx8749f7a7b24c491682f94ec946029847
     
     var body: some View {
         List{
-            ForEach(vm.locations){ location in
+            ForEach(flowerMapViewModel.locations){ location in
                 Button{
-                    vm.showNextLocation(location: location)
+                    flowerMapViewModel.showNextLocation(location: location)
                 }label: {
                     listRowView(location: location)
                 }
@@ -61,9 +61,9 @@ extension LocationsListView{
     }
 }
 
-struct LocationsListView_Previews: PreviewProvider {
-    static var previews: some View {
-        LocationsListView()
-            .environmentObject(LocationsViewModel())
-    }
-}
+//struct LocationsListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LocationsListView()
+//            .environmentObject(LocationsViewModel())
+//    }
+//}

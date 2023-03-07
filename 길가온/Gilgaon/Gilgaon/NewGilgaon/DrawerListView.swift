@@ -15,6 +15,7 @@ struct DrawerListView: View {
         ZStack {
             Color("White")
                 .ignoresSafeArea()
+//<<<<<<< Feat/#30
             
             List {
                 ForEach(firestoreViewModel.calendarList){ value in
@@ -23,6 +24,13 @@ struct DrawerListView: View {
                             NavigationLink(destination: FlowerMapView(fireStoreViewModel: firestoreViewModel,getStringValue: value.id)) { EmptyView() }
                                 .opacity(0)
                                 .buttonStyle(PlainButtonStyle())
+//=======
+            //ScrollView {
+            //    VStack {
+            //        ForEach(firestoreViewModel.calendarList){ value in
+            //            NavigationLink(destination: FlowerMapView( getStringValue: value.id)) {
+            //                taskCardView(task: value)
+//>>>>>>> dev
                         }
                 }
                 .listRowBackground(Color("White"))
