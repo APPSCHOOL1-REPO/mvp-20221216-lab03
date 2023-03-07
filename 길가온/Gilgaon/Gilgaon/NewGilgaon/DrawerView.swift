@@ -42,66 +42,63 @@ struct DrawerView: View {
                                     //햄버거 메뉴 뷰 터치하면 화면 안꺼지게
                                     self.showMenu = true
                                 }
-                            } else{
-                                Image(systemName: "person.fill")
-                                    .foregroundColor(Color("Pink"))
-                                    .font(.system(size: 64))
-                                    .padding()
-                                    .overlay(RoundedRectangle(cornerRadius: 64)
-                                        .stroke(Color("Pink"), lineWidth: 3))
-                            }
-                            
-                        }
-//                        .offset(x: -65)
-                        Spacer()
-                        VStack(alignment: .leading) {
-                            Text(fireStoreViewModel.userNickName)
-                                .font(.custom("NotoSerifKR-Regular",size:25))
-                                .foregroundColor(Color("DarkGray"))
-                                .bold()
-                                .padding(.bottom, 10)
-                            
-                            NavigationLink {
-                                FriendSettingView()
-                            } label: {
-                                
-                                Text("\(fireStoreViewModel.myFriendArray.count)명의 친구")
-                                    .font(.custom("NotoSerifKR-Regular",size:16))
-                                    
-                            }
-                        }
-                    }
-                    .background(Color("DarkGray").opacity(showMenu ? 0.5 : 0))
-                    .onTapGesture {
-                        //햄버거 메뉴 버튼말고 터치로 닫는 코드
-                        if self.showMenu {
-                            withAnimation {
-                                self.showMenu.toggle()
-                            }
-                            
-                        }
-                    }
-                    //                    }
-                }
-                .onAppear {
-                    //                myInfo(fireStoreViewModel.currentUserId!)
-                    fireStoreViewModel.myInfo(fireStoreViewModel.currentUserId!)
-                }
-                .toolbar {
-                    Button {
-                        withAnimation {
-                            showMenu.toggle()
+                        } else{
+                            Image(systemName: "person.fill")
+                                .foregroundColor(Color("Pink"))
+                                .font(.system(size: 64))
+                                .padding()
+                                .overlay(RoundedRectangle(cornerRadius: 64)
+                                    .stroke(Color("Pink"), lineWidth: 3))
                         }
                         
-                    } label: {
-                        Image(systemName: "line.3.horizontal")
+                    }
+                    //                        .offset(x: -65)
+                    Spacer()
+                    VStack(alignment: .leading) {
+                        Text(fireStoreViewModel.userNickName)
+                            .font(.custom("NotoSerifKR-Regular",size:25))
+                            .foregroundColor(Color("DarkGray"))
+                            .bold()
+                            .padding(.bottom, 10)
+                        
+                        NavigationLink {
+                            FriendSettingView()
+                        } label: {
+                            
+                            Text("\(fireStoreViewModel.myFriendArray.count)명의 친구")
+                                .font(.custom("NotoSerifKR-Regular",size:16))
+                            
+                        }
                     }
                 }
+                .background(Color("DarkGray").opacity(showMenu ? 0.5 : 0))
+                .onTapGesture {
+                    //햄버거 메뉴 버튼말고 터치로 닫는 코드
+                    if self.showMenu {
+                        withAnimation {
+                            self.showMenu.toggle()
+                        }
+                        
+                    }
+                }
+                //                    }
             }
-        }
-        .onAppear{
-            fireStoreViewModel.fetchImageUrl()
-            fireStoreViewModel.fetchFriend()
+            .onAppear {
+                //                myInfo(fireStoreViewModel.currentUserId!)
+                fireStoreViewModel.myInfo(fireStoreViewModel.currentUserId!)
+                fireStoreViewModel.fetchImageUrl()
+                fireStoreViewModel.fetchFriend()
+            }
+            .toolbar {
+                Button {
+                    withAnimation {
+                        showMenu.toggle()
+                    }
+                    
+                } label: {
+                    Image(systemName: "line.3.horizontal")
+                }
+            }
         }
     }
 }
