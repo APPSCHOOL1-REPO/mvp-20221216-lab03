@@ -81,7 +81,6 @@
 		63660F4E2937216F00B70272 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63660F4D2937216F00B70272 /* ImagePicker.swift */; };
 		63660F522937573500B70272 /* Customtoggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63660F512937573500B70272 /* Customtoggle.swift */; };
 		6380E7802952C3EE007772C3 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6380E77F2952C3EE007772C3 /* FirebaseStorage */; };
-		6398D89529B6EB9E0086ABC4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6398D89429B6EB9E0086ABC4 /* GoogleService-Info.plist */; };
 		63D2C123293836CD0011BC89 /* DayTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2C122293836CD0011BC89 /* DayTask.swift */; };
 		63D2C1282938379C0011BC89 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2C1272938379C0011BC89 /* TaskViewModel.swift */; };
 		63D2C12A2938388A0011BC89 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2C1292938388A0011BC89 /* DayView.swift */; };
@@ -92,6 +91,7 @@
 		6FF334C92935F1CD007438B1 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6FF334C82935F1CC007438B1 /* Config.xcconfig */; };
 		C0B7045B29388F1200245ED7 /* Sakura.json in Resources */ = {isa = PBXBuildFile; fileRef = C0B7045A29388F1200245ED7 /* Sakura.json */; };
 		C0C44ACB2950AAA8006FE8A4 /* PleaseLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C44ACA2950AAA8006FE8A4 /* PleaseLoginView.swift */; };
+		C0E09C5329B6F5CD00889C9C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0E09C5229B6F5CD00889C9C /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -163,7 +163,6 @@
 		635AE3AC29361A6D008A8452 /* DateTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTask.swift; sourceTree = "<group>"; };
 		63660F4D2937216F00B70272 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		63660F512937573500B70272 /* Customtoggle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customtoggle.swift; sourceTree = "<group>"; };
-		6398D89429B6EB9E0086ABC4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63D2C122293836CD0011BC89 /* DayTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTask.swift; sourceTree = "<group>"; };
 		63D2C1272938379C0011BC89 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		63D2C1292938388A0011BC89 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
@@ -171,6 +170,7 @@
 		6FF334CA2935F1D9007438B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C0B7045A29388F1200245ED7 /* Sakura.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sakura.json; sourceTree = "<group>"; };
 		C0C44ACA2950AAA8006FE8A4 /* PleaseLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PleaseLoginView.swift; sourceTree = "<group>"; };
+		C0E09C5229B6F5CD00889C9C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info/길가온/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C0FA4348293623F4002D4473 /* Gilgaon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gilgaon.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -307,8 +307,8 @@
 				1642F0EC2938897E005A54EF /* Font */,
 				C0FA4348293623F4002D4473 /* Gilgaon.entitlements */,
 				6FF334CA2935F1D9007438B1 /* Info.plist */,
-				6398D89429B6EB9E0086ABC4 /* GoogleService-Info.plist */,
 				635AE3842935E932008A8452 /* GilgaonApp.swift */,
+				C0E09C5229B6F5CD00889C9C /* GoogleService-Info.plist */,
 				3663C66D2938631E006880C9 /* MapVIew */,
 				635AE3A729361971008A8452 /* View */,
 				63D2C1242938371C0011BC89 /* ViewModel */,
@@ -472,7 +472,7 @@
 			files = (
 				635AE38C2935E934008A8452 /* Preview Assets.xcassets in Resources */,
 				1642F0FD29388BC6005A54EF /* NotoSerifKR-Medium.otf in Resources */,
-				6398D89529B6EB9E0086ABC4 /* GoogleService-Info.plist in Resources */,
+				C0E09C5329B6F5CD00889C9C /* GoogleService-Info.plist in Resources */,
 				1642F0FC29388BC6005A54EF /* NotoSerifKR-SemiBold.otf in Resources */,
 				1642F0FF29388BC6005A54EF /* NotoSerifKR-Bold.otf in Resources */,
 				16CA72952939BDE200D451F0 /* AppIcon.appiconset in Resources */,

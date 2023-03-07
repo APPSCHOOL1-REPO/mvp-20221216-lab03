@@ -56,9 +56,6 @@ struct DrawerView: View {
                 fireStoreViewModel.fetchImageUrl()
                 fireStoreViewModel.fetchFriend()
             }
-            .fullScreenCover(isPresented: $showPicker) {
-                ImagePicker(image: $profileImage)
-            }
             .toolbar {
                 Button(action: { showMenu.toggle() }) {
                     Image(systemName: "line.3.horizontal")
