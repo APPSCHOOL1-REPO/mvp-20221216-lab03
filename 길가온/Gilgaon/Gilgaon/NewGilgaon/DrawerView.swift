@@ -57,8 +57,10 @@ struct DrawerView: View {
                 fireStoreViewModel.fetchFriend()
             }
             .toolbar {
-                Button(action: { showMenu.toggle() }) {
-                    Image(systemName: "line.3.horizontal")
+                ToolbarItem {
+                    Button(action: { showMenu.toggle() }) {
+                        Image(systemName: "line.3.horizontal")
+                    }
                 }
             }
         }
