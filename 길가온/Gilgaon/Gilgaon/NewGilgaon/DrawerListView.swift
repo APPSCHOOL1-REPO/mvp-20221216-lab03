@@ -64,8 +64,6 @@ struct DrawerListView: View {
                     
                     // 생성 날짜
                     Text(task.createdDate)
-                    Text("\(task.taskDate)")
-                    Text("\(task.realDate)")
                     
                 }
                 
