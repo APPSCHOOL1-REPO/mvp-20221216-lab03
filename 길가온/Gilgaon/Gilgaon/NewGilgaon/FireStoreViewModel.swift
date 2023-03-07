@@ -206,26 +206,17 @@ class FireStoreViewModel: ObservableObject {
             }
     }
     
-    func persisImageToStorage(user:FireStoreModel, userImage: UIImage) {
+    func persisImageToStorage(user:FireStoreModel, userImage: UIImage) async -> Void {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         print("uid성공!")
         let ref = Storage.storage().reference(withPath: uid)
         guard let imageData = userImage.jpegData(compressionQuality: 0.5) else { return }
-        ref.putData(imageData, metadata: nil) { metadata, err in
-            if let err = err {
-                print("풋실패\(err)")
-                return
-            }
-            ref.downloadURL { url, err in
-                if let err = err {
-                    print("다운실패\(err)")
-                    return }
-                if let url = url    {
-                    self.addUser(user: user,photoId: url.absoluteString)
-                    PhotoId.photoUrl = url.absoluteString
-                    print(url.absoluteString)
-                }
-            }
+        do{
+            let _ = try await ref.putDataAsync(imageData)
+            let downloadUrl = try await ref.downloadURL()
+            self.addUser(user: user,photoId: downloadUrl.absoluteString)
+        }catch{
+           print("imageUpload Fail!")
         }
     }
     // [서랍 doc생성]

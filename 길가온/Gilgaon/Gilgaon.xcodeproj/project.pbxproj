@@ -80,8 +80,6 @@
 		63D2C123293836CD0011BC89 /* DayTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2C122293836CD0011BC89 /* DayTask.swift */; };
 		63D2C1282938379C0011BC89 /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2C1272938379C0011BC89 /* TaskViewModel.swift */; };
 		63D2C12A2938388A0011BC89 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D2C1292938388A0011BC89 /* DayView.swift */; };
-		6FF334BC2935F17D007438B1 /* AuthAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF334B92935F17C007438B1 /* AuthAppDelegate.swift */; };
-		6FF334BE2935F17D007438B1 /* KakaoAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF334BB2935F17C007438B1 /* KakaoAuthViewModel.swift */; };
 		6FF334C12935F1B3007438B1 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF334C02935F1B3007438B1 /* KakaoSDK */; };
 		6FF334C32935F1B3007438B1 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF334C22935F1B3007438B1 /* KakaoSDKAuth */; };
 		6FF334C52935F1B3007438B1 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF334C42935F1B3007438B1 /* KakaoSDKCommon */; };
@@ -89,6 +87,7 @@
 		6FF334C92935F1CD007438B1 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6FF334C82935F1CC007438B1 /* Config.xcconfig */; };
 		C0B7045B29388F1200245ED7 /* Sakura.json in Resources */ = {isa = PBXBuildFile; fileRef = C0B7045A29388F1200245ED7 /* Sakura.json */; };
 		C0C44ACB2950AAA8006FE8A4 /* PleaseLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C44ACA2950AAA8006FE8A4 /* PleaseLoginView.swift */; };
+		C0E09C4729B3AC0300889C9C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C0E09C4629B3AC0200889C9C /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -160,12 +159,11 @@
 		63D2C122293836CD0011BC89 /* DayTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayTask.swift; sourceTree = "<group>"; };
 		63D2C1272938379C0011BC89 /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		63D2C1292938388A0011BC89 /* DayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
-		6FF334B92935F17C007438B1 /* AuthAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthAppDelegate.swift; sourceTree = "<group>"; };
-		6FF334BB2935F17C007438B1 /* KakaoAuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KakaoAuthViewModel.swift; sourceTree = "<group>"; };
 		6FF334C82935F1CC007438B1 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		6FF334CA2935F1D9007438B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C0B7045A29388F1200245ED7 /* Sakura.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sakura.json; sourceTree = "<group>"; };
 		C0C44ACA2950AAA8006FE8A4 /* PleaseLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PleaseLoginView.swift; sourceTree = "<group>"; };
+		C0E09C4629B3AC0200889C9C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C0FA4348293623F4002D4473 /* Gilgaon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gilgaon.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -305,7 +303,6 @@
 				635AE3882935E934008A8452 /* Assets.xcassets */,
 				16CA72942939BDE200D451F0 /* AppIcon.appiconset */,
 				6FF334C82935F1CC007438B1 /* Config.xcconfig */,
-				6FF334B82935F17C007438B1 /* Auth */,
 				635AE38A2935E934008A8452 /* Preview Content */,
 			);
 			path = Gilgaon;
@@ -371,15 +368,6 @@
 				63D2C1272938379C0011BC89 /* TaskViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		6FF334B82935F17C007438B1 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				6FF334B92935F17C007438B1 /* AuthAppDelegate.swift */,
-				6FF334BB2935F17C007438B1 /* KakaoAuthViewModel.swift */,
-			);
-			path = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -461,6 +449,7 @@
 			files = (
 				635AE38C2935E934008A8452 /* Preview Assets.xcassets in Resources */,
 				1642F0FD29388BC6005A54EF /* NotoSerifKR-Medium.otf in Resources */,
+				C0E09C4729B3AC0300889C9C /* GoogleService-Info.plist in Resources */,
 				1642F0FC29388BC6005A54EF /* NotoSerifKR-SemiBold.otf in Resources */,
 				1642F0FF29388BC6005A54EF /* NotoSerifKR-Bold.otf in Resources */,
 				16CA72952939BDE200D451F0 /* AppIcon.appiconset in Resources */,
@@ -484,7 +473,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FF334BE2935F17D007438B1 /* KakaoAuthViewModel.swift in Sources */,
 				634BC63E2950369D0044B38B /* DrawerView.swift in Sources */,
 				362DC67429389FD100507017 /* LocationFetcher.swift in Sources */,
 				161510BE29502BE600BA7FFE /* RegisterView.swift in Sources */,
@@ -512,7 +500,6 @@
 				16F69DA7293845E80045CD91 /* LottieView.swift in Sources */,
 				36BB028B29518BD300CF2816 /* WritingView.swift in Sources */,
 				3663C67129386372006880C9 /* LocationListView.swift in Sources */,
-				6FF334BC2935F17D007438B1 /* AuthAppDelegate.swift in Sources */,
 				635AE39B2935E9F0008A8452 /* RecordView.swift in Sources */,
 				63D2C1282938379C0011BC89 /* TaskViewModel.swift in Sources */,
 				63660F4E2937216F00B70272 /* ImagePicker.swift in Sources */,
@@ -670,6 +657,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Gilgaon/Preview Content\"";
+				DEVELOPMENT_TEAM = JY747KU2DH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Gilgaon/Info.plist;
@@ -703,6 +691,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Gilgaon/Preview Content\"";
+				DEVELOPMENT_TEAM = JY747KU2DH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Gilgaon/Info.plist;

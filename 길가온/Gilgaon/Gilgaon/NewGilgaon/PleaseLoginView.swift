@@ -8,19 +8,28 @@
 import SwiftUI
 
 struct PleaseLoginView: View {
-    @EnvironmentObject private var registerModel: RegisterModel
+    @EnvironmentObject var registerModel: RegisterModel
     var body: some View {
         
         NavigationStack {
             Group {
                 if registerModel.currentUser != nil {
-                    HomeView()
+                    if registerModel.currentUserProfile == nil {
+                        RegisterView()
+                    } else {
+                        HomeView()
+                    }
                 } else {
                     LoginView()
                 }
             }
             .onAppear {
                 registerModel.listenToAuthState()
+                if registerModel.currentUser != nil {
+                    Task{
+                        registerModel.currentUserProfile = try await registerModel.fetchUserInfo(_: registerModel.currentUser!.uid)
+                    }
+                }
             }
         }
         .accentColor(Color("Red"))
