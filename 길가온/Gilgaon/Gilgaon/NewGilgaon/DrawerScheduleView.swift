@@ -7,14 +7,12 @@
 
 import SwiftUI
 
-
 struct DrawerScheduleView: View {
     @StateObject private var fireStoreViewModel = FireStoreViewModel()
     @State var isStart: Bool = false
     @State var isRecording: Bool = RecordingValue.isRecording
     @State var currentDate = Date()
-//    @Binding var currentDate: Date
-//    @Binding var calID: [String]
+    @State private var showModal = false
     
     @State private var title: String = ""
     var body: some View {
@@ -22,41 +20,62 @@ struct DrawerScheduleView: View {
             Color("White")
                 .ignoresSafeArea()
             VStack{
-                Button {
-                        isRecording.toggle()
-                        RecordingValue.isRecording = isRecording
-                    if isRecording == true{
-                        //  -> [스케쥴을 추가하는 View] //
-                        isStart = true
-                    }
-                } label: {
-                    Text(isRecording ? "기록멈추기": "기록하기")
-                        .font(.custom("NotoSerifKR-Regular",size:16))
-                }
-                .alert("기록을 시작합니다.", isPresented: $isStart, actions: {
-                    TextField("꽃갈피 제목", text: $title)
-                        .font(.custom("NotoSerifKR-Regular",size:16))
-                    Button("취소",role: .cancel,action: {
-                        isRecording = false
-                        RecordingValue.isRecording = isRecording
-                        title = ""
-                    })
-                    Button("추가", action: {
-
-                        let createdAt = Date().timeIntervalSince1970
-                        //민호
-                        let calendar = DayCalendarModel(id: UUID().uuidString, taskDate: currentDate, title: title, shareFriend: [], realDate: createdAt)
-
-                        //세훈
-//                        let calendar = DayCalendarModel(id: UUID().uuidString, taskDate: Date(),createdAt: Date().timeIntervalSince1970, title: title, shareFriend: [])
-
-                        fireStoreViewModel.addCalendar(calendar)
-                        title = ""
-                        
-                    })
-                }
-                )
-                .font(.custom("NotoSerifKR-Regular",size:16))
+//                Button {
+//                        isRecording.toggle()
+//                        RecordingValue.isRecording = isRecording
+//                    if isRecording == true{
+//                        //  -> [스케쥴을 추가하는 View] //
+//                        isStart = true
+//                    } else {
+//                        fireStoreViewModel.sharedFriendList = []
+//                    }
+//                } label: {
+//                    Text(isRecording ? "기록멈추기": "기록하기")
+//                        .font(.custom("NotoSerifKR-Regular",size:16))
+//                }
+//                .alert("기록을 시작합니다.", isPresented: $isStart, actions: {
+//                    TextField("꽃갈피 제목", text: $title)
+//                        .font(.custom("NotoSerifKR-Regular",size:16))
+//
+//                    Button {
+//                        showModal.toggle()
+//                    } label: {
+//                        if fireStoreViewModel.sharedFriendList.isEmpty {
+//                            Label("함께", systemImage: "plus")
+//                                .foregroundColor(Color("DarkGray"))
+//                                .font(.custom("NotoSerifKR-SemiBold", size: 15))
+//                        } else {
+//                            ForEach(fireStoreViewModel.sharedFriendList, id: \.self) { user in
+//                                Text(user.nickName)
+//                                    .foregroundColor(Color("DarkGray"))
+//                                    .font(.custom("NotoSerifKR-SemiBold", size: 15))
+//                            }
+//                        }
+//                    }
+//                    .sheet(isPresented: $showModal) {
+//                        AddMarkerFriendView(fireStoreViewModel: fireStoreViewModel)
+//                            .presentationDetents([.medium])
+//                    }
+//
+//                    Button("취소",role: .cancel,action: {
+//                        isRecording = false
+//                        RecordingValue.isRecording = isRecording
+//                        title = ""
+//                    })
+//                    Button("추가", action: {
+//
+//                        let createdAt = Date().timeIntervalSince1970
+//                        let sharedFirend = fireStoreViewModel.sharedFriendList
+//                        //민호
+//                        let calendar = DayCalendarModel(id: UUID().uuidString, taskDate: currentDate, title: title, shareFriend: sharedFirend, realDate: createdAt)
+//
+//                        fireStoreViewModel.addCalendar(calendar)
+//                        title = ""
+//
+//                    })
+//                }
+//                )
+//                .font(.custom("NotoSerifKR-Regular",size:16))
                 
                 flowerWritingView
             }
@@ -68,9 +87,16 @@ struct DrawerScheduleView: View {
 extension DrawerScheduleView {
     
     var flowerWritingView: some View {
-        VStack
-        {
-            if isRecording{
+        VStack {
+            if isRecording {
+                Button {
+                    isRecording.toggle()
+                    fireStoreViewModel.sharedFriendList = []
+                } label: {
+                    Text("기록멈추기")
+                }
+
+                
                 HStack {
                     Text("꽃갈피 남기는 중...")
                         .font(.custom("NotoSerifKR-Bold", size: 18))
@@ -91,19 +117,56 @@ extension DrawerScheduleView {
                             .foregroundColor(Color("Pink"))
                     }
                     NavigationLink {
-                        FlowerMapView(fireStoreViewModel: fireStoreViewModel, getStringValue: fireStoreViewModel.nowCalendarId)
+                        FlowerMapView( getStringValue: fireStoreViewModel.nowCalendarId)
                     } label: {
                         Text("지도 보기")
                             .font(.custom("NotoSerifKR-SemiBold", size: 15))
                             .foregroundColor(Color("Pink"))
                     }
                 }
+            } else {
+//                Text("만들어진 꽃갈피가 없습니다.")
+//                    .font(.custom("NotoSerifKR-SemiBold", size: 15))
+//                    .foregroundColor(Color("DarkGray"))
+                TextField("꽃갈피 제목", text: $title)
+                    .font(.custom("NotoSerifKR-Regular",size:16))
+                
+                Button {
+                    showModal.toggle()
+                } label: {
+                    if fireStoreViewModel.sharedFriendList.isEmpty {
+                        Label("함께", systemImage: "plus")
+                            .foregroundColor(Color("DarkGray"))
+                            .font(.custom("NotoSerifKR-SemiBold", size: 15))
+                    } else {
+                        ForEach(fireStoreViewModel.sharedFriendList, id: \.self) { user in
+                            Text(user.nickName)
+                                .foregroundColor(Color("DarkGray"))
+                                .font(.custom("NotoSerifKR-SemiBold", size: 15))
+                        }
+                    }
+                }
+                
+                Button("기록시작하기", action: {
+
+                    let createdAt = Date().timeIntervalSince1970
+                    var shareFriend:[String] = []
+                    for user in fireStoreViewModel.sharedFriendList {
+                        shareFriend.append(user.id)
+    
+                    }
+                    let calendar = DayCalendarModel(id: UUID().uuidString, taskDate: currentDate, title: title, shareFriend: shareFriend, realDate: createdAt)
+                    
+                    fireStoreViewModel.addCalendar(calendar)
+                    title = ""
+                    
+                    isRecording.toggle()
+                })
             }
-            else {
-                Text("만들어진 꽃갈피가 없습니다.")
-                    .font(.custom("NotoSerifKR-SemiBold", size: 15))
-                    .foregroundColor(Color("DarkGray"))
-            }
+        }
+        .sheet(isPresented: $showModal) {
+            AddMarkerFriendView(fireStoreViewModel: fireStoreViewModel)
+                .presentationDetents([.medium])
         }
         
     }

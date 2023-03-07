@@ -4,23 +4,34 @@
 //
 //  Created by 전준수 on 2022/12/19.
 //
-
+// MARK: -준수 수정함
 import SwiftUI
 
 struct PleaseLoginView: View {
-    @EnvironmentObject private var registerModel: RegisterModel
+    @EnvironmentObject var registerModel: RegisterModel
     var body: some View {
         
         NavigationStack {
             Group {
                 if registerModel.currentUser != nil {
-                    HomeView()
+                    if registerModel.currentUserProfile == nil {
+                            RegisterView()
+                            .deferredRendering(for: 1.0)
+                    } else {
+                        HomeView()
+                            .deferredRendering(for: 1.0)
+                    }
                 } else {
                     LoginView()
                 }
             }
             .onAppear {
                 registerModel.listenToAuthState()
+                if registerModel.currentUser != nil {
+                    Task{
+                        registerModel.currentUserProfile = try await registerModel.fetchUserInfo(_: registerModel.currentUser!.uid)
+                    }
+                }
             }
         }
         .accentColor(Color("Red"))
@@ -40,4 +51,44 @@ extension UINavigationController {
     navigationBar.topItem?.backButtonDisplayMode = .minimal
   }
 
+}
+
+// MARK: 지연 시키는 ViewModifier
+private struct DeferredViewModifier: ViewModifier {
+    
+    // MARK: API
+    
+    let threshold: Double
+    
+    // MARK: - ViewModifier
+    
+    func body(content: Content) -> some View {
+        _content(content)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + threshold) {
+                    self.shouldRender = true
+                }
+            }
+    }
+    
+    // MARK: - Private
+    
+    @ViewBuilder
+    private func _content(_ content: Content) -> some View {
+        if shouldRender {
+            content
+        } else {
+            content
+                .hidden()
+        }
+    }
+    
+    @State
+    private var shouldRender = false
+}
+
+extension View {
+    func deferredRendering(for seconds: Double) -> some View {
+        modifier(DeferredViewModifier(threshold: seconds))
+    }
 }

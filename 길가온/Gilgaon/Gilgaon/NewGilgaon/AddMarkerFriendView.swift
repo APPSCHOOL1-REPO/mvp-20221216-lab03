@@ -17,9 +17,8 @@ struct AddMarkerFriendView: View {
             
             LazyVStack {
                 ForEach(fireStoreViewModel.myFriendArray) {  friend in
-                    
                     Button {
-                        
+                        fireStoreViewModel.sharedFriendList.append(FriendModel(id: friend.id, nickName: friend.nickName, userPhoto: friend.userPhoto, userEmail: friend.userEmail))
                     } label: {
                         HStack {
                             Spacer()
@@ -33,7 +32,15 @@ struct AddMarkerFriendView: View {
                                         .cornerRadius(55)
                                         .overlay(RoundedRectangle(cornerRadius: 55)
                                             .stroke(Color("Pink"), lineWidth: 3))
-                                } placeholder: { }
+                                } placeholder: {
+                                    Image(systemName: "person.fill")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 55, height: 55)
+                                        .cornerRadius(55)
+                                        .overlay(RoundedRectangle(cornerRadius: 55)
+                                            .stroke(Color("Pink"), lineWidth: 3))
+                                }
                             }else{
                                 Image(systemName: "person.fill")
                                     .resizable()
