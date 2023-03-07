@@ -19,6 +19,7 @@ class FireStoreViewModel: ObservableObject {
     @Published var markerList: [MarkerModel] = []
     @Published var myFriendArray: [FriendModel] = []
     @Published var calendarList:[DayCalendarModel] = []
+    @Published var sharedFriend: [FriendModel] = []
     //[마커ㅎ
     @Published var sharedFriendList:[FriendModel] = []
     @Published var isRecording: Bool = false
@@ -213,6 +214,36 @@ class FireStoreViewModel: ObservableObject {
     }
     
 
+    // id를 가지고 유저를 조회해 사진 url 가져오는 함수
+    @MainActor
+    func getImageURL(userId: [String]) async -> [FriendModel] {
+        print(#function)
+        
+        self.sharedFriend.removeAll()
+        
+        do {
+            let snapshot = try await database.collection("User").getDocuments()
+            for docoment in snapshot.documents {
+                let id: String = docoment.documentID
+                let docData = docoment.data()
+                let nickName: String = docData["nickName"] as? String ?? ""
+                let userPhoto: String = docData["userPhoto"] as? String ?? ""
+                let userEmail: String = docData["userEmail"] as? String ?? ""
+                let user: FriendModel = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
+                
+                for id in userId {
+                    if user.id == id {
+                        self.sharedFriend.append(user)
+                    }
+                }
+            }
+            self.sharedFriend = Array(Set(self.sharedFriend))
+            return self.sharedFriend
+        } catch {
+            print("User 정보 가져오기 실패")
+            return []
+        }
+    }
     func searchUser() {
         print(#function)
         $searchText
@@ -231,7 +262,6 @@ class FireStoreViewModel: ObservableObject {
     
 
     func persisImageToStorage(user:FireStoreModel, userImage: UIImage) async -> Void {
-
         guard let uid = Auth.auth().currentUser?.uid else { return }
         print("uid성공!")
         let ref = Storage.storage().reference(withPath: uid)

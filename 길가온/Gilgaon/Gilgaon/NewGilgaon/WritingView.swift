@@ -53,9 +53,17 @@ struct WritingView: View {
                         Button {
                             showModal3.toggle()
                         } label: {
-                            Label("함께", systemImage: "plus")
-                                .foregroundColor(Color("DarkGray"))
-                                .font(.custom("NotoSerifKR-SemiBold", size: 15))
+                            if firestoreViewModel.sharedFriendList.isEmpty {
+                                Label("함께", systemImage: "plus")
+                                    .foregroundColor(Color("DarkGray"))
+                                    .font(.custom("NotoSerifKR-SemiBold", size: 15))
+                            } else {
+                                ForEach(firestoreViewModel.sharedFriendList, id: \.self) { user in
+                                    Text(user.nickName)
+                                        .foregroundColor(Color("DarkGray"))
+                                        .font(.custom("NotoSerifKR-SemiBold", size: 15))
+                                }
+                            }
                         }
                         .sheet(isPresented: $showModal3) {
                             AddMarkerFriendView(fireStoreViewModel: firestoreViewModel)

@@ -7,24 +7,52 @@
 import SwiftUI
 
 struct DrawerListView: View {
+    
     @StateObject private var firestoreViewModel = FireStoreViewModel()
     
     var body: some View {
         
-        
         ZStack {
             Color("White")
                 .ignoresSafeArea()
-            ScrollView {
-                VStack {
-                    ForEach(firestoreViewModel.calendarList){ value in
-                        NavigationLink(destination: FlowerMapView( getStringValue: value.id)) {
-                            taskCardView(task: value)
+//<<<<<<< Feat/#30
+            
+            List {
+                ForEach(firestoreViewModel.calendarList){ value in
+                    taskCardView(task: value)
+                        .background {
+                            NavigationLink(destination: FlowerMapView(fireStoreViewModel: firestoreViewModel,getStringValue: value.id)) { EmptyView() }
+                                .opacity(0)
+                                .buttonStyle(PlainButtonStyle())
+//=======
+            //ScrollView {
+            //    VStack {
+            //        ForEach(firestoreViewModel.calendarList){ value in
+            //            NavigationLink(destination: FlowerMapView( getStringValue: value.id)) {
+            //                taskCardView(task: value)
+//>>>>>>> dev
                         }
-                    }
                 }
-                .padding()
+                .listRowBackground(Color("White"))
+                .listRowSeparator(.hidden)
+                .swipeActions(edge: .leading) {
+                    Button {
+                        print("수정")
+                    } label: {
+                        Label("수정", systemImage: "eraser")
+                    }
+                    .tint(.yellow)
+                }
+                .swipeActions(edge: .trailing) {
+                    Button {
+                        print("삭제")
+                    } label: {
+                        Label("삭제", systemImage: "trash")
+                    }
+                    .tint(.red)
+                }
             }
+            .listStyle(.plain)
         }
         .onAppear{
             firestoreViewModel.fetchDayCalendar()
@@ -42,35 +70,58 @@ struct DrawerListView: View {
                     }
                     .hLeading()
                     
-                    //                    Text(task.taskDate.formatted(date: .omitted, time: .shortened))
-//                    ForEach(task.createdAt,id:\.self) {value in
-//                        Text(value)
-//                    }
+                    // 생성 날짜
+                    Text(task.createdDate)
                     
                 }
                 
                 HStack(spacing: 0) {
                     HStack(spacing: -10) {
-                        
-                        //친구들 프사 추가하는거
-                        ForEach(["p2", "p3", "p4"], id: \.self) { user in
-                            
-                            Image(user)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(width: 45, height: 45)
-                                .clipShape(Circle())
-                                .background(
-                                    Circle()
-                                        .stroke(Color("DarkGray"), lineWidth: 2)
-                                )
-                            
+                        ForEach(firestoreViewModel.sharedFriend, id: \.self) { user in
+                            if let url = user.userPhoto,
+                               let imageUrl = URL(string: url) {
+                                AsyncImage(url: imageUrl) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 45, height: 45)
+                                        .clipShape(Circle())
+                                        .background(
+                                            Circle()
+                                                .stroke(Color("DarkGray"), lineWidth: 2)
+                                        )
+                                } placeholder: {
+                                    Image(systemName: "person.fill")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 45, height: 45)
+                                        .clipShape(Circle())
+                                        .background(
+                                            Circle()
+                                                .stroke(Color("DarkGray"), lineWidth: 2)
+                                        )
+                                }
+                            } else{
+                                Image(systemName: "person.fill")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 45, height: 45)
+                                    .clipShape(Circle())
+                                    .background(
+                                        Circle()
+                                            .stroke(Color("DarkGray"), lineWidth: 2)
+                                    )
+                            }
                         }
                     }
                     .hLeading()
+                    .onAppear {
+                        Task {
+                           await firestoreViewModel.getImageURL(userId: task.shareFriend)
+                        }
+                    }
                 }
                 .padding(.top)
-                
             }
             .foregroundColor(Color("DarkGray"))
             .padding()
@@ -83,10 +134,6 @@ struct DrawerListView: View {
         }
         .hLeading()
     }
-}
-
-extension DrawerListView{
-    
 }
 
 struct DrawerListView_Previews: PreviewProvider {
