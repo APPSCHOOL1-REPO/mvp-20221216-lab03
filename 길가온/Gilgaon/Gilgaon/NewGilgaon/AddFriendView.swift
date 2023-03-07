@@ -6,20 +6,21 @@
 //
 
 import SwiftUI
+import SkeletonUI
 
 struct AddFriendView: View {
-    @StateObject  var fireStoreViewModel: FireStoreViewModel = FireStoreViewModel()
-    
+    @StateObject var fireStoreViewModel: FireStoreViewModel = FireStoreViewModel()
+    @ObservedObject var friendViewModel: FriendViewModel
     var body: some View {
         
         if fireStoreViewModel.myFriendArray.count > 0 {
                 VStack {
                     List {
-                        ForEach(fireStoreViewModel.myFriendArray, id: \.self) { myFriend in
+                        SkeletonForEach(with: fireStoreViewModel.myFriendArray) { loading,myFriend in
                             
                             HStack(alignment: .center) {
                                 // profile Image
-                                if let url = myFriend.userPhoto,
+                                if let url = myFriend?.userPhoto,
                                    let imageUrl = URL(string: url) {
                                     AsyncImage(url: imageUrl) { image in
                                         image
@@ -30,7 +31,12 @@ struct AddFriendView: View {
                                             .overlay(RoundedRectangle(cornerRadius: 55)
                                                 .stroke(Color("Pink"), lineWidth: 3))
                                     } placeholder: {
-                                        
+                                        Image(systemName: "person.fill")
+                                            .foregroundColor(Color("Pink"))
+                                            .font(.system(size: 20))
+                                            .padding()
+                                            .overlay(RoundedRectangle(cornerRadius: 55)
+                                                .stroke(Color("Pink"), lineWidth: 3))
                                     }
                                 } else{
                                     Image(systemName: "person.fill")
@@ -41,16 +47,17 @@ struct AddFriendView: View {
                                             .stroke(Color("Pink"), lineWidth: 3))
                                 }
                                 
-                                Text(myFriend.nickName)
+                                Text(myFriend?.nickName)
                                     .foregroundColor(Color("DarkGray"))
                                     .font(.custom("NotoSerifKR-Regular",size:16))
                                     .bold()
                                     .padding(.leading, 16.0)
+                                    .skeleton(with: loading)
                                 
                             }
                             .swipeActions(edge: .trailing, allowsFullSwipe: false, content: {
                                 Button(role: .destructive) {
-                                    fireStoreViewModel.deleteFriend(friend: myFriend)
+                                    fireStoreViewModel.deleteFriend(friend: myFriend!)
                                 } label: {
                                     Label("Delete", systemImage: "trash.fill")
                                 }
@@ -75,12 +82,13 @@ struct AddFriendView: View {
                     .background(Color("White"))
                     
                 }
+                .navigationTitle("친구목록")
                 .onAppear {
                     fireStoreViewModel.fetchFriend()
                 }
                 .toolbar {
                     NavigationLink {
-                        SearchUserView()
+                        SearchUserView(firestore: fireStoreViewModel, friendViewModel: friendViewModel)
                     } label: {
                         Text("+")
                             .font(.custom("NotoSerifKR-Regular",size:26))
@@ -97,7 +105,7 @@ struct AddFriendView: View {
             }
             .toolbar {
                 NavigationLink {
-                    SearchUserView()
+                    SearchUserView(firestore: fireStoreViewModel, friendViewModel: friendViewModel)
                 } label: {
                     Text("+")
                         .font(.custom("NotoSerifKR-Regular",size:26))
