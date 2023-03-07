@@ -15,34 +15,25 @@ struct DrawerListView: View {
         ZStack {
             Color("White")
                 .ignoresSafeArea()
-//<<<<<<< Feat/#30
-            
             List {
                 ForEach(firestoreViewModel.calendarList){ value in
                     taskCardView(task: value)
                         .background {
-                            NavigationLink(destination: FlowerMapView(fireStoreViewModel: firestoreViewModel,getStringValue: value.id)) { EmptyView() }
+                            NavigationLink(destination: FlowerMapView(getStringValue: value.id)) { EmptyView() }
                                 .opacity(0)
                                 .buttonStyle(PlainButtonStyle())
-//=======
-            //ScrollView {
-            //    VStack {
-            //        ForEach(firestoreViewModel.calendarList){ value in
-            //            NavigationLink(destination: FlowerMapView( getStringValue: value.id)) {
-            //                taskCardView(task: value)
-//>>>>>>> dev
                         }
                 }
                 .listRowBackground(Color("White"))
                 .listRowSeparator(.hidden)
                 .swipeActions(edge: .leading) {
-                    Button {
-                        print("수정")
-                    } label: {
-                        Label("수정", systemImage: "eraser")
-                    }
-                    .tint(.yellow)
-                }
+                            Button {
+                                print("수정")
+                            } label: {
+                                Label("수정", systemImage: "eraser")
+                            }
+                            .tint(.yellow)
+                        }
                 .swipeActions(edge: .trailing) {
                     Button {
                         print("삭제")
@@ -53,9 +44,10 @@ struct DrawerListView: View {
                 }
             }
             .listStyle(.plain)
-        }
-        .onAppear{
-            firestoreViewModel.fetchDayCalendar()
+            .onAppear{
+                firestoreViewModel.fetchDayCalendar()
+                print(firestoreViewModel.calendarList.count)
+            }
         }
     }
     
@@ -72,6 +64,8 @@ struct DrawerListView: View {
                     
                     // 생성 날짜
                     Text(task.createdDate)
+                    Text("\(task.taskDate)")
+                    Text("\(task.realDate)")
                     
                 }
                 
@@ -117,7 +111,7 @@ struct DrawerListView: View {
                     .hLeading()
                     .onAppear {
                         Task {
-                           await firestoreViewModel.getImageURL(userId: task.shareFriend)
+                            await firestoreViewModel.getImageURL(userId: task.shareFriend)
                         }
                     }
                 }

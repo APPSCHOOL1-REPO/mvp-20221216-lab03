@@ -314,7 +314,7 @@ class FireStoreViewModel: ObservableObject {
                         let realDate = docData["realDate"] as? Double ?? 0.0
 //                        print("realDate: \(realDate)")
                         let calendarData = DayCalendarModel(id: id, taskDate: taskDate, title: title, shareFriend: shareFriend, realDate: realDate)
-                        print(calendarData)
+                        print(#function)
                         self.calendarList.append(calendarData)
                     }
                 }
