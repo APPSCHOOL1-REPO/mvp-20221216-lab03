@@ -4,52 +4,83 @@
 //
 //  Created by kimminho on 2022/12/01.
 //
-
+// MARK: -준수 수정
 import SwiftUI
 
 struct OnboardingTabView: View {
     @Binding var isFirstLaunching: Bool
+    let locationFetcher = LocationFetcher()
+    
+    // timer count
+    @State var count: Int = 1
+    let timer = Timer.publish(every: 5.0, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        TabView {
-            // 페이지 1: 앱 소개
-            OnboardingDescribeView()
+        ZStack {
+            Color("White")
+                .ignoresSafeArea()
+            if isFirstLaunching == true {
+                LottieView2(filename: "Sakura")
+                    .ignoresSafeArea()
+                    .offset(x:200,y:-270)
+                    .frame(width: 2000,height: 1300)
+                    .opacity(0.6)
+            }
             
-            // 페이지 2: 꽃갈피 소개
-            OnboardingMapDescribeView()
+            TabView(selection: $count,
+                    content: {
+                if count == 1 {
+                    // 페이지 1: 앱 소개
+                    OnboardingDescribeView()
+                        .tag(1)
+                } else if count == 2 {
+                    // 페이지 2: 꽃갈피 소개
+                    OnboardingMapDescribeView()
+                        .tag(2)
+                } else if count == 3 {
+                    // 페이지 3: 카메라,위치추적 활성화
+                    GilgaonRequestPermissonView()
+                        .tag(3)
+                }
+            })
+            .ignoresSafeArea()
+            .onReceive(timer, perform: { _ in
+                withAnimation(.default) {
+                    count = count == 3 ? 1 : count + 1
+                }
+            })
+            .tabViewStyle(.page(indexDisplayMode: .always))
+           .indexViewStyle(.page(backgroundDisplayMode: .always))
             
-            
-            // 페이지 3: 카메라,위치추적 활성화
-            GilgaonRequestPermissonView(isFirstLaunching: $isFirstLaunching)
-            
-            
-            
-            
-            
-            
-            
-//            OnboardingPageView(
-//                imageName: "person.3.fill",
-//                title: "놀라운 개발자 커뮤니티",
-//                subtitle: "질문을 던지고, 다른 사람의 답변을 확인하세요"
-//            )
-            // 페이지 2: 쓰기 페이지 안내
-//            OnboardingPageView(
-//                imageName: "note.text.badge.plus",
-//                title: "쓰기 탭",
-//                subtitle: "이 앱은 개인 메모장으로도 쓸 수 있어요"
-//            )
-            
-            // 페이지 3: 읽기 페이지 안내 + 온보딩 완료
-//            OnboardingLastPageView(
-//                imageName: "eyes",
-//                title: "읽기 탭",
-//                subtitle: "시행착오를 정리해서 공유하고, 다른 개발자들의 인사이트를 얻으세요",
-//                isFirstLaunching: $isFirstLaunching
-//            )
+            VStack {
+                Spacer()
+                Button {
+                    self.locationFetcher.start()
+                    sleep(3)
+                    isFirstLaunching = false
+                } label: {
+                    Text("시작하기")
+                        .font(.custom("NotoSerifKR-Bold", size: 20))
+                        .frame(maxWidth: .infinity, maxHeight: 30.0, alignment: .center)
+                        .foregroundColor(Color("White"))
+                        .padding(10.0)
+                        .background {
+                            Color("Pink")
+                        }
+                        .cornerRadius(10.0)
+                    
+                }
+                .frame(width: 330)
+            }
+            .frame(height: 650)
+                
         }
-        .ignoresSafeArea()
-        .tabViewStyle(.page(indexDisplayMode: .always))
-        .indexViewStyle(.page(backgroundDisplayMode: .always))
+        
+    }
+}
+
+struct OnboardingTabView_Previews: PreviewProvider {
+    static var previews: some View {
+        OnboardingTabView(isFirstLaunching: .constant(false))
     }
 }

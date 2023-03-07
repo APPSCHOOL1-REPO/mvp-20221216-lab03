@@ -4,24 +4,31 @@
 //
 //  Created by 서광현 on 2022/12/01.
 //
-
+// MARK: -준수 수정
 import SwiftUI
 
 struct GilgaonRequestPermissonView: View {
-    @Binding var isFirstLaunching: Bool
-    let locationFetcher = LocationFetcher()
+    // MARK: Ready ProgressView
+    var progressReady : Double = 0.0
+    
+    // MARK: Start ProgressView
+    var progressStart: ClosedRange<Date> {
+        let start = Date()
+        let end = start.addingTimeInterval(5)
+        
+        return start...end
+    }
+    
+    // MARK: End ProgressView
+    var progressEnd: ClosedRange<Date> {
+        let start = Date()
+        let end = start.addingTimeInterval(0)
+        return start...end
+    }
     
     var body: some View {
         
         ZStack {
-            Color("White")
-                .ignoresSafeArea()
-            LottieView2(filename: "Sakura")
-                .ignoresSafeArea()
-                .frame(width: 2000,height: 1300)
-                .offset(x:200,y:-270)
-                .opacity(0.6)
-            
             VStack(spacing: 48.0) {
                 Text("길가온")
                     .font(.custom("NotoserifKR-Regular", size: 28))
@@ -55,26 +62,36 @@ struct GilgaonRequestPermissonView: View {
                     .font(.custom("NotoSerifKR-Regular", size: 15))
                     .foregroundColor(Color("DarkGray"))
                 
-                Button {
-                    self.locationFetcher.start()
-                    sleep(3)
-                    isFirstLaunching = false
-                } label: {
-                    Text("시작하기")
-                        .font(.custom("NotoSerifKR-Bold", size: 20))
-                        .frame(maxWidth: .infinity, maxHeight: 30.0, alignment: .center)
-                        .foregroundColor(Color("White"))
-                        .padding(10.0)
-                        .background {
-                            Color("Pink")
-                        }
-                        .cornerRadius(10.0)
-                }
-                .frame(width: 330)
-            
+                
             }
-            .frame(width: 350, height: 500)
+            .frame(width: 350, height: 400)
+            
+            VStack {
+                Spacer()
+                HStack(spacing: 7) {
+                    // MARK: End ProgressView
+                    ProgressView(timerInterval: progressEnd, countsDown: false)
+                        .tint(Color("Pink"))
+                        .foregroundColor(.clear)
+                        .frame(width: 80)
+                    
+                    // MARK: End ProgressView
+                    ProgressView(timerInterval: progressEnd, countsDown: false)
+                        .tint(Color("Pink"))
+                        .foregroundColor(.clear)
+                        .frame(width: 80)
+                    
+                    // MARK: Start ProgressView
+                    ProgressView(timerInterval: progressStart, countsDown: false)
+                        .tint(Color("Pink"))
+                        .foregroundColor(.clear)
+                        .frame(width: 80)
+                    
+                }
+            }
+            .frame(height: 500)
         }
+        
 
         
     }
@@ -82,6 +99,6 @@ struct GilgaonRequestPermissonView: View {
 
 struct GilgaonRequestPermissonView_Previews: PreviewProvider {
     static var previews: some View {
-        GilgaonRequestPermissonView(isFirstLaunching: .constant(true))
+        GilgaonRequestPermissonView()
     }
 }

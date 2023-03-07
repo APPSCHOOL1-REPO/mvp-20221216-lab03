@@ -18,40 +18,49 @@
  === NotoSerifKR-Bold
  === NotoSerifKR-Black
  */
-
+// MARK: -준수 수정
 import SwiftUI
 
 struct OnboardingDescribeView: View {
-
+    
+    // MARK: Ready ProgressView
+    var progressReady : Double = 0.0
+    
+    // MARK: Start ProgressView
+    var progressStart: ClosedRange<Date> {
+        let start = Date()
+        let end = start.addingTimeInterval(5)
+        
+        return start...end
+    }
+    
+    // MARK: End ProgressView
+    var progressEnd: ClosedRange<Date> {
+        let start = Date()
+        let end = start.addingTimeInterval(0)
+        return start...end
+    }
+    
     var body: some View {
         
         ZStack {
-            Color("White")
-                .ignoresSafeArea()
-            LottieView2(filename: "Sakura")
-                .ignoresSafeArea()
-                .offset(x:200,y:-270)
-                .frame(width: 2000,height: 1300)
-                .opacity(0.6)
-                
-       
             VStack(alignment: .center, spacing: 5) {
-                Spacer()
+                
                 VStack {
-                        Text("안녕하세요")
+                    Text("안녕하세요")
                         .font(.custom("NotoSerifKR-Bold",size:40))
-                            .foregroundColor(Color("Pink"))
-                            .padding()
+                        .foregroundColor(Color("Pink"))
+                        .padding()
                 }
-//              HStack {
-                    Text("“길가온”")
-                      .kerning(-0.5)
-                      .font(.custom("NotoSerifKR-SemiBold",size:25))
-                      .foregroundColor(Color("Pink")) + Text("은 사용자의 위치를")
-                      .kerning(-0.5)
-                      .foregroundColor(Color("DarkGray"))
-                      .font(.custom("NotoSerifKR-Light",size:25))
-//                }
+                //              HStack {
+                Text("“길가온”")
+                    .kerning(-0.5)
+                    .font(.custom("NotoSerifKR-SemiBold",size:25))
+                    .foregroundColor(Color("Pink")) + Text("은 사용자의 위치를")
+                    .kerning(-0.5)
+                    .foregroundColor(Color("DarkGray"))
+                    .font(.custom("NotoSerifKR-Light",size:25))
+                //                }
                 
                 VStack(spacing: 5) {
                     Text("실시간으로 추적하여")
@@ -69,10 +78,32 @@ struct OnboardingDescribeView: View {
                 .foregroundColor(Color("DarkGray"))
                 Spacer()
             }
+            .frame(width: 350, height: 400)
+            
+            VStack {
+                Spacer()
+            HStack(spacing: 7) {
+            
+                // MARK: Start ProgressView
+                ProgressView(timerInterval: progressStart, countsDown: false)
+                    .tint(Color("Pink"))
+                    .foregroundColor(.clear)
+                    .frame(width: 80)
+                
+                // MARK: Ready ProgressView
+                ProgressView(value: progressReady)
+                    .frame(width: 80)
+                    .padding(.bottom, 19)
+                
+                // MARK: Ready ProgressView
+                ProgressView(value: progressReady)
+                    .frame(width: 80)
+                    .padding(.bottom, 19)
+                
+            }
         }
-        
-    
-
+        .frame(height: 500)
+        }
     }
 }
 
