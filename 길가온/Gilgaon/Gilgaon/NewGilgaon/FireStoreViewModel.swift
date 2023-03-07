@@ -292,37 +292,34 @@ class FireStoreViewModel: ObservableObject {
     
     // [마커 가져오기]
     @MainActor
-    func fetchMarkers(inputID: String) async {
+    func fetchMarkers(inputID: String) async -> [MarkerModel] {
         print(#function)
-        print(inputID)
-        database.collection("User")
-            .document(self.currentUserId!)
-            .collection("Calendar")
-            .document(inputID)
-            .collection("Marker")
-            .getDocuments { (snapshot, error) in
-                self.markerList.removeAll()
-                LocationsDataService.locations.removeAll()
-                if let snapshot {
-                    for document in snapshot.documents {
-                        let id: String = document.documentID
-                        let docData = document.data()
-                        let title: String = docData["title"] as? String ?? ""
-                        let photo: String = docData["photo"] as? String ?? ""
-                        let createdAt: Double = docData["createdAt"] as? Double ?? 0
-                        let contents: String = docData["contents"] as? String ?? ""
-                        let locationName: String = docData["locationName"] as? String ?? ""
-                        let lat: String = docData["lat"] as? String ?? ""
-                        let lon: String = docData["lon"] as? String ?? ""
-                        let sharedFriend:[String] = docData["sharedFriend"] as? [String] ?? []
-                        
-                        let marker: MarkerModel = MarkerModel(id: id, title: title, photo: photo, createdAt: createdAt, contents: contents, locationName: locationName, lat: lat, lon: lon, shareFriend: sharedFriend)
-                        
-                        self.markerList.append(marker)
-                        LocationsDataService.locations = self.markerList
-                    }
-                }
+        var markerArr: [MarkerModel] = []
+        let ref = database.collection("User").document(self.currentUserId!).collection("Calendar").document(inputID).collection("Marker")
+        do{
+            let querySnapshots = try await ref.getDocuments()
+            for document in querySnapshots.documents{
+                let id: String = document.documentID
+                let docData = document.data()
+                let title: String = docData["title"] as? String ?? ""
+                let photo: String = docData["photo"] as? String ?? ""
+                let createdAt: Double = docData["createdAt"] as? Double ?? 0
+                let contents: String = docData["contents"] as? String ?? ""
+                let locationName: String = docData["locationName"] as? String ?? ""
+                let lat: String = docData["lat"] as? String ?? ""
+                let lon: String = docData["lon"] as? String ?? ""
+                let sharedFriend:[String] = docData["sharedFriend"] as? [String] ?? []
+                
+                let marker: MarkerModel = MarkerModel(id: id, title: title, photo: photo, createdAt: createdAt, contents: contents, locationName: locationName, lat: lat, lon: lon, shareFriend: sharedFriend)
+                
+                markerArr.append(marker)
+                LocationsDataService.locations = self.markerList
             }
-        print("markerList:",self.markerList)
+            return markerArr
+        }catch{
+            return []
+        }
+        
+        
     }
 }

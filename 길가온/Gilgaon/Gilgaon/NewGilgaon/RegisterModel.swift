@@ -253,9 +253,39 @@ func randomNonceString(length: Int = 32) -> String {
             }
         }
     }
-    
     return result
 }
+
+    // 로그아웃
+    func logout() {
+        currentUser = nil
+        PhotoId.photoUrl = ""
+        try? Auth.auth().signOut()
+        
+    }
+    // 회원탈퇴
+    func deleteUser() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        Firestore.firestore().collection("User").document(uid).delete() { err in
+            
+            if let err {
+                print("회원탈퇴 중 error 만남: \(err)")
+            } else {
+                let user = Auth.auth().currentUser
+                user?.delete { err in
+                    if let err {
+                        print("사용자 삭제 중 오류 - \(err)")
+                    } else {
+                        print("회원탈퇴 성공")
+                        self.currentUser = nil
+                    }
+                }
+                
+            }
+            
+        }
+    }
 
 
 //let fireStoreAddUser = FireStoreModel(id: user.uid, nickName: nickName, userPhoto: "", userEmail: userID)
