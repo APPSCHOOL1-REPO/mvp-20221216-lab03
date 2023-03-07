@@ -10,6 +10,7 @@ import SwiftUI
 struct DrawerDetailView: View {
     
     @EnvironmentObject var fireStoreViewModel: FireStoreViewModel
+    @StateObject var friendViewModel = FriendViewModel()
     @State private var middleView: MiddleView = .schedule
     @Binding var showMenu: Bool
     var middleViewArray: [MiddleView] = [.schedule, .list]
@@ -48,7 +49,8 @@ struct DrawerDetailView: View {
                         userNickNameText // fireStoreViewModel.userNickName
                         
                         NavigationLink {
-                            AddFriendView()
+//                            AddFriendView(friendViewModel: friendViewModel)
+                            FriendSettingView()
                         } label: {
                             
                             Text("\(fireStoreViewModel.myFriendArray.count)명의 친구")
