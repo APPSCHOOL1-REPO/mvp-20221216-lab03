@@ -17,6 +17,7 @@ struct CustomDataPicker: View {
     let days: [String] = ["일", "월", "화", "수", "목", "금", "토"]
     
     var body: some View {
+        
         ScrollView{
             ScrollViewReader { value in
                 VStack(spacing: 35) {
@@ -95,15 +96,12 @@ struct CustomDataPicker: View {
                                         )
                                         .onTapGesture {
                                             currentDate = value.date
-//                                            print(value.date)
                                             let createdAt = value.date.timeIntervalSince1970
                                         }
                                 }
                             }
                             .onAppear {
-                                Task {
-                                    try! await fireStoreModel.fetchDayCalendar()
-                                }
+                                fireStoreModel.fetchDayCalendar()
                             }
                         }
                         .offset(y: 20)
@@ -111,14 +109,30 @@ struct CustomDataPicker: View {
                     
                     VStack(spacing: 15) {
                         // 달력 밑에 데이터 보여주고 싶으면 여기에
+                        
                     }
                     .padding()
                 }
                 .onChange(of: currentMonth) { newValue in
                     currentDate = getCurrentMonth()
                 }
-            }//ScrollView
+            }
+            
         }
+        .gesture(
+            DragGesture()
+                .onEnded { gesture in
+                    if gesture.translation.width < 0 {
+                        withAnimation(.spring()) {
+                            currentMonth += 1
+                        }
+                    } else {
+                        withAnimation(.spring()) {
+                            currentMonth -= 1
+                        }
+                    }
+                }
+        )
     }
     
     @ViewBuilder
@@ -154,7 +168,6 @@ struct CustomDataPicker: View {
         .padding(.vertical, 9)
         .frame(height: 60, alignment: .top)
     }
-    
     
     func isSameDay(date1: Date, date2: Date) -> Bool {
         
