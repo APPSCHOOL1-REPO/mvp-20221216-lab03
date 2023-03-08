@@ -13,12 +13,41 @@ import MapKit
 
 struct UserMapView: UIViewRepresentable {
     @ObservedObject var flowerMapViewModel: FlowerMapViewModel
+    var startCoordinate = CLLocationCoordinate2D(latitude: 13.086, longitude: 80.2707)
+    var endCoordinate = CLLocationCoordinate2D(latitude: 12.9830, longitude: 80.2594)
     
     // func makeUIView() == func body() -> some View {}
     func makeUIView(context: Context) -> MKMapView {
         let mapView = MKMapView()
         mapView.register(MKAnnotationView.self, forAnnotationViewWithReuseIdentifier: "custom")
         setSubscriber(mapView)
+        
+        
+        //
+        let region = MKCoordinateRegion(center: startCoordinate, latitudinalMeters: 100000, longitudinalMeters: 100000)
+        
+        let sourcePin = MKPointAnnotation()
+        sourcePin.coordinate = startCoordinate
+        mapView.addAnnotation(sourcePin)
+        
+        let endPin = MKPointAnnotation()
+        endPin.coordinate = endCoordinate
+        mapView.addAnnotation(endPin)
+        
+        mapView.region = region
+        
+        let req = MKDirections.Request()
+        req.source = MKMapItem(placemark: MKPlacemark(coordinate: startCoordinate))
+        req.destination = MKMapItem(placemark: MKPlacemark(coordinate: endCoordinate))
+        
+        let direction = MKDirections(request: req)
+        direction.calculate { (direct, err) in
+            if err != nil {return}
+            let polyline = direct?.routes.first?.polyline
+            mapView.addOverlay(polyline!)
+            mapView.setRegion(MKCoordinateRegion(polyline!.boundingMapRect), animated: true)
+        }
+        
         return mapView
     }
     
@@ -90,6 +119,13 @@ class UserMapViewCoordinator: NSObject, MKMapViewDelegate{
                 mapViewController.flowerMapViewModel.updateMapRegions(location)
             }
         }
+    }
+    
+    func mapView( _ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let render = MKPolylineRenderer(overlay: overlay)
+        render.strokeColor = .orange
+        render.lineWidth = 2.0
+        return render
     }
     
     func setUpImage(_ annotation: LandmarkAnnotation) -> UIImage?{
