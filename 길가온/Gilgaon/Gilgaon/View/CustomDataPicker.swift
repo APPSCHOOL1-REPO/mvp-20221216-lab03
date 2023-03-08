@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct CustomDataPicker: View {
-    @EnvironmentObject var fireStoreModel: FireStoreViewModel
+    @StateObject var fireStoreModel: FireStoreViewModel = FireStoreViewModel()
     
     @State var currentDate = Date()
     @Binding var calID: [String]
     @State var currentMonth: Int = 0
     
     let days: [String] = ["일", "월", "화", "수", "목", "금", "토"]
+    
+    @StateObject var flowerMapViewModel = FlowerMapViewModel()
     
     var body: some View {
         
@@ -96,7 +98,6 @@ struct CustomDataPicker: View {
                                         )
                                         .onTapGesture {
                                             currentDate = value.date
-                                            let createdAt = value.date.timeIntervalSince1970
                                         }
                                 }
                             }
@@ -111,7 +112,6 @@ struct CustomDataPicker: View {
                         // 달력 밑에 데이터 보여주고 싶으면 여기에
                         
                     }
-                    .padding()
                 }
                 .onChange(of: currentMonth) { newValue in
                     currentDate = getCurrentMonth()
