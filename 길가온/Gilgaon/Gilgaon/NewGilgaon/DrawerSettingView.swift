@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DrawerSettingView: View {
     @EnvironmentObject var registerModel: RegisterModel
-    
+    @EnvironmentObject var locationFetcher: LocationFetcher
     @State private var deleteAlert: Bool = false
     
     var body: some View {
@@ -25,6 +25,17 @@ struct DrawerSettingView: View {
                 .frame(width: 140, height: 2)
                 .background(Color("DarkGray"))
                 .padding(.horizontal, 16)
+            Button {
+                Task {
+                    await locationFetcher.setLocationManager()
+                }
+            } label: {
+                Text("위치 설정")
+                    .foregroundColor(Color("DarkGray"))
+                    .font(.custom("NotoSerifKR-Regular",size:16))
+                    
+            }
+            .padding()
             
             Button {
                 registerModel.logout()

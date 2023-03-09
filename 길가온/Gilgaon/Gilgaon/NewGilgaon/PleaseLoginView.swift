@@ -26,10 +26,12 @@ struct PleaseLoginView: View {
                 }
             }
             .onAppear {
+                print("== PleaseLoginView ==")
                 registerModel.listenToAuthState()
                 if registerModel.currentUser != nil {
                     Task{
                         registerModel.currentUserProfile = try await registerModel.fetchUserInfo(_: registerModel.currentUser!.uid)
+                        print("==registerModel.currentUserProfile==\n,\(registerModel.currentUserProfile)")
                     }
                 }
             }

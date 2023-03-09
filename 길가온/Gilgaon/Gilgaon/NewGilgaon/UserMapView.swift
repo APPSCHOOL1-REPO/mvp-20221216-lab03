@@ -9,44 +9,50 @@
 import SwiftUI
 import UIKit
 import MapKit
+import Combine
 
 
 struct UserMapView: UIViewRepresentable {
     @ObservedObject var flowerMapViewModel: FlowerMapViewModel
-    var startCoordinate = CLLocationCoordinate2D(latitude: 13.086, longitude: 80.2707)
-    var endCoordinate = CLLocationCoordinate2D(latitude: 12.9830, longitude: 80.2594)
+    @EnvironmentObject var locationFetcher: LocationFetcher
+    var startCoordinate = CLLocationCoordinate2D(latitude: 37.26188076, longitude: 127.10893442)
+    var endCoordinate = CLLocationCoordinate2D(latitude: 37.27404621, longitude: 127.11990530)
     
     // func makeUIView() == func body() -> some View {}
     func makeUIView(context: Context) -> MKMapView {
+        print("값이 있는가\(locationFetcher.lastKnownLocation!)")
         let mapView = MKMapView()
         mapView.register(MKAnnotationView.self, forAnnotationViewWithReuseIdentifier: "custom")
         setSubscriber(mapView)
         
+        mapView.showsUserLocation = true
+        mapView.setUserTrackingMode(.follow, animated: true)
         
-        //
         let region = MKCoordinateRegion(center: startCoordinate, latitudinalMeters: 100000, longitudinalMeters: 100000)
         
-        let sourcePin = MKPointAnnotation()
-        sourcePin.coordinate = startCoordinate
-        mapView.addAnnotation(sourcePin)
-        
-        let endPin = MKPointAnnotation()
-        endPin.coordinate = endCoordinate
-        mapView.addAnnotation(endPin)
-        
-        mapView.region = region
-        
-        let req = MKDirections.Request()
-        req.source = MKMapItem(placemark: MKPlacemark(coordinate: startCoordinate))
-        req.destination = MKMapItem(placemark: MKPlacemark(coordinate: endCoordinate))
-        
-        let direction = MKDirections(request: req)
-        direction.calculate { (direct, err) in
-            if err != nil {return}
-            let polyline = direct?.routes.first?.polyline
-            mapView.addOverlay(polyline!)
-            mapView.setRegion(MKCoordinateRegion(polyline!.boundingMapRect), animated: true)
+//        mapView.region = region
+
+//        let req = MKDirections.Request()
+//        req.source = MKMapItem(placemark: MKPlacemark(coordinate: locationFetcher.recentLocation!))
+//        req.destination = MKMapItem(placemark: MKPlacemark(coordinate: endCoordinate))
+//
+//        let direction = MKDirections(request: req)
+//        direction.calculate { (direct, err) in
+//            if err != nil {return}
+//            let polyline = direct?.routes.first?.polyline
+//            mapView.addOverlay(polyline!)
+//            mapView.setRegion(MKCoordinateRegion(polyline!.boundingMapRect), animated: true)
+//        }
+        locationFetcher.$lineDraw.sink { _ in
+            print("??")
+        } receiveValue: { data in
+            if let data {
+                print(data)
+                mapView.addOverlay(data)
+                mapView.setRegion(MKCoordinateRegion(data.boundingMapRect), animated: true)
+            }
         }
+
         
         return mapView
     }

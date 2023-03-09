@@ -10,7 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @AppStorage("_isFirstLaunching") var isFirstLaunching: Bool = true
     @State private var selectedTabBar: SelectedTab = .first
-    
+    @EnvironmentObject var locationFetcher: LocationFetcher
     var body: some View {
         
         VStack {
