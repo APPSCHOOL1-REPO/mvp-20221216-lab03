@@ -20,7 +20,8 @@ struct UserMapView: UIViewRepresentable {
     
     // func makeUIView() == func body() -> some View {}
     func makeUIView(context: Context) -> MKMapView {
-        print("값이 있는가\(locationFetcher.lastKnownLocation!)")
+        print("값이 있는가\(locationFetcher.recentLocation!)")
+        print("\(locationFetcher.points.count)")
         let mapView = MKMapView()
         mapView.register(MKAnnotationView.self, forAnnotationViewWithReuseIdentifier: "custom")
         setSubscriber(mapView)
@@ -28,7 +29,7 @@ struct UserMapView: UIViewRepresentable {
         mapView.showsUserLocation = true
         mapView.setUserTrackingMode(.follow, animated: true)
         
-        let region = MKCoordinateRegion(center: startCoordinate, latitudinalMeters: 100000, longitudinalMeters: 100000)
+        let region = MKCoordinateRegion(center: locationFetcher.recentLocation!, latitudinalMeters: 100000, longitudinalMeters: 100000)
         
 //        mapView.region = region
 
@@ -43,14 +44,24 @@ struct UserMapView: UIViewRepresentable {
 //            mapView.addOverlay(polyline!)
 //            mapView.setRegion(MKCoordinateRegion(polyline!.boundingMapRect), animated: true)
 //        }
-        locationFetcher.$lineDraw.sink { _ in
-            print("??")
+        
+//        let lineDraw = MKPolyline(coordinates: points, count: points.count)
+//        self.lineDraw = lineDraw
+//        locationFetcher.$lineDraw.sink { _ in
+//        } receiveValue: { data in
+//            if let data {
+//                print(data)
+//                mapView.addOverlay(data)
+//                mapView.setRegion(MKCoordinateRegion(data.boundingMapRect), animated: true)
+//            }
+//        }
+        
+        locationFetcher.$points.sink { _ in
         } receiveValue: { data in
-            if let data {
-                print(data)
-                mapView.addOverlay(data)
-                mapView.setRegion(MKCoordinateRegion(data.boundingMapRect), animated: true)
-            }
+            let dt = MKPolyline(coordinates: data, count: data.count)
+            print(data)
+            mapView.addOverlay(dt)
+            mapView.setRegion(MKCoordinateRegion(dt.boundingMapRect), animated: true)
         }
 
         

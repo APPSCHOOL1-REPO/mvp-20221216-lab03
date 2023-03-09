@@ -4,9 +4,13 @@ import MapKit
 
 class LocationFetcher: NSObject, CLLocationManagerDelegate,ObservableObject {
     let manager = CLLocationManager()
-    var lastKnownLocation: CLLocationCoordinate2D?
     @Published var recentLocation: CLLocationCoordinate2D?
-    @Published var lineDraw: MKPolyline?
+//    @Published var lineDraw: MKPolyline?
+    @Published var points: [CLLocationCoordinate2D] = [
+        // TEST
+        CLLocationCoordinate2D(latitude: 37.25062407449622, longitude: 127.0635877387619),
+        CLLocationCoordinate2D(latitude: 37.25111939891473, longitude: 127.0639310615158),
+        CLLocationCoordinate2D(latitude: 37.251384139941024, longitude: 127.06349117923736),]
 
     override init() {
         super.init()
@@ -32,28 +36,26 @@ class LocationFetcher: NSObject, CLLocationManagerDelegate,ObservableObject {
     
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        lastKnownLocation = locations.first?.coordinate
-        recentLocation = locations.first?.coordinate
-//        print("== recentLocation == :",lastKnownLocation)
-        
+        print(#function)
         if let location = locations.first {
-            print("== 위치 업데이트 ==")
-            print("경도: \(location.coordinate.longitude)")
-            print("위도: \(location.coordinate.latitude)")
+            recentLocation = location.coordinate
         }
         guard let location = locations.last else { return }
         let latitude = location.coordinate.latitude
         let longtitude = location.coordinate.longitude
         
         if let recentLocation = self.recentLocation {
-            var points: [CLLocationCoordinate2D] = []
+            print(" ##Count:\(points.count)")
+            //현재위치의 좌표 (START)
             let point1 = CLLocationCoordinate2DMake(recentLocation.latitude, recentLocation.longitude)
+            //위치정보의 마지막값 (LAST)
             let point2: CLLocationCoordinate2D = CLLocationCoordinate2DMake(latitude, longtitude)
             points.append(point1)
             points.append(point2)
-            let lineDraw = MKPolyline(coordinates: points, count: points.count)
-            self.lineDraw = lineDraw
+//            let lineDraw = MKPolyline(coordinates: points, count: points.count)
+//            self.lineDraw = lineDraw
         }
+        self.recentLocation = location.coordinate
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("error")
