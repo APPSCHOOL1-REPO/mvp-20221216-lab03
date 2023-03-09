@@ -10,7 +10,6 @@ import SwiftUI
 struct CalendarSelectView: View {
     
     @ObservedObject var calendarViewModel: CalendarViewModel
-//    @State var getStringValue: String
     
     var body: some View {
         
@@ -54,20 +53,14 @@ struct CalendarSelectView: View {
                 }
                 .padding()
             }
-//            .onAppear{
-//                Task{
-//                    calendarViewModel.mapID = getStringValue
-//                    await calendarViewModel.fetchMap()
-//                }
-//            }
         }
     }
 }
 
-//struct CalendarSelectView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CalendarSelectView(flowerMapViewModel: FlowerMapViewModel(), getStringValue: "")
-//    }
-//}
+struct CalendarSelectView_Previews: PreviewProvider {
+    static var previews: some View {
+        CalendarSelectView(calendarViewModel: CalendarViewModel())
+    }
+}
 
 

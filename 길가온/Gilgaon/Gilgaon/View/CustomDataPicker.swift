@@ -15,7 +15,6 @@ struct CustomDataPicker: View {
     @State var currentDate: Date = Date()
     @Binding var calID: [String]
     @State var currentMonth: Int = 0
-//    @State var getStringValue: String = ""
     
     let days: [String] = ["일", "월", "화", "수", "목", "금", "토"]
         
