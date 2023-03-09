@@ -28,6 +28,7 @@ struct DrawerSettingView: View {
             Button {
                 Task {
                     await locationFetcher.setLocationManager()
+                    print("registerModel.currentUserProfile:?? ==> ",registerModel.currentUserProfile)
                 }
             } label: {
                 Text("위치 설정")

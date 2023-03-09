@@ -13,25 +13,31 @@ struct PleaseLoginView: View {
         
         NavigationStack {
             Group {
-                if registerModel.currentUser != nil {
-                    if registerModel.currentUserProfile == nil {
-                            RegisterView()
-                            .deferredRendering(for: 1.0)
-                    } else {
-                        HomeView()
-                            .deferredRendering(for: 1.0)
-                    }
-                } else {
-                    LoginView()
-                }
+//                if registerModel.currentUser != nil {
+//                    if registerModel.currentUserProfile == nil {
+//                            RegisterView()
+//                            .deferredRendering(for: 1.0)
+//                    } else {
+//                        HomeView()
+//                            .deferredRendering(for: 1.0)
+//                    }
+//                } else {
+//                    LoginView()
+//                }
+                if registerModel.currentUserProfile != nil {
+                    HomeView()
+                        .deferredRendering(for: 1.0)
+                } else { LoginView() }
             }
+            .onChange(of: registerModel.currentUserProfile, perform: { newValue in
+                registerModel.currentUserProfile = newValue
+            })
             .onAppear {
                 print("== PleaseLoginView ==")
                 registerModel.listenToAuthState()
                 if registerModel.currentUser != nil {
                     Task{
                         registerModel.currentUserProfile = try await registerModel.fetchUserInfo(_: registerModel.currentUser!.uid)
-                        print("==registerModel.currentUserProfile==\n,\(registerModel.currentUserProfile)")
                     }
                 }
             }

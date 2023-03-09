@@ -20,7 +20,7 @@ struct UserMapView: UIViewRepresentable {
     
     // func makeUIView() == func body() -> some View {}
     func makeUIView(context: Context) -> MKMapView {
-        print("값이 있는가\(locationFetcher.recentLocation!)")
+        print("값이 있는가\(locationFetcher.recentLocation)")
         print("\(locationFetcher.points.count)")
         let mapView = MKMapView()
         mapView.register(MKAnnotationView.self, forAnnotationViewWithReuseIdentifier: "custom")
@@ -29,9 +29,10 @@ struct UserMapView: UIViewRepresentable {
         mapView.showsUserLocation = true
         mapView.setUserTrackingMode(.follow, animated: true)
         
-        let region = MKCoordinateRegion(center: locationFetcher.recentLocation!, latitudinalMeters: 100000, longitudinalMeters: 100000)
-        
-//        mapView.region = region
+        if CLLocationCoordinate2DIsValid(startCoordinate) {
+            let region = MKCoordinateRegion(center: startCoordinate, latitudinalMeters: 1000, longitudinalMeters: 1000)
+            mapView.region = region
+        }
 
 //        let req = MKDirections.Request()
 //        req.source = MKMapItem(placemark: MKPlacemark(coordinate: locationFetcher.recentLocation!))
@@ -62,6 +63,7 @@ struct UserMapView: UIViewRepresentable {
             print(data)
             mapView.addOverlay(dt)
             mapView.setRegion(MKCoordinateRegion(dt.boundingMapRect), animated: true)
+
         }
 
         
@@ -79,6 +81,14 @@ struct UserMapView: UIViewRepresentable {
         uiView.delegate = context.coordinator
         uiView.setRegion(flowerMapViewModel.mapRegions, animated: true)
         uiView.addAnnotations(makePins())
+        locationFetcher.$points.sink { _ in
+        } receiveValue: { data in
+            let dt = MKPolyline(coordinates: data, count: data.count)
+            print("이동변화감지")
+            uiView.addOverlay(dt)
+//            uiView.setRegion(MKCoordinateRegion(dt.boundingMapRect), animated: true)
+            uiView.setRegion(MKCoordinateRegion(center: dt.coordinate, latitudinalMeters: 1.0, longitudinalMeters: 1.0), animated: true)
+        }
     }
     
     func makeCoordinator() -> UserMapViewCoordinator {
