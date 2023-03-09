@@ -20,8 +20,6 @@ struct UserMapView: UIViewRepresentable {
     
     // func makeUIView() == func body() -> some View {}
     func makeUIView(context: Context) -> MKMapView {
-        print("값이 있는가\(locationFetcher.recentLocation)")
-        print("\(locationFetcher.points.count)")
         let mapView = MKMapView()
         mapView.register(MKAnnotationView.self, forAnnotationViewWithReuseIdentifier: "custom")
         setSubscriber(mapView)
@@ -34,28 +32,6 @@ struct UserMapView: UIViewRepresentable {
             mapView.region = region
         }
 
-//        let req = MKDirections.Request()
-//        req.source = MKMapItem(placemark: MKPlacemark(coordinate: locationFetcher.recentLocation!))
-//        req.destination = MKMapItem(placemark: MKPlacemark(coordinate: endCoordinate))
-//
-//        let direction = MKDirections(request: req)
-//        direction.calculate { (direct, err) in
-//            if err != nil {return}
-//            let polyline = direct?.routes.first?.polyline
-//            mapView.addOverlay(polyline!)
-//            mapView.setRegion(MKCoordinateRegion(polyline!.boundingMapRect), animated: true)
-//        }
-        
-//        let lineDraw = MKPolyline(coordinates: points, count: points.count)
-//        self.lineDraw = lineDraw
-//        locationFetcher.$lineDraw.sink { _ in
-//        } receiveValue: { data in
-//            if let data {
-//                print(data)
-//                mapView.addOverlay(data)
-//                mapView.setRegion(MKCoordinateRegion(data.boundingMapRect), animated: true)
-//            }
-//        }
         
         locationFetcher.$points.sink { _ in
         } receiveValue: { data in
@@ -84,10 +60,9 @@ struct UserMapView: UIViewRepresentable {
         locationFetcher.$points.sink { _ in
         } receiveValue: { data in
             let dt = MKPolyline(coordinates: data, count: data.count)
-            print("이동변화감지")
             uiView.addOverlay(dt)
 //            uiView.setRegion(MKCoordinateRegion(dt.boundingMapRect), animated: true)
-            uiView.setRegion(MKCoordinateRegion(center: dt.coordinate, latitudinalMeters: 1.0, longitudinalMeters: 1.0), animated: true)
+//            uiView.setRegion(MKCoordinateRegion(center: dt.coordinate, latitudinalMeters: 1.0, longitudinalMeters: 1.0), animated: true)
         }
     }
     
