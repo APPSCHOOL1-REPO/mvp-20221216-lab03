@@ -14,6 +14,10 @@ struct AddFriendView: View {
     var body: some View {
         
         if fireStoreViewModel.myFriendArray.count > 0 {
+            
+            NavigationLink {
+                
+            } label: {
                 VStack {
                     List {
                         SkeletonForEach(with: fireStoreViewModel.myFriendArray) { loading,myFriend in
@@ -95,6 +99,11 @@ struct AddFriendView: View {
                             .bold()
                     }
             }
+            }
+
+            
+     
+            
         } else {
             ZStack {
                 Color("White")
