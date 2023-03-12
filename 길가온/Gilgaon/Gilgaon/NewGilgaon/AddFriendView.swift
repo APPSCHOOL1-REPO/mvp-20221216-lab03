@@ -21,7 +21,7 @@ struct AddFriendView: View {
                             
                             
                             NavigationLink {
-                                FriendDraweView(friendID: myFriend?.id ?? "")
+                                FriendDrawerView(friendID: myFriend?.id ?? "")
                             } label: {
                             HStack(alignment: .center) {
                                 // profile Image
