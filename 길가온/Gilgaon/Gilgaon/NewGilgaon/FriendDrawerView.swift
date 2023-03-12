@@ -132,7 +132,7 @@ struct FriendDrawerView: View {
                         case .comment:
                             FriendDrawerCommentView()
                         case .list:
-                            FriendDrawerListView()
+                            FriendDrawerListView(friendID: friendID)
                         }
                         
                     }

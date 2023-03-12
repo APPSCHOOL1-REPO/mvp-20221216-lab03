@@ -94,6 +94,7 @@
 		C068E0B229BE1B720070D71A /* FriendFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0B129BE1B720070D71A /* FriendFriendView.swift */; };
 		C068E0BA29BE476F0070D71A /* FriendDrawerCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0B929BE476F0070D71A /* FriendDrawerCommentView.swift */; };
 		C068E0BC29BE47770070D71A /* FriendDrawerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0BB29BE47770070D71A /* FriendDrawerListView.swift */; };
+		C068E0BE29BE5B470070D71A /* FriendFlowerMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0BD29BE5B470070D71A /* FriendFlowerMapView.swift */; };
 		C0B7045B29388F1200245ED7 /* Sakura.json in Resources */ = {isa = PBXBuildFile; fileRef = C0B7045A29388F1200245ED7 /* Sakura.json */; };
 		C0C44ACB2950AAA8006FE8A4 /* PleaseLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C44ACA2950AAA8006FE8A4 /* PleaseLoginView.swift */; };
 /* End PBXBuildFile section */
@@ -177,6 +178,7 @@
 		C068E0B129BE1B720070D71A /* FriendFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFriendView.swift; sourceTree = "<group>"; };
 		C068E0B929BE476F0070D71A /* FriendDrawerCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDrawerCommentView.swift; sourceTree = "<group>"; };
 		C068E0BB29BE47770070D71A /* FriendDrawerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDrawerListView.swift; sourceTree = "<group>"; };
+		C068E0BD29BE5B470070D71A /* FriendFlowerMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFlowerMapView.swift; sourceTree = "<group>"; };
 		C0B7045A29388F1200245ED7 /* Sakura.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sakura.json; sourceTree = "<group>"; };
 		C0C44ACA2950AAA8006FE8A4 /* PleaseLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PleaseLoginView.swift; sourceTree = "<group>"; };
 		C0FA4348293623F4002D4473 /* Gilgaon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gilgaon.entitlements; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				3663C67029386372006880C9 /* LocationListView.swift */,
 				1683284229B6DCC800B3EF73 /* FlowerMapViewModel.swift */,
 				3663C67429386397006880C9 /* FlowerMapView.swift */,
+				C068E0BD29BE5B470070D71A /* FriendFlowerMapView.swift */,
 				3663C676293863B1006880C9 /* FlowerMapPreviewView.swift */,
 				3663C678293863C4006880C9 /* LocationsViewModel.swift */,
 				3663C67A293863D4006880C9 /* LocationDataService.swift */,
@@ -559,6 +562,7 @@
 				16A60C1A29B0463400116569 /* FriendRequestCheckView.swift in Sources */,
 				16F69DB529387E030045CD91 /* OnboardingDescribeView.swift in Sources */,
 				3663C67B293863D4006880C9 /* LocationDataService.swift in Sources */,
+				C068E0BE29BE5B470070D71A /* FriendFlowerMapView.swift in Sources */,
 				3663C67329386383006880C9 /* Location.swift in Sources */,
 				362A085129557CC500C582B4 /* AddMarkerFriendView.swift in Sources */,
 				63660F522937573500B70272 /* Customtoggle.swift in Sources */,
