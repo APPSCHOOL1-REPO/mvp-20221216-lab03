@@ -92,6 +92,7 @@
 		C068E0AA29BDFFCD0070D71A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C068E0A929BDFFCC0070D71A /* GoogleService-Info.plist */; };
 		C068E0AE29BE04770070D71A /* FriendDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0AD29BE04770070D71A /* FriendDrawerView.swift */; };
 		C068E0B029BE05170070D71A /* FriendDrawerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0AF29BE05170070D71A /* FriendDrawerDetailView.swift */; };
+		C068E0B229BE1B720070D71A /* FriendFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0B129BE1B720070D71A /* FriendFriendView.swift */; };
 		C0B7045B29388F1200245ED7 /* Sakura.json in Resources */ = {isa = PBXBuildFile; fileRef = C0B7045A29388F1200245ED7 /* Sakura.json */; };
 		C0C44ACB2950AAA8006FE8A4 /* PleaseLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C44ACA2950AAA8006FE8A4 /* PleaseLoginView.swift */; };
 /* End PBXBuildFile section */
@@ -173,6 +174,7 @@
 		C068E0A929BDFFCC0070D71A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info/길가온/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C068E0AD29BE04770070D71A /* FriendDrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDrawerView.swift; sourceTree = "<group>"; };
 		C068E0AF29BE05170070D71A /* FriendDrawerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDrawerDetailView.swift; sourceTree = "<group>"; };
+		C068E0B129BE1B720070D71A /* FriendFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFriendView.swift; sourceTree = "<group>"; };
 		C0B7045A29388F1200245ED7 /* Sakura.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sakura.json; sourceTree = "<group>"; };
 		C0C44ACA2950AAA8006FE8A4 /* PleaseLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PleaseLoginView.swift; sourceTree = "<group>"; };
 		C0FA4348293623F4002D4473 /* Gilgaon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gilgaon.entitlements; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				16EE2F612951501700414279 /* AddFriendView.swift */,
 				16EE2F632951504600414279 /* FireStoreModel.swift */,
 				C068E0AD29BE04770070D71A /* FriendDrawerView.swift */,
+				C068E0B129BE1B720070D71A /* FriendFriendView.swift */,
 				C068E0AF29BE05170070D71A /* FriendDrawerDetailView.swift */,
 				16EE2F652951508D00414279 /* FireStoreViewModel.swift */,
 				36BB028A29518BD300CF2816 /* WritingView.swift */,
@@ -545,6 +548,7 @@
 				1683284329B6DCC800B3EF73 /* FlowerMapViewModel.swift in Sources */,
 				635AE3972935E9E2008A8452 /* HomeView.swift in Sources */,
 				635AE3992935E9E7008A8452 /* TabBarView.swift in Sources */,
+				C068E0B229BE1B720070D71A /* FriendFriendView.swift in Sources */,
 				16D46F9F2935EC7F00BB9440 /* TestAPIView.swift in Sources */,
 				635AE3932935E9D5008A8452 /* SplashView.swift in Sources */,
 				16A60C1A29B0463400116569 /* FriendRequestCheckView.swift in Sources */,
