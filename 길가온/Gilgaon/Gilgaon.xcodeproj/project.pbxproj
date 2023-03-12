@@ -91,7 +91,6 @@
 		6FF334C92935F1CD007438B1 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 6FF334C82935F1CC007438B1 /* Config.xcconfig */; };
 		C068E0AA29BDFFCD0070D71A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C068E0A929BDFFCC0070D71A /* GoogleService-Info.plist */; };
 		C068E0AE29BE04770070D71A /* FriendDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0AD29BE04770070D71A /* FriendDrawerView.swift */; };
-		C068E0B029BE05170070D71A /* FriendDrawerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0AF29BE05170070D71A /* FriendDrawerDetailView.swift */; };
 		C068E0B229BE1B720070D71A /* FriendFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0B129BE1B720070D71A /* FriendFriendView.swift */; };
 		C068E0BA29BE476F0070D71A /* FriendDrawerCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0B929BE476F0070D71A /* FriendDrawerCommentView.swift */; };
 		C068E0BC29BE47770070D71A /* FriendDrawerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0BB29BE47770070D71A /* FriendDrawerListView.swift */; };
@@ -175,7 +174,6 @@
 		6FF334CA2935F1D9007438B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C068E0A929BDFFCC0070D71A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info/길가온/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C068E0AD29BE04770070D71A /* FriendDrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDrawerView.swift; sourceTree = "<group>"; };
-		C068E0AF29BE05170070D71A /* FriendDrawerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDrawerDetailView.swift; sourceTree = "<group>"; };
 		C068E0B129BE1B720070D71A /* FriendFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFriendView.swift; sourceTree = "<group>"; };
 		C068E0B929BE476F0070D71A /* FriendDrawerCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDrawerCommentView.swift; sourceTree = "<group>"; };
 		C068E0BB29BE47770070D71A /* FriendDrawerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDrawerListView.swift; sourceTree = "<group>"; };
@@ -224,7 +222,6 @@
 				C068E0B929BE476F0070D71A /* FriendDrawerCommentView.swift */,
 				C068E0BB29BE47770070D71A /* FriendDrawerListView.swift */,
 				C068E0B129BE1B720070D71A /* FriendFriendView.swift */,
-				C068E0AF29BE05170070D71A /* FriendDrawerDetailView.swift */,
 				16EE2F652951508D00414279 /* FireStoreViewModel.swift */,
 				36BB028A29518BD300CF2816 /* WritingView.swift */,
 				16EE2F672951885A00414279 /* SearchUserView.swift */,
@@ -567,7 +564,6 @@
 				63660F522937573500B70272 /* Customtoggle.swift in Sources */,
 				3663C677293863B1006880C9 /* FlowerMapPreviewView.swift in Sources */,
 				635AE3A329360793008A8452 /* CustomDataPicker.swift in Sources */,
-				C068E0B029BE05170070D71A /* FriendDrawerDetailView.swift in Sources */,
 				16D46FA12935EC7F00BB9440 /* SearchViewModel.swift in Sources */,
 				16FA82C8293906A6006129D3 /* PopupTest.swift in Sources */,
 				634BC64429503C000044B38B /* DrawerSettingView.swift in Sources */,
