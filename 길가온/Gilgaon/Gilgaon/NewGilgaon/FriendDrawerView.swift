@@ -94,9 +94,9 @@ struct FriendDrawerView: View {
                                 
                                 
                                 NavigationLink {
-                                    FriendFriendView()
+                                    FriendFriendView(friendViewModel: friendViewModel, friendID: friendID)
                                 } label: {
-                                    Text("00명의 친구")
+                                    Text("\(friendViewModel.myFriendFriendArray.count)명의 친구")
                                             .font(.custom("NotoSerifKR-Regular",size:16))
                                 }
                             }
@@ -143,8 +143,8 @@ struct FriendDrawerView: View {
             .onAppear {
                 Task{
                     await friendViewModel.findUserUIdMe(userUid: friendID)
+                    await friendViewModel.fetchFriendFriend(userUid: friendID)
                 }
-             
             }
 
         

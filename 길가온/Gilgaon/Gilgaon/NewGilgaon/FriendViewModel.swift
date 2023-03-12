@@ -15,6 +15,7 @@ class FriendViewModel: ObservableObject {
     @Published var friendRequestArray: [FriendModel] = []
     @Published var friendRequestArrayUid: [String] = []
     @Published var listener: ListenerRegistration?
+    @Published var myFriendFriendArray: [FriendModel] = []
     let database = Firestore.firestore()
     //상대방이 추가할 때 내 아이디에 친구의 uid를 담아준다.
     
@@ -147,4 +148,31 @@ class FriendViewModel: ObservableObject {
                 }
             }
     }
+    
+    //친구의 친구목록을 조회하는 함수
+    func fetchFriendFriend(userUid: String) async{
+        await database
+            .collection("User")
+            .document(userUid)
+            .collection("Friend")
+            .getDocuments { (snapshot, error) in
+                self.myFriendFriendArray.removeAll()
+                if let snapshot {
+                    for document in snapshot.documents {
+                        let id: String = document.documentID
+                        let docData = document.data()
+                        let nickName: String = docData["nickName"] as? String ?? ""
+                        let userPhoto: String = docData["userPhoto"] as? String ?? ""
+                        let userEmail: String = docData["userEmail"] as? String ?? ""
+                        
+                        let friendInstance: FriendModel = FriendModel(id: id, nickName: nickName, userPhoto: userPhoto, userEmail: userEmail)
+                        
+                        self.myFriendFriendArray.append(friendInstance)
+                    }
+                    print("니친구들 다보여줘바")
+                    print(self.myFriendFriendArray)
+                }
+            }
+    }
+    
 }
