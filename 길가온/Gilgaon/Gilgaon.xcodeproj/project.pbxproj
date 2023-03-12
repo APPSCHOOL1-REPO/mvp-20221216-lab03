@@ -93,6 +93,8 @@
 		C068E0AE29BE04770070D71A /* FriendDrawerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0AD29BE04770070D71A /* FriendDrawerView.swift */; };
 		C068E0B029BE05170070D71A /* FriendDrawerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0AF29BE05170070D71A /* FriendDrawerDetailView.swift */; };
 		C068E0B229BE1B720070D71A /* FriendFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0B129BE1B720070D71A /* FriendFriendView.swift */; };
+		C068E0BA29BE476F0070D71A /* FriendDrawerCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0B929BE476F0070D71A /* FriendDrawerCommentView.swift */; };
+		C068E0BC29BE47770070D71A /* FriendDrawerListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C068E0BB29BE47770070D71A /* FriendDrawerListView.swift */; };
 		C0B7045B29388F1200245ED7 /* Sakura.json in Resources */ = {isa = PBXBuildFile; fileRef = C0B7045A29388F1200245ED7 /* Sakura.json */; };
 		C0C44ACB2950AAA8006FE8A4 /* PleaseLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C44ACA2950AAA8006FE8A4 /* PleaseLoginView.swift */; };
 /* End PBXBuildFile section */
@@ -175,6 +177,8 @@
 		C068E0AD29BE04770070D71A /* FriendDrawerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDrawerView.swift; sourceTree = "<group>"; };
 		C068E0AF29BE05170070D71A /* FriendDrawerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDrawerDetailView.swift; sourceTree = "<group>"; };
 		C068E0B129BE1B720070D71A /* FriendFriendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendFriendView.swift; sourceTree = "<group>"; };
+		C068E0B929BE476F0070D71A /* FriendDrawerCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDrawerCommentView.swift; sourceTree = "<group>"; };
+		C068E0BB29BE47770070D71A /* FriendDrawerListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendDrawerListView.swift; sourceTree = "<group>"; };
 		C0B7045A29388F1200245ED7 /* Sakura.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Sakura.json; sourceTree = "<group>"; };
 		C0C44ACA2950AAA8006FE8A4 /* PleaseLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PleaseLoginView.swift; sourceTree = "<group>"; };
 		C0FA4348293623F4002D4473 /* Gilgaon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Gilgaon.entitlements; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 				16EE2F612951501700414279 /* AddFriendView.swift */,
 				16EE2F632951504600414279 /* FireStoreModel.swift */,
 				C068E0AD29BE04770070D71A /* FriendDrawerView.swift */,
+				C068E0B929BE476F0070D71A /* FriendDrawerCommentView.swift */,
+				C068E0BB29BE47770070D71A /* FriendDrawerListView.swift */,
 				C068E0B129BE1B720070D71A /* FriendFriendView.swift */,
 				C068E0AF29BE05170070D71A /* FriendDrawerDetailView.swift */,
 				16EE2F652951508D00414279 /* FireStoreViewModel.swift */,
@@ -537,6 +543,7 @@
 				635AE39B2935E9F0008A8452 /* RecordView.swift in Sources */,
 				63D2C1282938379C0011BC89 /* TaskViewModel.swift in Sources */,
 				63660F4E2937216F00B70272 /* ImagePicker.swift in Sources */,
+				C068E0BA29BE476F0070D71A /* FriendDrawerCommentView.swift in Sources */,
 				1683284729B6DE6500B3EF73 /* UserMapView.swift in Sources */,
 				63D2C123293836CD0011BC89 /* DayTask.swift in Sources */,
 				16F69DB629387E030045CD91 /* OnboardingTabView.swift in Sources */,
@@ -544,6 +551,7 @@
 				16A60C1829B044DC00116569 /* FriendSettingView.swift in Sources */,
 				16D46FA42935EC7F00BB9440 /* SearchNetwork.swift in Sources */,
 				16EE2F682951885A00414279 /* SearchUserView.swift in Sources */,
+				C068E0BC29BE47770070D71A /* FriendDrawerListView.swift in Sources */,
 				161510C7295036B300BA7FFE /* RegisterModel.swift in Sources */,
 				1683284329B6DCC800B3EF73 /* FlowerMapViewModel.swift in Sources */,
 				635AE3972935E9E2008A8452 /* HomeView.swift in Sources */,
