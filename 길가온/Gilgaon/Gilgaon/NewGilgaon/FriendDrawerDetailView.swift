@@ -9,8 +9,16 @@ import SwiftUI
 
 struct FriendDrawerDetailView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GeometryReader { geometry in
+            VStack {
+                Text("이곳에 친구의 방명록 혹은 서랍이 나올 예정입니다.")
+                Text("테스트뷰입니다.")
+            }
+            .frame(width: geometry.size.width, height: geometry.size.height)
+        }
+
     }
+    
 }
 
 struct FriendDrawerDetailView_Previews: PreviewProvider {
