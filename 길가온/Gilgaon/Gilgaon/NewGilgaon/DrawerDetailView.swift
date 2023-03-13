@@ -173,7 +173,7 @@ struct DrawerDetailView: View {
                 
                 switch middleView {
                 case .guestBook:
-                    DrawerScheduleView()
+                    GuestBookView()
                 case .list:
                     DrawerListView()
                 }
