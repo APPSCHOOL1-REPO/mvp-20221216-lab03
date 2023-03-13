@@ -24,16 +24,25 @@ struct GuestBookView: View {
             ZStack {
                 ScrollView {
                     VStack {
-                        ForEach(1..<5) { number in
-                            HStack(alignment: .top, spacing: 15) {
-                                //프로필 이미지
+                        ForEach(1..<6) { _ in
+                            HStack(alignment: .top, spacing: 10) {
+                                
                                 if person.isEmpty {
-                                    personSystemImage
+                                    //기본 프로필 이미지
+                                    Image(systemName: "person.circle.fill")
+                                        .resizable()
+                                        .frame(width: geometry.size.width/6.5, height: geometry.size.height/9.5)
+                                        .foregroundColor(Color("Pink"))
+                                    
                                 } else {
-                                    userImage
+                                    //사용자 프로필 이미지
+                                    Image("b02")
+                                        .resizable()
+                                        .clipShape(Circle())
+                                        .frame(width: geometry.size.width/6.5, height: geometry.size.height/9.5)
                                 }
                                 
-                                //닉네임,글,작성시간
+                                //방명록 쓴 사람의 정보 : 닉네임, 글, 작성시간
                                 guestInfo
                                 
                                 Spacer()
@@ -86,36 +95,29 @@ struct GuestBookView: View {
                         } //ForEach
                         
                     }
-                    .padding(.vertical)
+                    .padding(.vertical, 8)
                 }
             }
-            
+            //방명록 작성하는 버튼
+            Button(action: {}) {
+                Circle()
+                    .fill(Color("Pink"))
+                    .frame(width: geometry.size.width/6.5, height: geometry.size.height/6.5)
+                    .opacity(0.8)
+                    .overlay {
+                        Image(systemName: "pencil")
+                            .resizable()
+                            .foregroundColor(Color.white)
+                            .frame(width: geometry.size.width/14.5, height: geometry.size.height/19.5)
+                    }
+                
+            }
+            .offset(x: geometry.size.width/1.22, y: geometry.size.height/1.21)
         }
     }
 }
 
 extension GuestBookView {
-    
-    private var personSystemImage: some View {
-            Circle()
-                .stroke(Color("White"), lineWidth: 1)
-                .frame(width: 65, height: 65)
-                .foregroundColor(Color.gray)
-                .overlay {
-                    Image(systemName: "person.fill")
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundColor(Color("Pink"))
-                        .frame(width: 50, height: 50)
-                }
-       
-    }
-    private var userImage: some View {
-        Image("b02")
-            .resizable()
-            .cornerRadius(65)
-            .frame(width: 65, height: 65)
-    }
     
     private var guestInfo: some View {
         VStack(alignment: .leading, spacing: 9) {
