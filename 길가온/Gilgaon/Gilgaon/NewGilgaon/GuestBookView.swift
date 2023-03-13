@@ -17,6 +17,7 @@ struct GuestBookView: View {
     @State private var deleteToggle: Bool = false // ...버튼 누르고 삭제버튼 누르면 켜지는 토글
     @State private var showingAlert = false // ...버튼 누르고 삭제 or 신고버튼 누르면 다시한번 올라오는 얼럿용 토글
     @State private var alertType = AlertType.delete
+    @State private var guestBookFullScreenToggle = false
     var personImage: String = " " //user 프로필 이미지
     var guestBook: String = "  " //방명록
     
@@ -109,6 +110,7 @@ struct GuestBookView: View {
             //방명록 작성하는 버튼
             Button(action: {
                 print("방명록 글쓰기 버튼 누름")
+                guestBookFullScreenToggle.toggle()
             }) {
                 Circle()
                     .fill(Color("Pink"))
@@ -123,6 +125,9 @@ struct GuestBookView: View {
                 
             }
             .offset(x: geometry.size.width/1.22, y: geometry.size.height/1.21)
+            .fullScreenCover(isPresented: $guestBookFullScreenToggle) {
+                GuestBookWritingView()
+            }
         }
     }
 }
