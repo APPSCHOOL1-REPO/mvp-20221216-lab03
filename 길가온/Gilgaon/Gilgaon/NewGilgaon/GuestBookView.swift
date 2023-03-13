@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum AlertType {
-    case delete, report
+    case delete, report, cancel, registration
 }
 
 struct GuestBookView: View {
@@ -90,7 +90,7 @@ struct GuestBookView: View {
                                         if type == .delete {
                                             Button("삭제", role: .destructive) {}
                                             Button("취소", role: .cancel) {}
-                                        } else {
+                                        } else if type == .report {
                                             Button("신고", role: .destructive) {}
                                             Button("취소", role: .cancel) {}
                                         }
@@ -110,7 +110,7 @@ struct GuestBookView: View {
             //방명록 작성하는 버튼
             Button(action: {
                 print("방명록 글쓰기 버튼 누름")
-                guestBookFullScreenToggle.toggle()
+                guestBookFullScreenToggle = true
             }) {
                 Circle()
                     .fill(Color("Pink"))
@@ -126,7 +126,7 @@ struct GuestBookView: View {
             }
             .offset(x: geometry.size.width/1.22, y: geometry.size.height/1.21)
             .fullScreenCover(isPresented: $guestBookFullScreenToggle) {
-                GuestBookWritingView()
+                GuestBookWritingView(guestBookFullScreenToggle: $guestBookFullScreenToggle)
             }
         }
     }
