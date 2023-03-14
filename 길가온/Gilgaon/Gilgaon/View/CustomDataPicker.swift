@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CustomDataPicker: View {
     @EnvironmentObject var fireStoreModel: FireStoreViewModel
-    
+    @ObservedObject var calendarVViewModel: CalendarVViewModel
     @State var currentDate = Date()
     @Binding var calID: [String]
     @State var currentMonth: Int = 0
@@ -33,11 +33,23 @@ struct CustomDataPicker: View {
                             
                             Spacer()
                             
-                            VStack() {
-                                Text(extraDate()[0])
-                                    .font(.custom("NotoSerifKR-SemiBold", size: 15))
-                                    .foregroundColor(Color("DarkGray"))
+                            Button {
+                                
+                                calendarVViewModel.isTapped.toggle()
+                            } label: {
+                                HStack{
+                                    Image(systemName: "pencil.line")
+                                    Text("작성하기")
+                                }
+                                
                             }
+
+//
+//                            VStack() {
+//                                Text(extraDate()[0])
+//                                    .font(.custom("NotoSerifKR-SemiBold", size: 15))
+//                                    .foregroundColor(Color("DarkGray"))
+//                            }
                             
                             Spacer()
                             
@@ -119,6 +131,7 @@ struct CustomDataPicker: View {
                 }
             }//ScrollView
         }
+        
     }
     
     @ViewBuilder
