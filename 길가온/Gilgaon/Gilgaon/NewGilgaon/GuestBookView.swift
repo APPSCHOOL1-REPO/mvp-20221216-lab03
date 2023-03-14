@@ -78,6 +78,7 @@ struct GuestBookView: View {
                                             print("신고하기")
                                             alertType = .report
                                             showingAlert = true
+                                            deleteToggle = false
                                         }
                                         Button("취소", role: .cancel) {
                                             print("신고하기")
